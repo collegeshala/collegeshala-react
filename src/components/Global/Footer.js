@@ -3,6 +3,11 @@
 /* eslint-disable no-script-url */
 import React from "react";
 
+import fb_icon from "./../../assets/img/footer/facebook-icon.png"
+import twitter_icon from "./../../assets/img/footer/twitter-icon.png"
+import linkedin_icon from "./../../assets/img/footer/linkedin-icon.png"
+import gmail_icon from "./../../assets/img/footer/gmailicon.png"
+
 class Footer extends React.Component {
     state = {};
 
@@ -66,7 +71,7 @@ class Footer extends React.Component {
                                 <li>
                                     <a target="_blank" href="">
                                         <img
-                                            src="./../../assets/images/footer/twitter-icon.png"
+                                            src={twitter_icon}
                                             id="footer-social-icons"
                                             alt=""
                                             srcset=""
@@ -77,7 +82,7 @@ class Footer extends React.Component {
                                         href="mailto:collegeshala2020@gmail.com"
                                     >
                                         <img
-                                            src="./../../assets/images/footer/gmailicon.png"
+                                            src={gmail_icon}
                                             id="footer-social-icons"
                                             alt=""
                                             srcset=""
@@ -88,7 +93,7 @@ class Footer extends React.Component {
                                         href="https://www.facebook.com/CollegeShalareal/"
                                     >
                                         <img
-                                            src="./../../assets/images/footer/facebook-icon.png"
+                                            src={fb_icon}
                                             id="footer-social-icons"
                                             alt=""
                                             rcset=""
@@ -99,7 +104,7 @@ class Footer extends React.Component {
                                         href="https://www.linkedin.com/company/collegeshala-edutech/"
                                     >
                                         <img
-                                            src="./../../assets/images/footer/linkedin-icon.png"
+                                            src={linkedin_icon}
                                             id="footer-social-icons"
                                             alt=""
                                             rcset=""
