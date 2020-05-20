@@ -1,10 +1,8 @@
-import React from 'react';
-import StudentAccount from "./components/Student/Account";
+import React from "react";
+import StudentDashboard from "./components/Student/StudentDashboard";
 
 function App() {
-  return (
-    <StudentAccount />
-  );
+  return <StudentDashboard />;
 }
 
 export default App;

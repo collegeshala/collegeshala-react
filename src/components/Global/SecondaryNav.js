@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@reach/router";
 
 class SecondaryNav extends React.Component {
   state = {};
@@ -8,16 +9,20 @@ class SecondaryNav extends React.Component {
       <div class="container student-dash-nav">
         <div class="row">
           <div class="col-sm text-center">
-            <a href="./my-account.html">My Account</a>
+            <Link to="/student-account">My Account</Link>
+            {/* <a href="./my-account.html">My Account</a> */}
           </div>
           <div class="col-sm text-center">
-            <a href="./student-dashboard.html">My Materials</a>
+            <Link to="/student-materials">My Materials</Link>
+            {/* <a href="./student-dashboard.html">My Materials</a> */}
           </div>
           <div class="col-sm text-center">
-            <a href="./my-transaction.html">My Transactions</a>
+            <Link to="/student-transactions">My Transactions</Link>
+            {/* <a href="./my-transaction.html">My Transactions</a> */}
           </div>
           <div class="col-sm text-center">
-            <a href="./coming-soon.html">Q/A Forum</a>
+            <Link to="/student-qa">Q/A Forum</Link>
+            {/* <a href="./coming-soon.html">Q/A Forum</a> */}
           </div>
         </div>
       </div>
