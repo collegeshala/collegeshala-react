@@ -2,51 +2,29 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import axios from "axios";
+
+import token from "./api_key";
 
 class StudentMaterials extends React.Component {
   state = {
-    notes: [
-      {
-        professoremail: "mujtababasheer14@gmail.com",
-        noteId: "9a01fc31-df29-4e74-bf89-dbe83ac28bcc",
-        noteurl:
-          "https://collegeshala-notes.s3.ap-south-1.amazonaws.com/9a01fc31-df29-4e74-bf89-dbe83ac28bcc.pdf",
-        requiredCredits: 2,
-        chaptername: "Dummy Chapter",
-        visibility: false,
-        sem: "X",
-        universityname: "NSIT",
-        professorname: "Mujtaba Basheer",
-        subjectname: "Dummy Subject",
-      },
-      {
-        professoremail: "mujtababasheer14@gmail.com",
-        noteId: "9a01fc31-df29-4e74-bf89-dbe83ac28bcc",
-        noteurl:
-          "https://collegeshala-notes.s3.ap-south-1.amazonaws.com/9a01fc31-df29-4e74-bf89-dbe83ac28bcc.pdf",
-        requiredCredits: 2,
-        chaptername: "Dummy Chapter",
-        visibility: false,
-        sem: "X",
-        universityname: "NSIT",
-        professorname: "Mujtaba Basheer",
-        subjectname: "Dummy Subject",
-      },
-      {
-        professoremail: "mujtababasheer14@gmail.com",
-        noteId: "9a01fc31-df29-4e74-bf89-dbe83ac28bcc",
-        noteurl:
-          "https://collegeshala-notes.s3.ap-south-1.amazonaws.com/9a01fc31-df29-4e74-bf89-dbe83ac28bcc.pdf",
-        requiredCredits: 2,
-        chaptername: "Dummy Chapter",
-        visibility: false,
-        sem: "X",
-        universityname: "NSIT",
-        professorname: "Mujtaba Basheer",
-        subjectname: "Dummy Subject",
-      },
-    ],
+    notes: [],
   };
+
+  componentDidMount() {
+    axios({
+      method: "POST",
+      url: "https://api.collegeshala.com/getnotes",
+      headers: {
+        authorization: token,
+      },
+    })
+      .then(({ data }) => {
+        console.log(data);
+        this.setState({ notes: data });
+      })
+      .catch((err) => console.error(err));
+  }
 
   render() {
     return (
