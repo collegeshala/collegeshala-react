@@ -57,9 +57,9 @@ class StudentMaterials extends React.Component {
             this.state.notes == false ? (
               <h1>No notes to display</h1>
             ) : (
-              this.state.notes.map((note) => {
+              this.state.notes.map((note, index) => {
                 return (
-                  <div className="col-121 col-md-4">
+                  <div className="col-121 col-md-4" key={note.noteId + index}>
                     <div className="card" id="card">
                       <img
                         className="card-img-top img-fluid"
@@ -74,7 +74,7 @@ class StudentMaterials extends React.Component {
                           make up the bulk of the card's content.
                         </p>
                         <button
-                          onclick="viewNote()"
+                          onClick="viewNote()"
                           className="btn btn-primary"
                           value={note.noteId}
                         >
