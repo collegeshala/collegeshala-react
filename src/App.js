@@ -12,6 +12,7 @@ import Register from './components/Global/pages/Register'
 import TermsOfUse from './components/Global/pages/TermsOfUse'
 import Login from './components/Global/pages/Login'
 import ProfessorInfo from './components/Global/pages/ProfessorInfo'
+import Index from './Index'
 
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
               <Route exact path="/terms-of-use" component={TermsOfUse} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/professor-info" component={ProfessorInfo} />
+              <Route exact path="/index" component={Index} />
             </Switch>
           <Footer />
         </div>
