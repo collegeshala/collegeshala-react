@@ -6,8 +6,10 @@ import { Router, Link } from "@reach/router";
 import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import SecondaryNav from "../Global/SecondaryNav";
+
 import StudentAccount from "./Account";
 import StudentMaterials from "./StudentMaterials";
+import StudentTransactions from "./StudentTransactions";
 
 const StudentDashboard = () => {
   return (
@@ -38,6 +40,7 @@ const StudentDashboard = () => {
       <Router>
         <StudentAccount path="student-account" />
         <StudentMaterials path="student-materials" />
+        <StudentTransactions path="student-transactions" />
       </Router>
       <Footer />
     </React.Fragment>
