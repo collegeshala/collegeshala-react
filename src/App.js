@@ -15,6 +15,7 @@ import ProfessorInfo from './components/Global/pages/ProfessorInfo'
 import Index from './Index'
 import ComingSoon from './components/Global/pages/ComingSoon'
 import SingleProduct from './components/Global/pages/SingleProduct'
+import About from './components/Global/pages/About'
 
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
               <Route exact path="/index" component={Index} />
               <Route exact path="/coming-soon" component={ComingSoon} />
               <Route exact path="/single-product" component={SingleProduct} />
+              <Route exact path="/about" component={About} />
             </Switch>
           <Footer />
         </div>
