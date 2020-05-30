@@ -7,6 +7,8 @@ import Copyright from './components/Global/pages/Copyright'
 import PrivacyPolicy from './components/Global/pages/PrivacyPolicy'
 import ReturnPolicy from './components/Global/pages/ReturnPolicy'
 import AllProduct from './components/Global/pages/AllProduct'
+import ComingSoon from './components/Global/pages/ComingSoon'
+import SingleProduct from './components/Global/pages/SingleProduct'
 
 class App extends Component {
   render() {
@@ -19,6 +21,8 @@ class App extends Component {
               <Route exact path="/privacypolicy" component={PrivacyPolicy} />
               <Route exact path="/returnpolicy" component={ReturnPolicy} />
               <Route exact path="/all-product" component={AllProduct} />
+              <Route exact path="/coming-soon" component={ComingSoon} />
+              <Route exact path="/single-product" component={SingleProduct} />
             </Switch>
           <Footer />
         </div>
