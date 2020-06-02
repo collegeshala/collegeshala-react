@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import './assets/css/style.css';
+import './assets/css/register.css'
+import './assets/css/studentRegister.css'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Header from './components/Global/Header';
 import Footer from './components/Global/Footer';
@@ -16,6 +18,8 @@ import Index from './Index'
 import ComingSoon from './components/Global/pages/ComingSoon'
 import SingleProduct from './components/Global/pages/SingleProduct'
 import About from './components/Global/pages/About'
+import StudentRegister from './components/Global/pages/StudentRegister'
+import TeacherRegister from './components/Global/pages/TeacherRegister'
 
 
 class App extends Component {
@@ -38,6 +42,8 @@ class App extends Component {
               <Route exact path="/coming-soon" component={ComingSoon} />
               <Route exact path="/single-product" component={SingleProduct} />
               <Route exact path="/about" component={About} />
+              <Route exact path="/student-register" component={StudentRegister} />
+              <Route exact path="/teacher-register" component={TeacherRegister} />
             </Switch>
           <Footer />
         </div>
