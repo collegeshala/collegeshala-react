@@ -1,6 +1,9 @@
 import React from 'react'
 
 class StudentRegister extends React.Component {
+    handlemouseover = (e) => {
+        e.target.style = 'cursor: pointer'
+    }
     render() {
         return (
             <div id="student-signup">
@@ -119,7 +122,7 @@ class StudentRegister extends React.Component {
                         </p>
                             </div>
                         </div>
-                        <div id="nextbtn" className="next" onmouseover="document.getElementById('nextbtn').style = 'cursor: pointer'" onclick="next()">
+                        <div id="nextbtn" className="next" onMouseOver={this.handlemouseover} onClick={next}>
                             Next{" "}
                             <img id="nextimg" src={require("../../../assets/logo/next.png")} />
                         </div>
