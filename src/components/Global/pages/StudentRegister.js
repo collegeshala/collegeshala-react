@@ -1,18 +1,49 @@
 import React from 'react'
 
 class StudentRegister extends React.Component {
-    handlemouseover = (e) => {
-        e.target.style = 'cursor: pointer'
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            name: "",
+            email: "",
+            password: "",
+            college: "",
+            university: "-Select University-",
+            degree: "-Select Degree-",
+            step: 1,
+        }
+    }
+    handlemouseover(e)
+    {
+        e.target.style = 'cursor : pointer';
+    }
+    validateEmail(email)
+    {
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        if (reg.test(email) === false) 
+            return false;
+        return true;
+    }
+    next()
+    {
+        if(this.state.step === 1)
+        {
+            if(!this.validateEmail(this.state.email)) {
+                alert("Enter valid email address");
+                return;
+            }
+        }
     }
     render() {
         return (
             <div id="student-signup">
                 <div>
                     <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "#6534CC" }}>
-                        <a id='back' className="navbar-brand" onclick="back()">
+                        <a id='back' className="navbar-brand" onClick="back()">
                             <img src={require("../../../assets/logo/LeftArrow.png")} alt="" srcset="" width="35" height="30" />
                         </a>
-                        <a id="backtext" onclick="back()"><p className="back-label">Back</p></a>
+                        <a id="backtext" onClick="back()"><p className="back-label">Back</p></a>
                     </nav>
                 </div>
                 <div className="content">
@@ -35,9 +66,9 @@ class StudentRegister extends React.Component {
                                 <img className="info-image" src={require("../../../assets/img/name-email-student-card.png")} alt="Register as student" />
                             </div>
                             <div className="col-6 input-column">
-                                <input type="text" className="input-text" placeholder="Enter your full name" name="fname" />
-                                <input type="email" className="input-text" placeholder="Enter your email address" name="email" />
-                                <input type="password" className="input-text" placeholder="Enter your password" name="password" />
+                                <input type="text" className="input-text" placeholder="Enter your full name" value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })}/>
+                                <input type="email" className="input-text" placeholder="Enter your email address" value={this.state.email} onChange={(e) => this.setState({ email: e.target.value })}/>
+                                <input type="password" className="input-text" placeholder="Enter your password" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })}/>
                             </div>
                         </div>
                         <div id="step-2" className="row details-container" style={{ display: "none" }}>
@@ -46,45 +77,45 @@ class StudentRegister extends React.Component {
                                 <img className="info-image" src={require("../../../assets/img/college-details-student-card 1.png")} alt="Register as student" />
                             </div>
                             <div className="col-6 input-column" style={{ paddingTop: "1vh", paddingBottom: "0" }}>
-                                <input type="text" className="input-text" placeholder="Enter your college's name" name="cname" />
-                                <select onchange="changeCllg()" type="text" className="input-text" id="uname">
-                                    <option value="select-degree">-Select University-</option>
-                                    <option value="Calcutta-University">Calcutta University</option>
-                                    <option value="Amity-University">Amity University</option>
-                                    <option value="Jadavpur-University">Jadavpur University</option>
-                                    <option value="Techno-India-University">Techno India University</option>
-                                    <option value="Barasat-University">Barasat University</option>
-                                    <option value="MAKAUT">MAKAUT</option>
+                                <input type="text" className="input-text" placeholder="Enter your college's name" value={this.state.college} onChange={(e) => this.setState({ college: e.target.value })}/>
+                                <select onChange="changeCllg()" defaultValue={this.state.university} type="text" className="input-text" id="uname">
+                                    <option selected={this.state.university === "-Select University-"} value="select-degree">-Select University-</option>
+                                    <option selected={this.state.university === "Calcutta University"} value="Calcutta-University">Calcutta University</option>
+                                    <option selected={this.state.university === "Amity University"} value="Amity-University">Amity University</option>
+                                    <option selected={this.state.university === "Jadavpur University"} value="Jadavpur-University">Jadavpur University</option>
+                                    <option selected={this.state.university === "Techno India University"} value="Techno-India-University">Techno India University</option>
+                                    <option selected={this.state.university === "Barasat University"} value="Barasat-University">Barasat University</option>
+                                    <option selected={this.state.university === "MAKAUT"} value="MAKAUT">MAKAUT</option>
                                 </select>
-                                <select className="input-text select-degree" id="select-degree">
+                                <select className="input-text select-degree" id="select-degree" defaultValue={this.state.degree}>
                                     <option value="">-Select Degree-</option>
                                 </select>
-                                <select className="input-text select-degree" id="Calcutta-University" style={{ display: "none" }}>
-                                    <option value="">-Select Degree-</option>
-                                    <option value="BCom">B-Com</option>
-                                    <option value="BBA">BBA</option>
-                                </select>
-                                <select className="input-text select-degree" id="Amity-University" style={{ display: "none" }}>
+                                <select className="input-text select-degree" id="Calcutta-University" defaultValue={this.state.university} style={{ display: "none" }}>
                                     <option value="">-Select Degree-</option>
                                     <option value="BCom">B-Com</option>
                                     <option value="BBA">BBA</option>
                                 </select>
-                                <select className="input-text select-degree" id="Jadavpur-University" style={{ display: "none" }}>
+                                <select className="input-text select-degree" id="Amity-University" defaultValue={this.state.university} style={{ display: "none" }}>
                                     <option value="">-Select Degree-</option>
                                     <option value="BCom">B-Com</option>
                                     <option value="BBA">BBA</option>
                                 </select>
-                                <select className="input-text select-degree" id="Techno-India-University" style={{ display: "none" }}>
+                                <select className="input-text select-degree" id="Jadavpur-University" defaultValue={this.state.university} style={{ display: "none" }}>
                                     <option value="">-Select Degree-</option>
                                     <option value="BCom">B-Com</option>
                                     <option value="BBA">BBA</option>
                                 </select>
-                                <select className="input-text select-degree" id="Barasat-University" style={{ display: "none" }}>
+                                <select className="input-text select-degree" id="Techno-India-University" defaultValue={this.state.university} style={{ display: "none" }}>
                                     <option value="">-Select Degree-</option>
                                     <option value="BCom">B-Com</option>
                                     <option value="BBA">BBA</option>
                                 </select>
-                                <select className="input-text select-degree" id="MAKAUT" style={{ display: "none" }}>
+                                <select className="input-text select-degree" id="Barasat-University" defaultValue={this.state.university} style={{ display: "none" }}>
+                                    <option value="">-Select Degree-</option>
+                                    <option value="BCom">B-Com</option>
+                                    <option value="BBA">BBA</option>
+                                </select>
+                                <select className="input-text select-degree" id="MAKAUT" defaultValue={this.state.university} style={{ display: "none" }}>
                                     <option value="">-Select Degree-</option>
                                     <option value="BCom">B-Com</option>
                                     <option value="BBA">BBA</option>
@@ -107,7 +138,7 @@ class StudentRegister extends React.Component {
                                 </select>
                                 <input type="text" className="input-text" placeholder="Enter your Phone number" name="phno" /><br />
                                 <input type="checkbox" name="termsconditions" />     I accept terms & conditions
-                        <button id="verifybtn" className="input-text"><span className="verifyph" onclick="handleSubmit()">Verify</span></button>
+                        <button id="verifybtn" className="input-text"><span className="verifyph" onClick="handleSubmit()">Verify</span></button>
                                 <input type="number" className="otpinput" placeholder="Enter Your OTP" name="otp" />
                             </div>
                         </div>
@@ -122,7 +153,7 @@ class StudentRegister extends React.Component {
                         </p>
                             </div>
                         </div>
-                        <div id="nextbtn" className="next" onMouseOver={this.handlemouseover} onClick={next}>
+                        <div id="nextbtn" className="next" onMouseOver={(e) => this.handlemouseover(e)}>
                             Next{" "}
                             <img id="nextimg" src={require("../../../assets/logo/next.png")} />
                         </div>
