@@ -5,15 +5,18 @@ import React, { Fragment } from "react";
 import axios from "axios";
 
 import token from "./api_key";
+import razorpay from "razorpay";
 
 class StudentTransactions extends React.Component {
   state = {
     transactions: [],
     length: 0,
     credits: 0,
+    creditsToPurchase: 0,
   };
 
   componentDidMount() {
+    let instance = new razorpay();
     axios({
       method: "POST",
       url: "https://api.collegeshala.com/studentdetails",
@@ -30,6 +33,12 @@ class StudentTransactions extends React.Component {
         });
       })
       .catch((err) => console.error(err));
+  }
+
+  handleCredits(event) {
+    const credits = event.target.value;
+    console.log(credits);
+    this.setState({ creditsToPurchase: credits });
   }
 
   render() {
@@ -93,10 +102,12 @@ class StudentTransactions extends React.Component {
                       id="buyCredits"
                       aria-describedby="emailHelp"
                       placeholder="Enter Credits Amount"
+                      value={this.state.creditsToPurchase}
+                      onChange={(e) => this.handleCredits(e)}
                     />
                     <br />
                     <p id="buyCredits" className="pl-1">
-                      Note: 1 credit equals 10 Rupees
+                      Note: 1 credit equals ₹ 10
                     </p>
                   </div>
                 </form>
@@ -132,19 +143,19 @@ class StudentTransactions extends React.Component {
                       <div className="row">
                         <div className="col-12 col-md-6">
                           <p className="text-center">
-                            Credits purchased: ${transaction.creditsPurchased}
+                            Credits purchased: {transaction.creditsPurchased}
                           </p>
                           <p className="text-center">
-                            Cost: &#8377 ${transaction.cost / 100}
+                            Cost: ₹ {transaction.cost / 100}
                           </p>
                         </div>
                         <div className="col-12 col-md-6">
                           <p className="text-center">
-                            Payment Id: ${transaction.paymentid}
+                            Payment Id: {transaction.paymentid}
                           </p>
                           <p className="text-center">
-                            Date and Time: $
-                            {transaction.timestamp.substring(0, 10)}, $
+                            Date and Time:
+                            {transaction.timestamp.substring(0, 10)},
                             {transaction.timestamp.substring(11, 19)}
                           </p>
                         </div>
@@ -161,19 +172,19 @@ class StudentTransactions extends React.Component {
                       <div className="row">
                         <div className="col-12 col-md-6">
                           <p className="text-center">
-                            Credits purchased: ${transaction.creditsPurchased}
+                            Credits purchased: {transaction.creditsPurchased}
                           </p>
                           <p className="text-center">
-                            Cost: &#8377 ${transaction.cost / 100}
+                            Cost: ₹ {transaction.cost / 100}
                           </p>
                         </div>
                         <div className="col-12 col-md-6">
                           <p className="text-center">
-                            Payment Id: ${transaction.paymentid}
+                            Payment Id: {transaction.paymentid}
                           </p>
                           <p className="text-center">
-                            Date and Time: $
-                            {transaction.timestamp.substring(0, 10)}, $
+                            Date and Time:
+                            {transaction.timestamp.substring(0, 10)},
                             {transaction.timestamp.substring(11, 19)}
                           </p>
                         </div>
