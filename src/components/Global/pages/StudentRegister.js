@@ -26,6 +26,7 @@ class StudentRegister extends React.Component {
             nextbtntext: "Next ",
             otptext: "Send OTP",
             isChecked: false,
+            changeCllgfuncCalls: 1,
         }
     }
     handleSubmit() {
@@ -65,12 +66,15 @@ class StudentRegister extends React.Component {
     }
     changeCllg(e) {
         this.setState({ university: e.target.value });
-        var defaultcllg = "select-degree"
-        var opt = document.getElementById('uname');
-        console.log(opt.value);
-        document.getElementById(defaultcllg).style = "display: none";
-        document.getElementById(opt.value).style = "display: inline-block";
-        defaultcllg = opt.value;
+        this.setState({ changeCllgfuncCalls: this.state.changeCllgfuncCalls + 1 });
+        if (this.state.changeCllgfuncCalls === 1) {
+            var defaultcllg = "select-degree"
+            var opt = document.getElementById('uname');
+            console.log(opt.value);
+            document.getElementById(defaultcllg).style = "display: none";
+            document.getElementById(opt.value).style = "display: inline-block";
+            defaultcllg = opt.value;
+        }
     }
     validateEmail(email) {
         var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
