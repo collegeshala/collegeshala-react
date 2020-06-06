@@ -1,38 +1,192 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 class StudentRegister extends React.Component {
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
+        this.progval = React.createRef();
         this.state = {
             name: "",
             email: "",
             password: "",
             college: "",
-            university: "-Select University-",
+            university: "select-university",
             degree: "-Select Degree-",
             step: 1,
+            verifych: false,
+            step1display: {},
+            step2display: { display: "none" },
+            step3display: { display: "none" },
+            step4display: { display: "none" },
+            step2img: require("../../../assets/logo/step2incomplete.png"),
+            step3img: require("../../../assets/logo/step3incomplete.png"),
+            step4img: require("../../../assets/logo/step4incomplete.png"),
+            nextbtntext: "Next ",
+            otptext : "Send OTP",
         }
     }
-    handlemouseover(e)
-    {
+    ResendOtp() {
+        this.setState({ otptext : "Resend OTP"})
+    }
+    handlemouseover(e) {
         e.target.style = 'cursor : pointer';
     }
-    validateEmail(email)
-    {
+    changeCllg() {
+        var defaultcllg = "select-degree"
+        var opt = document.getElementById('uname');
+        console.log(opt.value);
+        document.getElementById(defaultcllg).style = "display: none";
+        document.getElementById(opt.value).style = "display: inline-block";
+        defaultcllg = opt.value;
+    }
+    validateEmail(email) {
         var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-        if (reg.test(email) === false) 
+        if (reg.test(String(email).toLowerCase()) === false)
             return false;
         return true;
     }
-    next()
-    {
-        if(this.state.step === 1)
-        {
-            if(!this.validateEmail(this.state.email)) {
-                alert("Enter valid email address");
-                return;
+    next() {
+        if (this.state.step === 3 && !this.state.verifych) {
+            //Not Written
+            // handleVerify();
+        }
+        if (this.state.step === 4) {
+            localStorage.setItem("acc_type", 'student');
+            //Doesn't work. Route to be added
+            //window.location.href = "/login.html"
+        }
+        else {
+            if (this.state.step === 1) {
+                if (!this.validateEmail(this.state.email)) {
+                    alert("Enter valid email address");
+                    return;
+                }
             }
+            this.progval.current.classList.add(`progress${this.state.step}`);
+            setTimeout(() => {
+                switch (this.state.step) {
+                    case 1: this.setState({ step2img: require("../../../assets/logo/step2complete.png") });
+                        break;
+
+                    case 2: this.setState({ step3img: require("../../../assets/logo/step3complete.png") });
+                        break;
+
+                    case 3: this.setState({ step4img: require("../../../assets/logo/step4complete.png") });
+                        break;
+
+                    default:
+                }
+                this.setState({ step : this.state.step + 1 });
+            }, 500);
+
+            // document.getElementById(`step-${this.state.step}`).style = "display: none";
+            switch (this.state.step) {
+                case 1: this.setState({ step1display: { display: "none" } });
+                    break;
+
+                case 2: this.setState({ step2display: { display: "none" } });
+                    break;
+
+                case 3: this.setState({ step3display: { display: "none" } });
+                    break;
+
+                default:
+            }
+            // (window.innerWidth > 800)?
+            //         document.getElementById(`step-${this.state.step+1}`).style = "display: inline-flex":
+            //         document.getElementById(`step-${this.state.step+1}`).style = "display: initial";
+            if (window.innerWidth > 800) {
+                switch (this.state.step) {
+                    case 1: this.setState({ step2display: { display: "inline-flex" } });
+                        break;
+
+                    case 2: this.setState({ step3display: { display: "inline-flex" } });
+                        break;
+
+                    case 3: this.setState({ step4display: { display: "inline-flex" } });
+                        break;
+
+                    default:
+                }
+            }
+            else {
+                switch (this.state.step) {
+                    case 1: this.setState({ step2display: { display: "initial" } });
+                        break;
+
+                    case 2: this.setState({ step3display: { display: "initial" } });
+                        break;
+
+                    case 3: this.setState({ step4display: { display: "initial" } });
+                        break;
+
+                    default:
+                }
+            }
+            // if(step === 2){
+            //     document.getElementById('nextbtn').innerHTML = 'Finish<img id="nextimg" src="assets/logo/next.png">';
+            // }
+            if (this.state.step === 2) {
+                this.setState({ nextbtntext: "Finish " });
+            }
+            // if(verifych){
+            //     document.getElementById('nextbtn').innerHTML = 'Go to HomePage<img id="nextimg" src="assets/logo/next.png">';
+            // }
+            if (this.state.verifych) {
+                this.setState({ nextbtntext: "Go to HomePage " });
+            }
+        }
+    }
+    back() {
+        if (this.state.step !== 1) {
+            switch (this.state.step) {
+                case 1: this.setState({ step1display: { display: "none" } });
+                    break;
+
+                case 2: this.setState({ step2display: { display: "none" } });
+                    break;
+
+                case 3: this.setState({ step3display: { display: "none" } });
+                    break;
+
+                default:
+            }
+            if (window.innerWidth > 800) {
+                switch (this.state.step) {
+                    case 2: this.setState({ step1display: { display: "inline-flex" } });
+                        break;
+
+                    case 3: this.setState({ step2display: { display: "inline-flex" } });
+                        break;
+
+                    case 4: this.setState({ step3display: { display: "inline-flex" } });
+                        break;
+                    default:
+                }
+            }
+            else {
+                switch (this.state.step) {
+                    case 2: this.setState({ step1display: { display: "initial" } });
+                        break;
+
+                    case 3: this.setState({ step2display: { display: "initial" } });
+                        break;
+
+                    case 4: this.setState({ step3display: { display: "initial" } });
+                        break;
+                    default:
+                }
+            }
+            if(this.state.step === 3) {
+                this.setState({ nextbtntext: "Next " });
+            }
+            else if(this.state.step === 4) {
+                this.setState({ nextbtntext: "Finish " });
+            }
+            this.setState({ step : this.state.step - 1 });
+        }
+        else {
+            //Route to register component to be added
         }
     }
     render() {
@@ -40,52 +194,54 @@ class StudentRegister extends React.Component {
             <div id="student-signup">
                 <div>
                     <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "#6534CC" }}>
-                        <a id='back' className="navbar-brand" onClick="back()">
-                            <img src={require("../../../assets/logo/LeftArrow.png")} alt="" srcset="" width="35" height="30" />
-                        </a>
-                        <a id="backtext" onClick="back()"><p className="back-label">Back</p></a>
+                            <a id='back' className="navbar-brand" onClick={() => this.back()}>
+                                <img src={require("../../../assets/logo/LeftArrow.png")} alt="" srcSet="" width="35" height="30" />
+                            </a>
+                        
+                            <a id="backtext" onClick={() => this.back()}><p className="back-label">Back</p></a>
+                        
                     </nav>
                 </div>
                 <div className="content">
                     <div>
                         <div className="progressbar-container">
                             <div className="progressbar">
-                                <div id="progval" className="progress-value"></div>
+                                <div id="progval" ref={this.progval} className="progress-value"></div>
                                 <div className="progress-steps">
                                     <img id="step-1-img" src={require("../../../assets/logo/step1.png")} alt="step1" />
-                                    <img id="step-2-img" src={require("../../../assets/logo/step2incomplete.png")} alt="step2" />
-                                    <img id="step-3-img" src={require("../../../assets/logo/step3incomplete.png")} alt="step3" />
-                                    <img id="step-4-img" src={require("../../../assets/logo/step4incomplete.png")} alt="step4" />
+                                    <img id="step-2-img" src={this.state.step2img} alt="step2" />
+                                    <img id="step-3-img" src={this.state.step3img} alt="step3" />
+                                    <img id="step-4-img" src={this.state.step4img} alt="step4" />
                                     <span className="stretch"></span>
                                 </div>
                             </div>
                         </div>
-                        <div id="step-1" className="row details-container">
+                        <div id="step-1" className="row details-container" style={this.state.step1display}>
                             <div className="col-6 image-column">
                                 <div className="info-about">Tell us <span style={{ color: "#FF4133" }}>about</span> you...</div>
                                 <img className="info-image" src={require("../../../assets/img/name-email-student-card.png")} alt="Register as student" />
                             </div>
                             <div className="col-6 input-column">
-                                <input type="text" className="input-text" placeholder="Enter your full name" value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })}/>
-                                <input type="email" className="input-text" placeholder="Enter your email address" value={this.state.email} onChange={(e) => this.setState({ email: e.target.value })}/>
-                                <input type="password" className="input-text" placeholder="Enter your password" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })}/>
+                                <input type="text" className="input-text" placeholder="Enter your full name" value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
+                                <input type="email" className="input-text" placeholder="Enter your email address" value={this.state.email} onChange={(e) => this.setState({ email: e.target.value })} />
+                                <input type="password" className="input-text" placeholder="Enter your password" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} />
                             </div>
                         </div>
-                        <div id="step-2" className="row details-container" style={{ display: "none" }}>
+                        <div id="step-2" className="row details-container" style={this.state.step2display}>
                             <div className="col-6 image-column">
                                 <div className="info-about">Tell us <span style={{ color: "#FF4133" }}>about</span> your college...</div>
                                 <img className="info-image" src={require("../../../assets/img/college-details-student-card 1.png")} alt="Register as student" />
                             </div>
                             <div className="col-6 input-column" style={{ paddingTop: "1vh", paddingBottom: "0" }}>
-                                <input type="text" className="input-text" placeholder="Enter your college's name" value={this.state.college} onChange={(e) => this.setState({ college: e.target.value })}/>
-                                <select onChange="changeCllg()" defaultValue={this.state.university} type="text" className="input-text" id="uname">
-                                    <option selected={this.state.university === "-Select University-"} value="select-degree">-Select University-</option>
-                                    <option selected={this.state.university === "Calcutta University"} value="Calcutta-University">Calcutta University</option>
-                                    <option selected={this.state.university === "Amity University"} value="Amity-University">Amity University</option>
-                                    <option selected={this.state.university === "Jadavpur University"} value="Jadavpur-University">Jadavpur University</option>
-                                    <option selected={this.state.university === "Techno India University"} value="Techno-India-University">Techno India University</option>
-                                    <option selected={this.state.university === "Barasat University"} value="Barasat-University">Barasat University</option>
-                                    <option selected={this.state.university === "MAKAUT"} value="MAKAUT">MAKAUT</option>
+                                <input type="text" className="input-text" placeholder="Enter your college's name" value={this.state.college} onChange={(e) => this.setState({ college: e.target.value })} />
+                                <select onChange={(e) => this.changeCllg(e)} defaultValue={this.state.university} type="text" className="input-text" id="uname">
+                                    <option value="select-university">-Select University-</option>
+                                    <option value="Calcutta-University">Calcutta University</option>
+                                    <option value="Amity-University">Amity University</option>
+                                    <option value="Jadavpur-University">Jadavpur University</option>
+                                    <option value="Techno-India-University">Techno India University</option>
+                                    <option value="Barasat-University">Barasat University</option>
+                                    <option value="MAKAUT">MAKAUT</option>
                                 </select>
                                 <select className="input-text select-degree" id="select-degree" defaultValue={this.state.degree}>
                                     <option value="">-Select Degree-</option>
@@ -123,7 +279,7 @@ class StudentRegister extends React.Component {
                                 <input type="text" className="input-text" placeholder="You are in which semester?" name="sem" />
                             </div>
                         </div>
-                        <div id="step-3" className="row details-container" style={{ display: "none" }}>
+                        <div id="step-3" className="row details-container" style={this.state.step3display}>
                             <div className="col-6 image-column">
                                 <div className="info-about">One <span style={{ color: "#FF4133" }}>last</span> entry...</div>
                                 <img className="info-image" src={require("../../../assets/img/step3.png")} alt="Register as student" />
@@ -138,11 +294,15 @@ class StudentRegister extends React.Component {
                                 </select>
                                 <input type="text" className="input-text" placeholder="Enter your Phone number" name="phno" /><br />
                                 <input type="checkbox" name="termsconditions" />     I accept terms & conditions
-                        <button id="verifybtn" className="input-text"><span className="verifyph" onClick="handleSubmit()">Verify</span></button>
+                        <div class="container" style={{ display : "inline-block" }}>
+                            <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.ResendOtp()}>{this.state.otptext}</span></button>
+                            <button id="verifybtn" className="input-text"><span className="verifyph" onClick="handleSubmit()">Verify</span></button>
+                        </div>
+                        
                                 <input type="number" className="otpinput" placeholder="Enter Your OTP" name="otp" />
                             </div>
                         </div>
-                        <div id="step-4" className="row details-container" style={{ display: "none" }}>
+                        <div id="step-4" className="row details-container" style={this.state.step4display}>
                             <div className="col-6 image-column">
                                 <img className="info-image" src={require("../../../assets/img/rocket-human-icon 1.png")} alt="Register as student" />
                             </div>
@@ -153,8 +313,8 @@ class StudentRegister extends React.Component {
                         </p>
                             </div>
                         </div>
-                        <div id="nextbtn" className="next" onMouseOver={(e) => this.handlemouseover(e)}>
-                            Next{" "}
+                        <div id="nextbtn" className="next" onMouseOver={(e) => this.handlemouseover(e)} onClick={() => this.next()}>
+                            {this.state.nextbtntext}
                             <img id="nextimg" src={require("../../../assets/logo/next.png")} />
                         </div>
                     </div>
