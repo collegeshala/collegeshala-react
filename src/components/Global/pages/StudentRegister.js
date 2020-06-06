@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
 
 class StudentRegister extends React.Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class StudentRegister extends React.Component {
             otptext : "Send OTP",
         }
     }
-    ResendOtp() {
+    Otp() {
         this.setState({ otptext : "Resend OTP"})
     }
     handlemouseover(e) {
@@ -295,7 +295,7 @@ class StudentRegister extends React.Component {
                                 <input type="text" className="input-text" placeholder="Enter your Phone number" name="phno" /><br />
                                 <input type="checkbox" name="termsconditions" />     I accept terms & conditions
                         <div class="container" style={{ display : "inline-block" }}>
-                            <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.ResendOtp()}>{this.state.otptext}</span></button>
+                            <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.Otp()}>{this.state.otptext}</span></button>
                             <button id="verifybtn" className="input-text"><span className="verifyph" onClick="handleSubmit()">Verify</span></button>
                         </div>
                         
