@@ -11,7 +11,9 @@ class StudentRegister extends React.Component {
             password: "",
             college: "",
             university: "select-university",
-            degree: "-Select Degree-",
+            degree: "",
+            sem: 1,
+            phoneNo: 0,
             step: 1,
             verifych: false,
             step1display: {},
@@ -22,16 +24,47 @@ class StudentRegister extends React.Component {
             step3img: require("../../../assets/logo/step3incomplete.png"),
             step4img: require("../../../assets/logo/step4incomplete.png"),
             nextbtntext: "Next ",
-            otptext : "Send OTP",
+            otptext: "Send OTP",
+            isChecked: false,
         }
     }
-    Otp() {
-        this.setState({ otptext : "Resend OTP"})
+    handleSubmit() {
+        if (!this.state.isChecked) {
+            alert('Please accept terms and conditions');
+            return;
+        }
+        var userData = {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password,
+            cllgname: this.state.college,
+            univname: this.state.university,
+            degree: this.state.degree,
+            sem: this.state.sem,
+            phone: '+91' + this.state.phoneNo,
+            isProfessor: false,
+        }
+        console.log(userData);
+        var onSuccess = function registerSuccess(result) {
+            var cognitoUser = result.user;
+            console.log('Check user here : ', cognitoUser);
+            alert("New User created. Please check your phone for the verification code");
+        }
+        var onFailure = function registerFailure(err) {
+            alert(err);
+            console.error(err);
+        }
+        //Not written yet
+        //register(userData,onSuccess,onFailure);
+    }
+    otp() {
+        this.setState({ otptext: "Resend OTP" })
     }
     handlemouseover(e) {
         e.target.style = 'cursor : pointer';
     }
-    changeCllg() {
+    changeCllg(e) {
+        this.setState({ university: e.target.value });
         var defaultcllg = "select-degree"
         var opt = document.getElementById('uname');
         console.log(opt.value);
@@ -76,7 +109,7 @@ class StudentRegister extends React.Component {
 
                     default:
                 }
-                this.setState({ step : this.state.step + 1 });
+                this.setState({ step: this.state.step + 1 });
             }, 500);
 
             // document.getElementById(`step-${this.state.step}`).style = "display: none";
@@ -177,13 +210,13 @@ class StudentRegister extends React.Component {
                     default:
                 }
             }
-            if(this.state.step === 3) {
+            if (this.state.step === 3) {
                 this.setState({ nextbtntext: "Next " });
             }
-            else if(this.state.step === 4) {
+            else if (this.state.step === 4) {
                 this.setState({ nextbtntext: "Finish " });
             }
-            this.setState({ step : this.state.step - 1 });
+            this.setState({ step: this.state.step - 1 });
         }
         else {
             //Route to register component to be added
@@ -194,12 +227,12 @@ class StudentRegister extends React.Component {
             <div id="student-signup">
                 <div>
                     <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "#6534CC" }}>
-                            <a id='back' className="navbar-brand" onClick={() => this.back()}>
-                                <img src={require("../../../assets/logo/LeftArrow.png")} alt="" srcSet="" width="35" height="30" />
-                            </a>
-                        
-                            <a id="backtext" onClick={() => this.back()}><p className="back-label">Back</p></a>
-                        
+                        <a id='back' className="navbar-brand" onClick={() => this.back()}>
+                            <img src={require("../../../assets/logo/LeftArrow.png")} alt="" srcSet="" width="35" height="30" />
+                        </a>
+
+                        <a id="backtext" onClick={() => this.back()}><p className="back-label">Back</p></a>
+
                     </nav>
                 </div>
                 <div className="content">
@@ -235,48 +268,48 @@ class StudentRegister extends React.Component {
                             <div className="col-6 input-column" style={{ paddingTop: "1vh", paddingBottom: "0" }}>
                                 <input type="text" className="input-text" placeholder="Enter your college's name" value={this.state.college} onChange={(e) => this.setState({ college: e.target.value })} />
                                 <select onChange={(e) => this.changeCllg(e)} defaultValue={this.state.university} type="text" className="input-text" id="uname">
-                                    <option value="select-university">-Select University-</option>
-                                    <option value="Calcutta-University">Calcutta University</option>
-                                    <option value="Amity-University">Amity University</option>
-                                    <option value="Jadavpur-University">Jadavpur University</option>
-                                    <option value="Techno-India-University">Techno India University</option>
-                                    <option value="Barasat-University">Barasat University</option>
-                                    <option value="MAKAUT">MAKAUT</option>
+                                    <option selected={this.state.university === "select-university"} value="select-university">-Select University-</option>
+                                    <option selected={this.state.university === "Calcutta-University"} value="Calcutta-University">Calcutta University</option>
+                                    <option selected={this.state.university === "Amity-University"} value="Amity-University">Amity University</option>
+                                    <option selected={this.state.university === "Jadavpur-University"} value="Jadavpur-University">Jadavpur University</option>
+                                    <option selected={this.state.university === "Techno-India-University"} value="Techno-India-University">Techno India University</option>
+                                    <option selected={this.state.university === "Barasat-University"} value="Barasat-University">Barasat University</option>
+                                    <option selected={this.state.university === "MAKAUT"} value="MAKAUT">MAKAUT</option>
                                 </select>
-                                <select className="input-text select-degree" id="select-degree" defaultValue={this.state.degree}>
-                                    <option value="">-Select Degree-</option>
+                                <select className="input-text select-degree" id="select-degree" defaultValue={this.state.degree} onChange={(e) => this.setState({ degree: e.target.value })}>
+                                    <option selected={this.state.degree === ""} value="">-Select Degree-</option>
                                 </select>
-                                <select className="input-text select-degree" id="Calcutta-University" defaultValue={this.state.university} style={{ display: "none" }}>
-                                    <option value="">-Select Degree-</option>
-                                    <option value="BCom">B-Com</option>
-                                    <option value="BBA">BBA</option>
+                                <select className="input-text select-degree" id="Calcutta-University" defaultValue={this.state.degree} style={{ display: "none" }} onChange={(e) => this.setState({ degree: e.target.value })}>
+                                    <option selected={this.state.degree === ""} value="">-Select Degree-</option>
+                                    <option selected={this.state.degree === "BCom"} value="BCom">B-Com</option>
+                                    <option selected={this.state.degree === "BBA"} value="BBA">BBA</option>
                                 </select>
-                                <select className="input-text select-degree" id="Amity-University" defaultValue={this.state.university} style={{ display: "none" }}>
-                                    <option value="">-Select Degree-</option>
-                                    <option value="BCom">B-Com</option>
-                                    <option value="BBA">BBA</option>
+                                <select className="input-text select-degree" id="Amity-University" defaultValue={this.state.degree} style={{ display: "none" }} onChange={(e) => this.setState({ degree: e.target.value })}>
+                                    <option selected={this.state.degree === ""} value="">-Select Degree-</option>
+                                    <option selected={this.state.degree === "BCom"} value="BCom">B-Com</option>
+                                    <option selected={this.state.degree === "BBA"} value="BBA">BBA</option>
                                 </select>
-                                <select className="input-text select-degree" id="Jadavpur-University" defaultValue={this.state.university} style={{ display: "none" }}>
-                                    <option value="">-Select Degree-</option>
-                                    <option value="BCom">B-Com</option>
-                                    <option value="BBA">BBA</option>
+                                <select className="input-text select-degree" id="Jadavpur-University" defaultValue={this.state.degree} style={{ display: "none" }} onChange={(e) => this.setState({ degree: e.target.value })}>
+                                    <option selected={this.state.degree === ""} value="">-Select Degree-</option>
+                                    <option selected={this.state.degree === "BCom"} value="BCom">B-Com</option>
+                                    <option selected={this.state.degree === "BBA"} value="BBA">BBA</option>
                                 </select>
-                                <select className="input-text select-degree" id="Techno-India-University" defaultValue={this.state.university} style={{ display: "none" }}>
-                                    <option value="">-Select Degree-</option>
-                                    <option value="BCom">B-Com</option>
-                                    <option value="BBA">BBA</option>
+                                <select className="input-text select-degree" id="Techno-India-University" defaultValue={this.state.degree} style={{ display: "none" }} onChange={(e) => this.setState({ degree: e.target.value })}>
+                                    <option selected={this.state.degree === ""} value="">-Select Degree-</option>
+                                    <option selected={this.state.degree === "BCom"} value="BCom">B-Com</option>
+                                    <option selected={this.state.degree === "BBA"} value="BBA">BBA</option>
                                 </select>
-                                <select className="input-text select-degree" id="Barasat-University" defaultValue={this.state.university} style={{ display: "none" }}>
-                                    <option value="">-Select Degree-</option>
-                                    <option value="BCom">B-Com</option>
-                                    <option value="BBA">BBA</option>
+                                <select className="input-text select-degree" id="Barasat-University" defaultValue={this.state.degree} style={{ display: "none" }} onChange={(e) => this.setState({ degree: e.target.value })}>
+                                    <option selected={this.state.degree === ""} value="">-Select Degree-</option>
+                                    <option selected={this.state.degree === "BCom"} value="BCom">B-Com</option>
+                                    <option selected={this.state.degree === "BBA"} value="BBA">BBA</option>
                                 </select>
-                                <select className="input-text select-degree" id="MAKAUT" defaultValue={this.state.university} style={{ display: "none" }}>
-                                    <option value="">-Select Degree-</option>
-                                    <option value="BCom">B-Com</option>
-                                    <option value="BBA">BBA</option>
+                                <select className="input-text select-degree" id="MAKAUT" defaultValue={this.state.degree} style={{ display: "none" }} onChange={(e) => this.setState({ degree: e.target.value })}>
+                                    <option selected={this.state.degree === ""} value="">-Select Degree-</option>
+                                    <option selected={this.state.degree === "BCom"} value="BCom">B-Com</option>
+                                    <option selected={this.state.degree === "BBA"} value="BBA">BBA</option>
                                 </select>
-                                <input type="text" className="input-text" placeholder="You are in which semester?" name="sem" />
+                                <input type="text" className="input-text" placeholder="You are in which semester?" onChange={(e) => this.setState({ sem: Number(e.target.value) })} />
                             </div>
                         </div>
                         <div id="step-3" className="row details-container" style={this.state.step3display}>
@@ -285,20 +318,20 @@ class StudentRegister extends React.Component {
                                 <img className="info-image" src={require("../../../assets/img/step3.png")} alt="Register as student" />
                             </div>
                             <div className="col-6 input-column" style={{ paddingTop: "1vh", paddingBottom: "0" }}>
-                                <select className="input-text" id="knowabout" style={{ fontSize: "20px" }}>
+                                <select className="input-text" id="knowabout" style={{ fontSize: "20px" }} >
                                     <option value="">-How did you know about Collegeshala-</option>
                                     <option value="social-media">Social Media</option>
                                     <option value="friends">Friends</option>
                                     <option value="collegeshala-collaborators">Collegeshala collaborators</option>
                                     <option value="none">None</option>
                                 </select>
-                                <input type="text" className="input-text" placeholder="Enter your Phone number" name="phno" /><br />
-                                <input type="checkbox" name="termsconditions" />     I accept terms & conditions
-                        <div class="container" style={{ display : "inline-block" }}>
-                            <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.Otp()}>{this.state.otptext}</span></button>
-                            <button id="verifybtn" className="input-text"><span className="verifyph" onClick="handleSubmit()">Verify</span></button>
-                        </div>
-                        
+                                <input type="text" className="input-text" placeholder="Enter your Phone number" value={this.state.phoneNo} onChange={(e) => this.setState({ phoneNo: e.target.value })} /><br />
+                                <input type="checkbox" name="termsconditions" checked={this.state.isChecked} onChange={(e) => this.setState({ isChecked: e.target.value })} />     I accept terms & conditions
+                                <div class="container" style={{ display: "inline-block" }}>
+                                    <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.otp()}>{this.state.otptext}</span></button>
+                                    <button id="verifybtn" className="input-text"><span className="verifyph" onClick="handleSubmit()">Verify</span></button>
+                                </div>
+
                                 <input type="number" className="otpinput" placeholder="Enter Your OTP" name="otp" />
                             </div>
                         </div>
