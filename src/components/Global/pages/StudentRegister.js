@@ -177,13 +177,14 @@ class StudentRegister extends React.Component {
     back() {
         if (this.state.step !== 1) {
             switch (this.state.step) {
-                case 1: this.setState({ step1display: { display: "none" } });
-                    break;
 
                 case 2: this.setState({ step2display: { display: "none" } });
                     break;
 
                 case 3: this.setState({ step3display: { display: "none" } });
+                    break;
+
+                case 4: this.setState({ step4display: { display: "none" } });
                     break;
 
                 default:
