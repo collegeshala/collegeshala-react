@@ -333,7 +333,7 @@ class StudentRegister extends React.Component {
                                 <input type="checkbox" name="termsconditions" checked={this.state.isChecked} onChange={(e) => this.setState({ isChecked: e.target.value })} />     I accept terms & conditions
                                 <div class="container" style={{ display: "inline-block" }}>
                                     <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.otp()}>{this.state.otptext}</span></button>
-                                    <button id="verifybtn" className="input-text"><span className="verifyph" onClick="handleSubmit()">Verify</span></button>
+                                    <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.handleSubmit()}>Verify</span></button>
                                 </div>
 
                                 <input type="number" className="otpinput" placeholder="Enter Your OTP" name="otp" />
