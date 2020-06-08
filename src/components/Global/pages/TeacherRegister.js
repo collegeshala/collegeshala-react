@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 class TeacherRegister extends React.Component {
     constructor(props) {
         super(props);
@@ -11,7 +12,7 @@ class TeacherRegister extends React.Component {
             college: "",
             dept: "",
             subject: "",
-            phoneNo: 0,
+            phoneNo: "",
             step: 1,
             verifych: false,
             step1display: {},
@@ -22,7 +23,7 @@ class TeacherRegister extends React.Component {
             step3img: require("../../../assets/logo/step3incomplete.png"),
             step4img: require("../../../assets/logo/step4incomplete.png"),
             nextbtntext: "Next ",
-            otptext: "Send OTP",
+            sendOtpisClicked: false,
             isChecked: false,
         }
     }
@@ -38,7 +39,7 @@ class TeacherRegister extends React.Component {
             cllgname: this.state.college,
             department: this.state.dept,
             subject: this.state.subject,
-            phone: '+91' + this.state.phoneNo,
+            phone: '+91' + Number(this.state.phoneNo),
             isProfessor: true,
         }
         var onSuccess = function registerSuccess(result) {
@@ -53,8 +54,12 @@ class TeacherRegister extends React.Component {
         //Not written yet
         //register(userData,onSuccess,onFailure);
     }
-    otp() {
-        this.setState({ otptext: "Resend OTP" })
+    sendOtp() {
+        this.setState({ sendOtpisClicked: true });
+        //Insert Send OTP code here
+    }
+    resendOtp() {
+        //Insert Resend OTP code here
     }
     handlemouseover(e) {
         e.target.style = 'cursor : pointer';
@@ -159,6 +164,21 @@ class TeacherRegister extends React.Component {
     }
     back() {
         if (this.state.step !== 1) {
+            this.progval.current.classList.remove(`progress${this.state.step - 1}`);
+            setTimeout(() => {
+                switch (this.state.step) {
+                    case 1: this.setState({ step2img: require("../../../assets/logo/step2incomplete.png") });
+                        break;
+
+                    case 2: this.setState({ step3img: require("../../../assets/logo/step3incomplete.png") });
+                        break;
+
+                    case 3: this.setState({ step4img: require("../../../assets/logo/step4incomplete.png") });
+                        break;
+
+                    default:
+                }
+            }, 100);
             switch (this.state.step) {
 
                 case 2: this.setState({ step2display: { display: "none" } });
@@ -211,6 +231,14 @@ class TeacherRegister extends React.Component {
         }
     }
     render() {
+        let OtpButton;
+        if(this.state.sendOtpisClicked)
+        {
+            OtpButton = <div><button id="resendbtn" className="input-text"><span className="verifyph" onClick={() => this.resendOtp()}>Resend OTP</span></button>
+            <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.handleSubmit()}>Verify</span></button></div>;
+        }
+        else OtpButton = <button id="sendbtn" className="input-text"><span className="verifyph" onClick={() => this.sendOtp()}>Send OTP</span></button>;
+
         return (
             <div id="student-signup">
                 <div>
@@ -231,7 +259,6 @@ class TeacherRegister extends React.Component {
                                     <img id="step-2-img" src={this.state.step2img} alt="step2" />
                                     <img id="step-3-img" src={this.state.step3img} alt="step3" />
                                     <img id="step-4-img" src={this.state.step4img} alt="step4" />
-                                    <span className="stretch"></span>
                                 </div>
                             </div>
                         </div>
@@ -264,10 +291,9 @@ class TeacherRegister extends React.Component {
                             </div>
                             <div className="col-6 input-column">
                                 <input type="text" className="input-text" placeholder="Enter your Phone number" value={this.state.phoneNo} onChange={(e) => this.setState({ phoneNo: e.target.value })} /><br />
-                                <input type="checkbox" name="termsconditions" checked={this.state.isChecked} onChange={(e) => this.setState({ isChecked: e.target.value })} />     I accept terms & conditions
-                                <div class="container" style={{ display: "inline-block" }}>
-                                    <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.otp()}>{this.state.otptext}</span></button>
-                                    <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.handleSubmit()}>Verify</span></button>
+                                <input type="checkbox" name="termsconditions" defaultChecked={this.state.isChecked} onChange={() => this.setState({ isChecked: !this.state.isChecked })} />     I accept terms & conditions
+                                <div className="otpbtncontainer" style={{ textAlign: "center" }}>
+                                    {OtpButton}
                                 </div>
 
                                 <input type="text" className="otpinput" placeholder="Enter Your OTP" name="otp" />

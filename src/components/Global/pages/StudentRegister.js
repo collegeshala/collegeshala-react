@@ -13,7 +13,7 @@ class StudentRegister extends React.Component {
             university: "select-university",
             degree: "",
             sem: 1,
-            phoneNo: 0,
+            phoneNo: "",
             step: 1,
             verifych: false,
             step1display: {},
@@ -24,7 +24,7 @@ class StudentRegister extends React.Component {
             step3img: require("../../../assets/logo/step3incomplete.png"),
             step4img: require("../../../assets/logo/step4incomplete.png"),
             nextbtntext: "Next ",
-            otptext: "Send OTP",
+            sendOtpisClicked: false,
             isChecked: false,
             changeCllgfuncCalls: 1,
         }
@@ -42,7 +42,7 @@ class StudentRegister extends React.Component {
             univname: this.state.university,
             degree: this.state.degree,
             sem: this.state.sem,
-            phone: '+91' + this.state.phoneNo,
+            phone: '+91' + Number(this.state.phoneNo),
             isProfessor: false,
         }
         console.log(userData);
@@ -58,8 +58,12 @@ class StudentRegister extends React.Component {
         //Not written yet
         //register(userData,onSuccess,onFailure);
     }
-    otp() {
-        this.setState({ otptext: "Resend OTP" })
+    sendOtp() {
+        this.setState({ sendOtpisClicked: true });
+        //Insert Send OTP code here
+    }
+    resendOtp() {
+        //Insert Resend OTP code here
     }
     handlemouseover(e) {
         e.target.style = 'cursor : pointer';
@@ -176,6 +180,21 @@ class StudentRegister extends React.Component {
     }
     back() {
         if (this.state.step !== 1) {
+            this.progval.current.classList.remove(`progress${this.state.step - 1}`);
+            setTimeout(() => {
+                switch (this.state.step) {
+                    case 1: this.setState({ step2img: require("../../../assets/logo/step2incomplete.png") });
+                        break;
+
+                    case 2: this.setState({ step3img: require("../../../assets/logo/step3incomplete.png") });
+                        break;
+
+                    case 3: this.setState({ step4img: require("../../../assets/logo/step4incomplete.png") });
+                        break;
+
+                    default:
+                }
+            }, 100);
             switch (this.state.step) {
 
                 case 2: this.setState({ step2display: { display: "none" } });
@@ -228,6 +247,14 @@ class StudentRegister extends React.Component {
         }
     }
     render() {
+        let OtpButton;
+        if(this.state.sendOtpisClicked)
+        {
+            OtpButton = <div><button id="resendbtn" className="input-text"><span className="verifyph" onClick={() => this.resendOtp()}>Resend OTP</span></button>
+            <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.handleSubmit()}>Verify</span></button></div>;
+        }
+        else OtpButton = <button id="sendbtn" className="input-text"><span className="verifyph" onClick={() => this.sendOtp()}>Send OTP</span></button>;
+
         return (
             <div id="student-signup">
                 <div>
@@ -250,7 +277,6 @@ class StudentRegister extends React.Component {
                                     <img id="step-2-img" src={this.state.step2img} alt="step2" />
                                     <img id="step-3-img" src={this.state.step3img} alt="step3" />
                                     <img id="step-4-img" src={this.state.step4img} alt="step4" />
-                                    <span className="stretch"></span>
                                 </div>
                             </div>
                         </div>
@@ -288,31 +314,55 @@ class StudentRegister extends React.Component {
                                     <option selected={this.state.degree === ""} value="">-Select Degree-</option>
                                     <option selected={this.state.degree === "BCom"} value="BCom">B-Com</option>
                                     <option selected={this.state.degree === "BBA"} value="BBA">BBA</option>
+                                    <option selected={this.state.degree === "BSc-Botany-Honours"} value="BSc-Botany-Honours">B. Sc Botany (Honours)</option>
+                                    <option selected={this.state.degree === "BSc-Botany-Pass"} value="BSc-Botany-Pass">B. Sc Botany (Pass)</option>
+                                    <option selected={this.state.degree === "BA-English-Honours"} value="BA-English-Honours">BA English (Honours)</option>
+                                    <option selected={this.state.degree === "BA-English-Pass"} value="BA-English-Pass">BA English (Pass)</option>
                                 </select>
                                 <select className="input-text select-degree" id="Amity-University" defaultValue={this.state.degree} style={{ display: "none" }} onChange={(e) => this.setState({ degree: e.target.value })}>
                                     <option selected={this.state.degree === ""} value="">-Select Degree-</option>
                                     <option selected={this.state.degree === "BCom"} value="BCom">B-Com</option>
                                     <option selected={this.state.degree === "BBA"} value="BBA">BBA</option>
+                                    <option selected={this.state.degree === "BSc-Botany-Honours"} value="BSc-Botany-Honours">B. Sc Botany (Honours)</option>
+                                    <option selected={this.state.degree === "BSc-Botany-Pass"} value="BSc-Botany-Pass">B. Sc Botany (Pass)</option>
+                                    <option selected={this.state.degree === "BA-English-Honours"} value="BA-English-Honours">BA English (Honours)</option>
+                                    <option selected={this.state.degree === "BA-English-Pass"} value="BA-English-Pass">BA English (Pass)</option>
                                 </select>
                                 <select className="input-text select-degree" id="Jadavpur-University" defaultValue={this.state.degree} style={{ display: "none" }} onChange={(e) => this.setState({ degree: e.target.value })}>
                                     <option selected={this.state.degree === ""} value="">-Select Degree-</option>
                                     <option selected={this.state.degree === "BCom"} value="BCom">B-Com</option>
                                     <option selected={this.state.degree === "BBA"} value="BBA">BBA</option>
+                                    <option selected={this.state.degree === "BSc-Botany-Honours"} value="BSc-Botany-Honours">B. Sc Botany (Honours)</option>
+                                    <option selected={this.state.degree === "BSc-Botany-Pass"} value="BSc-Botany-Pass">B. Sc Botany (Pass)</option>
+                                    <option selected={this.state.degree === "BA-English-Honours"} value="BA-English-Honours">BA English (Honours)</option>
+                                    <option selected={this.state.degree === "BA-English-Pass"} value="BA-English-Pass">BA English (Pass)</option>
                                 </select>
                                 <select className="input-text select-degree" id="Techno-India-University" defaultValue={this.state.degree} style={{ display: "none" }} onChange={(e) => this.setState({ degree: e.target.value })}>
                                     <option selected={this.state.degree === ""} value="">-Select Degree-</option>
                                     <option selected={this.state.degree === "BCom"} value="BCom">B-Com</option>
                                     <option selected={this.state.degree === "BBA"} value="BBA">BBA</option>
+                                    <option selected={this.state.degree === "BSc-Botany-Honours"} value="BSc-Botany-Honours">B. Sc Botany (Honours)</option>
+                                    <option selected={this.state.degree === "BSc-Botany-Pass"} value="BSc-Botany-Pass">B. Sc Botany (Pass)</option>
+                                    <option selected={this.state.degree === "BA-English-Honours"} value="BA-English-Honours">BA English (Honours)</option>
+                                    <option selected={this.state.degree === "BA-English-Pass"} value="BA-English-Pass">BA English (Pass)</option>
                                 </select>
                                 <select className="input-text select-degree" id="Barasat-University" defaultValue={this.state.degree} style={{ display: "none" }} onChange={(e) => this.setState({ degree: e.target.value })}>
                                     <option selected={this.state.degree === ""} value="">-Select Degree-</option>
                                     <option selected={this.state.degree === "BCom"} value="BCom">B-Com</option>
                                     <option selected={this.state.degree === "BBA"} value="BBA">BBA</option>
+                                    <option selected={this.state.degree === "BSc-Botany-Honours"} value="BSc-Botany-Honours">B. Sc Botany (Honours)</option>
+                                    <option selected={this.state.degree === "BSc-Botany-Pass"} value="BSc-Botany-Pass">B. Sc Botany (Pass)</option>
+                                    <option selected={this.state.degree === "BA-English-Honours"} value="BA-English-Honours">BA English (Honours)</option>
+                                    <option selected={this.state.degree === "BA-English-Pass"} value="BA-English-Pass">BA English (Pass)</option>
                                 </select>
                                 <select className="input-text select-degree" id="MAKAUT" defaultValue={this.state.degree} style={{ display: "none" }} onChange={(e) => this.setState({ degree: e.target.value })}>
                                     <option selected={this.state.degree === ""} value="">-Select Degree-</option>
                                     <option selected={this.state.degree === "BCom"} value="BCom">B-Com</option>
                                     <option selected={this.state.degree === "BBA"} value="BBA">BBA</option>
+                                    <option selected={this.state.degree === "BSc-Botany-Honours"} value="BSc-Botany-Honours">B. Sc Botany (Honours)</option>
+                                    <option selected={this.state.degree === "BSc-Botany-Pass"} value="BSc-Botany-Pass">B. Sc Botany (Pass)</option>
+                                    <option selected={this.state.degree === "BA-English-Honours"} value="BA-English-Honours">BA English (Honours)</option>
+                                    <option selected={this.state.degree === "BA-English-Pass"} value="BA-English-Pass">BA English (Pass)</option>
                                 </select>
                                 <input type="text" className="input-text" placeholder="You are in which semester?" onChange={(e) => this.setState({ sem: Number(e.target.value) })} />
                             </div>
@@ -331,12 +381,10 @@ class StudentRegister extends React.Component {
                                     <option value="none">None</option>
                                 </select>
                                 <input type="text" className="input-text" placeholder="Enter your Phone number" value={this.state.phoneNo} onChange={(e) => this.setState({ phoneNo: e.target.value })} /><br />
-                                <input type="checkbox" name="termsconditions" checked={this.state.isChecked} onChange={(e) => this.setState({ isChecked: e.target.value })} />     I accept terms & conditions
-                                <div class="container" style={{ display: "inline-block" }}>
-                                    <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.otp()}>{this.state.otptext}</span></button>
-                                    <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.handleSubmit()}>Verify</span></button>
+                                <input type="checkbox" name="termsconditions" defaultChecked={this.state.isChecked} onChange={() => this.setState({ isChecked: !this.state.isChecked })} />     I accept terms & conditions<br />
+                                <div className="otpbtncontainer" style={{ textAlign: "center" }}>
+                                    {OtpButton}
                                 </div>
-
                                 <input type="number" className="otpinput" placeholder="Enter Your OTP" name="otp" />
                             </div>
                         </div>
@@ -363,3 +411,4 @@ class StudentRegister extends React.Component {
 }
 
 export default StudentRegister
+

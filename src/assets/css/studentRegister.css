@@ -145,6 +145,8 @@
     margin-top: -35px;
     margin-left: -5px;
     width: 102%;
+    display: flex;
+    justify-content: space-between;
     text-align: justify;
     -ms-text-justify: distribute-all-lines;
     text-justify: distribute-all-lines;
@@ -244,6 +246,9 @@ option{
     color: #6534CC;
     margin: 2vh 0;
 }
+.otpbtncontainer {
+    width: 33vw;
+}
 .verify-button{
     margin: 2vh 0;
     padding-left: 1vw;
@@ -269,9 +274,17 @@ option{
     line-height: 30px;
     color: #6534CC;
 }
+#sendbtn{
+    width: 12vw;
+    margin: 0;
+}
+#resendbtn {
+    width: 15vw;
+    margin: 0 2vw 0 0;
+}
 #verifybtn{
     width: 12vw;
-    margin: 0 9vw;
+    margin: 0;
 }
 .hurray{
     font-family: Lato;
@@ -325,9 +338,18 @@ option{
     .input-text{
         width: 70vw;
     }
+    .otpbtncontainer {
+        width: 100%;
+    }
+    #sendbtn{
+        width: 45vw;
+    }
+    #resendbtn {
+        width: 53vw;
+        margin: 0 4vw 0 0;
+    }
     #verifybtn{
         width: 30vw;
-        margin: 0 19vw;
     }
     .success-message{
         width: 100vw;
