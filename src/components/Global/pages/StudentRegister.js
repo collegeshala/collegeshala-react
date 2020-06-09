@@ -1,4 +1,5 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom';
 
 
 class StudentRegister extends React.Component {
@@ -27,6 +28,8 @@ class StudentRegister extends React.Component {
             sendOtpisClicked: false,
             isChecked: false,
             changeCllgfuncCalls: 1,
+            step1orstep4isClicked: false,
+            redirect : "",
         }
     }
     handleSubmit() {
@@ -93,8 +96,8 @@ class StudentRegister extends React.Component {
         }
         if (this.state.step === 4) {
             localStorage.setItem("acc_type", 'student');
-            //Doesn't work. Route to be added
-            //window.location.href = "/login.html"
+            this.setState({ step1orstep4isClicked : true});
+            this.setState({ redirect : "/login"});
         }
         else {
             if (this.state.step === 1) {
@@ -243,10 +246,11 @@ class StudentRegister extends React.Component {
             this.setState({ step: this.state.step - 1 });
         }
         else {
-            //Route to register component to be added
+            this.setState({ step1orstep4isClicked : true});
+            this.setState({ redirect : "/register"});
         }
     }
-    render() {
+    render() { 
         let OtpButton;
         if(this.state.sendOtpisClicked)
         {
@@ -254,8 +258,11 @@ class StudentRegister extends React.Component {
             <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.handleSubmit()}>Verify</span></button></div>;
         }
         else OtpButton = <button id="sendbtn" className="input-text"><span className="verifyph" onClick={() => this.sendOtp()}>Send OTP</span></button>;
-
-        return (
+        
+        if(this.state.step1orstep4isClicked){
+            return <Redirect to={this.state.redirect} />
+        }
+        else return (
             <div id="student-signup">
                 <div>
                     <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "#6534CC" }}>
