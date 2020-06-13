@@ -3,10 +3,10 @@ import { Router } from "@reach/router";
 
 // AUTH IMPORTS
 import Login from "./components/Global/pages/Login";
+import StudentRegister from "./components/Global/pages/StudentRegister";
 
 // STUDENT IMPORTS
 import StudentMaterials from "./components/Student/StudentMaterials";
-import StudentRegister from "./components/Global/pages/StudentRegister";
 import StudentTransactions from "./components/Student/StudentTransactions";
 import StudentAccount from "./components/Student/StudentAccount";
 
