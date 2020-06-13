@@ -22,9 +22,7 @@ const StudentDashboard = () => {
               <a href="spa.html">Home</a>
             </li>
             <li className="breadcrumb-item">
-              <a href="#">
-                <Link to="/student-account">Student's Name</Link>
-              </a>
+              <Link to="/student-account">Student's Name</Link>
             </li>
             <li
               className="breadcrumb-item active"

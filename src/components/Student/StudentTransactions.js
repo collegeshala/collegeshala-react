@@ -2,12 +2,46 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment } from "react";
+import { Link } from "@reach/router";
 import axios from "axios";
 
-import token from "./api_key";
-import razorpay from "razorpay";
+import Navbar from "../Global/Navbar";
+import Footer from "../Global/Footer";
+import SecondaryNav from "../Global/SecondaryNav";
 
-class StudentTransactions extends React.Component {
+import token from "./api_key";
+
+const StudentTransactions = () => {
+  return (
+    <React.Fragment>
+      <Navbar />
+      <div className="container pt-4">
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <a href="spa.html">Home</a>
+            </li>
+            <li className="breadcrumb-item">
+              <Link to="/student-account">Student's Name</Link>
+            </li>
+            <li
+              className="breadcrumb-item active"
+              id="current-active"
+              aria-current="page"
+            >
+              My Transactions
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <SecondaryNav />
+      <Transactions />
+      <Footer />
+    </React.Fragment>
+  );
+};
+
+class Transactions extends React.Component {
   state = {
     transactions: [],
     length: 0,
@@ -16,7 +50,7 @@ class StudentTransactions extends React.Component {
   };
 
   componentDidMount() {
-    let instance = new razorpay();
+    // let instance = new razorpay();
     axios({
       method: "POST",
       url: "https://api.collegeshala.com/studentdetails",
