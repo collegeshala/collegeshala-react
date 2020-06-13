@@ -27,7 +27,7 @@ class TeacherRegister extends React.Component {
             sendOtpisClicked: false,
             isChecked: false,
             step1orstep4isClicked: false,
-            redirect : "",
+            redirect: "",
         }
     }
     handleSubmit() {
@@ -80,8 +80,8 @@ class TeacherRegister extends React.Component {
         }
         if (this.state.step === 4) {
             localStorage.setItem("acc_type", 'professor');
-            this.setState({ step1orstep4isClicked : true});
-            this.setState({ redirect : "/login"});
+            this.setState({ step1orstep4isClicked: true });
+            this.setState({ redirect: "/login" });
         }
         else {
             if (this.state.step === 1) {
@@ -230,20 +230,19 @@ class TeacherRegister extends React.Component {
             this.setState({ step: this.state.step - 1 });
         }
         else {
-            this.setState({ step1orstep4isClicked : true});
-            this.setState({ redirect : "/register"});
+            this.setState({ step1orstep4isClicked: true });
+            this.setState({ redirect: "/register" });
         }
     }
     render() {
         let OtpButton;
-        if(this.state.sendOtpisClicked)
-        {
+        if (this.state.sendOtpisClicked) {
             OtpButton = <div><button id="resendbtn" className="input-text"><span className="verifyph" onClick={() => this.resendOtp()}>Resend OTP</span></button>
-            <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.handleSubmit()}>Verify</span></button></div>;
+                <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.handleSubmit()}>Verify</span></button></div>;
         }
         else OtpButton = <button id="sendbtn" className="input-text"><span className="verifyph" onClick={() => this.sendOtp()}>Send OTP</span></button>;
 
-        if(this.state.step1orstep4isClicked){
+        if (this.state.step1orstep4isClicked) {
             return <Redirect to={this.state.redirect} />
         }
         else return (

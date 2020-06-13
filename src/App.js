@@ -20,6 +20,7 @@ import SingleProduct from './components/Global/pages/SingleProduct'
 import About from './components/Global/pages/About'
 import StudentRegister from './components/Global/pages/StudentRegister'
 import TeacherRegister from './components/Global/pages/TeacherRegister'
+import StudentDashboard from './components/Student/StudentDashboard'
 
 
 class App extends Component {
@@ -44,6 +45,7 @@ class App extends Component {
               <Route exact path="/about" component={About} />
               <Route exact path="/student-register" component={StudentRegister} />
               <Route exact path="/teacher-register" component={TeacherRegister} />
+              <Route exact path="/student-dashboard" component={StudentDashboard} />
             </Switch>
           <Footer />
         </div>
