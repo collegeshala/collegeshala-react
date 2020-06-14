@@ -65,7 +65,7 @@ class TeacherRegister extends React.Component {
         //Insert Resend OTP code here
     }
     handlemouseover(e) {
-        e.target.style = 'cursor : pointer';
+        e.target.style.cursor = "pointer";
     }
     validateEmail(email) {
         var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;

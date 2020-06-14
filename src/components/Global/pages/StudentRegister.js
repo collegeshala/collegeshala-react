@@ -69,7 +69,7 @@ class StudentRegister extends React.Component {
         //Insert Resend OTP code here
     }
     handlemouseover(e) {
-        e.target.style = 'cursor : pointer';
+        e.target.style.cursor = "pointer";
     }
     changeCllg(e) {
         this.setState({ university: e.target.value });

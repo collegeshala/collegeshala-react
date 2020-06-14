@@ -22,8 +22,8 @@ class Login extends React.Component {
     }
   }
   handlemouseover(e) {
-    e.target.style = 'cursor : pointer';
-  }
+    e.target.style.cursor = "pointer";
+}
   next() {
     // document.getElementById(`step-${this.state.step}`).style = "display: none";
     switch (this.state.step) {
