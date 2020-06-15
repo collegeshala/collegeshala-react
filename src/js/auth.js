@@ -159,6 +159,7 @@ export const forgotPassword = (username) => {
       console.log(
         "CodeDeliveryData from forgotPassword: " + JSON.stringify(data)
       );
+      this.next.bind(this);
     },
     onFailure: function (err) {
       alert(err.message || JSON.stringify(err));

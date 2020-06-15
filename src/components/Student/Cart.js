@@ -3,11 +3,10 @@
 import React, { Fragment } from "react";
 import { Link } from "@reach/router";
 import axios from "axios";
+import { getToken } from "./../../js/auth";
 
 import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
-
-import token from "./api_key";
 
 const Cart = () => {
   return (
@@ -48,7 +47,8 @@ class CartPage extends React.Component {
 
     this.deleteNote = this.deleteNote.bind(this);
   }
-  componentDidMount() {
+  async componentDidMount() {
+    const token = await getToken;
     axios({
       method: "POST",
       url: "https://api.collegeshala.com/fetchcart",
@@ -78,8 +78,9 @@ class CartPage extends React.Component {
       .catch((err) => console.error(err));
   }
 
-  deleteNote(event) {
+  async deleteNote(event) {
     event.preventDefault();
+    const token = await getToken;
     const index = event.target.value;
     const { noteId, requiredCredits } = this.state.notes[index];
     let { notes, total } = this.state;

@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { navigate } from "@reach/router";
-
 import { login, forgotPassword, resetPassword } from "./../../../js/auth";
 
 class Login extends React.Component {
@@ -26,7 +24,7 @@ class Login extends React.Component {
     };
   }
   handlemouseover(e) {
-    e.target.style = "cursor : pointer";
+    e.target.style.cursor = "pointer";
   }
   next() {
     // document.getElementById(`step-${this.state.step}`).style = "display: none";
@@ -83,6 +81,30 @@ class Login extends React.Component {
     }
     this.setState({ step: this.state.step + 1 });
   }
+  backCallback() {
+    // (window.innerWidth > 800)?
+    //               document.getElementById(`step-${step}`).style = "display: inline-flex":
+    //               document.getElementById(`step-${step}`).style = "display: initial";
+    if (window.innerWidth > 800) {
+      switch (this.state.step) {
+        case 1:
+          this.setState({ step1display: { display: "inline-flex" } });
+          break;
+
+        default:
+      }
+    } else {
+      switch (this.state.step) {
+        case 1:
+          this.setState({ step1display: { display: "initial" } });
+          break;
+
+        default:
+      }
+    }
+    this.setState({ nextbtntext: "Sign IN " });
+    this.setState({ nextFunction: this.handleLogin.bind(this) });
+  }
   back() {
     if (this.state.step !== 1) {
       switch (this.state.step) {
@@ -97,31 +119,10 @@ class Login extends React.Component {
         default:
       }
       if (this.state.step === 2) {
-        this.setState({ step: this.state.step - 1 });
-      } else this.setState({ step: this.state.step - 2 });
-
-      // (window.innerWidth > 800)?
-      //               document.getElementById(`step-${step}`).style = "display: inline-flex":
-      //               document.getElementById(`step-${step}`).style = "display: initial";
-      if (window.innerWidth > 800) {
-        switch (this.state.step) {
-          case 1:
-            this.setState({ step1display: { display: "inline-flex" } });
-            break;
-
-          default:
-        }
-      } else {
-        switch (this.state.step) {
-          case 1:
-            this.setState({ step1display: { display: "initial" } });
-            break;
-
-          default:
-        }
-      }
-      this.setState({ nextbtntext: "Sign IN " });
-      this.setState({ nextFunction: this.handleLogin.bind(this) });
+        this.setState({ step: this.state.step - 1 }, () => this.backCallback());
+      } else
+        this.setState({ step: this.state.step - 2 }, () => this.backCallback());
+      // adding callback as setstate is asynchronous and does not update
     } else {
       this.setState({ toBeRedirected: true });
       this.setState({ redirect: "/register" });
@@ -132,7 +133,7 @@ class Login extends React.Component {
       username: this.state.email,
       password: this.state.password,
     };
-    // console.log({ userData });
+    console.log({ userData });
     const onSuccess = (result) => {
       console.log(result);
       const accessToken = result.getAccessToken().getJwtToken();
@@ -146,7 +147,7 @@ class Login extends React.Component {
         payload,
       });
       localStorage.setItem("username", userData.username);
-      navigate("/student-account");
+      this.setState({ redirect: "/student-dashboard" });
     };
     const onFailure = (err) => {
       console.error(err);
@@ -163,7 +164,6 @@ class Login extends React.Component {
     var email = this.state.emailforgot;
     console.log(email);
     forgotPassword(email);
-    this.next();
   }
   handleResetPassword() {
     console.log("rp");
@@ -176,6 +176,8 @@ class Login extends React.Component {
       console.log(code, email, password);
       const onSuccess = () => {
         alert("Password has been reset sucessfully");
+        this.setState({ toBeRedirected: true });
+        this.setState({ redirect: "/login" });
       };
       resetPassword({ code, username: email, password }, onSuccess);
     } else alert("Passwords dont match");
@@ -229,7 +231,7 @@ class Login extends React.Component {
                 </div>
                 <div className="col-6 input-column">
                   <input
-                    type="email"
+                    type="text"
                     className="input-text"
                     placeholder="Enter your email address"
                     value={this.state.email}
@@ -268,7 +270,7 @@ class Login extends React.Component {
                     password.
                   </p>
                   <input
-                    type="email"
+                    type="text"
                     className="input-text"
                     placeholder="Enter your email address"
                     value={this.state.emailforgot}

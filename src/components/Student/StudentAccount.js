@@ -147,7 +147,11 @@ class Account extends React.Component {
                   value={this.state.fullName}
                   aria-describedby="emailHelp"
                   placeholder="Enter Full Name"
-                  onChange={(e) => this.setState({ fullName: e.target.value })}
+                  onChange={(e) =>
+                    this.setState({
+                      fullName: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div className="form-group">
@@ -171,7 +175,11 @@ class Account extends React.Component {
                   value={this.state.college}
                   aria-describedby="emailHelp"
                   placeholder="College Name"
-                  onChange={(e) => this.setState({ college: e.target.value })}
+                  onChange={(e) =>
+                    this.setState({
+                      college: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div className="form-group">
@@ -184,7 +192,9 @@ class Account extends React.Component {
                   aria-describedby="emailHelp"
                   placeholder="Degree Pursuing"
                   onChange={(e) =>
-                    this.setState({ university: e.target.value })
+                    this.setState({
+                      university: e.target.value,
+                    })
                   }
                 />
               </div>
@@ -219,7 +229,11 @@ class Account extends React.Component {
                   value={this.state.phoneNo}
                   aria-describedby="emailHelp"
                   placeholder="Phone Number"
-                  onChange={(e) => this.setState({ phoneNo: e.target.value })}
+                  onChange={(e) =>
+                    this.setState({
+                      phoneNo: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div className="container pt-3">
