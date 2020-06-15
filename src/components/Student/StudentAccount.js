@@ -8,7 +8,6 @@ import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import SecondaryNav from "../Global/SecondaryNav";
 
-// import token from "./api_key";
 import { getToken, signout } from "./../../js/auth";
 
 const StudentAccount = () => {
@@ -52,16 +51,7 @@ class Account extends React.Component {
     original: {},
   };
 
-  setData({ fullName, email, college, university, sem, phoneNo }) {
-    this.setState({
-      fullName,
-      email,
-      college,
-      university,
-      sem: sem.toString(),
-      phoneNo: phoneNo.toString(),
-    });
-
+  setData() {
     const original = this.state;
     delete original.original;
     this.setState({ original });
@@ -115,11 +105,26 @@ class Account extends React.Component {
       },
     })
       .then(({ data }) => {
-        console.log(data.Item);
-        this.setData(data.Item);
+        console.log({ studentDetails: data.Item });
+        const {
+          fullName,
+          email,
+          college,
+          university,
+          sem,
+          phoneNo,
+        } = data.Item;
+        this.setState({
+          fullName,
+          email,
+          college,
+          university,
+          sem: sem.toString(),
+          phoneNo,
+        });
+        this.setData();
       })
       .catch((err) => console.error(err));
-    setTimeout(console.log({ state: this.state.sem }), 1000);
   }
 
   render() {
@@ -183,26 +188,28 @@ class Account extends React.Component {
                   }
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="semester">Semester</label>
-                <select
-                  id="semester"
-                  className="form-control"
-                  defaultValue={this.state.sem}
-                  onChange={(e) => {
-                    const sem = e.target.value;
-                    console.log(sem);
-                    this.setState({ sem });
-                  }}
-                >
-                  <option value="1">First</option>
-                  <option value="2">Second</option>
-                  <option value="3">Third</option>
-                  <option value="4">Fourth</option>
-                  <option value="5">Fifth</option>
-                  <option value="6">Sixth</option>
-                </select>
-              </div>
+              {this.state.sem === "0" ? null : (
+                <div className="form-group">
+                  <label htmlFor="semester">Semester</label>
+                  <select
+                    id="semester"
+                    className="form-control"
+                    defaultValue={this.state.sem}
+                    onChange={(e) => {
+                      const sem = e.target.value;
+                      console.log(sem);
+                      this.setState({ sem });
+                    }}
+                  >
+                    <option value="1">First</option>
+                    <option value="2">Second</option>
+                    <option value="3">Third</option>
+                    <option value="4">Fourth</option>
+                    <option value="5">Fifth</option>
+                    <option value="6">Sixth</option>
+                  </select>
+                </div>
+              )}
               <div className="form-group">
                 <label htmlFor="phoneNo">Phone Number</label>
                 <input

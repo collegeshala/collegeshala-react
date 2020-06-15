@@ -79,6 +79,7 @@ class Login extends React.Component {
       this.setState({ nextFunction: this.handleForgetPassword.bind(this) });
     } else if (this.state.step === 2) {
       this.setState({ nextbtntext: "Update Password " });
+      this.setState({ nextFunction: this.handleResetPassword.bind(this) });
     }
     this.setState({ step: this.state.step + 1 });
   }
@@ -144,6 +145,7 @@ class Login extends React.Component {
         refreshToken,
         payload,
       });
+      localStorage.setItem("username", userData.username);
       navigate("/student-account");
     };
     const onFailure = (err) => {

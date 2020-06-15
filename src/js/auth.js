@@ -121,7 +121,7 @@ const sessionExpire = (token) => {
 
 export const getToken = new Promise((resolve, reject) => {
   const cognitoUser = UserPool.getCurrentUser();
-  // console.log({ cognitoUser });
+  console.log({ cognitoUser });
 
   if (cognitoUser) {
     cognitoUser.getSession((err, session) => {
@@ -189,11 +189,3 @@ export const resetPassword = ({ username, code, password }, onSuccess) => {
 //     }
 //   );
 // }
-
-// module.exports = {
-//   register,
-//   confirm,
-//   resendCode,
-//   parseJwt,
-//   getToken,
-// };
