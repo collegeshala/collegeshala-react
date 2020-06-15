@@ -267,7 +267,7 @@ option {
   line-height: 36px;
   text-transform: capitalize;
   color: #6534cc;
-  margin: 2vh 0;
+  margin: 2vh 0 2vh 65vw;
 }
 .otpbtncontainer {
   width: 33vw;

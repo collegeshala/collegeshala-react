@@ -30,7 +30,7 @@ const getUser = (username) => {
   return window.user;
 };
 
-const register = (userData) => {
+export const register = (userData) => {
   const AttributeList = [];
 
   for (const x in userData) {
@@ -63,10 +63,10 @@ const register = (userData) => {
   );
 };
 
-const confirm = ({ username, code }) => {
+export const confirm = ({ username, code }) => {
   console.log(username, code);
 
-  const cognitoUser = window.user;
+  const cognitoUser = getUser(username);
   cognitoUser.confirmRegistration(code, true, function (err, result) {
     if (err) {
       alert(err.message || JSON.stringify(err));
@@ -76,8 +76,9 @@ const confirm = ({ username, code }) => {
   });
 };
 
-const resendCode = () => {
-  const cognitoUser = window.user;
+export const resendCode = (username) => {
+  const cognitoUser = getUser(username);
+  console.log(cognitoUser);
   cognitoUser.resendConfirmationCode(function (err, result) {
     if (err) {
       alert(err.message || JSON.stringify(err));
@@ -87,32 +88,19 @@ const resendCode = () => {
   });
 };
 
-const login = ({ username, password }) => {
+export const login = ({ username, password }, onSuccess, onFailure) => {
   const authenticationDetails = new AuthenticationDetails({
     Username: username,
     Password: password,
   });
   const cognitoUser = getUser(username);
   cognitoUser.authenticateUser(authenticationDetails, {
-    onSuccess: (result) => {
-      const accessToken = result.getAccessToken().getJwtToken();
-      const idToken = result.getIdToken().getJwtToken();
-      const refreshToken = result.getRefreshToken().getToken();
-      console.log({
-        accessToken,
-        idToken,
-        refreshToken,
-      });
-      // console.log(JSON.stringify(result));
-    },
-    onFailure: (err) => {
-      console.error(err);
-      console.log(authenticationDetails);
-    },
+    onSuccess: onSuccess,
+    onFailure: onFailure,
   });
 };
 
-const parseJwt = (token) => {
+export const parseJwt = (token) => {
   try {
     return JSON.parse(atob(token.split(".")[1]));
   } catch (e) {
@@ -124,15 +112,16 @@ const sessionExpire = (token) => {
   const sessionExp = parseJwt(token).exp;
   let curr = new Date().getTime();
   curr = curr / 1000;
-  console.log(sessionExp, curr);
+  // console.log(sessionExp, curr);
   if (curr > sessionExp) {
     return true;
   }
   return false;
 };
 
-const getToken = new Promise((resolve, reject) => {
+export const getToken = new Promise((resolve, reject) => {
   const cognitoUser = UserPool.getCurrentUser();
+  // console.log({ cognitoUser });
 
   if (cognitoUser) {
     cognitoUser.getSession((err, session) => {
@@ -156,6 +145,39 @@ const getToken = new Promise((resolve, reject) => {
   }
 });
 
+export const signout = () => {
+  const cognitoUser = UserPool.getCurrentUser();
+  cognitoUser.signOut();
+};
+
+export const forgotPassword = (username) => {
+  const cognitoUser = getUser(username);
+
+  cognitoUser.forgotPassword({
+    onSuccess: function (data) {
+      // successfully initiated reset password request
+      console.log(
+        "CodeDeliveryData from forgotPassword: " + JSON.stringify(data)
+      );
+    },
+    onFailure: function (err) {
+      alert(err.message || JSON.stringify(err));
+    },
+  });
+};
+
+export const resetPassword = ({ username, code, password }, onSuccess) => {
+  const cognitoUser = getUser(username);
+
+  cognitoUser.confirmPassword(code, password, {
+    onSuccess: onSuccess,
+    onFailure: (err) => {
+      console.error(err);
+      alert("Oops! There was an error.");
+    },
+  });
+};
+
 // {
 //   let cognitoUser = UserPool.getCurrentUser();
 //   cognitoUser.authenticateUser(
@@ -168,11 +190,10 @@ const getToken = new Promise((resolve, reject) => {
 //   );
 // }
 
-module.exports = {
-  register,
-  confirm,
-  resendCode,
-  login,
-  parseJwt,
-  getToken,
-};
+// module.exports = {
+//   register,
+//   confirm,
+//   resendCode,
+//   parseJwt,
+//   getToken,
+// };

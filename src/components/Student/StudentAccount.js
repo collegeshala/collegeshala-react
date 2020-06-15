@@ -1,14 +1,15 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import axios from "axios";
 
 import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import SecondaryNav from "../Global/SecondaryNav";
 
-import token from "./api_key";
+// import token from "./api_key";
+import { getToken, signout } from "./../../js/auth";
 
 const StudentAccount = () => {
   return (
@@ -46,7 +47,7 @@ class Account extends React.Component {
     email: "",
     college: "",
     university: "",
-    sem: 0,
+    sem: "0",
     phoneNo: "",
     original: {},
   };
@@ -71,11 +72,13 @@ class Account extends React.Component {
     this.setData(this.state.original);
   }
 
-  update(event) {
+  async update(event) {
     event.preventDefault();
     const data = this.state;
     delete data.original;
     delete data.email;
+    const token = await getToken;
+    // console.log({ idToken: token });
 
     axios({
       method: "POST",
@@ -96,7 +99,14 @@ class Account extends React.Component {
       .catch((err) => console.error(err));
   }
 
-  componentDidMount() {
+  logout() {
+    signout();
+    navigate("/login");
+  }
+
+  async componentDidMount() {
+    const token = await getToken;
+    // console.log({ idToken: token });
     axios({
       method: "POST",
       url: "https://api.collegeshala.com/studentdetails",
@@ -105,10 +115,11 @@ class Account extends React.Component {
       },
     })
       .then(({ data }) => {
-        console.log(data);
+        console.log(data.Item);
         this.setData(data.Item);
       })
       .catch((err) => console.error(err));
+    setTimeout(console.log({ state: this.state.sem }), 1000);
   }
 
   render() {
@@ -117,7 +128,7 @@ class Account extends React.Component {
         <div className="row">
           <div className="col-12 col-md-8">
             <div className="container m-5">
-              <a href="javascript:void(0)" onclick="goToURL(); return false;">
+              <a href="#" onClick={this.logout}>
                 Log Out
               </a>
             </div>
@@ -178,25 +189,17 @@ class Account extends React.Component {
                   id="semester"
                   className="form-control"
                   defaultValue={this.state.sem}
-                  onChange={(e) =>
-                    this.setState({ sem: Number(e.target.value) })
-                  }
+                  onChange={(e) => {
+                    const sem = e.target.value;
+                    console.log(sem);
+                    this.setState({ sem });
+                  }}
                 >
-                  <option selected={this.state.sem === 1} value="1">
-                    First
-                  </option>
-                  <option selected={this.state.sem === 2} value="2">
-                    Second
-                  </option>
-                  <option selected={this.state.sem === 3} value="3">
-                    Third
-                  </option>
-                  <option selected={this.state.sem === 4} value="4">
-                    Fourth
-                  </option>
-                  <option selected={this.state.sem === 5} value="5">
-                    Fifth
-                  </option>
+                  <option value="1">First</option>
+                  <option value="2">Second</option>
+                  <option value="3">Third</option>
+                  <option value="4">Fourth</option>
+                  <option value="5">Fifth</option>
                   <option value="6">Sixth</option>
                 </select>
               </div>

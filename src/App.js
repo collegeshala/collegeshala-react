@@ -9,17 +9,19 @@ import StudentRegister from "./components/Global/pages/StudentRegister";
 import StudentMaterials from "./components/Student/StudentMaterials";
 import StudentTransactions from "./components/Student/StudentTransactions";
 import StudentAccount from "./components/Student/StudentAccount";
+import Cart from "./components/Student/Cart";
 
 const App = () => {
   return (
     <Router>
       {/* STUDENT ROUTES */}
-      <StudentRegister path="/student-register" />
       <StudentMaterials path="/student-materials" />
       <StudentTransactions path="/student-transactions" />
       <StudentAccount path="/student-account" />
+      <Cart path="/cart" />
 
       {/* AUTH ROUTES */}
+      <StudentRegister path="/student-register" />
       <Login path="/login" />
     </Router>
   );

@@ -9,7 +9,8 @@ import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import SecondaryNav from "../Global/SecondaryNav";
 
-import token from "./api_key";
+// import token from "./api_key";
+import { getToken } from "./../../js/auth";
 
 const StudentMaterials = () => {
   return (
@@ -43,10 +44,12 @@ const StudentMaterials = () => {
 
 class Materials extends React.Component {
   state = {
-    notes: [],
+    notes: false,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    const token = await getToken;
+    console.log({ token });
     axios({
       method: "POST",
       url: "https://api.collegeshala.com/getnotes",
