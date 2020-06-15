@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Redirect } from "react-router-dom";
+import { navigate } from "@reach/router";
 import { login, forgotPassword, resetPassword } from "./../../../js/auth";
 
 class Login extends React.Component {
@@ -147,7 +148,8 @@ class Login extends React.Component {
         payload,
       });
       localStorage.setItem("username", userData.username);
-      this.setState({ redirect: "/student-dashboard" });
+      navigate("/student-materials");
+      this.setState({ redirect: "/student-materials" });
     };
     const onFailure = (err) => {
       console.error(err);
