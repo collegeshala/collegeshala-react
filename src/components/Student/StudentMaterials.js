@@ -44,7 +44,7 @@ const StudentMaterials = () => {
 
 class Materials extends React.Component {
   state = {
-    notes: false,
+    notes: [],
   };
 
   async componentDidMount() {
@@ -70,8 +70,11 @@ class Materials extends React.Component {
         <div className="row notes">
           {
             // eslint-disable-next-line eqeqeq
-            this.state.notes == false ? (
-              <h1>No notes to display</h1>
+            this.state.notes.length === 0 ? (
+              <h2>
+                <br />
+                No notes to display
+              </h2>
             ) : (
               this.state.notes.map((note, index) => {
                 return (
@@ -90,7 +93,7 @@ class Materials extends React.Component {
                           make up the bulk of the card's content.
                         </p>
                         <button
-                          onClick="viewNote()"
+                          // onClick="viewNote()"
                           className="btn btn-primary"
                           value={note.noteId}
                         >

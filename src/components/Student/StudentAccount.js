@@ -213,7 +213,7 @@ class Account extends React.Component {
               <div className="form-group">
                 <label htmlFor="phoneNo">Phone Number</label>
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
                   id="phoneNo"
                   value={this.state.phoneNo}
