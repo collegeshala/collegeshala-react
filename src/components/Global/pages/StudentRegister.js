@@ -14,6 +14,8 @@ class StudentRegister extends React.Component {
             university: "select-university",
             degree: "",
             sem: 1,
+            knowabout: "",
+            ccName: "",
             phoneNo: "",
             step: 1,
             verifych: false,
@@ -27,9 +29,9 @@ class StudentRegister extends React.Component {
             nextbtntext: "Next ",
             sendOtpisClicked: false,
             isChecked: false,
-            changeCllgfuncCalls: 1,
+            changeCllgfuncCalls: 0,
             step1orstep4isClicked: false,
-            redirect : "",
+            redirect: "",
         }
     }
     handleSubmit() {
@@ -73,15 +75,17 @@ class StudentRegister extends React.Component {
     }
     changeCllg(e) {
         this.setState({ university: e.target.value });
-        this.setState({ changeCllgfuncCalls: this.state.changeCllgfuncCalls + 1 });
-        if (this.state.changeCllgfuncCalls === 1) {
-            var defaultcllg = "select-degree"
-            var opt = document.getElementById('uname');
-            console.log(opt.value);
-            document.getElementById(defaultcllg).style = "display: none";
-            document.getElementById(opt.value).style = "display: inline-block";
-            defaultcllg = opt.value;
-        }
+        this.setState({ changeCllgfuncCalls: this.state.changeCllgfuncCalls + 1 },() => {
+            if (this.state.changeCllgfuncCalls === 1) {
+                var defaultcllg = "select-degree"
+                var opt = document.getElementById('uname');
+                console.log(opt.value);
+                document.getElementById(defaultcllg).style = "display: none";
+                document.getElementById(opt.value).style = "display: inline-block";
+                defaultcllg = opt.value;
+            }
+        });
+        
     }
     validateEmail(email) {
         var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -96,8 +100,8 @@ class StudentRegister extends React.Component {
         }
         if (this.state.step === 4) {
             localStorage.setItem("acc_type", 'student');
-            this.setState({ step1orstep4isClicked : true});
-            this.setState({ redirect : "/login"});
+            this.setState({ step1orstep4isClicked: true });
+            this.setState({ redirect: "/login" });
         }
         else {
             if (this.state.step === 1) {
@@ -246,24 +250,45 @@ class StudentRegister extends React.Component {
             this.setState({ step: this.state.step - 1 });
         }
         else {
-            this.setState({ step1orstep4isClicked : true});
-            this.setState({ redirect : "/register"});
+            this.setState({ step1orstep4isClicked: true });
+            this.setState({ redirect: "/register" });
         }
     }
-    render() { 
+    render() {
+        const css = `
+        .content {
+            margin: 4vh 9.5vw;
+            height: 80vh;
+        }
+        .next {
+            margin: 14vh 0 2vh 65vw;
+            padding-right: 3vw;
+        }
+        @media only screen and (max-width: 800px) {
+            .content{
+                height: auto;
+                width: 100vw;
+                margin: 0;
+            }
+            .next{
+                margin: 2vh 0 2vh 65vw;
+            }
+        }
+        
+        `
         let OtpButton;
-        if(this.state.sendOtpisClicked)
-        {
+        if (this.state.sendOtpisClicked) {
             OtpButton = <div><button id="resendbtn" className="input-text"><span className="verifyph" onClick={() => this.resendOtp()}>Resend OTP</span></button>
-            <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.handleSubmit()}>Verify</span></button></div>;
+                <button id="verifybtn" className="input-text"><span className="verifyph" onClick={() => this.handleSubmit()}>Verify</span></button></div>;
         }
         else OtpButton = <button id="sendbtn" className="input-text"><span className="verifyph" onClick={() => this.sendOtp()}>Send OTP</span></button>;
-        
-        if(this.state.step1orstep4isClicked){
+
+        if (this.state.step1orstep4isClicked) {
             return <Redirect to={this.state.redirect} />
         }
         else return (
             <div id="student-signup">
+                <style>{css}</style>
                 <div>
                     <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "#6534CC" }}>
                         <a id='back' className="navbar-brand" onClick={() => this.back()}>
@@ -380,13 +405,14 @@ class StudentRegister extends React.Component {
                                 <img className="info-image" src={require("../../../assets/img/step3.png")} alt="Register as student" />
                             </div>
                             <div className="col-6 input-column" style={{ paddingTop: "1vh", paddingBottom: "0" }}>
-                                <select className="input-text" id="knowabout" style={{ fontSize: "20px" }} >
+                                <select className="input-text" id="knowabout" style={{ fontSize: "20px" }} onChange={(e) => this.setState({ knowabout: e.target.value })}>
                                     <option value="">-How did you know about Collegeshala-</option>
                                     <option value="social-media">Social Media</option>
                                     <option value="friends">Friends</option>
                                     <option value="collegeshala-collaborators">Collegeshala collaborators</option>
                                     <option value="none">None</option>
                                 </select>
+                                <input type="text" className="input-text" placeholder="Enter Collaborator's Name" style={{ display: (this.state.knowabout === "collegeshala-collaborators") ? "" : "none" }} value={this.state.ccName} onChange={(e) => this.setState({ ccName: e.target.value })} />
                                 <input type="text" className="input-text" placeholder="Enter your Phone number" value={this.state.phoneNo} onChange={(e) => this.setState({ phoneNo: e.target.value })} /><br />
                                 <input type="checkbox" name="termsconditions" defaultChecked={this.state.isChecked} onChange={() => this.setState({ isChecked: !this.state.isChecked })} />     I accept terms & conditions<br />
                                 <div className="otpbtncontainer" style={{ textAlign: "center" }}>

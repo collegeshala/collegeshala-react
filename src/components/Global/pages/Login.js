@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect } from 'react-router-dom';
 
+import { login, forgotPassword, resetPassword } from "./../../../js/auth";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -23,8 +24,9 @@ class Login extends React.Component {
   }
   handlemouseover(e) {
     e.target.style.cursor = "pointer";
-}
+  }
   next() {
+
     // document.getElementById(`step-${this.state.step}`).style = "display: none";
     switch (this.state.step) {
       case 1: this.setState({ step1display: { display: "none" } });
@@ -70,8 +72,32 @@ class Login extends React.Component {
     }
     else if (this.state.step === 2) {
       this.setState({ nextbtntext: "Update Password " });
+      this.setState({ nextFunction: this.handleResetPassword.bind(this) });
     }
     this.setState({ step: this.state.step + 1 });
+  }
+  backCallback() {
+    // (window.innerWidth > 800)?
+    //               document.getElementById(`step-${step}`).style = "display: inline-flex":
+    //               document.getElementById(`step-${step}`).style = "display: initial";
+    if (window.innerWidth > 800) {
+      switch (this.state.step) {
+        case 1: this.setState({ step1display: { display: "inline-flex" } });
+          break;
+
+        default:
+      }
+    }
+    else {
+      switch (this.state.step) {
+        case 1: this.setState({ step1display: { display: "initial" } });
+          break;
+
+        default:
+      }
+    }
+    this.setState({ nextbtntext: "Sign IN " });
+    this.setState({ nextFunction: this.handleLogin.bind(this) });
   }
   back() {
     if (this.state.step !== 1) {
@@ -86,31 +112,11 @@ class Login extends React.Component {
         default:
       }
       if (this.state.step === 2) {
-        this.setState({ step: this.state.step - 1 });
+        this.setState({ step: this.state.step - 1 }, () => this.backCallback());
       }
-      else this.setState({ step: this.state.step - 2 });
+      else this.setState({ step: this.state.step - 2 }, () => this.backCallback());
+      // adding callback as setstate is asynchronous and does not update
 
-      // (window.innerWidth > 800)?
-      //               document.getElementById(`step-${step}`).style = "display: inline-flex":
-      //               document.getElementById(`step-${step}`).style = "display: initial";
-      if (window.innerWidth > 800) {
-        switch (this.state.step) {
-          case 1: this.setState({ step1display: { display: "inline-flex" } });
-            break;
-
-          default:
-        }
-      }
-      else {
-        switch (this.state.step) {
-          case 1: this.setState({ step1display: { display: "initial" } });
-            break;
-
-          default:
-        }
-      }
-      this.setState({ nextbtntext: "Sign IN " });
-      this.setState({ nextFunction: this.handleLogin.bind(this) });
     }
     else {
       this.setState({ toBeRedirected: true });
@@ -122,43 +128,54 @@ class Login extends React.Component {
       email: this.state.email,
       password: this.state.password,
     }
-    var onSuccess = function loginSuccess(result) {
-      console.log('Check user here : ', result);
-      window.localStorage.setItem("idToken", result.idToken.jwtToken)
-      //let isProf = parseJwt(result.idToken.jwtToken)['custom:isProfessor'];
-      //below block is to be uncommented 
-      // if (isProf === 'true') {
-      //   localStorage.setItem("acc_type", 'professor');
-      //   this.setState({ toBeRedirected: true });
-      //   this.setState({ redirect: "/teacher-dashboard" });
-      // } else {
-      //   localStorage.setItem("acc_type", 'student');
-      //   this.setState({ toBeRedirected: true });
-      //   this.setState({ redirect: "/student-dashboard" });
-      // }
-    }
-    var onFailure = function loginFailure(err) {
-      alert(err);
-    }
-    //logIn(userData,onSuccess,onFailure);
+    console.log({ userData });
+    const onSuccess = (result) => {
+      console.log(result);
+      const accessToken = result.getAccessToken().getJwtToken();
+      const idToken = result.getIdToken().getJwtToken();
+      const refreshToken = result.getRefreshToken().getToken();
+      const payload = result.getAccessToken().payload;
+      console.log({
+        accessToken,
+        idToken,
+        refreshToken,
+        payload,
+      });
+      localStorage.setItem("username", userData.username);
+      this.setState({ redirect: "/student-dashboard" });
+    };
+    const onFailure = (err) => {
+      console.error(err);
+      alert("Login unsuccessfull :-/");
+      this.setState({
+        email: "",
+        password: "",
+      });
+    };
+    login(userData, onSuccess, onFailure);
   }
   handleForgetPassword() {
+    console.log("fp");
     var email = this.state.emailforgot;
-    //forgotPassword(email);
-    console.log(email)
+    console.log(email);
+    forgotPassword(email);
   }
   handleResetPassword() {
-    var email = this.state.emailforgot;
-    var code = this.state.code;
-    var password = this.state.password1;
-    var password2 = this.state.passwordconf;
-    console.log('password2', password2, 'sdsd', password);
+    console.log("rp");
+    const email = this.state.emailforgot;
+    const code = this.state.code;
+    const password = this.state.password1;
+    const password2 = this.state.passwordconf;
+    console.log("password2", password2, "sdsd", password);
     if (password === password2) {
       console.log(code, email, password);
-      //resetPassword(code,email,password);
-    }
-    else
-      alert('Passwords dont match');
+      const onSuccess = () => {
+        alert("Password has been reset sucessfully");
+        this.setState({ toBeRedirected: true });
+        this.setState({ redirect: "/login" });
+      };
+      resetPassword({ code, username: email, password }, onSuccess);
+    } else alert("Passwords dont match");
   }
   render() {
     if (this.state.toBeRedirected) {
