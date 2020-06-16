@@ -236,17 +236,11 @@ export const signout = () => {
   cognitoUser.signOut();
 };
 
-export const forgotPassword = (username) => {
+export const forgotPassword = (username, onSuccess) => {
   const cognitoUser = getUser(username);
 
   cognitoUser.forgotPassword({
-    onSuccess: function (data) {
-      // successfully initiated reset password request
-      console.log(
-        "CodeDeliveryData from forgotPassword: " + JSON.stringify(data)
-      );
-      this.next.bind(this);
-    },
+    onSuccess: onSuccess,
     onFailure: function (err) {
       alert(err.message || JSON.stringify(err));
     },

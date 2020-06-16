@@ -4,6 +4,8 @@ import { Router } from "@reach/router";
 // AUTH IMPORTS
 import Login from "./components/Global/pages/Login";
 import StudentRegister from "./components/Global/pages/StudentRegister";
+import TeacherRegister from "./components/Global/pages/TeacherRegister";
+import Register from "./components/Global/pages/Register";
 
 // STUDENT IMPORTS
 import StudentMaterials from "./components/Student/StudentMaterials";
@@ -25,7 +27,9 @@ const App = () => {
 
       {/* AUTH ROUTES */}
       <StudentRegister path="/student-register" />
+      <TeacherRegister path="/teacher-register" />
       <Login path="/login" />
+      <Register path="/register" />
 
       {/* GLOBAL ROUTES */}
       <Index path="/" />

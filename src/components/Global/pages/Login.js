@@ -175,7 +175,13 @@ class Login extends React.Component {
     console.log("fp");
     var email = this.state.emailforgot;
     console.log(email);
-    forgotPassword(email);
+    const onSuccess = (data) => {
+      console.log(
+        "CodeDeliveryData from forgotPassword: " + JSON.stringify(data)
+      );
+      this.next();
+    };
+    forgotPassword(email, onSuccess);
   }
   handleResetPassword() {
     console.log("rp");
