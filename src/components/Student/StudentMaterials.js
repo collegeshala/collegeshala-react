@@ -2,51 +2,67 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import { Link } from "@reach/router";
+import axios from "axios";
 
-class StudentMaterials extends React.Component {
+import Navbar from "../Global/Navbar";
+import Footer from "../Global/Footer";
+import SecondaryNav from "../Global/SecondaryNav";
+
+// import token from "./api_key";
+import { getToken } from "./../../js/auth";
+
+const StudentMaterials = () => {
+  return (
+    <React.Fragment>
+      <Navbar />
+      <div className="container pt-4">
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <a href="spa.html">Home</a>
+            </li>
+            <li className="breadcrumb-item">
+              <Link to="/student-account">Student's Name</Link>
+            </li>
+            <li
+              className="breadcrumb-item active"
+              id="current-active"
+              aria-current="page"
+            >
+              My Materials
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <SecondaryNav />
+      <Materials />
+      <Footer />
+    </React.Fragment>
+  );
+};
+
+class Materials extends React.Component {
   state = {
-    notes: [
-      {
-        professoremail: "mujtababasheer14@gmail.com",
-        noteId: "9a01fc31-df29-4e74-bf89-dbe83ac28bcc",
-        noteurl:
-          "https://collegeshala-notes.s3.ap-south-1.amazonaws.com/9a01fc31-df29-4e74-bf89-dbe83ac28bcc.pdf",
-        requiredCredits: 2,
-        chaptername: "Dummy Chapter",
-        visibility: false,
-        sem: "X",
-        universityname: "NSIT",
-        professorname: "Mujtaba Basheer",
-        subjectname: "Dummy Subject",
-      },
-      {
-        professoremail: "mujtababasheer14@gmail.com",
-        noteId: "9a01fc31-df29-4e74-bf89-dbe83ac28bcc",
-        noteurl:
-          "https://collegeshala-notes.s3.ap-south-1.amazonaws.com/9a01fc31-df29-4e74-bf89-dbe83ac28bcc.pdf",
-        requiredCredits: 2,
-        chaptername: "Dummy Chapter",
-        visibility: false,
-        sem: "X",
-        universityname: "NSIT",
-        professorname: "Mujtaba Basheer",
-        subjectname: "Dummy Subject",
-      },
-      {
-        professoremail: "mujtababasheer14@gmail.com",
-        noteId: "9a01fc31-df29-4e74-bf89-dbe83ac28bcc",
-        noteurl:
-          "https://collegeshala-notes.s3.ap-south-1.amazonaws.com/9a01fc31-df29-4e74-bf89-dbe83ac28bcc.pdf",
-        requiredCredits: 2,
-        chaptername: "Dummy Chapter",
-        visibility: false,
-        sem: "X",
-        universityname: "NSIT",
-        professorname: "Mujtaba Basheer",
-        subjectname: "Dummy Subject",
-      },
-    ],
+    notes: [],
   };
+
+  async componentDidMount() {
+    const token = await getToken();
+    console.log({ token });
+    axios({
+      method: "POST",
+      url: "https://api.collegeshala.com/getnotes",
+      headers: {
+        authorization: token,
+      },
+    })
+      .then(({ data }) => {
+        console.log(data);
+        this.setState({ notes: data });
+      })
+      .catch((err) => console.error(err));
+  }
 
   render() {
     return (
@@ -54,8 +70,11 @@ class StudentMaterials extends React.Component {
         <div className="row notes">
           {
             // eslint-disable-next-line eqeqeq
-            this.state.notes == false ? (
-              <h1>No notes to display</h1>
+            this.state.notes.length === 0 ? (
+              <h2>
+                <br />
+                No notes to display
+              </h2>
             ) : (
               this.state.notes.map((note, index) => {
                 return (
@@ -74,7 +93,7 @@ class StudentMaterials extends React.Component {
                           make up the bulk of the card's content.
                         </p>
                         <button
-                          onClick="viewNote()"
+                          // onClick="viewNote()"
                           className="btn btn-primary"
                           value={note.noteId}
                         >
