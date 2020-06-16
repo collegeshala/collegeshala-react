@@ -52,7 +52,7 @@ class Index extends React.Component {
                     id="nav-sign-up"
                     href="#"
                     data-target=".navbar-collapse.show"
-                    onClick={() => navigate("/login")}
+                    onClick={() => navigate("/register")}
                   >
                     <span id="nav-font">Sign Up</span>
                   </a>
