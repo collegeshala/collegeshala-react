@@ -67,7 +67,7 @@ class Account extends React.Component {
     const data = this.state;
     delete data.original;
     delete data.email;
-    const token = await getToken;
+    const token = await getToken();
     // console.log({ idToken: token });
 
     axios({
@@ -95,7 +95,7 @@ class Account extends React.Component {
   }
 
   async componentDidMount() {
-    const token = await getToken;
+    const token = await getToken();
     // console.log({ idToken: token });
     axios({
       method: "POST",

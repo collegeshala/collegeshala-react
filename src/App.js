@@ -11,6 +11,9 @@ import StudentTransactions from "./components/Student/StudentTransactions";
 import StudentAccount from "./components/Student/StudentAccount";
 import Cart from "./components/Student/Cart";
 
+// GLOBAL IMPORTS
+import Index from "./Index";
+
 const App = () => {
   return (
     <Router>
@@ -23,6 +26,9 @@ const App = () => {
       {/* AUTH ROUTES */}
       <StudentRegister path="/student-register" />
       <Login path="/login" />
+
+      {/* GLOBAL ROUTES */}
+      <Index path="/" />
     </Router>
   );
 };

@@ -48,7 +48,7 @@ class CartPage extends React.Component {
     this.deleteNote = this.deleteNote.bind(this);
   }
   async componentDidMount() {
-    const token = await getToken;
+    const token = await getToken();
     axios({
       method: "POST",
       url: "https://api.collegeshala.com/fetchcart",
@@ -80,7 +80,7 @@ class CartPage extends React.Component {
 
   async deleteNote(event) {
     event.preventDefault();
-    const token = await getToken;
+    const token = await getToken();
     const index = event.target.value;
     const { noteId, requiredCredits } = this.state.notes[index];
     let { notes, total } = this.state;

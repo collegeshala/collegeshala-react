@@ -50,7 +50,7 @@ class Transactions extends React.Component {
 
   async componentDidMount() {
     // let instance = new razorpay();
-    const token = await getToken;
+    const token = await getToken();
     axios({
       method: "POST",
       url: "https://api.collegeshala.com/studentdetails",

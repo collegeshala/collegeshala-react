@@ -2,7 +2,12 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { navigate } from "@reach/router";
-import { login, forgotPassword, resetPassword } from "./../../../js/auth";
+import {
+  login,
+  forgotPassword,
+  resetPassword,
+  parseJwt,
+} from "./../../../js/auth";
 
 class Login extends React.Component {
   constructor(props) {
@@ -141,6 +146,7 @@ class Login extends React.Component {
       const idToken = result.getIdToken().getJwtToken();
       const refreshToken = result.getRefreshToken().getToken();
       const payload = result.getAccessToken().payload;
+      console.log(parseJwt(idToken));
       console.log({
         accessToken,
         idToken,
@@ -148,7 +154,11 @@ class Login extends React.Component {
         payload,
       });
       localStorage.setItem("username", userData.username);
-      navigate("/student-materials");
+      if (parseJwt(idToken)["custom:isProfessor"] === "true") {
+        navigate("/professor-materials");
+      } else {
+        navigate("/student-materials");
+      }
       this.setState({ redirect: "/student-materials" });
     };
     const onFailure = (err) => {

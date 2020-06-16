@@ -48,7 +48,7 @@ class Materials extends React.Component {
   };
 
   async componentDidMount() {
-    const token = await getToken;
+    const token = await getToken();
     console.log({ token });
     axios({
       method: "POST",
