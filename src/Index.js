@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import { navigate } from "@reach/router";
 
 class Index extends React.Component {
   render() {
@@ -49,8 +50,9 @@ class Index extends React.Component {
                   <a
                     className="nav-link index-nav-link"
                     id="nav-sign-up"
-                    href="./register.html"
+                    href="#"
                     data-target=".navbar-collapse.show"
+                    onClick={() => navigate("/login")}
                   >
                     <span id="nav-font">Sign Up</span>
                   </a>
@@ -172,8 +174,9 @@ class Index extends React.Component {
             <a
               className="btn btn-primary"
               id="signup"
-              href="/register.html"
+              href="#"
               role="button"
+              onClick={() => navigate("/login")}
             >
               Sign Up
             </a>
