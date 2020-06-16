@@ -9,7 +9,8 @@ import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import SecondaryNav from "../Global/SecondaryNav";
 
-import token from "./api_key";
+// import token from "./api_key";
+import { getToken } from "./../../js/auth";
 
 const StudentMaterials = () => {
   return (
@@ -46,7 +47,9 @@ class Materials extends React.Component {
     notes: [],
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    const token = await getToken();
+    console.log({ token });
     axios({
       method: "POST",
       url: "https://api.collegeshala.com/getnotes",
@@ -67,8 +70,11 @@ class Materials extends React.Component {
         <div className="row notes">
           {
             // eslint-disable-next-line eqeqeq
-            this.state.notes == false ? (
-              <h1>No notes to display</h1>
+            this.state.notes.length === 0 ? (
+              <h2>
+                <br />
+                No notes to display
+              </h2>
             ) : (
               this.state.notes.map((note, index) => {
                 return (
@@ -87,7 +93,7 @@ class Materials extends React.Component {
                           make up the bulk of the card's content.
                         </p>
                         <button
-                          onClick="viewNote()"
+                          // onClick="viewNote()"
                           className="btn btn-primary"
                           value={note.noteId}
                         >

@@ -1,7 +1,14 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Redirect } from 'react-router-dom';
 
-import { login, forgotPassword, resetPassword } from "./../../../js/auth";
+import { navigate } from "@reach/router";
+import {
+  login,
+  forgotPassword,
+  resetPassword,
+  parseJwt,
+} from "./../../../js/auth";
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -18,24 +25,24 @@ class Login extends React.Component {
       step3display: { display: "none" },
       nextbtntext: "Sign IN ",
       nextFunction: this.handleLogin.bind(this),
-      toBeRedirected: false,
-      redirect: "",
-    }
+    };
   }
   handlemouseover(e) {
     e.target.style.cursor = "pointer";
   }
   next() {
-
     // document.getElementById(`step-${this.state.step}`).style = "display: none";
     switch (this.state.step) {
-      case 1: this.setState({ step1display: { display: "none" } });
+      case 1:
+        this.setState({ step1display: { display: "none" } });
         break;
 
-      case 2: this.setState({ step2display: { display: "none" } });
+      case 2:
+        this.setState({ step2display: { display: "none" } });
         break;
 
-      case 3: this.setState({ step3display: { display: "none" } });
+      case 3:
+        this.setState({ step3display: { display: "none" } });
         break;
 
       default:
@@ -45,21 +52,24 @@ class Login extends React.Component {
     //         document.getElementById(`step-${this.state.step+1}`).style = "display: initial";
     if (window.innerWidth > 800) {
       switch (this.state.step) {
-        case 1: this.setState({ step2display: { display: "inline-flex" } });
+        case 1:
+          this.setState({ step2display: { display: "inline-flex" } });
           break;
 
-        case 2: this.setState({ step3display: { display: "inline-flex" } });
+        case 2:
+          this.setState({ step3display: { display: "inline-flex" } });
           break;
 
         default:
       }
-    }
-    else {
+    } else {
       switch (this.state.step) {
-        case 1: this.setState({ step2display: { display: "initial" } });
+        case 1:
+          this.setState({ step2display: { display: "initial" } });
           break;
 
-        case 2: this.setState({ step3display: { display: "initial" } });
+        case 2:
+          this.setState({ step3display: { display: "initial" } });
           break;
 
         default:
@@ -69,8 +79,7 @@ class Login extends React.Component {
     if (this.state.step === 1) {
       this.setState({ nextbtntext: "Finish " });
       this.setState({ nextFunction: this.handleForgetPassword.bind(this) });
-    }
-    else if (this.state.step === 2) {
+    } else if (this.state.step === 2) {
       this.setState({ nextbtntext: "Update Password " });
       this.setState({ nextFunction: this.handleResetPassword.bind(this) });
     }
@@ -82,15 +91,16 @@ class Login extends React.Component {
     //               document.getElementById(`step-${step}`).style = "display: initial";
     if (window.innerWidth > 800) {
       switch (this.state.step) {
-        case 1: this.setState({ step1display: { display: "inline-flex" } });
+        case 1:
+          this.setState({ step1display: { display: "inline-flex" } });
           break;
 
         default:
       }
-    }
-    else {
+    } else {
       switch (this.state.step) {
-        case 1: this.setState({ step1display: { display: "initial" } });
+        case 1:
+          this.setState({ step1display: { display: "initial" } });
           break;
 
         default:
@@ -102,32 +112,30 @@ class Login extends React.Component {
   back() {
     if (this.state.step !== 1) {
       switch (this.state.step) {
-
-        case 2: this.setState({ step2display: { display: "none" } });
+        case 2:
+          this.setState({ step2display: { display: "none" } });
           break;
 
-        case 3: this.setState({ step3display: { display: "none" } });
+        case 3:
+          this.setState({ step3display: { display: "none" } });
           break;
 
         default:
       }
       if (this.state.step === 2) {
         this.setState({ step: this.state.step - 1 }, () => this.backCallback());
-      }
-      else this.setState({ step: this.state.step - 2 }, () => this.backCallback());
+      } else
+        this.setState({ step: this.state.step - 2 }, () => this.backCallback());
       // adding callback as setstate is asynchronous and does not update
-
-    }
-    else {
-      this.setState({ toBeRedirected: true });
-      this.setState({ redirect: "/register" });
+    } else {
+      navigate("/register");
     }
   }
   handleLogin() {
     var userData = {
-      email: this.state.email,
+      username: this.state.email,
       password: this.state.password,
-    }
+    };
     console.log({ userData });
     const onSuccess = (result) => {
       console.log(result);
@@ -135,6 +143,7 @@ class Login extends React.Component {
       const idToken = result.getIdToken().getJwtToken();
       const refreshToken = result.getRefreshToken().getToken();
       const payload = result.getAccessToken().payload;
+      console.log(parseJwt(idToken));
       console.log({
         accessToken,
         idToken,
@@ -142,7 +151,12 @@ class Login extends React.Component {
         payload,
       });
       localStorage.setItem("username", userData.username);
-      this.setState({ redirect: "/student-dashboard" });
+      if (parseJwt(idToken)["custom:isProfessor"] === "true") {
+        
+      } else {
+        navigate("/student-materials");
+        
+      }
     };
     const onFailure = (err) => {
       console.error(err);
@@ -158,7 +172,13 @@ class Login extends React.Component {
     console.log("fp");
     var email = this.state.emailforgot;
     console.log(email);
-    forgotPassword(email);
+    const onSuccess = (data) => {
+      console.log(
+        "CodeDeliveryData from forgotPassword: " + JSON.stringify(data)
+      );
+      this.next();
+    };
+    forgotPassword(email, onSuccess);
   }
   handleResetPassword() {
     console.log("rp");
@@ -171,150 +191,163 @@ class Login extends React.Component {
       console.log(code, email, password);
       const onSuccess = () => {
         alert("Password has been reset sucessfully");
-        this.setState({ toBeRedirected: true });
-        this.setState({ redirect: "/login" });
+        window.location.reload(false);
       };
       resetPassword({ code, username: email, password }, onSuccess);
     } else alert("Passwords dont match");
   }
   render() {
-    if (this.state.toBeRedirected) {
-      return <Redirect to={this.state.redirect} />
-    }
-    else return (
-      <div id="student-signup">
-        <div>
-          <nav
-            className="navbar navbar-expand-lg navbar-dark"
-            style={{ backgroundColor: "#6534CC" }}
-          >
-            <a id="back" className="navbar-brand" onClick={() => this.back()}>
-              <img
-                src={require("../../../assets/logo/LeftArrow.png")}
-                alt=""
-                srcSet=""
-                width="35"
-                height="30"
-              />
-            </a>
-            <a id="backtext" onClick={() => this.back()}>
-              <p className="back-label">Back</p>
-            </a>
-          </nav>
-        </div>
-        <div className="content">
+      return (
+        <div id="student-signup">
           <div>
-            <div className="welcome-text">
-              Welcome <span style={{ color: "#FF4133" }}>Back</span>!
-            </div>
-            <div id="step-1" className="row details-container" style={this.state.step1display}>
-              <div className="col-6 image-column">
-                <img
-                  className="info-image"
-                  src={require("../../../assets/img/signin-card.png")}
-                  alt="Sign in"
-                />
-              </div>
-              <div className="col-6 input-column">
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter your email address"
-                  value={this.state.email}
-                  onChange={(e) => this.setState({ email: e.target.value })}
-                />
-                <input
-                  type="password"
-                  className="input-text"
-                  placeholder="Enter your password"
-                  value={this.state.password}
-                  onChange={(e) => this.setState({ password: e.target.value })}
-                />
-                <br />
-                <p id="forgot-password" onClick={() => this.next()}>
-                  Forgot your Password?
-                </p>
-              </div>
-            </div>
-            <div
-              id="step-2"
-              className="row details-container"
-              style={this.state.step2display}
+            <nav
+              className="navbar navbar-expand-lg navbar-dark"
+              style={{ backgroundColor: "#6534CC" }}
             >
-              <div className="col-6 image-column">
+              <a
+                href="#"
+                id="back"
+                className="navbar-brand"
+                onClick={() => this.back()}
+              >
                 <img
-                  className="info-image"
-                  src={require("../../../assets/img/signin-card.png")}
-                  alt="forgot-password"
+                  src={require("../../../assets/logo/LeftArrow.png")}
+                  alt=""
+                  srcSet=""
+                  width="35"
+                  height="30"
                 />
+              </a>
+              <a href="#" id="backtext" onClick={() => this.back()}>
+                <p className="back-label">Back</p>
+              </a>
+            </nav>
+          </div>
+          <div className="content">
+            <div>
+              <div className="welcome-text">
+                Welcome <span style={{ color: "#FF4133" }}>Back</span>!
               </div>
-              <div className="col-6 input-column">
-                <p id="password-reset">
-                  Please enter your Email in the field below to reset your
-                  password.
-                </p>
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter your email address"
-                  value={this.state.emailforgot}
-                  onChange={(e) => this.setState({ emailforgot: e.target.value })}
-                />
+              <div
+                id="step-1"
+                className="row details-container"
+                style={this.state.step1display}
+              >
+                <div className="col-6 image-column">
+                  <img
+                    className="info-image"
+                    src={require("../../../assets/img/signin-card.png")}
+                    alt="Sign in"
+                  />
+                </div>
+                <div className="col-6 input-column">
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter your email address"
+                    value={this.state.email}
+                    onChange={(e) => this.setState({ email: e.target.value })}
+                  />
+                  <input
+                    type="password"
+                    className="input-text"
+                    placeholder="Enter your password"
+                    value={this.state.password}
+                    onChange={(e) =>
+                      this.setState({ password: e.target.value })
+                    }
+                  />
+                  <br />
+                  <p id="forgot-password" onClick={() => this.next()}>
+                    Forgot your Password?
+                  </p>
+                </div>
               </div>
-            </div>
-            <div
-              id="step-3"
-              className="row details-container"
-              style={this.state.step3display}
-            >
-              <div className="col-6 image-column">
+              <div
+                id="step-2"
+                className="row details-container"
+                style={this.state.step2display}
+              >
+                <div className="col-6 image-column">
+                  <img
+                    className="info-image"
+                    src={require("../../../assets/img/signin-card.png")}
+                    alt="forgot-password"
+                  />
+                </div>
+                <div className="col-6 input-column">
+                  <p id="password-reset">
+                    Please enter your Email in the field below to reset your
+                    password.
+                  </p>
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter your email address"
+                    value={this.state.emailforgot}
+                    onChange={(e) =>
+                      this.setState({ emailforgot: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div
+                id="step-3"
+                className="row details-container"
+                style={this.state.step3display}
+              >
+                <div className="col-6 image-column">
+                  <img
+                    className="info-image"
+                    src={require("../../../assets/img/signin-card.png")}
+                    alt="forgot-password"
+                  />
+                </div>
+                <div className="col-6 input-column">
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter Code Send to Phone"
+                    value={this.state.code}
+                    onChange={(e) => this.setState({ code: e.target.value })}
+                  />
+                  <input
+                    type="password"
+                    className="input-text"
+                    placeholder="Enter new password"
+                    value={this.state.password1}
+                    onChange={(e) =>
+                      this.setState({ password1: e.target.value })
+                    }
+                  />
+                  <input
+                    type="password"
+                    className="input-text"
+                    placeholder="Re-type password"
+                    value={this.state.passwordconf}
+                    onChange={(e) =>
+                      this.setState({ passwordconf: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div
+                id="nextbtn"
+                className="next"
+                onMouseOver={(e) => this.handlemouseover(e)}
+                onClick={this.state.nextFunction}
+              >
+                {this.state.nextbtntext}
                 <img
-                  className="info-image"
-                  src={require("../../../assets/img/signin-card.png")}
-                  alt="forgot-password"
+                  id="nextimg"
+                  alt="nextbutton"
+                  src={require("../../../assets/logo/next.png")}
                 />
               </div>
-              <div className="col-6 input-column">
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter Code Send to Phone"
-                  value={this.state.code}
-                  onChange={(e) => this.setState({ code: e.target.value })}
-                />
-                <input
-                  type="password"
-                  className="input-text"
-                  placeholder="Enter new password"
-                  value={this.state.password1}
-                  onChange={(e) => this.setState({ password1: e.target.value })}
-                />
-                <input
-                  type="password"
-                  className="input-text"
-                  placeholder="Re-type password"
-                  value={this.state.passwordconf}
-                  onChange={(e) => this.setState({ passwordconf: e.target.value })}
-                />
-              </div>
-            </div>
-            <div
-              id="nextbtn"
-              className="next"
-              onMouseOver={(e) => this.handlemouseover(e)}
-              onClick={this.state.nextFunction}
-            >
-              {this.state.nextbtntext}
-              <img
-                id="nextimg"
-                alt="nextbutton"
-                src={require("../../../assets/logo/next.png")}
-              />
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
   }
 }
 

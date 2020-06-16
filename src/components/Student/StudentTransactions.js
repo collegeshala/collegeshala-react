@@ -4,12 +4,11 @@
 import React, { Fragment } from "react";
 import { Link } from "@reach/router";
 import axios from "axios";
+import { getToken } from "./../../js/auth";
 
 import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import SecondaryNav from "../Global/SecondaryNav";
-
-import token from "./api_key";
 
 const StudentTransactions = () => {
   return (
@@ -49,8 +48,9 @@ class Transactions extends React.Component {
     creditsToPurchase: 0,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     // let instance = new razorpay();
+    const token = await getToken();
     axios({
       method: "POST",
       url: "https://api.collegeshala.com/studentdetails",
