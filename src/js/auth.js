@@ -192,6 +192,23 @@ export const parseJwt = (token) => {
   }
 };
 
+export const isLoggedIn = () => {
+  const CognitoUser = UserPool.getCurrentUser();
+  return new Promise((res) => {
+    if (CognitoUser) {
+      CognitoUser.getSession((err, session) => {
+        if (err) {
+          res(false);
+        } else {
+          res(true);
+        }
+      });
+    } else {
+      res(false);
+    }
+  });
+};
+
 const sessionExpire = (token) => {
   const sessionExp = parseJwt(token).exp;
   let curr = new Date().getTime();

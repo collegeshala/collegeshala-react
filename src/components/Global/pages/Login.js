@@ -7,6 +7,7 @@ import {
   forgotPassword,
   resetPassword,
   parseJwt,
+  isLoggedIn,
 } from "./../../../js/auth";
 
 class Login extends React.Component {
@@ -199,6 +200,9 @@ class Login extends React.Component {
       };
       resetPassword({ code, username: email, password }, onSuccess);
     } else alert("Passwords dont match");
+  }
+  async componentDidMount() {
+    console.log(await isLoggedIn());
   }
   render() {
     if (this.state.toBeRedirected) {
