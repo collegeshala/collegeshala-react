@@ -77,7 +77,7 @@ class StudentRegister extends React.Component {
     const confirmData = { username, code };
     const onSuccess = (result) => {
       console.log("call result: " + JSON.stringify(result));
-      navigate("/student-material");
+      navigate("/student-materials");
     };
     confirm(confirmData, onSuccess);
   }
