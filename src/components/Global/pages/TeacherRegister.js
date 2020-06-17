@@ -1,4 +1,6 @@
 import React from "react";
+import { navigate } from "@reach/router";
+import { register, resendCode, confirm } from "./../../../js/auth";
 
 class TeacherRegister extends React.Component {
   constructor(props) {

@@ -147,7 +147,7 @@ export const register = (userData, onSuccess, onFailure) => {
   // );
 };
 
-export const confirm = ({ username, code }) => {
+export const confirm = ({ username, code }, onSuccess) => {
   console.log(username, code);
 
   const cognitoUser = getUser(username);
@@ -156,7 +156,7 @@ export const confirm = ({ username, code }) => {
       alert(err.message || JSON.stringify(err));
       return;
     }
-    console.log("call result: " + result);
+    onSuccess(result);
   });
 };
 
@@ -168,7 +168,7 @@ export const resendCode = (username) => {
       alert(err.message || JSON.stringify(err));
       return;
     }
-    console.log("call result: " + result);
+    console.log("call result: " + JSON.stringify(result));
   });
 };
 

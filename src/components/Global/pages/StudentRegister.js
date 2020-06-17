@@ -1,6 +1,8 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import { navigate } from "@reach/router";
+import { register, resendCode, confirm } from "./../../../js/auth";
 
 class StudentRegister extends React.Component {
   constructor(props) {
@@ -15,6 +17,7 @@ class StudentRegister extends React.Component {
       degree: "",
       sem: 1,
       phoneNo: "",
+      code: "",
       step: 1,
       verifych: false,
       step1display: {},
@@ -58,15 +61,25 @@ class StudentRegister extends React.Component {
       alert(err);
       console.error(err);
     };
-    //Not written yet
-    //register(userData,onSuccess,onFailure);
+    register(userData, onSuccess, onFailure);
   }
+  // this function is not needed
   sendOtp() {
     this.setState({ sendOtpisClicked: true });
     //Insert Send OTP code here
   }
   resendOtp() {
-    //Insert Resend OTP code here
+    const { email } = this.state;
+    resendCode(email);
+  }
+  confirmUser() {
+    const { email: username, code } = this.state;
+    const confirmData = { username, code };
+    const onSuccess = (result) => {
+      console.log("call result: " + JSON.stringify(result));
+      navigate("/student-material");
+    };
+    confirm(confirmData, onSuccess);
   }
   handlemouseover(e) {
     e.target.style = "cursor : pointer";
@@ -794,6 +807,7 @@ class StudentRegister extends React.Component {
                   className="otpinput"
                   placeholder="Enter Your OTP"
                   name="otp"
+                  onChange={(e) => this.setState({ code: e.target.value })}
                 />
               </div>
             </div>
