@@ -14,6 +14,7 @@ class TeacherRegister extends React.Component {
       dept: "",
       subject: "",
       phoneNo: "",
+      code: "",
       step: 1,
       verifych: false,
       step1display: {},
@@ -85,7 +86,7 @@ class TeacherRegister extends React.Component {
   next() {
     if (this.state.step === 4) {
       localStorage.setItem("acc_type", "professor");
-      navigate("/student-materials");
+      navigate("/login");
     } else {
       if (this.state.step === 1) {
         if (!this.validateEmail(this.state.email)) {
@@ -180,7 +181,7 @@ class TeacherRegister extends React.Component {
         this.setState({ nextbtntext: "Finish " });
       }
       if (this.state.step === 3 && this.state.verifych) {
-        this.setState({ nextbtntext: "Go to Materials " });
+        this.setState({ nextbtntext: "Go to HomePage " });
       }
     }
   }
@@ -450,6 +451,7 @@ class TeacherRegister extends React.Component {
                   className="otpinput"
                   placeholder="Enter Your OTP"
                   name="otp"
+                  onChange={(e) => this.setState({ code: e.target.value })}
                 />
               </div>
             </div>
