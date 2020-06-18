@@ -274,10 +274,31 @@ class TeacherRegister extends React.Component {
                   <img id="step-2-img" src={this.state.step2img} alt="step2" />
                   <img id="step-3-img" src={this.state.step3img} alt="step3" />
                   <img id="step-4-img" src={this.state.step4img} alt="step4" />
-                  <span className="stretch"></span>
                 </div>
               </div>
             </div>
+            {/* 
+                  OLD CODE
+            <div className="progressbar-container">
+              <div className="progressbar">
+                <div
+                  id="progval"
+                  ref={this.progval}
+                  className="progress-value"
+                ></div>
+                <div className="progress-steps">
+                  <img
+                    id="step-1-img"
+                    src={require("../../../assets/logo/step1.png")}
+                    alt="step1"
+                  />
+                  <img id="step-2-img" src={this.state.step2img} alt="step2" />
+                  <img id="step-3-img" src={this.state.step3img} alt="step3" />
+                  <img id="step-4-img" src={this.state.step4img} alt="step4" />
+                  <span className="stretch"></span>
+                </div>
+              </div>
+            </div> */}
             <div
               id="step-1"
               className="row details-container"
