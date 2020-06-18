@@ -15,7 +15,7 @@ import StudentAccount from "./components/Student/StudentAccount";
 import Cart from "./components/Student/Cart";
 
 // GLOBAL IMPORTS
-import Index from "./Index";
+// import Index from "./Index";
 
 const App = () => {
   return (
@@ -33,7 +33,7 @@ const App = () => {
       <Register path="/register" />
 
       {/* GLOBAL ROUTES */}
-      <Index path="/" />
+      {/* <Index path="/" /> */}
     </Router>
   );
 };
