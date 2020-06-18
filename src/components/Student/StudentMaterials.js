@@ -49,7 +49,7 @@ class Materials extends React.Component {
 
   async componentDidMount() {
     const token = await getToken();
-    console.log({ token });
+    // console.log({ token });
     axios({
       method: "POST",
       url: "https://api.collegeshala.com/getnotes",
@@ -58,8 +58,10 @@ class Materials extends React.Component {
       },
     })
       .then(({ data }) => {
-        console.log(data);
-        this.setState({ notes: data });
+        console.log({ data });
+        if(!data.error) {
+          this.setState({ notes: data });
+        }
       })
       .catch((err) => console.error(err));
   }

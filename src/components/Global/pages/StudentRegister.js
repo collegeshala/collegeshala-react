@@ -2,7 +2,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { navigate } from "@reach/router";
-import { register, resendCode, confirm } from "./../../../js/auth";
+import {
+  resendCode,
+  confirm,
+  register,
+} from "./../../../js/auth";
+import "./../../../assets/css/studentRegister.css";
 
 class StudentRegister extends React.Component {
   constructor(props) {
@@ -16,6 +21,8 @@ class StudentRegister extends React.Component {
       university: "select-university",
       degree: "",
       sem: 1,
+      knowabout: "",
+      ccName: "",
       phoneNo: "",
       code: "",
       step: 1,
@@ -30,7 +37,7 @@ class StudentRegister extends React.Component {
       nextbtntext: "Next ",
       sendOtpisClicked: false,
       isChecked: false,
-      changeCllgfuncCalls: 1,
+      changeCllgfuncCalls: 0,
     };
   }
   handleSubmit() {
@@ -38,35 +45,32 @@ class StudentRegister extends React.Component {
       alert("Please accept terms and conditions");
       return;
     }
-    var userData = {
+    const userData = {
       name: this.state.name,
       email: this.state.email,
+      phone_number: "+91" + this.state.phoneNo,
       password: this.state.password,
-      cllgname: this.state.college,
-      univname: this.state.university,
-      degree: this.state.degree,
-      sem: this.state.sem,
-      phone: "+91" + Number(this.state.phoneNo),
-      isProfessor: false,
+      "custom:cllgname": this.state.college,
+      "custom:univname": this.state.university,
+      "custom:degree": this.state.degree,
+      "custom:sem": this.state.sem.toString(),
+      "custom:isProfessor": "false",
     };
-    console.log(userData);
-    var onSuccess = function registerSuccess(result) {
-      var cognitoUser = result.user;
+    console.log(JSON.stringify(userData));
+    const onSuccess = function registerSuccess(result) {
+      const cognitoUser = result.user;
+      window.user = cognitoUser;
       console.log("Check user here : ", cognitoUser);
       alert(
         "New User created. Please check your phone for the verification code"
       );
     };
-    var onFailure = function registerFailure(err) {
-      alert(err);
+    const onFailure = function registerFailure(err) {
+      alert("Oops! There was some error :-/");
       console.error(err);
     };
     register(userData, onSuccess, onFailure);
-  }
-  // this function is not needed
-  sendOtp() {
     this.setState({ sendOtpisClicked: true });
-    //Insert Send OTP code here
   }
   resendOtp() {
     const { email } = this.state;
@@ -77,7 +81,9 @@ class StudentRegister extends React.Component {
     const confirmData = { username, code };
     const onSuccess = (result) => {
       console.log("call result: " + JSON.stringify(result));
-      navigate("/student-materials");
+      alert("Successfully verified !");
+      this.setState({ verifych: true });
+      this.next();
     };
     confirm(confirmData, onSuccess);
   }
@@ -86,15 +92,19 @@ class StudentRegister extends React.Component {
   }
   changeCllg(e) {
     this.setState({ university: e.target.value });
-    this.setState({ changeCllgfuncCalls: this.state.changeCllgfuncCalls + 1 });
-    if (this.state.changeCllgfuncCalls === 1) {
-      var defaultcllg = "select-degree";
-      var opt = document.getElementById("uname");
-      console.log(opt.value);
-      document.getElementById(defaultcllg).style = "display: none";
-      document.getElementById(opt.value).style = "display: inline-block";
-      defaultcllg = opt.value;
-    }
+    this.setState(
+      { changeCllgfuncCalls: this.state.changeCllgfuncCalls + 1 },
+      () => {
+        if (this.state.changeCllgfuncCalls === 1) {
+          var defaultcllg = "select-degree";
+          var opt = document.getElementById("uname");
+          console.log(opt.value);
+          document.getElementById(defaultcllg).style = "display: none";
+          document.getElementById(opt.value).style = "display: inline-block";
+          defaultcllg = opt.value;
+        }
+      }
+    );
   }
   validateEmail(email) {
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -102,20 +112,18 @@ class StudentRegister extends React.Component {
     return true;
   }
   next() {
-    if (this.state.step === 3 && !this.state.verifych) {
-      //Not Written
-      // handleVerify();
-    }
     if (this.state.step === 4) {
       localStorage.setItem("acc_type", "student");
-      //Doesn't work. Route to be added
-      //window.location.href = "/login.html"
+      navigate("/student-materials");
     } else {
       if (this.state.step === 1) {
         if (!this.validateEmail(this.state.email)) {
           alert("Enter valid email address");
           return;
         }
+      }
+      if (this.state.step === 3 && !this.state.verifych) {
+        this.confirmUser();
       }
       this.progval.current.classList.add(`progress${this.state.step}`);
       setTimeout(() => {
@@ -142,7 +150,6 @@ class StudentRegister extends React.Component {
         }
         this.setState({ step: this.state.step + 1 });
       }, 500);
-
       // document.getElementById(`step-${this.state.step}`).style = "display: none";
       switch (this.state.step) {
         case 1:
@@ -201,11 +208,8 @@ class StudentRegister extends React.Component {
       if (this.state.step === 2) {
         this.setState({ nextbtntext: "Finish " });
       }
-      // if(verifych){
-      //     document.getElementById('nextbtn').innerHTML = 'Go to HomePage<img id="nextimg" src="assets/logo/next.png">';
-      // }
-      if (this.state.verifych) {
-        this.setState({ nextbtntext: "Go to HomePage " });
+      if (this.state.step === 3 && this.state.verifych) {
+        this.setState({ nextbtntext: "Go to Materials " });
       }
     }
   }
@@ -288,30 +292,44 @@ class StudentRegister extends React.Component {
       }
       this.setState({ step: this.state.step - 1 });
     } else {
-      //Route to register component to be added
+      navigate("/register");
     }
   }
   render() {
+    // const css = `
+    //   .content {
+    //       margin: 4vh 9.5vw;
+    //       height: 80vh;
+    //   }
+    //   .next {
+    //       margin: 14vh 0 2vh 65vw;
+    //       padding-right: 3vw;
+    //   }
+    //   @media only screen and (max-width: 800px) {
+    //       .content{
+    //           height: auto;
+    //           width: 100vw;
+    //           margin: 0;
+    //       }
+    //       .next{
+    //           margin: 2vh 0 2vh 65vw;
+    //       }
+    //   }
+
+    //   `;
     let OtpButton;
     if (this.state.sendOtpisClicked) {
       OtpButton = (
-        <div>
-          <button id="resendbtn" className="input-text">
-            <span className="verifyph" onClick={() => this.resendOtp()}>
-              Resend OTP
-            </span>
-          </button>
-          <button id="verifybtn" className="input-text">
-            <span className="verifyph" onClick={() => this.handleSubmit()}>
-              Verify
-            </span>
-          </button>
-        </div>
+        <button id="resendbtn" className="input-text">
+          <span className="verifyph" onClick={() => this.resendOtp()}>
+            Resend OTP
+          </span>
+        </button>
       );
     } else
       OtpButton = (
         <button id="sendbtn" className="input-text">
-          <span className="verifyph" onClick={() => this.sendOtp()}>
+          <span className="verifyph" onClick={() => this.handleSubmit()}>
             Send OTP
           </span>
         </button>
@@ -737,7 +755,7 @@ class StudentRegister extends React.Component {
                 <input
                   type="text"
                   className="input-text"
-                  placeholder="You are in which semester?"
+                  placeholder="In which semester are you?"
                   onChange={(e) =>
                     this.setState({ sem: Number(e.target.value) })
                   }
@@ -767,6 +785,7 @@ class StudentRegister extends React.Component {
                   className="input-text"
                   id="knowabout"
                   style={{ fontSize: "20px" }}
+                  onChange={(e) => this.setState({ knowabout: e.target.value })}
                 >
                   <option value="">
                     -How did you know about Collegeshala-
@@ -778,6 +797,19 @@ class StudentRegister extends React.Component {
                   </option>
                   <option value="none">None</option>
                 </select>
+                {/* <input
+                  type="text"
+                  className="input-text"
+                  placeholder="Enter Collaborator's Name"
+                  style={{
+                    display:
+                      this.state.knowabout === "collegeshala-collaborators"
+                        ? ""
+                        : "none",
+                  }}
+                  value={this.state.ccName}
+                  onChange={(e) => this.setState({ ccName: e.target.value })}
+                /> */}
                 <input
                   type="text"
                   className="input-text"

@@ -33,24 +33,24 @@ class TeacherRegister extends React.Component {
       alert("Please accept terms and conditions");
       return;
     }
-    var userData = {
+    const userData = {
       name: this.state.name,
       email: this.state.email,
+      phone_number: "+91" + this.state.phoneNo,
       password: this.state.password,
-      cllgname: this.state.college,
-      department: this.state.dept,
-      subject: this.state.subject,
-      phone: "+91" + this.state.phoneNo,
-      isProfessor: true,
+      "custom:cllgname": this.state.college,
+      "custom:department": this.state.dept,
+      "custom:subjects": this.state.subject,
+      "custom:isProfessor": "true",
     };
-    var onSuccess = function registerSuccess(result) {
-      var cognitoUser = result.user;
+    const onSuccess = function registerSuccess(result) {
+      const cognitoUser = result.user;
       console.log("Check user here : ", cognitoUser);
       alert(
         "New User created. Please check your phone for the verification code"
       );
     };
-    var onFailure = function registerFailure(err) {
+    const onFailure = function registerFailure(err) {
       alert(err);
       console.error(err);
     };
