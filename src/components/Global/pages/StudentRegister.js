@@ -2,8 +2,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { navigate } from "@reach/router";
-import { register, resendCode, confirm } from "./../../../js/auth";
-import './../../../assets/css/studentRegister.css'
+import {
+  resendCode,
+  confirm,
+  register,
+} from "./../../../js/auth";
+
 
 class StudentRegister extends React.Component {
   constructor(props) {
@@ -41,27 +45,28 @@ class StudentRegister extends React.Component {
       alert("Please accept terms and conditions");
       return;
     }
-    var userData = {
+    const userData = {
       name: this.state.name,
       email: this.state.email,
+      phone_number: "+91" + this.state.phoneNo,
       password: this.state.password,
-      cllgname: this.state.college,
-      univname: this.state.university,
-      degree: this.state.degree,
-      sem: this.state.sem,
-      phone: "+91" + Number(this.state.phoneNo),
-      isProfessor: false,
+      "custom:cllgname": this.state.college,
+      "custom:univname": this.state.university,
+      "custom:degree": this.state.degree,
+      "custom:sem": this.state.sem.toString(),
+      "custom:isProfessor": "false",
     };
-    console.log(userData);
-    var onSuccess = function registerSuccess(result) {
-      var cognitoUser = result.user;
+    console.log(JSON.stringify(userData));
+    const onSuccess = function registerSuccess(result) {
+      const cognitoUser = result.user;
+      window.user = cognitoUser;
       console.log("Check user here : ", cognitoUser);
       alert(
         "New User created. Please check your phone for the verification code"
       );
     };
-    var onFailure = function registerFailure(err) {
-      alert(err);
+    const onFailure = function registerFailure(err) {
+      alert("Oops! There was some error :-/");
       console.error(err);
     };
     register(userData, onSuccess, onFailure);
@@ -77,7 +82,7 @@ class StudentRegister extends React.Component {
     const onSuccess = (result) => {
       console.log("call result: " + JSON.stringify(result));
       alert("Successfully verified !");
-      this.setState({ verifych : true });
+      this.setState({ verifych: true });
       this.next();
     };
     confirm(confirmData, onSuccess);
@@ -107,7 +112,6 @@ class StudentRegister extends React.Component {
     return true;
   }
   next() {
-    
     if (this.state.step === 4) {
       localStorage.setItem("acc_type", "student");
       navigate("/student-materials");
@@ -311,16 +315,16 @@ class StudentRegister extends React.Component {
     //           margin: 2vh 0 2vh 65vw;
     //       }
     //   }
-      
+
     //   `;
     let OtpButton;
     if (this.state.sendOtpisClicked) {
       OtpButton = (
-          <button id="resendbtn" className="input-text">
-            <span className="verifyph" onClick={() => this.resendOtp()}>
-              Resend OTP
-            </span>
-          </button>
+        <button id="resendbtn" className="input-text">
+          <span className="verifyph" onClick={() => this.resendOtp()}>
+            Resend OTP
+          </span>
+        </button>
       );
     } else
       OtpButton = (
@@ -751,7 +755,7 @@ class StudentRegister extends React.Component {
                 <input
                   type="text"
                   className="input-text"
-                  placeholder="You are in which semester?"
+                  placeholder="In which semester are you?"
                   onChange={(e) =>
                     this.setState({ sem: Number(e.target.value) })
                   }
