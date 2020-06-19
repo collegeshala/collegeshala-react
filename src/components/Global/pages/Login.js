@@ -136,7 +136,7 @@ class Login extends React.Component {
       username: this.state.email,
       password: this.state.password,
     };
-    console.log({ userData });
+    // console.log({ userData });
     const onSuccess = (result) => {
       console.log(result);
       const accessToken = result.getAccessToken().getJwtToken();

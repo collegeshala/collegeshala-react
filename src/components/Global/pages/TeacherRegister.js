@@ -1,4 +1,6 @@
 import React from "react";
+import { navigate } from "@reach/router";
+import { resendCode, confirm, register } from "./../../../js/auth";
 
 class TeacherRegister extends React.Component {
   constructor(props) {
@@ -11,7 +13,8 @@ class TeacherRegister extends React.Component {
       college: "",
       dept: "",
       subject: "",
-      phoneNo: 0,
+      phoneNo: "",
+      code: "",
       step: 1,
       verifych: false,
       step1display: {},
@@ -22,7 +25,7 @@ class TeacherRegister extends React.Component {
       step3img: require("../../../assets/logo/step3incomplete.png"),
       step4img: require("../../../assets/logo/step4incomplete.png"),
       nextbtntext: "Next ",
-      otptext: "Send OTP",
+      sendOtpisClicked: false,
       isChecked: false,
     };
   }
@@ -31,35 +34,49 @@ class TeacherRegister extends React.Component {
       alert("Please accept terms and conditions");
       return;
     }
-    var userData = {
+    const userData = {
       name: this.state.name,
       email: this.state.email,
+      phone_number: "+91" + this.state.phoneNo,
       password: this.state.password,
-      cllgname: this.state.college,
-      department: this.state.dept,
-      subject: this.state.subject,
-      phone: "+91" + this.state.phoneNo,
-      isProfessor: true,
+      "custom:cllgname": this.state.college,
+      "custom:department": this.state.dept,
+      "custom:subjects": this.state.subject,
+      "custom:isProfessor": "true",
     };
-    var onSuccess = function registerSuccess(result) {
-      var cognitoUser = result.user;
+    console.log(JSON.stringify(userData));
+    const onSuccess = function registerSuccess(result) {
+      const cognitoUser = result.user;
+      window.user = cognitoUser;
       console.log("Check user here : ", cognitoUser);
       alert(
         "New User created. Please check your phone for the verification code"
       );
     };
-    var onFailure = function registerFailure(err) {
-      alert(err);
+    const onFailure = function registerFailure(err) {
+      alert("Oops! There was some error :-/");
       console.error(err);
     };
-    //Not written yet
-    //register(userData,onSuccess,onFailure);
+    register(userData, onSuccess, onFailure);
+    this.setState({ sendOtpisClicked: true });
   }
-  otp() {
-    this.setState({ otptext: "Resend OTP" });
+  resendOtp() {
+    const { email } = this.state;
+    resendCode(email);
+  }
+  confirmUser() {
+    const { email: username, code } = this.state;
+    const confirmData = { username, code };
+    const onSuccess = (result) => {
+      console.log("call result: " + JSON.stringify(result));
+      alert("Successfully verified !");
+      this.setState({ verifych: true });
+      this.next();
+    };
+    confirm(confirmData, onSuccess);
   }
   handlemouseover(e) {
-    e.target.style = "cursor : pointer";
+    e.target.style.cursor = "pointer";
   }
   validateEmail(email) {
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -67,20 +84,18 @@ class TeacherRegister extends React.Component {
     return true;
   }
   next() {
-    if (this.state.step === 3 && !this.state.verifych) {
-      //Not Written
-      // handleVerify();
-    }
     if (this.state.step === 4) {
       localStorage.setItem("acc_type", "professor");
-      //Doesn't work. Route to be added
-      //window.location.href = "/login.html"
+      navigate("/login");
     } else {
       if (this.state.step === 1) {
         if (!this.validateEmail(this.state.email)) {
           alert("Enter valid email address");
           return;
         }
+      }
+      if (this.state.step === 3 && !this.state.verifych) {
+        this.confirmUser();
       }
       this.progval.current.classList.add(`progress${this.state.step}`);
       setTimeout(() => {
@@ -107,7 +122,6 @@ class TeacherRegister extends React.Component {
         }
         this.setState({ step: this.state.step + 1 });
       }, 500);
-
       // document.getElementById(`step-${this.state.step}`).style = "display: none";
       switch (this.state.step) {
         case 1:
@@ -166,16 +180,37 @@ class TeacherRegister extends React.Component {
       if (this.state.step === 2) {
         this.setState({ nextbtntext: "Finish " });
       }
-      // if(verifych){
-      //     document.getElementById('nextbtn').innerHTML = 'Go to HomePage<img id="nextimg" src="assets/logo/next.png">';
-      // }
-      if (this.state.verifych) {
+      if (this.state.step === 3 && this.state.verifych) {
         this.setState({ nextbtntext: "Go to HomePage " });
       }
     }
   }
   back() {
     if (this.state.step !== 1) {
+      this.progval.current.classList.remove(`progress${this.state.step - 1}`);
+      setTimeout(() => {
+        switch (this.state.step) {
+          case 1:
+            this.setState({
+              step2img: require("../../../assets/logo/step2incomplete.png"),
+            });
+            break;
+
+          case 2:
+            this.setState({
+              step3img: require("../../../assets/logo/step3incomplete.png"),
+            });
+            break;
+
+          case 3:
+            this.setState({
+              step4img: require("../../../assets/logo/step4incomplete.png"),
+            });
+            break;
+
+          default:
+        }
+      }, 100);
       switch (this.state.step) {
         case 2:
           this.setState({ step2display: { display: "none" } });
@@ -229,10 +264,28 @@ class TeacherRegister extends React.Component {
       }
       this.setState({ step: this.state.step - 1 });
     } else {
-      //Route to register component to be added
+      navigate("/register");
     }
   }
   render() {
+    let OtpButton;
+    if (this.state.sendOtpisClicked) {
+      OtpButton = (
+        <button id="resendbtn" className="input-text">
+          <span className="verifyph" onClick={() => this.resendOtp()}>
+            Resend OTP
+          </span>
+        </button>
+      );
+    } else
+      OtpButton = (
+        <button id="sendbtn" className="input-text">
+          <span className="verifyph" onClick={() => this.handleSubmit()}>
+            Send OTP
+          </span>
+        </button>
+      );
+
     return (
       <div id="student-signup">
         <div>
@@ -272,7 +325,6 @@ class TeacherRegister extends React.Component {
                   <img id="step-2-img" src={this.state.step2img} alt="step2" />
                   <img id="step-3-img" src={this.state.step3img} alt="step3" />
                   <img id="step-4-img" src={this.state.step4img} alt="step4" />
-                  <span className="stretch"></span>
                 </div>
               </div>
             </div>
@@ -382,30 +434,24 @@ class TeacherRegister extends React.Component {
                 <input
                   type="checkbox"
                   name="termsconditions"
-                  checked={this.state.isChecked}
-                  onChange={(e) => this.setState({ isChecked: e.target.value })}
+                  defaultChecked={this.state.isChecked}
+                  onChange={() =>
+                    this.setState({ isChecked: !this.state.isChecked })
+                  }
                 />{" "}
                 I accept terms & conditions
-                <div class="container" style={{ display: "inline-block" }}>
-                  <button id="verifybtn" className="input-text">
-                    <span className="verifyph" onClick={() => this.otp()}>
-                      {this.state.otptext}
-                    </span>
-                  </button>
-                  <button id="verifybtn" className="input-text">
-                    <span
-                      className="verifyph"
-                      onClick={() => this.handleSubmit()}
-                    >
-                      Verify
-                    </span>
-                  </button>
+                <div
+                  className="otpbtncontainer"
+                  style={{ textAlign: "center" }}
+                >
+                  {OtpButton}
                 </div>
                 <input
                   type="text"
                   className="otpinput"
                   placeholder="Enter Your OTP"
                   name="otp"
+                  onChange={(e) => this.setState({ code: e.target.value })}
                 />
               </div>
             </div>

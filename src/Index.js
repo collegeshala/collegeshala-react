@@ -50,7 +50,7 @@ class Index extends React.Component {
                   <a
                     className="nav-link index-nav-link"
                     id="nav-sign-up"
-                    href="#"
+                    href=""
                     data-target=".navbar-collapse.show"
                     onClick={() => navigate("/register")}
                   >
@@ -63,7 +63,7 @@ class Index extends React.Component {
                     onclick="goToURL(); return false;"
                     target="_blank"
                     id="nav-user-icon"
-                    href="#"
+                    href=""
                     data-toggle="collapse"
                     data-target=".navbar-collapse.show"
                   >

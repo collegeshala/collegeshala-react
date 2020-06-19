@@ -33,7 +33,7 @@ class Register extends React.Component {
             </div>
             <div className="row choice-container">
               <div className="col-6 student-choice">
-                <a href="#" onClick={() => navigate("/student-register")}>
+                <a href="" onClick={() => navigate("/student-register")}>
                   <img
                     className="studentimg"
                     src={require("../../../assets/img/student-reg-page.png")}
@@ -42,13 +42,13 @@ class Register extends React.Component {
                 </a>
                 <div className="student-link">
                   Are you
-                  <a href="#" onClick={() => navigate("/student-register")}>
+                  <a href="" onClick={() => navigate("/student-register")}>
                     <span style={{ color: "#ff4133" }}> student?</span>
                   </a>
                 </div>
               </div>
               <div className="col-6 teacher-choice">
-                <a href="#" onClick={() => navigate("/teacher-register")}>
+                <a href="" onClick={() => navigate("/teacher-register")}>
                   <img
                     className="teacherimg"
                     src={require("../../../assets/img/teacher-reg-page.png")}
@@ -57,7 +57,7 @@ class Register extends React.Component {
                 </a>
                 <div className="teacher-link">
                   Are you
-                  <a href="#" onClick={() => navigate("/teacher-register")}>
+                  <a href="" onClick={() => navigate("/teacher-register")}>
                     <span style={{ color: "#ff4133" }}> teacher?</span>
                   </a>
                 </div>
@@ -65,7 +65,7 @@ class Register extends React.Component {
             </div>
             <div className="login-link">
               Already Registered?
-              <a href="#" onClick={() => navigate("/login")}>
+              <a href="" onClick={() => navigate("/login")}>
                 <span style={{ color: "#ff4133" }}> Login here</span>
               </a>
             </div>
