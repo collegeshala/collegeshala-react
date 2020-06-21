@@ -1,8 +1,44 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { navigate } from "@reach/router";
+import axios from "axios";
 
 class Index extends React.Component {
+  state = {
+    email: "",
+  };
+
+  handleEmail(email) {
+    this.setState({ email });
+  }
+
+  subscribe() {
+    const { email } = this.state;
+    let re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/;
+    if (email.match(re)) {
+      // console.log(email);
+      axios({
+        method: "POST",
+        url: "https://api.collegeshala.com/subscribenewsletter",
+        data: JSON.stringify({ email }),
+      })
+        .then((res) => {
+          console.log(res.status);
+          alert("You have been subscribed successfully to our newsletter!");
+          this.handleEmail("");
+        })
+        .catch((err) => {
+          console.error(err);
+          alert(
+            "Oops! Seems like there was an error! Please try again later :-/"
+          );
+        });
+    } else {
+      alert("Please enter a valid email!");
+      this.handleEmail("");
+    }
+  }
+
   render() {
     return (
       <div>
@@ -60,7 +96,7 @@ class Index extends React.Component {
                 <li className="nav-item">
                   <a
                     className="nav-link index-nav-link"
-                    onclick="goToURL(); return false;"
+                    // onclick="goToURL(); return false;"
                     target="_blank"
                     id="nav-user-icon"
                     href=""
@@ -108,7 +144,10 @@ class Index extends React.Component {
           </h1>
           <div className="card-deck m-5">
             <div className="card">
-              <a onclick="userindexredirect(); return false;" href="#">
+              <a
+                // onClick="userindexredirect(); return false;"
+                href="#"
+              >
                 <p className="text-center">
                   <img
                     className="card-img-top services-image"
@@ -118,10 +157,7 @@ class Index extends React.Component {
                 </p>
               </a>
               <div className="card-body">
-                <a
-                  // onclick="userindexredirect(); return false;"
-                  href="#"
-                >
+                <a href="#">
                   <h5 className="card-title text-center" id="custom-purple">
                     Study Materials
                   </h5>
@@ -285,8 +321,15 @@ class Index extends React.Component {
                 type="email"
                 id="sub-email"
                 placeholder="Enter your email"
+                value={this.state.email}
+                onChange={(e) => this.handleEmail(e.target.value)}
               />
-              <input type="button" id="newsletter-btn" value="Subscribe" />
+              <input
+                type="button"
+                id="newsletter-btn"
+                onClick={this.subscribe.bind(this)}
+                value="Subscribe"
+              />
             </p>
           </div>
           <div className="newletter-below-img"></div>
