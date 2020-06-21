@@ -296,27 +296,22 @@ class StudentRegister extends React.Component {
     }
   }
   render() {
-    // const css = `
-    //   .content {
-    //       margin: 4vh 9.5vw;
-    //       height: 80vh;
-    //   }
-    //   .next {
-    //       margin: 14vh 0 2vh 65vw;
-    //       padding-right: 3vw;
-    //   }
-    //   @media only screen and (max-width: 800px) {
-    //       .content{
-    //           height: auto;
-    //           width: 100vw;
-    //           margin: 0;
-    //       }
-    //       .next{
-    //           margin: 2vh 0 2vh 65vw;
-    //       }
-    //   }
+    const css = `
+      .content {
+          margin: 4vh 9.5vw;
+          height: 80vh;
+      }
+      .next {
+        margin: 13vh 0 2vh 40vw;
+      }
+      @media only screen and (max-width: 800px) {
 
-    //   `;
+          .next {
+            margin: 2vh 0;
+          } 
+      }
+
+      `;
     let OtpButton;
     if (this.state.sendOtpisClicked) {
       OtpButton = (
@@ -337,6 +332,7 @@ class StudentRegister extends React.Component {
 
     return (
       <div id="student-signup">
+        <style>{css}</style>
         <div>
           <nav
             className="navbar navbar-expand-lg navbar-dark"
@@ -797,7 +793,7 @@ class StudentRegister extends React.Component {
                   </option>
                   <option value="none">None</option>
                 </select>
-                {/* <input
+                <input
                   type="text"
                   className="input-text"
                   placeholder="Enter Collaborator's Name"
@@ -809,7 +805,7 @@ class StudentRegister extends React.Component {
                   }}
                   value={this.state.ccName}
                   onChange={(e) => this.setState({ ccName: e.target.value })}
-                /> */}
+                />
                 <input
                   type="text"
                   className="input-text"
