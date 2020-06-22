@@ -8,7 +8,6 @@ import {
   register,
 } from "./../../../js/auth";
 
-
 class StudentRegister extends React.Component {
   constructor(props) {
     super(props);
@@ -81,9 +80,9 @@ class StudentRegister extends React.Component {
     const confirmData = { username, code };
     const onSuccess = (result) => {
       console.log("call result: " + JSON.stringify(result));
-      alert("Successfully verified !");
       this.setState({ verifych: true });
       this.next();
+      alert("Successfully verified !");
     };
     confirm(confirmData, onSuccess);
   }
@@ -112,7 +111,9 @@ class StudentRegister extends React.Component {
     return true;
   }
   next() {
-    if (this.state.step === 4) {
+    if (this.state.step === 3 && !this.state.verifych) {
+      this.confirmUser();
+    } else if (this.state.step === 4) {
       localStorage.setItem("acc_type", "student");
       navigate("/login");
     } else {
@@ -121,9 +122,6 @@ class StudentRegister extends React.Component {
           alert("Enter valid email address");
           return;
         }
-      }
-      if (this.state.step === 3 && !this.state.verifych) {
-        this.confirmUser();
       }
       this.progval.current.classList.add(`progress${this.state.step}`);
       setTimeout(() => {
