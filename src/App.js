@@ -16,6 +16,7 @@ import Cart from "./components/Student/Cart";
 
 // GLOBAL IMPORTS
 // import Index from "./Index";
+import About from "./components/Global/pages/About"
 
 const App = () => {
   return (
@@ -34,6 +35,8 @@ const App = () => {
 
       {/* GLOBAL ROUTES */}
       {/* <Index path="/" /> */}
+      <About path="/about" />
+      
     </Router>
   );
 };
