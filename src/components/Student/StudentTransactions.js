@@ -5,6 +5,7 @@ import React, { Fragment } from "react";
 import { Link } from "@reach/router";
 import axios from "axios";
 import { getToken } from "./../../js/auth";
+import { checkout } from "./../../js/razorpay";
 
 import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
@@ -45,7 +46,7 @@ class Transactions extends React.Component {
     transactions: [],
     length: 0,
     credits: 0,
-    creditsToPurchase: 0,
+    creditsToPurchase: "",
   };
 
   async componentDidMount() {
@@ -71,8 +72,19 @@ class Transactions extends React.Component {
 
   handleCredits(event) {
     const credits = event.target.value;
-    console.log(credits);
+    // console.log(credits);
     this.setState({ creditsToPurchase: credits });
+  }
+
+  async buyCredits() {
+    const { creditsToPurchase } = this.state;
+    console.log(creditsToPurchase);
+    try {
+      const resp = await checkout(creditsToPurchase);
+    } catch (error) {
+      console.error(error);
+      alert("Oops! There was an error :-/");
+    }
   }
 
   render() {
@@ -158,6 +170,7 @@ class Transactions extends React.Component {
                   id="buy-credits"
                   type="button"
                   className="btn btn-primary"
+                  onClick={this.buyCredits.bind(this)}
                 >
                   Buy Now
                 </button>

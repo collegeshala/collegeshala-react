@@ -2,12 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { navigate } from "@reach/router";
-import {
-  resendCode,
-  confirm,
-  register,
-} from "./../../../js/auth";
-import "./../../../assets/css/studentRegister.css";
+import { resendCode, confirm, register } from "./../../../js/auth";
 
 class StudentRegister extends React.Component {
   constructor(props) {
@@ -45,6 +40,8 @@ class StudentRegister extends React.Component {
       alert("Please accept terms and conditions");
       return;
     }
+
+    const { ccName, knowabout } = this.state;
     const userData = {
       name: this.state.name,
       email: this.state.email,
@@ -55,6 +52,8 @@ class StudentRegister extends React.Component {
       "custom:degree": this.state.degree,
       "custom:sem": this.state.sem.toString(),
       "custom:isProfessor": "false",
+      "custom:knowAbout":
+        knowabout == "collegeshala-collaborators" ? ccName : knowabout,
     };
     console.log(JSON.stringify(userData));
     const onSuccess = function registerSuccess(result) {
@@ -81,9 +80,9 @@ class StudentRegister extends React.Component {
     const confirmData = { username, code };
     const onSuccess = (result) => {
       console.log("call result: " + JSON.stringify(result));
-      alert("Successfully verified !");
       this.setState({ verifych: true });
       this.next();
+      alert("Successfully verified !");
     };
     confirm(confirmData, onSuccess);
   }
@@ -112,18 +111,17 @@ class StudentRegister extends React.Component {
     return true;
   }
   next() {
-    if (this.state.step === 4) {
+    if (this.state.step === 3 && !this.state.verifych) {
+      this.confirmUser();
+    } else if (this.state.step === 4) {
       localStorage.setItem("acc_type", "student");
-      navigate("/student-materials");
+      navigate("/login");
     } else {
       if (this.state.step === 1) {
         if (!this.validateEmail(this.state.email)) {
           alert("Enter valid email address");
           return;
         }
-      }
-      if (this.state.step === 3 && !this.state.verifych) {
-        this.confirmUser();
       }
       this.progval.current.classList.add(`progress${this.state.step}`);
       setTimeout(() => {
@@ -209,7 +207,7 @@ class StudentRegister extends React.Component {
         this.setState({ nextbtntext: "Finish " });
       }
       if (this.state.step === 3 && this.state.verifych) {
-        this.setState({ nextbtntext: "Go to Materials " });
+        this.setState({ nextbtntext: "Go to HomePage " });
       }
     }
   }
@@ -296,27 +294,22 @@ class StudentRegister extends React.Component {
     }
   }
   render() {
-    // const css = `
-    //   .content {
-    //       margin: 4vh 9.5vw;
-    //       height: 80vh;
-    //   }
-    //   .next {
-    //       margin: 14vh 0 2vh 65vw;
-    //       padding-right: 3vw;
-    //   }
-    //   @media only screen and (max-width: 800px) {
-    //       .content{
-    //           height: auto;
-    //           width: 100vw;
-    //           margin: 0;
-    //       }
-    //       .next{
-    //           margin: 2vh 0 2vh 65vw;
-    //       }
-    //   }
+    const css = `
+      .content {
+          margin: 4vh 9.5vw;
+          height: 80vh;
+      }
+      .next {
+        margin: 13vh 0 2vh 40vw;
+      }
+      @media only screen and (max-width: 800px) {
 
-    //   `;
+          .next {
+            margin: 2vh 0;
+          } 
+      }
+
+      `;
     let OtpButton;
     if (this.state.sendOtpisClicked) {
       OtpButton = (
@@ -337,6 +330,7 @@ class StudentRegister extends React.Component {
 
     return (
       <div id="student-signup">
+        <style>{css}</style>
         <div>
           <nav
             className="navbar navbar-expand-lg navbar-dark"
@@ -797,7 +791,7 @@ class StudentRegister extends React.Component {
                   </option>
                   <option value="none">None</option>
                 </select>
-                {/* <input
+                <input
                   type="text"
                   className="input-text"
                   placeholder="Enter Collaborator's Name"
@@ -809,7 +803,7 @@ class StudentRegister extends React.Component {
                   }}
                   value={this.state.ccName}
                   onChange={(e) => this.setState({ ccName: e.target.value })}
-                /> */}
+                />
                 <input
                   type="text"
                   className="input-text"
