@@ -83,6 +83,7 @@ class CartPage extends React.Component {
           });
       } else {
         alert("Notes purchased successfully!");
+        this.setState({ payment_id: "", notes: [] });
       }
     } catch (error) {
       console.error(error);
