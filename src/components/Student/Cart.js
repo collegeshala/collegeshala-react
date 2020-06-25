@@ -3,7 +3,9 @@
 import React, { Fragment } from "react";
 import { Link } from "@reach/router";
 import axios from "axios";
+
 import { getToken } from "./../../js/auth";
+import { checkout } from "./../../js/razorpay";
 
 import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
@@ -43,10 +45,57 @@ class CartPage extends React.Component {
     this.state = {
       notes: [],
       total: 0,
+      payment_id: "",
     };
 
     this.deleteNote = this.deleteNote.bind(this);
+    this.checkoutCart = this.checkoutCart.bind(this);
   }
+
+  async checkoutCart() {
+    const token = await getToken();
+
+    try {
+      const resp = (
+        await axios({
+          method: "POST",
+          url: "https://api.collegeshala.com/checkout",
+          headers: {
+            authorization: token,
+          },
+        })
+      ).data;
+
+      console.log(resp);
+      if (resp.msg && resp.msg == "Insufficient credits") {
+        console.log("insufficient");
+        let creditsBalance = this.state.total - resp.creditsAvailable;
+        let amt = creditsBalance * 10;
+        checkout(amt)
+          .then((data) => {
+            console.log(data);
+            this.setState({ payment_id: data.payment_id });
+            this.checkoutCart();
+          })
+          .catch((err) => {
+            console.error(err);
+            alert("Oops! There was an error in payment :-/");
+          });
+      } else {
+        alert("Notes purchased successfully!");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Oops! There was some error during checkout :-/");
+      if (this.state.payment_id) {
+        alert(
+          "Please contact us with reference Payment-ID: " +
+            this.state.payment_id
+        );
+      }
+    }
+  }
+
   async componentDidMount() {
     const token = await getToken();
     axios({
@@ -57,6 +106,7 @@ class CartPage extends React.Component {
       },
     })
       .then(({ data }) => {
+        if (data == "No-items in cart") return;
         console.log(data.Responses.notes);
         let total = 0;
         const cart = data.Responses.notes.map((note) => {
@@ -179,7 +229,12 @@ class CartPage extends React.Component {
                 <span>{this.state.total}</span>
                 <span> credits</span>
               </h1>
-              <button href="#" className="checkout-btn-cart" id="custom-red">
+              <button
+                href="#"
+                onClick={this.checkoutCart}
+                className="checkout-btn-cart"
+                id="custom-red"
+              >
                 Checkout
               </button>
             </div>

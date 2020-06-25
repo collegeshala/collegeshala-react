@@ -77,10 +77,41 @@ class Transactions extends React.Component {
   }
 
   async buyCredits() {
+    const token = await getToken();
     const { creditsToPurchase } = this.state;
-    console.log(creditsToPurchase);
+    // console.log(creditsToPurchase);
     try {
-      const resp = await checkout(creditsToPurchase);
+      if (creditsToPurchase > 0 && (creditsToPurchase * 10) % 10 == 0) {
+        const amount = creditsToPurchase * 10;
+        const resp = await checkout(amount);
+        // const resp = await checkout(creditsToPurchase);
+        axios({
+          method: "POST",
+          url: "https://api.collegeshala.com/addcredits",
+          headers: {
+            authorization: token,
+          },
+          data: JSON.stringify({
+            credits: +creditsToPurchase,
+            amount: amount,
+            paymentid: resp.razorpay_payment_id,
+          }),
+        })
+          .then(({ data }) => {
+            // console.log(response.data);
+            const updatedCredits = data.Attributes.credits;
+            this.setState({ credits: updatedCredits });
+          })
+          .catch((err) => {
+            console.error(err);
+            alert(
+              "Oops! There was an error adding credits! Please contact us with reference Payment-ID: " +
+                resp.razorpay_payment_id
+            );
+          });
+      } else {
+        alert("Please enter a valid number!");
+      }
     } catch (error) {
       console.error(error);
       alert("Oops! There was an error :-/");

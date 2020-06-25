@@ -15,8 +15,6 @@ export const checkout = async (amount) => {
   ).data;
 
   return new Promise((res, rej) => {
-    console.log({ fetched_cred: razorpay_cred });
-
     axios({
       method: "POST",
       url: "https://api.collegeshala.com/create-order",

@@ -1,4 +1,5 @@
 import React from "react";
+import { navigate, Link } from "@reach/router";
 import logo from "./../../assets/img/logo.png";
 
 class Navbar extends React.Component {
@@ -40,9 +41,12 @@ class Navbar extends React.Component {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/cart.html">
+              <Link className="nav-link" to="/cart">
                 <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-              </a>
+              </Link>
+              {/* <a className="nav-link" href="/cart.html">
+                <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+              </a> */}
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/my-account.html">

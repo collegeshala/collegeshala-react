@@ -136,7 +136,7 @@ const sessionExpire = (token) => {
 export const getToken = () => {
   return new Promise((resolve, reject) => {
     const cognitoUser = UserPool.getCurrentUser();
-    console.log({ cognitoUser });
+    // console.log({ cognitoUser });
 
     if (cognitoUser) {
       cognitoUser.getSession((err, session) => {
