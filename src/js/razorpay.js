@@ -1,14 +1,22 @@
 import { getToken } from "./auth";
 import axios from "axios";
 
-const razorpay_cred = {
-  key_id: "rzp_live_og3WnLF8qiaveP",
-};
-
 export const checkout = async (amount) => {
   const token = await getToken();
 
+  const razorpay_cred = (
+    await axios({
+      method: "GET",
+      url: "https://api.collegeshala.com/razorpay-cred",
+      headers: {
+        authorization: token,
+      },
+    })
+  ).data;
+
   return new Promise((res, rej) => {
+    console.log({ fetched_cred: razorpay_cred });
+
     axios({
       method: "POST",
       url: "https://api.collegeshala.com/create-order",
@@ -36,6 +44,7 @@ export const checkout = async (amount) => {
               time: Date.now().toString(),
               response,
             });
+            if (response.error) rej(response.error.metadata);
             res(response);
           },
           theme: {
