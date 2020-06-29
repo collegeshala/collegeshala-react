@@ -1,5 +1,6 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+// a0ff20dd-b95e-4b0c-a6c9-01338352ff59
 import React, { Fragment } from "react";
 import { Link } from "@reach/router";
 import axios from "axios";
@@ -72,9 +73,21 @@ class CartPage extends React.Component {
         let creditsBalance = this.state.total - resp.creditsAvailable;
         let amt = creditsBalance * 10;
         checkout(amt)
-          .then((data) => {
+          .then(async (data) => {
             console.log(data);
             this.setState({ payment_id: data.payment_id });
+            await axios({
+              method: "POST",
+              url: "https://api.collegeshala.com/addcredits",
+              headers: {
+                authorization: token,
+              },
+              data: JSON.stringify({
+                credits: +creditsBalance,
+                amount: amt,
+                paymentid: data.razorpay_payment_id,
+              }),
+            });
             this.checkoutCart();
           })
           .catch((err) => {
