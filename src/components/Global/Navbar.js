@@ -5,7 +5,7 @@ import { getToken } from "./../../js/auth";
 import { isLoggedIn } from "./../../js/auth";
 import { parseJwt } from "./../../js/auth";
 
-const AnonymousNav = () => (
+const AnonymousNav = (props) => (
   <div>
     <nav className="navbar custom-nav navbar-expand-lg navbar-light bg-custom-blur">
       <a className="navbar-brand" href="/">
@@ -30,6 +30,8 @@ const AnonymousNav = () => (
                 type="text"
                 id="search-input"
                 placeholder="Search your subject here "
+                onChange={props.search}
+                onKeyPress={props.check}
               />
             </p>
           </li>
@@ -62,6 +64,8 @@ const AnonymousNav = () => (
               type="text"
               id="search-notes"
               placeholder="Search your subject here "
+              onChange={props.search}
+              onKeyPress={props.check}
             />
           </div>
         </div>
@@ -70,7 +74,7 @@ const AnonymousNav = () => (
   </div>
 );
 
-const StudentNav = () => (
+const StudentNav = (props) => (
   <div>
     <nav className="navbar custom-nav navbar-expand-lg navbar-light bg-custom-blur">
       <a className="navbar-brand" href="/">
@@ -95,6 +99,8 @@ const StudentNav = () => (
                 type="text"
                 id="search-input"
                 placeholder="Search your subject here "
+                onChange={props.search}
+                onKeyPress={props.check}
               />
             </p>
           </li>
@@ -172,6 +178,8 @@ const StudentNav = () => (
               type="text"
               id="search-notes"
               placeholder="Search your subject here "
+              onChange={props.search}
+              onKeyPress={props.check}
             />
           </div>
         </div>
@@ -180,7 +188,7 @@ const StudentNav = () => (
   </div>
 );
 
-const TeacherNav = () => (
+const TeacherNav = (props) => (
   <div>
     <nav className="navbar custom-nav navbar-expand-lg navbar-light bg-custom-blur">
       <a className="navbar-brand" href="/">
@@ -205,6 +213,8 @@ const TeacherNav = () => (
                 type="text"
                 id="search-input"
                 placeholder="Search your subject here "
+                onChange={props.search}
+                onKeyPress={props.check}
               />
             </p>
           </li>
@@ -282,6 +292,8 @@ const TeacherNav = () => (
               type="text"
               id="search-notes"
               placeholder="Search your subject here "
+              onChange={props.search}
+              onKeyPress={props.check}
             />
           </div>
         </div>
@@ -291,10 +303,29 @@ const TeacherNav = () => (
 );
 
 class Navbar extends Component {
-  state = {
-    isLoading: true,
-    isProf: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoading: true,
+      isProf: false,
+    };
+
+    this.search = this.search.bind(this);
+    this.onenter = this.onenter.bind(this);
+  }
+
+  search(event) {
+    localStorage.setItem("value", event.target.value);
+  }
+
+  onenter(event) {
+    const code = (event.keyCode ? event.keyCode : event.which);
+    if(code == 13)
+    {
+      window.location.pathname="/all-product";
+    }
+  }
 
   async componentDidMount() {
     const checkLogin = await isLoggedIn();
@@ -315,11 +346,11 @@ class Navbar extends Component {
 
   render() {
     return this.state.isLoading ? (
-      <AnonymousNav />
+      <AnonymousNav search={this.search} check={this.onenter}/>
     ) : this.state.isProf ? (
-      <TeacherNav />
+      <TeacherNav search={this.search} check={this.onenter}/>
     ) : (
-      <StudentNav />
+      <StudentNav search={this.search} check={this.onenter}/>
     );
   }
 }
