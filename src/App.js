@@ -17,6 +17,9 @@ import Cart from "./components/Student/Cart";
 // GLOBAL IMPORTS
 import Index from "./Index";
 import About from "./components/Global/pages/About";
+import DisclaimerWarranties from "./components/Global/pages/DisclaimerWarranties";
+import ProfessorInfo from "./components/Global/pages/ProfessorInfo";
+import TermsOfUse from "./components/Global/pages/TermsOfUse";
 
 const App = () => {
   return (
@@ -36,6 +39,9 @@ const App = () => {
       {/* GLOBAL ROUTES */}
       <Index path="/" />
       <About path="/about" />
+      <DisclaimerWarranties path="/disclaimer-warranties" />
+      <ProfessorInfo path="/professor-info" />
+      <TermsOfUse path="/terms-of-use" />
     </Router>
   );
 };
