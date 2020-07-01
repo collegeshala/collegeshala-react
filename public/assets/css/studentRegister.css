@@ -1,0 +1,364 @@
+.navbar .nav-link{
+    padding-top: 20px !important;
+    padding-right: 50px !important;
+    color: purple !important;
+    font-weight: 500 !important;
+    font-size: 15px;
+}
+
+#student-signup{
+    background-image: url(../assets/images/bg-reg-section.png);
+    background-position: center;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.content{
+    height: 70vh;
+    width: 81vw;
+    background: #FFFFFF;
+    border-radius: 14px;
+    margin: 9vh 9.5vw;
+}
+#back{
+    cursor: pointer;
+}
+.back-label{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 30px;
+    text-transform: capitalize;
+    color: #FFFFFF;
+    margin-top: 2vh;
+    cursor: pointer;
+}
+.details-container{
+    height: 42vh;
+}
+
+.image-column{
+    padding: 0 8vw;
+}
+.input-column{
+    padding: 6vh 0;
+}
+.info-about{
+    margin: 0 0 4vh 0;
+    width: max-content;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 36px;
+}
+.info-image{
+    width: 23vw;
+}
+@media only screen and (max-height: 800px) {
+    .info-image{
+        width: 20vw;
+    }
+}
+@media only screen and (max-height: 700px) {
+    .info-image{
+        width: 17vw;
+    }
+}
+@media only screen and (max-height: 600px) {
+    .info-image{
+        width: 14vw;
+    }
+}
+@media only screen and (max-width: 1330px) {
+    .info-image{
+        width: 25vw;
+    }
+}
+@media only screen and (max-width: 1120px) {
+    .info-image{
+        width: 30vw;
+    }
+}
+.progressbar-container{
+    padding: 8vh;
+}
+
+.progressbar{
+    width: 40vw;
+    height: 10px;
+    border: #6534CC 3px solid;
+    margin: 0 auto;
+}
+.progress-value{
+    width: 0%;
+    height: 4.4px;
+    background-color: #6534CC;
+}
+
+.progress-value.progress1 {
+    -webkit-animation: animate-progress1 0.5s linear;
+    animation: animate-progress1 0.5s linear;
+    width: 30%;
+}
+.progress-value.progress2 {
+    -webkit-animation: animate-progress2 0.5s linear;
+    animation: animate-progress2 0.5s linear;
+    width: 60%;
+}
+.progress-value.progress3 {
+    -webkit-animation: animate-progress3 0.5s linear;
+    animation: animate-progress3 0.5s linear;
+    width: 100%;
+}
+@-webkit-keyframes animate-progress1{
+    0% { width: 0;}
+    100% { width: 30%;}
+}
+
+@keyframes animate-progress1 {
+    0% { width: 0;}
+    100% { width: 30%;}
+}
+@-webkit-keyframes animate-progress2{
+    0% { width: 30%;}
+    100% { width: 60%;}
+}
+
+@keyframes animate-progress2 {
+    0% { width: 30%;}
+    100% { width: 60%;}
+}
+@-webkit-keyframes animate-progress3{
+    0% { width: 60%;}
+    100% { width: 100%;}
+}
+
+@keyframes animate-progress3 {
+    0% { width: 60%;}
+    100% { width: 100%;}
+}
+
+.progress-steps{
+    margin-top: -35px;
+    margin-left: -5px;
+    width: 102%;
+    text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+}
+.progress-steps img {
+    vertical-align: top;
+    display: inline-block;
+    zoom: 1;
+}
+.stretch {
+    width: 100%;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0;
+}
+.input-text{
+    margin: 2vh 0;
+    padding-left: 1vw;
+    width: 33vw;
+    height: 7vh;
+    background-color: #FFFFFF;
+    border: 2px solid #FF4133;
+    box-sizing: border-box;
+    box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+}
+.input-text:focus {
+    outline: none;
+}
+select{
+    overflow: scroll;
+}
+option{
+    outline: #FF4133;
+    border-radius: 50px;
+    overflow: scroll;
+}
+#forgot-password{
+    width: 30vw;
+    text-align: center;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 26px;
+    margin-top: 2vh;
+    cursor: pointer;
+}
+#password-reset{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 30px;
+    padding-right: 2vw;
+}
+.otpinput{
+    margin: 2vh 2.5vw;
+    padding-left: 1vw;
+    width: 28vw;
+    height: 7vh;
+    background-color: #FFFFFF;
+    border: 0;
+    border-bottom: 2px solid #FF4133;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+}
+.otpinput::placeholder {
+    text-align: center;
+}
+::placeholder {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 35px;
+    color: #8C8C8C;
+
+}
+.next{
+    text-align: right;
+    padding-right: 5vw;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 36px;
+    text-transform: capitalize;
+    color: #6534CC;
+    margin: 2vh 0;
+}
+.verify-button{
+    margin: 2vh 0;
+    padding-left: 1vw;
+    width: 28vw;
+    height: 7vh;
+    background-color: #FFFFFF;
+    border: 2px solid #FF4133;
+    box-sizing: border-box;
+    box-shadow: 4px 7px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    font-family: Lato;
+}
+.verifyph{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 30px;
+    color: #6534CC;
+}
+#verifybtn{
+    width: 12vw;
+    margin: 0 9vw;
+}
+.hurray{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 60px;
+    color: #FF4133;
+}
+.success-message {
+    width: 35vw;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 36px;
+    color: #000000;
+}
+@media only screen and (max-width: 800px)
+{
+    .content{
+        height: auto;
+        width: 100vw;
+        margin: 0;
+    }
+    #student-signup{
+        background-image: none;
+    }
+    .progressbar{
+        width: 70vw;
+    }
+    .details-container{
+        display: inline;
+        text-align: center;
+    }
+    .image-column{
+        max-width: 100%;
+        margin-top: -5vh;
+    }
+    .input-column{
+        max-width: 100%;
+        padding: 3vh 0;
+    }
+    .info-about{
+        width: auto;
+        font-size: 30px;
+    }
+    .info-image{
+        width: 17vw;
+    }
+    .input-text{
+        width: 70vw;
+    }
+    #verifybtn{
+        width: 30vw;
+        margin: 0 19vw;
+    }
+    .success-message{
+        width: 100vw;
+    }
+    #forgot-password{
+        width: 100vw;
+    }
+}
+@media only screen and (max-width: 991px)
+{
+    .navbar{
+        justify-content: flex-start;
+    }
+}
+@media only screen and (max-width: 450px)
+{
+    .progressbar{
+        width: 96vw;
+    }
+    .progressbar-container{
+        padding: 8vh 1vh;
+    }
+}
+.welcome-text{
+    padding: 5vh;
+    text-align: center;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 48px;
+    text-transform: capitalize;
+    color: #6534CC;
+}

@@ -1,0 +1,139 @@
+.navbar .nav-link{
+    padding-top: 20px !important;
+    padding-right: 50px !important;
+    color: purple !important;
+    font-weight: 500 !important;
+    font-size: 15px;
+}
+
+#register{
+    background-image: url(../assets/images/bg-reg-section.png);
+    
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.content{
+    height: 70vh;
+    width: 81vw;
+    background: #FFFFFF;
+    border-radius: 14px;
+    margin: 9vh 9.5vw;
+}
+
+.back-label{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 30px;
+    text-transform: capitalize;
+    color: #FFFFFF;
+    margin-top: 2vh;
+}
+
+.tap-on-your-side-text{
+    padding: 5vh;
+    text-align: center;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 48px;
+    text-transform: capitalize;
+    color: #FF4133;
+}
+.choice-container{
+    height: 42vh;
+}
+
+.student-choice{
+    border-right: #C4C4C4 solid 1.5px;
+    padding: 0 11vw;
+}
+.teacher-choice{
+    padding: 0 10vw;
+}
+
+.student-link, .teacher-link{
+    margin-top: 5vh;
+    text-align: center;
+    width: inherit;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+}
+.login-link{
+    padding: 4vh 0;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+}
+/* .studentimg{
+    height: 20vh;
+} */
+@media only screen and (max-height: 700px)
+{
+    .studentimg{
+        height: 30vh;
+    }
+    .teacherimg{
+        height: 30vh;
+    }
+}
+@media only screen and (max-width: 930px)
+{
+    .studentimg{
+        height: 25vh;
+    }
+    .teacherimg{
+        height: 25vh;
+    }
+}
+@media only screen and (max-width: 991px)
+{
+    .navbar{
+        justify-content: flex-start;
+    }
+}
+@media only screen and (max-width: 770px)
+{
+    .studentimg{
+        height: 40vh;
+    }
+    .teacherimg{
+        height: 40vh;
+    }
+    .content{
+        width: 100vw;
+        height: 100%;
+        margin: 0;
+    }
+    .choice-container{
+        display: inline;
+    }
+    .student-choice{
+        border: #FFFFFF 0px;
+        height: 75vh;
+    }
+    .col-6{
+        max-width: 100vw;
+        margin: 0;
+        text-align: center;
+    }
+    .student-link{
+        font-size: 35px;
+    }
+    .teacher-link{
+        font-size: 35px;
+    }
+    .login-link{
+        font-size: 25px;
+    }
+}
