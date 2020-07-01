@@ -15,7 +15,7 @@ import StudentAccount from "./components/Student/StudentAccount";
 import Cart from "./components/Student/Cart";
 
 // GLOBAL IMPORTS
-import Index from "./Index";
+import Homepage from "./Homepage";
 import About from "./components/Global/pages/About";
 import DisclaimerWarranties from "./components/Global/pages/DisclaimerWarranties";
 import ProfessorInfo from "./components/Global/pages/ProfessorInfo";
@@ -37,7 +37,7 @@ const App = () => {
       <Register path="/register" />
 
       {/* GLOBAL ROUTES */}
-      <Index path="/" />
+      <Homepage path="/" />
       <About path="/about" />
       <DisclaimerWarranties path="/disclaimer-warranties" />
       <ProfessorInfo path="/professor-info" />
