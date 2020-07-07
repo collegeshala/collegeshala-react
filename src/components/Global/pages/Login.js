@@ -8,6 +8,7 @@ import {
   resetPassword,
   parseJwt,
 } from "./../../../js/auth";
+import '../../../assets/css/studentRegister.css';
 
 class Login extends React.Component {
   constructor(props) {

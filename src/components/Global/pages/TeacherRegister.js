@@ -1,6 +1,7 @@
 import React from "react";
 import { navigate } from "@reach/router";
 import { resendCode, confirm, register } from "./../../../js/auth";
+import '../../../assets/css/studentRegister.css';
 
 class TeacherRegister extends React.Component {
   constructor(props) {

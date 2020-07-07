@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { navigate } from "@reach/router";
+import '../../../assets/css/register.css';
 
 class Register extends React.Component {
   render() {
