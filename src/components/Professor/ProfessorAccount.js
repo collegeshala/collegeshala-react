@@ -45,10 +45,11 @@ class Account extends React.Component {
     fullName: "",
     email: "",
     college: "",
-    university: "",
-    sem: "0",
     phoneNo: "",
     original: {},
+    dept: "",
+    subjects: "",
+    phoneNo: "",
   };
 
   setData() {
@@ -59,7 +60,8 @@ class Account extends React.Component {
 
   discardChanges(event) {
     event.preventDefault();
-    this.setData(this.state.original);
+    const { original } = this.state;
+    this.setState({ ...original, original });
   }
 
   async update(event) {
@@ -67,12 +69,12 @@ class Account extends React.Component {
     const data = this.state;
     delete data.original;
     delete data.email;
+    delete data.phoneNo;
     const token = await getToken();
-    // console.log({ idToken: token });
 
     axios({
       method: "POST",
-      url: "https://api.collegeshala.com/updatestudentaccount",
+      url: "https://api.collegeshala.com/updateprofessorsaccount",
       headers: {
         authorization: token,
       },
@@ -96,7 +98,7 @@ class Account extends React.Component {
 
   async componentDidMount() {
     const token = await getToken();
-    // console.log({ idToken: token });
+
     axios({
       method: "POST",
       url: "https://api.collegeshala.com/professordetails",
@@ -107,19 +109,14 @@ class Account extends React.Component {
       .then(({ data }) => {
         console.log("RIchard here");
         console.log({ professorDetails: data.Item });
-        const {
-          email,
-          college,
-          university,
-          sem,
-          phoneNo,
-        } = data.Item;
+        const { email, college, dept, phoneNo, fullName, subjects } = data.Item;
         this.setState({
           email,
           college,
-          university,
-          sem: sem.toString(),
+          dept,
           phoneNo,
+          fullName,
+          subjects,
         });
         console.log(email);
         this.setData();
@@ -133,31 +130,12 @@ class Account extends React.Component {
         <div className="row">
           <div className="col-12 col-md-8">
             <div className="container m-5">
-              <a href="javascript:void(0)" onclick="goToURL(); return false;">
+              <a href="" onClick={this.logout}>
                 Log Out
               </a>
             </div>
             <form action="#" method="post">
-              <div className="form-row mb-1">
-                {/* <div className="col">
-                  <label htmlFor="fname">First Name</label>
-                  <input
-                    type="text"
-                    id="fname"
-                    className="form-control"
-                    placeholder="First Name"
-                  />
-                </div>
-                <div className="col">
-                  <label htmlFor="lname">Last Name</label>
-                  <input
-                    type="text"
-                    id="lname"
-                    className="form-control"
-                    placeholder="Last Name"
-                  />
-                </div> */}
-              </div>
+              <div className="form-row mb-1"></div>
               <div className="form-group">
                 <label htmlFor="fullname">Full Name</label>
                 <input
@@ -166,6 +144,12 @@ class Account extends React.Component {
                   id="fullname"
                   aria-describedby="emailHelp"
                   placeholder="Enter Full Name"
+                  value={this.state.fullName}
+                  onChange={(e) =>
+                    this.setState({
+                      fullName: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div className="form-group">
@@ -176,15 +160,8 @@ class Account extends React.Component {
                   id="email"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Password"
+                  value={this.state.email}
+                  onChange={() => alert("You cannot change your email!")}
                 />
               </div>
               <div className="form-group">
@@ -195,6 +172,12 @@ class Account extends React.Component {
                   id="college"
                   aria-describedby="emailHelp"
                   placeholder="College Name"
+                  value={this.state.college}
+                  onChange={(e) =>
+                    this.setState({
+                      college: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div className="form-group">
@@ -205,6 +188,12 @@ class Account extends React.Component {
                   id="dept"
                   aria-describedby="emailHelp"
                   placeholder="Department"
+                  value={this.state.dept}
+                  onChange={(e) =>
+                    this.setState({
+                      dept: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div className="form-group">
@@ -215,22 +204,38 @@ class Account extends React.Component {
                   id="subjects"
                   aria-describedby="emailHelp"
                   placeholder="Subjects"
+                  value={this.state.subjects}
+                  onChange={(e) =>
+                    this.setState({
+                      subjects: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div className="form-group">
                 <label htmlFor="phoneNo">Phone Number</label>
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
                   id="phoneNo"
                   aria-describedby="emailHelp"
                   placeholder="Phone Number"
+                  value={this.state.phoneNo}
+                  onChange={() => alert("You cannot change your phone number!")}
                 />
               </div>
-              <button type="submit" className="btn btn-primary update-btn">
+              <button
+                type="submit"
+                className="btn btn-primary update-btn"
+                onClick={this.update.bind(this)}
+              >
                 Update
-              </button>
-              <button type="submit" className="btn btn-secondary">
+              </button>{" "}
+              <button
+                type="submit"
+                className="btn btn-secondary"
+                onClick={this.discardChanges.bind(this)}
+              >
                 Discard Changes
               </button>
             </form>

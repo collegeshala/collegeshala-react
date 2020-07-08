@@ -27,6 +27,7 @@ import About from "./components/Global/pages/About";
 import DisclaimerWarranties from "./components/Global/pages/DisclaimerWarranties";
 import ProfessorInfo from "./components/Global/pages/ProfessorInfo";
 import TermsOfUse from "./components/Global/pages/TermsOfUse";
+import ProfessorUpload from "./components/Professor/ProfessorUpload";
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
 
       {/* PROFESSOR ROUTES */}
       <ProfessorAccount path="/professor-account" />
+      <ProfessorUpload path="/professor-upload" />
 
       {/* AUTH ROUTES */}
       <StudentRegister path="/student-register" />
