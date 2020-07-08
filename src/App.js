@@ -18,6 +18,9 @@ import StudentTransactions from "./components/Student/StudentTransactions";
 import StudentAccount from "./components/Student/StudentAccount";
 import Cart from "./components/Student/Cart";
 
+// PROFESSOR IMPORTS
+import ProfessorAccount from "./components/Professor/ProfessorAccount";
+
 // GLOBAL IMPORTS
 import Homepage from "./Homepage";
 import About from "./components/Global/pages/About";
@@ -33,6 +36,9 @@ const App = () => {
       <StudentTransactions path="/student-transactions" />
       <StudentAccount path="/student-account" />
       <Cart path="/cart" />
+
+      {/* PROFESSOR ROUTES */}
+      <ProfessorAccount path="/professor-account" />
 
       {/* AUTH ROUTES */}
       <StudentRegister path="/student-register" />
