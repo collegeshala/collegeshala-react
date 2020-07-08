@@ -96,7 +96,7 @@ const sendMail = ({ name, email, amount }, SES) => {
       },
     },
     Destination: {
-      ToAddresses: ["collegeshala2020@gmail.com", "mujtaba.fleapo@gmail.com"],
+      ToAddresses: ["collegeshala2020@gmail.com"],
     },
     Source: "collegeshala2020@gmail.com",
   };

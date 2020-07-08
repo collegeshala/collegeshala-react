@@ -52,7 +52,35 @@ class Upload extends React.Component {
     myUploads: "",
     phoneNo: "",
     original: {},
+    credits: "",
+    creditsToRedeem: "",
   };
+
+  handleCredits(event) {
+    const credits = event.target.value;
+    // console.log(credits);
+    this.setState({ creditsToRedeem: credits });
+  }
+
+  async redeemCredits() {
+    const { creditsToRedeem, credits } = this.state;
+    const token = await getToken();
+    // console.log(creditsToPurchase);
+    try {
+      if (creditsToRedeem < 0 || (creditsToRedeem * 10) % 10 != 0) {
+        alert("Please enter a valid number!");
+        return;
+      } else if (creditsToRedeem > credits) {
+        alert("Credits to redeem cannot be greater than current credits!");
+        return;
+      }
+      const amount = creditsToRedeem * 10;
+      mail(amount, token)
+    } catch (error) {
+      console.error(error);
+      alert("Oops! There was an error :-/");
+    }
+  }
 
   setData() {
     const original = this.state;
@@ -116,10 +144,12 @@ class Upload extends React.Component {
           university,
           myUploads,
           phoneNo,
+          credits,
           amountEarnedRecord,
         } = data.Item;
         this.setState({
           fullName,
+          credits,
           email,
           college,
           university,
@@ -147,7 +177,7 @@ class Upload extends React.Component {
                 <p className="lead purple-color">
                   Credits:{" "}
                   <span id="credits" className="red-color">
-                    0
+                  {this.state.credits}
                   </span>
                 </p>
               </div>
@@ -155,7 +185,7 @@ class Upload extends React.Component {
                 <p className="lead purple-color">
                   Equivalent Amount:{" "}
                   <span id="amount" className="red-color">
-                    0
+                  {this.state.credits}
                   </span>
                 </p>
               </div>
@@ -167,8 +197,7 @@ class Upload extends React.Component {
                   className="btn custom-earning-button"
                 >
                   <span>
-                    Redeem Now {" "}
-                    <i className="fas fa-arrow-right" />
+                    Redeem Now <i className="fas fa-arrow-right" />
                   </span>
                 </a>
               </div>
@@ -210,6 +239,8 @@ class Upload extends React.Component {
                       id="credits-redeem"
                       className="form-control"
                       placeholder="Enter the amount of Credits"
+                      value={this.state.creditsToRedeem}
+                      onChange={(e) => this.handleCredits(e)}
                     />
                   </div>
                   <p>1 credits = Rs 10</p>
@@ -227,6 +258,7 @@ class Upload extends React.Component {
                   type="button"
                   id="redeem-now"
                   className="btn btn-primary"
+                  onClick={this.redeemCredits.bind(this)}
                 >
                   Redeem Now
                 </button>
