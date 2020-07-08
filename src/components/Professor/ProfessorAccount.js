@@ -99,15 +99,15 @@ class Account extends React.Component {
     // console.log({ idToken: token });
     axios({
       method: "POST",
-      url: "https://api.collegeshala.com/studentdetails",
+      url: "https://api.collegeshala.com/professordetails",
       headers: {
         authorization: token,
       },
     })
       .then(({ data }) => {
-        console.log({ studentDetails: data.Item });
+        console.log("RIchard here");
+        console.log({ professorDetails: data.Item });
         const {
-          fullName,
           email,
           college,
           university,
@@ -115,13 +115,13 @@ class Account extends React.Component {
           phoneNo,
         } = data.Item;
         this.setState({
-          fullName,
           email,
           college,
           university,
           sem: sem.toString(),
           phoneNo,
         });
+        console.log(email);
         this.setData();
       })
       .catch((err) => console.error(err));
@@ -139,7 +139,7 @@ class Account extends React.Component {
             </div>
             <form action="#" method="post">
               <div className="form-row mb-1">
-                <div className="col">
+                {/* <div className="col">
                   <label htmlFor="fname">First Name</label>
                   <input
                     type="text"
@@ -156,7 +156,17 @@ class Account extends React.Component {
                     className="form-control"
                     placeholder="Last Name"
                   />
-                </div>
+                </div> */}
+              </div>
+              <div className="form-group">
+                <label htmlFor="fullname">Full Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="fullname"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter Full Name"
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email address</label>
