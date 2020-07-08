@@ -68,7 +68,6 @@ class Account extends React.Component {
     delete data.original;
     delete data.email;
     const token = await getToken();
-    // console.log({ idToken: token });
 
     axios({
       method: "POST",

@@ -8,7 +8,7 @@ import {
   resetPassword,
   parseJwt,
 } from "./../../../js/auth";
-import '../../../assets/css/studentRegister.css';
+import "../../../assets/css/studentRegister.css";
 
 class Login extends React.Component {
   constructor(props) {
@@ -153,6 +153,7 @@ class Login extends React.Component {
       });
       localStorage.setItem("username", userData.username);
       if (parseJwt(idToken)["custom:isProfessor"] === "true") {
+        navigate("/professor-account");
       } else {
         navigate("/student-materials");
       }
