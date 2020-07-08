@@ -8,6 +8,7 @@ import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import ProfessorNav from "../Global/ProfessorNav";
 import ProfessorBreadcrumb from "../Professor/ProfessorBreadcrumb";
+import { mail } from "./../../js/email";
 
 import { getToken, signout } from "./../../js/auth";
 
@@ -166,7 +167,7 @@ class Upload extends React.Component {
                   className="btn custom-earning-button"
                 >
                   <span>
-                    Redeem Now
+                    Redeem Now {" "}
                     <i className="fas fa-arrow-right" />
                   </span>
                 </a>
