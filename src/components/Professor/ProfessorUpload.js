@@ -47,7 +47,7 @@ class Upload extends React.Component {
     email: "",
     college: "",
     university: "",
-    sem: "0",
+    myUploads: "",
     phoneNo: "",
     original: {},
   };
@@ -106,15 +106,13 @@ class Upload extends React.Component {
       },
     })
       .then(({ data }) => {
-        console.log("RIchard here");
         console.log({ professorDetails: data.Item });
-
         const {
           fullName,
           email,
           college,
           university,
-          sem,
+          myUploads,
           phoneNo,
         } = data.Item;
         this.setState({
@@ -122,9 +120,11 @@ class Upload extends React.Component {
           email,
           college,
           university,
+          myUploads,
           phoneNo,
         });
-        console.log(fullName);
+        console.log(myUploads);
+        console.log(myUploads.map((note) => note.subjectname));
         this.setData();
       })
       .catch((err) => console.error(err));
@@ -365,6 +365,49 @@ class Upload extends React.Component {
           </div>
         </div>
         <h3 className="container mt-5">Previously Updated Notes</h3>
+        <div className="container student-dashboard-material">
+          <div className="row" id="myuploadsrow">
+            {
+              // eslint-disable-next-line eqeqeq
+              this.state.myUploads.length === 0 ? (
+                <h2>
+                  <br />
+                  No notes to display
+                </h2>
+              ) : (
+                this.state.myUploads.map((note, index) => {
+                  return (
+                    <div className="col-12 col-md-4" key={note.noteId}>
+                      <div className="card" id="card">
+                        <img
+                          className="card-img-top img-fluid"
+                          src="https://via.placeholder.com/260x180"
+                          alt="my materials"
+                        />
+                        <div className="card-body">
+                          <h4 className="card-title">{note.chaptername}</h4>
+                          <h5 className="professor">By {note.professorname}</h5>
+                          <p className="card-text">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                          </p>
+                          <button
+                            // onClick="viewNote()"
+                            className="btn btn-primary"
+                            value={note.noteId}
+                          >
+                            Read
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              )
+            }
+          </div>
+        </div>
+
         <div className="container student-dashboard-material mt-3">
           <div id="myuploadsrow" className="row"></div>
           <nav

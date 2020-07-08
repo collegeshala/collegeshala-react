@@ -49,7 +49,6 @@ class Account extends React.Component {
     original: {},
     dept: "",
     subjects: "",
-    phoneNo: "",
   };
 
   setData() {

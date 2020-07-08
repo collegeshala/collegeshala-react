@@ -81,7 +81,7 @@ class Transactions extends React.Component {
     const { creditsToPurchase } = this.state;
     // console.log(creditsToPurchase);
     try {
-      if (creditsToPurchase > 0 && (creditsToPurchase * 10) % 10 == 0) {
+      if (creditsToPurchase > 0 && (creditsToPurchase * 10) % 10 === 0) {
         const amount = creditsToPurchase * 10;
         const resp = await checkout(amount);
         // const resp = await checkout(creditsToPurchase);
