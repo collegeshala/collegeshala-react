@@ -381,7 +381,7 @@ class Upload extends React.Component {
                       <div className="card" id="card">
                         <img
                           className="card-img-top img-fluid"
-                          src="https://via.placeholder.com/260x180"
+                          src="https://www.nicepng.com/png/detail/76-767861_image-free-library-note-clipart-pen-and-paper.png"
                           alt="my materials"
                         />
                         <div className="card-body">

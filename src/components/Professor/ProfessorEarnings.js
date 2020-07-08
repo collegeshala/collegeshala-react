@@ -44,6 +44,7 @@ const ProfessorEarnings = () => {
 class Upload extends React.Component {
   state = {
     fullName: "",
+    amountEarnedRecord: "",
     email: "",
     college: "",
     university: "",
@@ -114,6 +115,7 @@ class Upload extends React.Component {
           university,
           myUploads,
           phoneNo,
+          amountEarnedRecord,
         } = data.Item;
         this.setState({
           fullName,
@@ -122,9 +124,8 @@ class Upload extends React.Component {
           university,
           myUploads,
           phoneNo,
+          amountEarnedRecord,
         });
-        console.log(myUploads);
-        console.log(myUploads.map((note) => note.subjectname));
         this.setData();
       })
       .catch((err) => console.error(err));
@@ -133,20 +134,60 @@ class Upload extends React.Component {
   render() {
     return (
       <div>
-        {/* Teacher Upload Button Open div */}
+        <section id="earning-credits-section" className="py-4">
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <h2 className="display-5">TOTAL EARNINGS:</h2>
+              </div>
+            </div>
+            <div className="row mt-3">
+              <div className="col-md-4">
+                <p className="lead purple-color">
+                  Credits:{" "}
+                  <span id="credits" className="red-color">
+                    0
+                  </span>
+                </p>
+              </div>
+              <div className="col-md-4">
+                <p className="lead purple-color">
+                  Equivalent Amount:{" "}
+                  <span id="amount" className="red-color">
+                    0
+                  </span>
+                </p>
+              </div>
+              <div className="col-md-4">
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#redeem-btn"
+                  className="btn custom-earning-button"
+                >
+                  <span>
+                    Redeem Now
+                    <i className="fas fa-arrow-right" />
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* Redeem Now Modal */}
         <div
           className="modal fade"
-          id="exampleModal"
+          id="redeem-btn"
           tabIndex={-1}
           role="dialog"
-          aria-labelledby="exampleModalLabel"
+          aria-labelledby="exampleModalCenterTitle"
           aria-hidden="true"
         >
-          <div className="modal-dialog" role="document">
+          <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  Modal title
+                <h5 className="modal-title" id="exampleModalLongTitle">
+                  Redeem your Credits
                 </h5>
                 <button
                   type="button"
@@ -158,293 +199,129 @@ class Upload extends React.Component {
                 </button>
               </div>
               <div className="modal-body">
-                {/* Nav tabs */}
-                <ul className="nav nav-tabs">
-                  <li className="nav-item">
-                    <a
-                      className="nav-link active"
-                      data-toggle="tab"
-                      href="#teacher-upload-notes-tab"
-                    >
-                      Upload Notes
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a
-                      className="nav-link"
-                      data-toggle="tab"
-                      href="#teacher-upload-sample-paper-tab"
-                    >
-                      Upload Sample Paper
-                    </a>
-                  </li>
-                </ul>
-                {/* Tab panes */}
-                <div className="tab-content">
-                  <div
-                    id="teacher-upload-notes-tab"
-                    className="container tab-pane active"
-                  >
-                    <br />
-                    <h3>Upload Notes</h3>
-                    <form>
-                      <div className="form-group">
-                        <input
-                          type="file"
-                          name="file"
-                          id="file"
-                          className="inputfile"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-subject-name">
-                          Subject Name
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="teacher-upload-subject-name"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter subject name"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-chapter-name">
-                          Chapter Name
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="teacher-upload-chapter-name"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter chapter name"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-semester-number">
-                          For which semester?
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="teacher-upload-semester-number"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter semester"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-university-name">
-                          University Name
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="teacher-upload-university-name"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter University name"
-                        />
-                      </div>
-                      <button
-                        onclick="handleUpload()"
-                        id="submi-notes-upload"
-                        className="btn btn-primary"
-                      >
-                        Submit
-                      </button>
-                    </form>
+                <form>
+                  <div className="form-group">
+                    <label htmlFor="exampleFormControlInput1">
+                      Enter Credits
+                    </label>
+                    <input
+                      type="number"
+                      id="credits-redeem"
+                      className="form-control"
+                      placeholder="Enter the amount of Credits"
+                    />
                   </div>
-                  <div
-                    id="teacher-upload-sample-paper-tab"
-                    className="container tab-pane fade"
-                  >
-                    <br />
-                    <h3>Upload Sample Paper</h3>
-                    <form>
-                      <div className="form-group">
-                        <input
-                          type="file"
-                          name="file"
-                          id="sample-paper-file"
-                          className="inputfile"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-sample-paper-subject-name">
-                          Subject Name
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="teacher-upload-sample-paper-subject-name"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter subject name"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-sample-paper-semester-number">
-                          For which semester?
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="teacher-upload-sample-paper-semester-number"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter semester"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-sample-paper-university-name">
-                          University Name
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="teacher-upload-sample-paper-university-name"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter University name"
-                        />
-                      </div>
-                      <button
-                        type="submit"
-                        id="submi-sample-paper-upload"
-                        className="btn btn-primary"
-                      >
-                        Submit
-                      </button>
-                    </form>
-                  </div>
-                </div>
+                  <p>1 credits = Rs 10</p>
+                </form>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  id="redeem-now"
+                  className="btn btn-primary"
+                >
+                  Redeem Now
+                </button>
               </div>
             </div>
           </div>
         </div>
-        {/* display if notes uploaded successfully*/}
-        <div
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-          className="toast"
-          data-autohide="false"
-        >
-          <div className="toast-header">
-            <img src="..." className="rounded mr-2" alt="..." />
-            <strong className="mr-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button
-              type="button"
-              className="ml-2 mb-1 close"
-              data-dismiss="toast"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div className="toast-body">
-            Hello, world! This is a toast message.
-          </div>
-        </div>
-        <div className="container mt-5">
-          <div className="row">
-            <div className="col-md-8">
-              <h1 className="teacher-dashboard-main-heading">
-                Want to Upload a new note?
-              </h1>
+        <section id="earning-details-section" className="mt-5">
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <h2 className="display-5">DETAILS OF NOTES SOLD:</h2>
+              </div>
             </div>
-            <div className="col-6 col-md-4">
-              {/* Button trigger modal */}
-              <button
-                type="button"
-                className="btn mt-2"
-                id="teacher-upload-button"
-                data-toggle="modal"
-                data-target="#exampleModal"
-              >
-                Upload Now →
-              </button>
-            </div>
-          </div>
-        </div>
-        <h3 className="container mt-5">Previously Updated Notes</h3>
-        <div className="container student-dashboard-material">
-          <div className="row" id="myuploadsrow">
-            {
-              // eslint-disable-next-line eqeqeq
-              this.state.myUploads.length === 0 ? (
-                <h2>
-                  <br />
-                  No notes to display
-                </h2>
-              ) : (
-                this.state.myUploads.map((note, index) => {
-                  return (
-                    <div className="col-12 col-md-4" key={note.noteId}>
-                      <div className="card" id="card">
-                        <img
-                          className="card-img-top img-fluid"
-                          src="https://via.placeholder.com/260x180"
-                          alt="my materials"
-                        />
-                        <div className="card-body">
-                          <h4 className="card-title">{note.chaptername}</h4>
-                          <h5 className="professor">By {note.professorname}</h5>
-                          <p className="card-text">
-                            Some quick example text to build on the card title
-                            and make up the bulk of the card's content.
-                          </p>
-                          <button
-                            // onClick="viewNote()"
-                            className="btn btn-primary"
-                            value={note.noteId}
-                          >
-                            Read
-                          </button>
+            <div id="transactions" className="row mt-3">
+              {/* transaction details go here */}
+
+              {
+                // eslint-disable-next-line eqeqeq
+                this.state.amountEarnedRecord.length === 0 ? (
+                  <h2>
+                    <br />
+                    No earnings to display
+                  </h2>
+                ) : (
+                  this.state.myUploads.map((note, index) => {
+                    return (
+                      <div className="col-md-6">
+                        <div className="card mb-4">
+                          <div className="card-body pb-3">
+                            <div className="row">
+                              <div className="col-lg-3">
+                                <img
+                                  src={require("../../assets/img/pdf_logo.svg")}
+                                  alt="pdf logo"
+                                  className="img-fluid"
+                                />
+                              </div>
+                              <div className="col-lg-9">
+                                <a href>
+                                  <h4 className="purple-color">
+                                    Note ID: ${"{"}
+                                    earning.notesPurchased[0].noteId
+                                    {"}"}
+                                  </h4>
+                                </a>
+                                {/*
+                            <div class="row">
+                                <div class="col">
+                                <p class="bold"><i class="fas fa-user-circle"></i> <b><span id="prof-name"><a href="#">By Prof.
+                                        ${state.prof_name}</a></span></b></p>
+                                </div>
+                            </div>
+                        */}
+                              </div>
+                            </div>
+                            <div className="row">
+                              <div className="col-md-12">
+                                <div>
+                                  <p className="text-muted">
+                                    Selling Price:{" "}
+                                    <b>
+                                      <span className="text-dark">
+                                        ${"{"}
+                                        earning.notesPurchased[0].amountEarned *
+                                        10 / 6{"}"} credits
+                                      </span>
+                                    </b>
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="col-md-12">
+                                <div>
+                                  <p className="lead purple-color">
+                                    Total Credits:{" "}
+                                    <span className="red-color">
+                                      ${"{"}
+                                      earning.notesPurchased[0].amountEarned
+                                      {"}"}
+                                    </span>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })
-              )
-            }
-          </div>
-        </div>
+                    );
+                  })
+                )
+              }
 
-        <div className="container student-dashboard-material mt-3">
-          <div id="myuploadsrow" className="row"></div>
-          <nav
-            aria-label="Page navigation example"
-            className="text-center pt-4"
-          >
-            <ul className="pagination justify-content-center">
-              <li className="page-item">
-                <a className="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">«</span>
-                  <span className="sr-only">Previous</span>
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  1
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  2
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  3
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">»</span>
-                  <span className="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+              {/* Transaction div */}
+            </div>
+          </div>
+        </section>
       </div>
     );
   }
