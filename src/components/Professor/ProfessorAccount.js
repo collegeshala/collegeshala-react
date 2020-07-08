@@ -106,13 +106,7 @@ class Account extends React.Component {
       .then(({ data }) => {
         console.log("RIchard here");
         console.log({ professorDetails: data.Item });
-        const {
-          email,
-          college,
-          university,
-          sem,
-          phoneNo,
-        } = data.Item;
+        const { email, college, university, sem, phoneNo } = data.Item;
         this.setState({
           email,
           college,
@@ -132,31 +126,12 @@ class Account extends React.Component {
         <div className="row">
           <div className="col-12 col-md-8">
             <div className="container m-5">
-              <a href="javascript:void(0)" onclick="goToURL(); return false;">
+              <a href="" onClick={this.logout}>
                 Log Out
               </a>
             </div>
             <form action="#" method="post">
-              <div className="form-row mb-1">
-                {/* <div className="col">
-                  <label htmlFor="fname">First Name</label>
-                  <input
-                    type="text"
-                    id="fname"
-                    className="form-control"
-                    placeholder="First Name"
-                  />
-                </div>
-                <div className="col">
-                  <label htmlFor="lname">Last Name</label>
-                  <input
-                    type="text"
-                    id="lname"
-                    className="form-control"
-                    placeholder="Last Name"
-                  />
-                </div> */}
-              </div>
+              <div className="form-row mb-1"></div>
               <div className="form-group">
                 <label htmlFor="fullname">Full Name</label>
                 <input

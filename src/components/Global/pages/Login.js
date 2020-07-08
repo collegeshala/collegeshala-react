@@ -144,7 +144,7 @@ class Login extends React.Component {
       const idToken = result.getIdToken().getJwtToken();
       const refreshToken = result.getRefreshToken().getToken();
       const payload = result.getAccessToken().payload;
-      console.log(parseJwt(idToken));
+      // console.log(parseJwt(idToken));
       console.log({
         accessToken,
         idToken,
@@ -152,6 +152,7 @@ class Login extends React.Component {
         payload,
       });
       localStorage.setItem("username", userData.username);
+      localStorage.setItem("idToken", idToken);
       if (parseJwt(idToken)["custom:isProfessor"] === "true") {
         navigate("/professor-account");
       } else {
