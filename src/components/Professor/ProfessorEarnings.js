@@ -11,7 +11,7 @@ import ProfessorBreadcrumb from "../Professor/ProfessorBreadcrumb";
 
 import { getToken, signout } from "./../../js/auth";
 
-const ProfessorUpload = () => {
+const ProfessorEarnings = () => {
   return (
     <React.Fragment>
       <Navbar />
@@ -106,7 +106,7 @@ class Upload extends React.Component {
       },
     })
       .then(({ data }) => {
-        /* console.log({ professorDetails: data.Item }); */
+        console.log({ professorDetails: data.Item });
         const {
           fullName,
           email,
@@ -123,8 +123,8 @@ class Upload extends React.Component {
           myUploads,
           phoneNo,
         });
-        /* console.log(fullName); */
-        /* console.log(myUploads.map((note) => note.subjectname)); */
+        console.log(myUploads);
+        console.log(myUploads.map((note) => note.subjectname));
         this.setData();
       })
       .catch((err) => console.error(err));
@@ -386,7 +386,7 @@ class Upload extends React.Component {
                         />
                         <div className="card-body">
                           <h4 className="card-title">{note.chaptername}</h4>
-                          <h5 className="professor">By {this.state.fullName}</h5>
+                          <h5 className="professor">By {note.professorname}</h5>
                           <p className="card-text">
                             Some quick example text to build on the card title
                             and make up the bulk of the card's content.
@@ -450,4 +450,4 @@ class Upload extends React.Component {
   }
 }
 
-export default ProfessorUpload;
+export default ProfessorEarnings;

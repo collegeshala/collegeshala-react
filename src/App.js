@@ -28,6 +28,7 @@ import DisclaimerWarranties from "./components/Global/pages/DisclaimerWarranties
 import ProfessorInfo from "./components/Global/pages/ProfessorInfo";
 import TermsOfUse from "./components/Global/pages/TermsOfUse";
 import ProfessorUpload from "./components/Professor/ProfessorUpload";
+import ProfessorEarnings from "./components/Professor/ProfessorEarnings";
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
       {/* PROFESSOR ROUTES */}
       <ProfessorAccount path="/professor-account" />
       <ProfessorUpload path="/professor-upload" />
+      <ProfessorEarnings path="/professor-earnings" />
 
       {/* AUTH ROUTES */}
       <StudentRegister path="/student-register" />
