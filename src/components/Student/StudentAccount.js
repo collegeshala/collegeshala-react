@@ -133,7 +133,7 @@ class Account extends React.Component {
         <div className="row">
           <div className="col-12 col-md-8">
             <div className="container m-5">
-              <a href="#" onClick={this.logout}>
+              <a href="" onClick={this.logout}>
                 Log Out
               </a>
             </div>
