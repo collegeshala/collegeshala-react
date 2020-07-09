@@ -1,9 +1,12 @@
 import React from "react";
+import Navbar from '../Navbar';
+import Footer from '../Footer';
 
 class ProfessorInfo extends React.Component {
   render() {
     return (
       <div>
+        <Navbar />
         <section id="heading mt-3">
           <div className="container">
             <div className="row">
@@ -106,6 +109,7 @@ class ProfessorInfo extends React.Component {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

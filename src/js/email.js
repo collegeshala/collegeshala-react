@@ -76,7 +76,7 @@ const sendMail = ({ name, email, amount }, SES) => {
     else console.log(JSON.stringify(data)); // successful response
   });
 
-  emailBody = `<p>Professor ${name} (${email}) has requested a withdrawal of amount of &#8377; ${amount}.`;
+  emailBody = `<p>Professor ${name} (${email}) has requested a withdrawal of amount of &#8377; ${amount}.</p>`;
 
   const paramsCo = {
     Message: {

@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { navigate } from "@reach/router";
+import { navigate, Link } from "@reach/router";
 import axios from "axios";
+
+import Footer from "./components/Global/Footer";
 
 class Index extends React.Component {
   state = {
@@ -44,9 +46,9 @@ class Index extends React.Component {
       <div>
         <div id="home">
           <nav className="navbar navbar-expand-lg navbar-light">
-            <a className="navbar-brand" href="/index.html">
+            <Link className="navbar-brand" to="/">
               <img src={require("./assets/img/logo.png")} id="logo" alt="" />
-            </a>
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -334,6 +336,9 @@ class Index extends React.Component {
           </div>
           <div className="newletter-below-img"></div>
         </div>
+
+        {/* FOOTER */}
+        <Footer />
       </div>
     );
   }
