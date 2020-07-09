@@ -54,7 +54,7 @@ class StudentRegister extends React.Component {
       "custom:sem": this.state.sem.toString(),
       "custom:isProfessor": "false",
       "custom:knowAbout":
-        knowabout == "collegeshala-collaborators" ? ccName : knowabout,
+        knowabout === "collegeshala-collaborators" ? ccName : knowabout,
     };
     console.log(JSON.stringify(userData));
     const onSuccess = function registerSuccess(result) {

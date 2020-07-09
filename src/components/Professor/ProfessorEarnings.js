@@ -67,7 +67,7 @@ class Upload extends React.Component {
     const token = await getToken();
     // console.log(creditsToPurchase);
     try {
-      if (creditsToRedeem < 0 || (creditsToRedeem * 10) % 10 != 0) {
+      if (creditsToRedeem < 0 || (creditsToRedeem * 10) % 10 !== 0) {
         alert("Please enter a valid number!");
         return;
       } else if (creditsToRedeem > credits) {
