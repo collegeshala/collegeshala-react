@@ -118,7 +118,7 @@ class Index extends React.Component {
             <h1 className="above-search-bar-text">
               It's a <span id="custom-purple">Student</span>
               <span id="custom-red">'</span>
-              <span id="custom-purple">s</span>
+              <span id="custom-purple">s </span>
               Thing!
             </h1>
             <h2 className="text-center tagline-text">

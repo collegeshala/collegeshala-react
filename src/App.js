@@ -27,6 +27,9 @@ import About from "./components/Global/pages/About";
 import DisclaimerWarranties from "./components/Global/pages/DisclaimerWarranties";
 import ProfessorInfo from "./components/Global/pages/ProfessorInfo";
 import TermsOfUse from "./components/Global/pages/TermsOfUse";
+import PrivacyPolicy from "./components/Global/pages/PrivacyPolicy"
+import ReturnPolicy from "./components/Global/pages/ReturnPolicy"
+import Copyright from "./components/Global/pages/Copyright"
 import ProfessorUpload from "./components/Professor/ProfessorUpload";
 import ProfessorEarnings from "./components/Professor/ProfessorEarnings";
 
@@ -53,6 +56,9 @@ const App = () => {
       {/* GLOBAL ROUTES */}
       <Homepage path="/" />
       <About path="/about" />
+      <Copyright path="/copyright" />
+      <PrivacyPolicy path="/privacy-policy" />
+      <ReturnPolicy path="/return-policy" />
       <DisclaimerWarranties path="/disclaimer-warranties" />
       <ProfessorInfo path="/professor-info" />
       <TermsOfUse path="/terms-of-use" />
