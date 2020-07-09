@@ -4,7 +4,7 @@ import axios from "axios";
 import upload from "./../../js/upload";
 import { getToken } from "./../../js/auth";
 
-const UploadModal = () => {
+const UploadModal = ({ updateFunc }) => {
   const [file, setFile] = useState("");
   const [subject, setSubject] = useState("");
   const [chapter, setChapter] = useState("");
@@ -49,7 +49,10 @@ const UploadModal = () => {
         ...fileDetails,
       }),
     })
-      .then(() => alert("Note uploaded successfully!"))
+      .then(() => {
+        alert("Note uploaded successfully!");
+        updateFunc();
+      })
       .catch((err) => {
         console.error(err);
         alert("There was an error in added the notes :-/");

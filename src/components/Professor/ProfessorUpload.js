@@ -136,7 +136,7 @@ class Upload extends React.Component {
     return (
       <div>
         {/* Teacher Upload Button Open div */}
-        <UploadModal />
+        <UploadModal updateFunc={this.componentDidMount.bind(this)} />
         {/* display if notes uploaded successfully*/}
         <div
           role="alert"
