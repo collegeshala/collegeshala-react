@@ -167,8 +167,7 @@ class Upload extends React.Component {
                   className="btn custom-earning-button"
                 >
                   <span>
-                    Redeem Now {" "}
-                    <i className="fas fa-arrow-right" />
+                    Redeem Now <i className="fas fa-arrow-right" />
                   </span>
                 </a>
               </div>

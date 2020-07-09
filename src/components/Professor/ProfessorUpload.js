@@ -9,6 +9,8 @@ import Footer from "../Global/Footer";
 import ProfessorNav from "../Global/ProfessorNav";
 import ProfessorBreadcrumb from "../Professor/ProfessorBreadcrumb";
 
+import UploadModal from "./UploadModal";
+
 import { getToken, signout } from "./../../js/auth";
 
 const ProfessorUpload = () => {
@@ -134,190 +136,7 @@ class Upload extends React.Component {
     return (
       <div>
         {/* Teacher Upload Button Open div */}
-        <div
-          className="modal fade"
-          id="exampleModal"
-          tabIndex={-1}
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  Modal title
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                {/* Nav tabs */}
-                <ul className="nav nav-tabs">
-                  <li className="nav-item">
-                    <a
-                      className="nav-link active"
-                      data-toggle="tab"
-                      href="#teacher-upload-notes-tab"
-                    >
-                      Upload Notes
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a
-                      className="nav-link"
-                      data-toggle="tab"
-                      href="#teacher-upload-sample-paper-tab"
-                    >
-                      Upload Sample Paper
-                    </a>
-                  </li>
-                </ul>
-                {/* Tab panes */}
-                <div className="tab-content">
-                  <div
-                    id="teacher-upload-notes-tab"
-                    className="container tab-pane active"
-                  >
-                    <br />
-                    <h3>Upload Notes</h3>
-                    <form>
-                      <div className="form-group">
-                        <input
-                          type="file"
-                          name="file"
-                          id="file"
-                          className="inputfile"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-subject-name">
-                          Subject Name
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="teacher-upload-subject-name"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter subject name"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-chapter-name">
-                          Chapter Name
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="teacher-upload-chapter-name"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter chapter name"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-semester-number">
-                          For which semester?
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="teacher-upload-semester-number"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter semester"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-university-name">
-                          University Name
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="teacher-upload-university-name"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter University name"
-                        />
-                      </div>
-                      <button
-                        onclick="handleUpload()"
-                        id="submi-notes-upload"
-                        className="btn btn-primary"
-                      >
-                        Submit
-                      </button>
-                    </form>
-                  </div>
-                  <div
-                    id="teacher-upload-sample-paper-tab"
-                    className="container tab-pane fade"
-                  >
-                    <br />
-                    <h3>Upload Sample Paper</h3>
-                    <form>
-                      <div className="form-group">
-                        <input
-                          type="file"
-                          name="file"
-                          id="sample-paper-file"
-                          className="inputfile"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-sample-paper-subject-name">
-                          Subject Name
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="teacher-upload-sample-paper-subject-name"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter subject name"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-sample-paper-semester-number">
-                          For which semester?
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="teacher-upload-sample-paper-semester-number"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter semester"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="teacher-upload-sample-paper-university-name">
-                          University Name
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="teacher-upload-sample-paper-university-name"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter University name"
-                        />
-                      </div>
-                      <button
-                        type="submit"
-                        id="submi-sample-paper-upload"
-                        className="btn btn-primary"
-                      >
-                        Submit
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <UploadModal />
         {/* display if notes uploaded successfully*/}
         <div
           role="alert"
@@ -386,7 +205,9 @@ class Upload extends React.Component {
                         />
                         <div className="card-body">
                           <h4 className="card-title">{note.chaptername}</h4>
-                          <h5 className="professor">By {this.state.fullName}</h5>
+                          <h5 className="professor">
+                            By {this.state.fullName}
+                          </h5>
                           <p className="card-text">
                             Some quick example text to build on the card title
                             and make up the bulk of the card's content.
