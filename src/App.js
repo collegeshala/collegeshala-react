@@ -1,8 +1,8 @@
 import React from "react";
-import $ from 'jquery';
+import $ from "jquery";
 import Popper from "popper.js";
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.bundle'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle";
 import "./assets/css/style.css";
 import { Router } from "@reach/router";
 
@@ -21,15 +21,18 @@ import Cart from "./components/Student/Cart";
 // PROFESSOR IMPORTS
 import ProfessorAccount from "./components/Professor/ProfessorAccount";
 
+// UTILITY IMPORTS
+import SingleProductPage from "./components/Global/pages/SingleProductPage";
+
 // GLOBAL IMPORTS
 import Homepage from "./Homepage";
 import About from "./components/Global/pages/About";
 import DisclaimerWarranties from "./components/Global/pages/DisclaimerWarranties";
 import ProfessorInfo from "./components/Global/pages/ProfessorInfo";
 import TermsOfUse from "./components/Global/pages/TermsOfUse";
-import PrivacyPolicy from "./components/Global/pages/PrivacyPolicy"
-import ReturnPolicy from "./components/Global/pages/ReturnPolicy"
-import Copyright from "./components/Global/pages/Copyright"
+import PrivacyPolicy from "./components/Global/pages/PrivacyPolicy";
+import ReturnPolicy from "./components/Global/pages/ReturnPolicy";
+import Copyright from "./components/Global/pages/Copyright";
 import ProfessorUpload from "./components/Professor/ProfessorUpload";
 import ProfessorEarnings from "./components/Professor/ProfessorEarnings";
 
@@ -52,6 +55,9 @@ const App = () => {
       <TeacherRegister path="/teacher-register" />
       <Login path="/login" />
       <Register path="/register" />
+
+      {/* UTILITY ROUTES */}
+      <SingleProductPage path="/single-product" />
 
       {/* GLOBAL ROUTES */}
       <Homepage path="/" />
