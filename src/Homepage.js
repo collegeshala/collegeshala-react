@@ -168,7 +168,7 @@ class Index extends React.Component {
               </div>
             </div>
             <div className="card">
-              <a href="/coming-soon.html">
+              <a href="" onClick={() => navigate("/coming-soon")}>
                 <p className="text-center">
                   <img
                     className="card-img-top services-image"
@@ -179,7 +179,7 @@ class Index extends React.Component {
                 </p>
               </a>
               <div className="card-body">
-                <a href="/coming-soon.html">
+                <a href="" onClick={() => navigate("/coming-soon")}>
                   <h5 className="card-title text-center" id="custom-purple">
                     Question/Answers
                   </h5>
@@ -188,7 +188,7 @@ class Index extends React.Component {
               </div>
             </div>
             <div className="card">
-              <a href="/coming-soon.html">
+              <a href="" onClick={() => navigate("/coming-soon")}>
                 <p className="text-center">
                   <img
                     className="card-img-top services-image"
@@ -198,7 +198,7 @@ class Index extends React.Component {
                 </p>
               </a>
               <div className="card-body">
-                <a href="/coming-soon.html">
+                <a href="" onClick={() => navigate("/coming-soon")}>
                   <h5 className="card-title text-center" id="custom-purple">
                     Sell/Buy Books
                   </h5>
@@ -214,7 +214,7 @@ class Index extends React.Component {
               id="signup"
               href="#"
               role="button"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/register")}
             >
               Sign Up
             </a>
@@ -299,8 +299,9 @@ class Index extends React.Component {
                 <a
                   className="btn"
                   id="join-btn"
-                  href="/coming-soon.html"
+                  href=""
                   role="button"
+                  onClick={() => navigate("/coming-soon")}
                 >
                   Join the community
                 </a>
