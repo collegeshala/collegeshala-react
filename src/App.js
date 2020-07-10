@@ -30,6 +30,7 @@ import TermsOfUse from "./components/Global/pages/TermsOfUse";
 import PrivacyPolicy from "./components/Global/pages/PrivacyPolicy"
 import ReturnPolicy from "./components/Global/pages/ReturnPolicy"
 import Copyright from "./components/Global/pages/Copyright"
+import AllProduct from "./components/Global/pages/AllProduct"
 import ProfessorUpload from "./components/Professor/ProfessorUpload";
 import ProfessorEarnings from "./components/Professor/ProfessorEarnings";
 
@@ -57,6 +58,7 @@ const App = () => {
       <Homepage path="/" />
       <About path="/about" />
       <Copyright path="/copyright" />
+      <AllProduct path="/all-product" />
       <PrivacyPolicy path="/privacy-policy" />
       <ReturnPolicy path="/return-policy" />
       <DisclaimerWarranties path="/disclaimer-warranties" />
