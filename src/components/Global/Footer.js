@@ -13,7 +13,7 @@ class Footer extends React.Component {
 
   render() {
     return (
-      <footer className="site-footer">
+      <footer className="site-footer" id="global-footer">
         <div className="container">
           <div className="row">
             <div className="col-12 col-md-6">

@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import AWS, { Config } from "aws-sdk";
+import AWS, { Config, CostExplorer } from "aws-sdk";
 import {
   CognitoUserPool,
   CognitoUserAttribute,
@@ -186,6 +186,17 @@ export const resetPassword = ({ username, code, password }, onSuccess) => {
       console.error(err);
       alert("Oops! There was an error.");
     },
+  });
+};
+
+export const userDetails = (username) => {
+  const cognitoUser = getUser(username);
+  cognitoUser.getUserDetails((err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log({ userDetails: data });
+    }
   });
 };
 

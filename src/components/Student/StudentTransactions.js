@@ -4,16 +4,17 @@
 import React, { Fragment } from "react";
 import { Link } from "@reach/router";
 import axios from "axios";
-import { getToken } from "./../../js/auth";
+import { getToken, userDetails } from "./../../js/auth";
 import { checkout } from "./../../js/razorpay";
 
 import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import SecondaryNav from "../Global/SecondaryNav";
+import Loader from "./../Global/Loader";
 
 const StudentTransactions = () => {
   return (
-    <React.Fragment>
+    <Fragment>
       <Navbar />
       <div className="container pt-4">
         <nav aria-label="breadcrumb">
@@ -37,7 +38,7 @@ const StudentTransactions = () => {
       <SecondaryNav />
       <Transactions />
       <Footer />
-    </React.Fragment>
+    </Fragment>
   );
 };
 
@@ -47,6 +48,7 @@ class Transactions extends React.Component {
     length: 0,
     credits: 0,
     creditsToPurchase: "",
+    isLoading: true,
   };
 
   async componentDidMount() {
@@ -65,7 +67,9 @@ class Transactions extends React.Component {
           transactions: data.Item.creditsPurchaseRecord,
           credits: data.Item.credits,
           length: data.Item.creditsPurchaseRecord.length,
+          isLoading: false,
         });
+        userDetails(data.Item.email);
       })
       .catch((err) => console.error(err));
   }
@@ -123,7 +127,9 @@ class Transactions extends React.Component {
     const arr1 = transactions.slice(0, parseInt(length / 2));
     const arr2 = transactions.slice(parseInt(length / 2));
 
-    return (
+    return this.state.isLoading ? (
+      <Loader />
+    ) : (
       <Fragment>
         <section id="students-buy-credits" className="container mt-5">
           <div className="row">
