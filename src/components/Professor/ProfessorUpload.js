@@ -17,25 +17,7 @@ const ProfessorUpload = () => {
   return (
     <React.Fragment>
       <Navbar />
-      <div className="container pt-4">
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="/">Home</a>
-            </li>
-            <li className="breadcrumb-item">
-              <Link to="/professor-account">Professor's Name</Link>
-            </li>
-            <li
-              className="breadcrumb-item active"
-              id="current-active"
-              aria-current="page"
-            >
-              Notes Upload
-            </li>
-          </ol>
-        </nav>
-      </div>
+      <ProfessorBreadcrumb breadcrumbs={"Your Uploaded Notes"} />
       <ProfessorNav />
       <Upload />
       <Footer />

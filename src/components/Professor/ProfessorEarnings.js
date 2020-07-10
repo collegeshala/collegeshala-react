@@ -12,11 +12,14 @@ import { mail } from "./../../js/email";
 
 import { getToken, signout } from "./../../js/auth";
 
+let profName = "hi";
+
 const ProfessorEarnings = () => {
   return (
     <React.Fragment>
       <Navbar />
-      <div className="container pt-4">
+      <ProfessorBreadcrumb breadcrumbs={"Your Earnings"} />
+      {/* <div className="container pt-4">
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
@@ -34,7 +37,7 @@ const ProfessorEarnings = () => {
             </li>
           </ol>
         </nav>
-      </div>
+      </div> */}
       <ProfessorNav />
       <Upload />
       <Footer />
@@ -75,7 +78,7 @@ class Upload extends React.Component {
         return;
       }
       const amount = creditsToRedeem * 10;
-      mail(amount, token)
+      mail(amount, token);
     } catch (error) {
       console.error(error);
       alert("Oops! There was an error :-/");
@@ -157,6 +160,8 @@ class Upload extends React.Component {
           phoneNo,
           amountEarnedRecord,
         });
+        profName = fullName;
+        console.log(profName);
         this.setData();
       })
       .catch((err) => console.error(err));
@@ -177,7 +182,7 @@ class Upload extends React.Component {
                 <p className="lead purple-color">
                   Credits:{" "}
                   <span id="credits" className="red-color">
-                  {this.state.credits}
+                    {this.state.credits}
                   </span>
                 </p>
               </div>
@@ -185,7 +190,7 @@ class Upload extends React.Component {
                 <p className="lead purple-color">
                   Equivalent Amount:{" "}
                   <span id="amount" className="red-color">
-                  {this.state.credits}
+                    {this.state.credits}
                   </span>
                 </p>
               </div>
@@ -284,7 +289,7 @@ class Upload extends React.Component {
                     No earnings to display
                   </h2>
                 ) : (
-                  this.state.myUploads.map((note, index) => {
+                  this.state.amountEarnedRecord.map((note, index) => {
                     return (
                       <div className="col-md-6">
                         <div className="card mb-4">
