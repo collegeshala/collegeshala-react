@@ -1,8 +1,8 @@
 import React from "react";
-import $ from 'jquery';
+import $ from "jquery";
 import Popper from "popper.js";
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.bundle'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle";
 import "./assets/css/style.css";
 import { Router } from "@reach/router";
 
@@ -21,9 +21,13 @@ import Cart from "./components/Student/Cart";
 // PROFESSOR IMPORTS
 import ProfessorAccount from "./components/Professor/ProfessorAccount";
 
+// UTILITY IMPORTS
+import SingleProductPage from "./components/Global/pages/SingleProductPage";
+
 // GLOBAL IMPORTS
 import Homepage from "./Homepage";
 import About from "./components/Global/pages/About";
+import ComingSoon from "./components/Global/pages/ComingSoon"
 import DisclaimerWarranties from "./components/Global/pages/DisclaimerWarranties";
 import ProfessorInfo from "./components/Global/pages/ProfessorInfo";
 import TermsOfUse from "./components/Global/pages/TermsOfUse";
@@ -54,9 +58,13 @@ const App = () => {
       <Login path="/login" />
       <Register path="/register" />
 
+      {/* UTILITY ROUTES */}
+      <SingleProductPage path="/single-product" />
+
       {/* GLOBAL ROUTES */}
       <Homepage path="/" />
       <About path="/about" />
+      <ComingSoon path="/coming-soon" />
       <Copyright path="/copyright" />
       <AllProduct path="/all-product" />
       <PrivacyPolicy path="/privacy-policy" />

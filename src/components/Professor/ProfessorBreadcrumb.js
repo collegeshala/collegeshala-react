@@ -1,9 +1,35 @@
 import React from "react";
 import { Link, navigate } from "@reach/router";
 import axios from "axios";
+import { getToken, userDetails } from "./../../js/auth";
 
 class ProfessorBreadcrumb extends React.Component {
-  state = {};
+  state = {
+    fullName: "",
+  };
+
+  async componentDidMount() {
+    const token = await getToken();
+    // console.log({ idToken: token });
+    axios({
+      method: "POST",
+      url: "https://api.collegeshala.com/professordetails",
+      headers: {
+        authorization: token,
+      },
+    })
+      .then(({ data }) => {
+        /* console.log({ professorDetails: data.Item }); */
+        const {
+          fullName,
+        } = data.Item;
+        this.setState({
+          fullName,
+        });
+        /* userDetails(); */
+      })
+      .catch((err) => console.error(err));
+  }
 
   render() {
     return (
@@ -14,14 +40,14 @@ class ProfessorBreadcrumb extends React.Component {
               <a href="/">Home</a>
             </li>
             <li className="breadcrumb-item">
-              <Link to="/professor-account">Professor's Name</Link>
+              <Link to="/professor-account">{this.state.fullName}</Link>
             </li>
             <li
               className="breadcrumb-item active"
               id="current-active"
               aria-current="page"
             >
-              Notes Upload
+              {this.props.breadcrumbs}
             </li>
           </ol>
         </nav>

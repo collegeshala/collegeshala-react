@@ -3,13 +3,21 @@ import "./../../assets/css/loader.css";
 
 class Loader extends React.Component {
   componentDidMount() {
-    const el = document.getElementById("global-footer");
-    el.classList.toggle("isLoading");
+    try {
+      const el = document.getElementById("global-footer");
+      el.classList.toggle("isLoading");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   componentWillUnmount() {
-    const el = document.getElementById("global-footer");
-    el.classList.toggle("isLoading");
+    try {
+      const el = document.getElementById("global-footer");
+      el.classList.toggle("isLoading");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   render() {
