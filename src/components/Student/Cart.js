@@ -10,6 +10,7 @@ import { checkout } from "./../../js/razorpay";
 
 import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
+import Loader from "./../Global/Loader";
 
 const Cart = () => {
   return (
@@ -47,6 +48,7 @@ class CartPage extends React.Component {
       notes: [],
       total: 0,
       payment_id: "",
+      isLoading: true,
     };
 
     this.deleteNote = this.deleteNote.bind(this);
@@ -120,8 +122,11 @@ class CartPage extends React.Component {
       },
     })
       .then(({ data }) => {
-        if (data === "No-items in cart") return;
-        console.log(data.Responses.notes);
+        if (data === "No-items in cart") {
+          this.setState({ isLoading: false });
+          return;
+        }
+        // console.log(data.Responses.notes);
         let total = 0;
         const cart = data.Responses.notes.map((note) => {
           let parsed_note = {};
@@ -133,10 +138,11 @@ class CartPage extends React.Component {
           }
           return parsed_note;
         });
-        console.log(total);
+        // console.log(total);
         this.setState({
           notes: cart,
           total,
+          isLoading: false,
         });
       })
       .catch((err) => console.error(err));
@@ -144,8 +150,8 @@ class CartPage extends React.Component {
 
   async deleteNote(event) {
     event.preventDefault();
+    const index = +event.target.value;
     const token = await getToken();
-    const index = event.target.value;
     const { noteId, requiredCredits } = this.state.notes[index];
     let { notes, total } = this.state;
     notes.splice(index, 1);
@@ -170,7 +176,9 @@ class CartPage extends React.Component {
   }
 
   render() {
-    return (
+    return this.state.isLoading ? (
+      <Loader />
+    ) : (
       <Fragment>
         <div className="container cart">
           {this.state.notes.length === 0 ? (

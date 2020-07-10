@@ -191,7 +191,7 @@ export const resetPassword = ({ username, code, password }, onSuccess) => {
 
 export const userDetails = (username) => {
   const cognitoUser = getUser(username);
-  cognitoUser.getUserDetails((err, data) => {
+  cognitoUser.getUserData((err, data) => {
     if (err) {
       console.error(err);
     } else {
