@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-script-url */
 import React from "react";
-
+import { Link } from '@reach/router';
 import fb_icon from "./../../assets/img/footer/facebook-icon.png";
 import twitter_icon from "./../../assets/img/footer/twitter-icon.png";
 import linkedin_icon from "./../../assets/img/footer/linkedin-icon.png";
@@ -17,36 +17,35 @@ class Footer extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-12 col-md-6">
-              <h6>About the company</h6>
-              <a href="./about.html">
+              <Link to="/about">
                 <h6 className="text-justify">About Us</h6>
-              </a>
+              </Link>
               <div className="row">
                 <div className="col-12 col-md-4">
-                  <a target="_blank" href="./copyright.html">
+                  <Link to="/copyright">
                     Copyright
-                  </a>
+                  </Link>
                   <br />
-                  <a target="_blank" href="./disclaimer-warranties.html">
+                  <Link to="/disclaimer-warranties">
                     Disclaimer Warranties
-                  </a>
+                  </Link>
                   <br />
-                  <a target="_blank" href="./privacy-policy.html">
+                  <Link to="/privacy-policy">
                     Privacy Policy
-                  </a>
+                  </Link>
                 </div>
                 <div className="col-12 col-md-4">
-                  <a target="_blank" href="./return-policy.html">
+                  <Link to="/return-policy">
                     Return Policy
-                  </a>
+                  </Link>
                   <br />
-                  <a target="_blank" href="./professor-info.html">
+                  <Link to="/professor-info">
                     Course Advisors
-                  </a>
+                  </Link>
                   <br />
-                  <a target="_blank" href="./terms-of-use.html">
+                  <Link to="/terms-of-use">
                     Terms of Use
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

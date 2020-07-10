@@ -68,7 +68,7 @@ class CartPage extends React.Component {
       ).data;
 
       console.log(resp);
-      if (resp.msg && resp.msg == "Insufficient credits") {
+      if (resp.msg && resp.msg === "Insufficient credits") {
         console.log("insufficient");
         let creditsBalance = this.state.total - resp.creditsAvailable;
         let amt = creditsBalance * 10;
@@ -120,7 +120,7 @@ class CartPage extends React.Component {
       },
     })
       .then(({ data }) => {
-        if (data == "No-items in cart") return;
+        if (data === "No-items in cart") return;
         console.log(data.Responses.notes);
         let total = 0;
         const cart = data.Responses.notes.map((note) => {

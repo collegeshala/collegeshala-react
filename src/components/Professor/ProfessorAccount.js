@@ -106,8 +106,6 @@ class Account extends React.Component {
       },
     })
       .then(({ data }) => {
-        console.log("RIchard here");
-        console.log({ professorDetails: data.Item });
         const { email, college, dept, phoneNo, fullName, subjects } = data.Item;
         this.setState({
           email,
@@ -117,7 +115,6 @@ class Account extends React.Component {
           fullName,
           subjects,
         });
-        console.log(email);
         this.setData();
       })
       .catch((err) => console.error(err));
