@@ -1,7 +1,7 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Link, navigate } from "@reach/router";
+import { navigate } from "@reach/router";
 import axios from "axios";
 
 import Navbar from "../Global/Navbar";
@@ -12,7 +12,7 @@ import { mail } from "./../../js/email";
 
 import { getToken, signout } from "./../../js/auth";
 
-let profName = "hi";
+let creditsDisplay = 0;
 
 const ProfessorEarnings = () => {
   return (
@@ -55,7 +55,7 @@ class Upload extends React.Component {
     myUploads: "",
     phoneNo: "",
     original: {},
-    credits: "",
+    credits: 0,
     creditsToRedeem: "",
   };
 
@@ -85,44 +85,6 @@ class Upload extends React.Component {
     }
   }
 
-  setData() {
-    const original = this.state;
-    delete original.original;
-    this.setState({ original });
-  }
-
-  discardChanges(event) {
-    event.preventDefault();
-    this.setData(this.state.original);
-  }
-
-  async update(event) {
-    event.preventDefault();
-    const data = this.state;
-    delete data.original;
-    delete data.email;
-    const token = await getToken();
-    // console.log({ idToken: token });
-
-    axios({
-      method: "POST",
-      url: "https://api.collegeshala.com/updatestudentaccount",
-      headers: {
-        authorization: token,
-      },
-      data: JSON.stringify({
-        AccessToken: token,
-        params: data,
-      }),
-    })
-      .then(({ data }) => {
-        console.log(data);
-        alert("Details updated successfully!");
-        this.componentDidMount();
-      })
-      .catch((err) => console.error(err));
-  }
-
   logout() {
     signout();
     navigate("/login");
@@ -140,6 +102,7 @@ class Upload extends React.Component {
     })
       .then(({ data }) => {
         console.log({ professorDetails: data.Item });
+
         const {
           fullName,
           email,
@@ -160,9 +123,13 @@ class Upload extends React.Component {
           phoneNo,
           amountEarnedRecord,
         });
-        profName = fullName;
-        console.log(profName);
-        this.setData();
+        console.log(amountEarnedRecord);
+        Object.keys(amountEarnedRecord).forEach((key, index) => {
+            /* console.log(amountEarnedRecord[key]); */
+            amountEarnedRecord[key].notesPurchased.map((noteDetails) => {
+              console.log(noteDetails.noteId);
+            })
+        })
       })
       .catch((err) => console.error(err));
   }
@@ -190,7 +157,7 @@ class Upload extends React.Component {
                 <p className="lead purple-color">
                   Equivalent Amount:{" "}
                   <span id="amount" className="red-color">
-                    {this.state.credits}
+                    {this.state.credits * 10}
                   </span>
                 </p>
               </div>
@@ -271,25 +238,23 @@ class Upload extends React.Component {
             </div>
           </div>
         </div>
-        <section id="earning-details-section" className="mt-5">
+        <section id="earning-details-section" className="mt-2">
           <div className="container">
             <div className="row">
               <div className="col">
                 <h2 className="display-5">DETAILS OF NOTES SOLD:</h2>
               </div>
             </div>
-            <div id="transactions" className="row mt-3">
-              {/* transaction details go here */}
 
+            {/* transaction details go here */}
+            <div class="row mt-3">
               {
                 // eslint-disable-next-line eqeqeq
                 this.state.amountEarnedRecord.length === 0 ? (
-                  <h2>
-                    <br />
-                    No earnings to display
-                  </h2>
+                  <h2>No earnings to display</h2>
                 ) : (
-                  this.state.amountEarnedRecord.map((note, index) => {
+                  this.state.amountEarnedRecord.map((studentDetails, index) => {
+                    
                     return (
                       <div className="col-md-6">
                         <div className="card mb-4">
@@ -305,9 +270,8 @@ class Upload extends React.Component {
                               <div className="col-lg-9">
                                 <a href>
                                   <h4 className="purple-color">
-                                    Note ID: ${"{"}
-                                    earning.notesPurchased[0].noteId
-                                    {"}"}
+                                    Note ID:
+                                    {studentDetails.notesPurchased[0].noteId}
                                   </h4>
                                 </a>
                                 {/*
@@ -327,9 +291,7 @@ class Upload extends React.Component {
                                     Selling Price:{" "}
                                     <b>
                                       <span className="text-dark">
-                                        ${"{"}
-                                        earning.notesPurchased[0].amountEarned *
-                                        10 / 6{"}"} credits
+                                        dummy data
                                       </span>
                                     </b>
                                   </p>
@@ -355,9 +317,8 @@ class Upload extends React.Component {
                   })
                 )
               }
-
-              {/* Transaction div */}
             </div>
+            {/* Transaction div */}
           </div>
         </section>
       </div>

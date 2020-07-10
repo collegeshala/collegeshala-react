@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, navigate } from "@reach/router";
+import { Link } from "@reach/router";
 import axios from "axios";
-import { getToken, userDetails } from "./../../js/auth";
+import { getToken } from "./../../js/auth";
 
 class ProfessorBreadcrumb extends React.Component {
   state = {

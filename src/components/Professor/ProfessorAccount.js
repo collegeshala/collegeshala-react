@@ -1,7 +1,7 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Link, navigate } from "@reach/router";
+import { navigate } from "@reach/router";
 import axios from "axios";
 
 import Navbar from "../Global/Navbar";
