@@ -123,13 +123,7 @@ class Upload extends React.Component {
           phoneNo,
           amountEarnedRecord,
         });
-        console.log(amountEarnedRecord);
-        Object.keys(amountEarnedRecord).forEach((key, index) => {
-            /* console.log(amountEarnedRecord[key]); */
-            amountEarnedRecord[key].notesPurchased.map((noteDetails) => {
-              console.log(noteDetails.noteId);
-            })
-        })
+        /* console.log(amountEarnedRecord); */
       })
       .catch((err) => console.error(err));
   }
@@ -247,72 +241,79 @@ class Upload extends React.Component {
             </div>
 
             {/* transaction details go here */}
-            <div class="row mt-3">
+            <div className="row mt-3">
               {
                 // eslint-disable-next-line eqeqeq
                 this.state.amountEarnedRecord.length === 0 ? (
                   <h2>No earnings to display</h2>
                 ) : (
-                  this.state.amountEarnedRecord.map((studentDetails, index) => {
-                    
-                    return (
-                      <div className="col-md-6">
-                        <div className="card mb-4">
-                          <div className="card-body pb-3">
-                            <div className="row">
-                              <div className="col-lg-3">
-                                <img
-                                  src={require("../../assets/img/pdf_logo.svg")}
-                                  alt="pdf logo"
-                                  className="img-fluid"
-                                />
+                  Object.keys(this.state.amountEarnedRecord).forEach((key) => {
+                    /* console.log(this.state.amountEarnedRecord[key]); */
+                    this.state.amountEarnedRecord[key].notesPurchased.map(
+                      (noteDetails) => {
+                        console.log(noteDetails.noteId);
+                        /* console.log(noteDetails.noteId); */
+                        return (
+                          <div className="col-md-6">
+                            <p>richard</p>
+                            <div className="card mb-4">
+                              <div className="card-body pb-3">
+                                <div className="row">
+                                  <div className="col-lg-3">
+                                    <img
+                                      src={require("../../assets/img/pdf_logo.svg")}
+                                      alt="pdf logo"
+                                      className="img-fluid"
+                                    />
+                                  </div>
+                                  <div className="col-lg-9">
+                                    <a href>
+                                      <h4 className="purple-color">
+                                        Note ID:
+                                        {noteDetails.noteId}
+                                      </h4>
+                                    </a>
+                                    {/*
+                              <div class="row">
+                                  <div class="col">
+                                  <p class="bold"><i class="fas fa-user-circle"></i> <b><span id="prof-name"><a href="#">By Prof.
+                                          ${state.prof_name}</a></span></b></p>
+                                  </div>
                               </div>
-                              <div className="col-lg-9">
-                                <a href>
-                                  <h4 className="purple-color">
-                                    Note ID:
-                                    {studentDetails.notesPurchased[0].noteId}
-                                  </h4>
-                                </a>
-                                {/*
-                            <div class="row">
-                                <div class="col">
-                                <p class="bold"><i class="fas fa-user-circle"></i> <b><span id="prof-name"><a href="#">By Prof.
-                                        ${state.prof_name}</a></span></b></p>
+                          */}
+                                  </div>
                                 </div>
-                            </div>
-                        */}
-                              </div>
-                            </div>
-                            <div className="row">
-                              <div className="col-md-12">
-                                <div>
-                                  <p className="text-muted">
-                                    Selling Price:{" "}
-                                    <b>
-                                      <span className="text-dark">
-                                        dummy data
-                                      </span>
-                                    </b>
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="col-md-12">
-                                <div>
-                                  <p className="lead purple-color">
-                                    Total Credits:{" "}
-                                    <span className="red-color">
-                                      ${"{"}
-                                      earning.notesPurchased[0].amountEarned
-                                      {"}"}
-                                    </span>
-                                  </p>
+                                <div className="row">
+                                  <div className="col-md-12">
+                                    <div>
+                                      <p className="text-muted">
+                                        Selling Price:{" "}
+                                        <b>
+                                          <span className="text-dark">
+                                            dummy data
+                                          </span>
+                                        </b>
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div className="col-md-12">
+                                    <div>
+                                      <p className="lead purple-color">
+                                        Total Credits:{" "}
+                                        <span className="red-color">
+                                          ${"{"}
+                                          earning.notesPurchased[0].amountEarned
+                                          {"}"}
+                                        </span>
+                                      </p>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
+                        );
+                      }
                     );
                   })
                 )
