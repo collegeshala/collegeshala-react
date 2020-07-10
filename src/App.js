@@ -27,6 +27,7 @@ import SingleProductPage from "./components/Global/pages/SingleProductPage";
 // GLOBAL IMPORTS
 import Homepage from "./Homepage";
 import About from "./components/Global/pages/About";
+import ComingSoon from "./components/Global/pages/ComingSoon"
 import DisclaimerWarranties from "./components/Global/pages/DisclaimerWarranties";
 import ProfessorInfo from "./components/Global/pages/ProfessorInfo";
 import TermsOfUse from "./components/Global/pages/TermsOfUse";
@@ -62,6 +63,7 @@ const App = () => {
       {/* GLOBAL ROUTES */}
       <Homepage path="/" />
       <About path="/about" />
+      <ComingSoon path="/coming-soon" />
       <Copyright path="/copyright" />
       <PrivacyPolicy path="/privacy-policy" />
       <ReturnPolicy path="/return-policy" />
