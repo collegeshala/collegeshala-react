@@ -23,18 +23,18 @@ import ProfessorAccount from "./components/Professor/ProfessorAccount";
 
 // UTILITY IMPORTS
 import SingleProductPage from "./components/Global/pages/SingleProductPage";
+import AllProduct from "./components/Global/pages/AllProduct";
 
 // GLOBAL IMPORTS
 import Homepage from "./Homepage";
 import About from "./components/Global/pages/About";
-import ComingSoon from "./components/Global/pages/ComingSoon"
+import ComingSoon from "./components/Global/pages/ComingSoon";
 import DisclaimerWarranties from "./components/Global/pages/DisclaimerWarranties";
 import ProfessorInfo from "./components/Global/pages/ProfessorInfo";
 import TermsOfUse from "./components/Global/pages/TermsOfUse";
-import PrivacyPolicy from "./components/Global/pages/PrivacyPolicy"
-import ReturnPolicy from "./components/Global/pages/ReturnPolicy"
-import Copyright from "./components/Global/pages/Copyright"
-import AllProduct from "./components/Global/pages/AllProduct"
+import PrivacyPolicy from "./components/Global/pages/PrivacyPolicy";
+import ReturnPolicy from "./components/Global/pages/ReturnPolicy";
+import Copyright from "./components/Global/pages/Copyright";
 import ProfessorUpload from "./components/Professor/ProfessorUpload";
 import ProfessorEarnings from "./components/Professor/ProfessorEarnings";
 
@@ -60,13 +60,13 @@ const App = () => {
 
       {/* UTILITY ROUTES */}
       <SingleProductPage path="/single-product" />
+      <AllProduct path="/all-product" />
 
       {/* GLOBAL ROUTES */}
       <Homepage path="/" />
       <About path="/about" />
       <ComingSoon path="/coming-soon" />
       <Copyright path="/copyright" />
-      <AllProduct path="/all-product" />
       <PrivacyPolicy path="/privacy-policy" />
       <ReturnPolicy path="/return-policy" />
       <DisclaimerWarranties path="/disclaimer-warranties" />
@@ -77,34 +77,3 @@ const App = () => {
 };
 
 export default App;
-
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import Header from "./components/Global/Header";
-// import Footer from "./components/Global/Footer";
-// import Copyright from "./components/Global/pages/Copyright";
-// import PrivacyPolicy from "./components/Global/pages/PrivacyPolicy";
-// import ReturnPolicy from "./components/Global/pages/ReturnPolicy";
-// import AllProduct from "./components/Global/pages/AllProduct";
-// import ComingSoon from "./components/Global/pages/ComingSoon";
-// import SingleProduct from "./components/Global/pages/SingleProduct";
-
-// class App extends Component {
-//   render() {
-//     return (
-//       <Router>
-//         <div className="App">
-//           <Header />
-//           <Switch>
-//             <Route exact path="/copyright" component={Copyright} />
-//             <Route exact path="/privacypolicy" component={PrivacyPolicy} />
-//             <Route exact path="/returnpolicy" component={ReturnPolicy} />
-//             <Route exact path="/all-product" component={AllProduct} />
-//             <Route exact path="/coming-soon" component={ComingSoon} />
-//             <Route exact path="/single-product" component={SingleProduct} />
-//           </Switch>
-//           <Footer />
-//         </div>
-//       </Router>
-//     );
-//   }
-// }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { navigate } from "@reach/router";
 import main_logo from "./../../assets/img/logo.png";
 
 import { getToken } from "./../../js/auth";
@@ -320,10 +321,14 @@ class Navbar extends Component {
   }
 
   onenter(event) {
-    const code = (event.keyCode ? event.keyCode : event.which);
-    if(code == 13)
-    {
-      window.location.pathname="/all-product";
+    const code = event.keyCode ? event.keyCode : event.which;
+    if (code == 13) {
+      if (window.location.href.endsWith("/all-product")) {
+        this.props.searchFunc(localStorage.getItem("value"));
+      } else {
+        navigate("/all-product");
+      }
+      // window.location.pathname = "/all-product";
     }
   }
 
@@ -346,11 +351,11 @@ class Navbar extends Component {
 
   render() {
     return this.state.isLoading ? (
-      <AnonymousNav search={this.search} check={this.onenter}/>
+      <AnonymousNav search={this.search} check={this.onenter} />
     ) : this.state.isProf ? (
-      <TeacherNav search={this.search} check={this.onenter}/>
+      <TeacherNav search={this.search} check={this.onenter} />
     ) : (
-      <StudentNav search={this.search} check={this.onenter}/>
+      <StudentNav search={this.search} check={this.onenter} />
     );
   }
 }

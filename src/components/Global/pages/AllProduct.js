@@ -1,119 +1,149 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from "react";
+import axios from "axios";
+
 import Navbar from "../Navbar";
 import Footer from "../Footer";
-import axios from 'axios';
+import Loader from "./../Loader";
 
-const NoteCard = (props) => (
+const NoteCard = ({ note }) => (
   <div className="row notes-info-tab">
-    <div className="col-12 col-md-2"><img width="85" height="85" src="./assets/images/pdf_logo.svg"
-        className="all-prod-img rounded float-left" alt="..." /></div>
-      <div className="col-12 col-md-8">
-        <a id="to-pdf" href="/single-product.html?noteId=${note.noteId}">
-          <h5>
-            <span id="custom-purple">${props.note.chaptername}</span> - 
-                  ${props.note.subjectname}
-          </h5>
-        </a>
-        <div className="float-left mt-1">
-          <h5><i className="fas fa-user-circle"></i>By Prof. ${props.note.professorname}</h5>
-        </div>
-        <div className="float-left mt-1 pl-3">
-          <h5><i className="fas fa-graduation-cap"></i>${props.note.universityname}</h5>
-        </div>
+    <div className="col-12 col-md-2">
+      <img
+        width="85"
+        height="85"
+        src={require("./../../../assets/img/pdf_logo.svg")}
+        className="all-prod-img rounded float-left"
+        alt="..."
+      />
+    </div>
+    <div className="col-12 col-md-8">
+      <a id="to-pdf" href="/single-product.html?noteId=${note.noteId}">
+        <h5>
+          <span id="custom-purple">{note.chaptername}</span> -{note.subjectname}
+        </h5>
+      </a>
+      <div className="float-left mt-1">
+        <h5>
+          <i className="fas fa-user-circle"></i>By Prof. {note.professorname}
+        </h5>
       </div>
-      <div className="col-12 col-md-2 mt-3">
-        <h4>&#8377; ${props.note.requiredCredits * 10}</h4>
+      <div className="float-left mt-1 pl-3">
+        <h5>
+          <i className="fas fa-graduation-cap"></i>
+          {note.universityname}
+        </h5>
       </div>
+    </div>
+    <div className="col-12 col-md-2 mt-3">
+      <h4>&#8377; {note.requiredCredits * 10}</h4>
+    </div>
   </div>
-)
+);
 
 class AllProduct extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      keys: ["chaptername", "subjectname", "universityname"],
+      keys: ["chaptername", "subjectname", "universityname", "professorname"],
       value: "",
       notes: [],
-      notFound: ""
-    }
+      notFound: "",
+      isLoading: true,
+    };
   }
 
-  async componentDidMount() {
-      this.setState({
-        value: localStorage.getItem("value")
-      })
+  async fetchResults(value) {
+    this.setState({ isLoading: true });
+    const params = ["chaptername", "subjectname", "universityname"];
+    const notes = [];
+    const noteIds = new Set();
 
-      const noteIds = new Set();
+    for (let i = 0; i < 4; i++) {
+      const key = params[i];
+      try {
+        const resp = (
+          await axios({
+            method: "POST",
+            url: "https://api.collegeshala.com/searchnotes",
+            data: JSON.stringify({ key, value }),
+          })
+        ).data;
+        // console.log(resp);
 
-      for (let i = 0; i < 3; i++) {
-        var config = {
-          method: 'POST',
-          url: "https://api.collegeshala.com/searchnotes",
-          data: JSON.stringify({
-            key: this.state.keys[i],
-            value: this.state.value
-          }),
-          headers: {}
-        }
-        let resp = (await axios(config)).data;
-        
         if (!resp.message) {
-          resp.forEach(note => {
+          resp.forEach((note) => {
             let parsed_note = {};
             for (let x in note) {
-              parsed_note[x] = note[x].S || note[x].N || note[x].BOOL
+              parsed_note[x] = note[x].S || note[x].N || note[x].BOOL;
             }
             if (!noteIds.has(parsed_note.noteId)) {
               noteIds.add(parsed_note.noteId);
-              this.state.notes.push(parsed_note);
+              notes.push(parsed_note);
             }
           });
         } else {
           continue;
         }
+      } catch (error) {
+        console.error(error.response);
       }
-      if (this.state.notes.length == 0) {
-        this.setState({
-          notFound: "No results found"
-        });
-        console.log("No results found");
-      } else {
-        console.log("h");
-      }
+    }
+
+    this.setState({ notes, isLoading: false });
+  }
+
+  async componentDidMount() {
+    const value = localStorage.getItem("value");
+    this.fetchResults(value);
   }
 
   render() {
     const { notes, notFound } = this.state;
     return (
       <div>
-        <Navbar />
-        <div class="container pt-4">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Library</a></li>
-        <li class="breadcrumb-item active" aria-current="page">
-          All Product
-        </li>
-      </ol>
-    </nav>
-  </div>
+        <Navbar searchFunc={this.fetchResults.bind(this)} />
+        {this.state.isLoading ? (
+          <Loader />
+        ) : (
+          <Fragment>
+            <div className="container pt-4">
+              <nav aria-label="breadcrumb">
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item">
+                    <a href="/">Home</a>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <a href="#">Library</a>
+                  </li>
+                  <li className="breadcrumb-item active" aria-current="page">
+                    All Product
+                  </li>
+                </ol>
+              </nav>
+            </div>
 
-  <div class="container pt-1">
-    <p class="results-found">
-    <span id="custom-red">{notes.length}</span> Result(s) found
-    </p>
-  </div>
-  <div class="container notes-container">
-    <h1 class="text-center mt-5 mb-5" id="custom-red no-notes">{notFound}</h1>
-    {notes.map(note => (
-      <NoteCard note={note} />
-    ))}
-  </div>
-  <Footer />
+            <div className="container pt-1">
+              <p className="results-found">
+                <span id="custom-red">{notes.length}</span> Result(s) found
+              </p>
+            </div>
+            <div className="container notes-container">
+              {this.state.notes.length == 0 ? (
+                <h1 className="text-center mt-5 mb-5" id="custom-red no-notes">
+                  {notFound}
+                </h1>
+              ) : (
+                this.state.notes.map((note) => (
+                  <NoteCard key={note.noteId} note={note} />
+                ))
+              )}
+            </div>
+          </Fragment>
+        )}
+        <Footer />
       </div>
-    )
+    );
   }
 }
 

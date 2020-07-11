@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { navigate } from "@reach/router";
-import '../../../assets/css/register.css';
+import "../../../assets/css/register.css";
 
 class Register extends React.Component {
   render() {
@@ -17,7 +17,7 @@ class Register extends React.Component {
               <img
                 src={require("../../../assets/logo/LeftArrow.png")}
                 alt=""
-                srcset=""
+                srcSet=""
                 width="35"
                 height="30"
               />
