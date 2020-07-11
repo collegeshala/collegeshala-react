@@ -252,7 +252,7 @@ class Upload extends React.Component {
                   const { studentEmail, timestamp, notesPurchased } = recordObj;
                   const date = new Date(Date.parse(timestamp)).toDateString();
                   return notesPurchased.map(({ amountEarned, noteId }) => (
-                    <div class="col-md-6">
+                    <div class="col-md-6" key={noteId}>
                       <div class="card mb-4">
                         <div class="card-body pb-3">
                           <div class="row">
