@@ -7,6 +7,7 @@ import axios from "axios";
 import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import ProfessorNav from "../Global/ProfessorNav";
+import Loader from "./../Global/Loader";
 import ProfessorBreadcrumb from "../Professor/ProfessorBreadcrumb";
 import { mail } from "./../../js/email";
 
@@ -48,7 +49,7 @@ const ProfessorEarnings = () => {
 class Upload extends React.Component {
   state = {
     fullName: "",
-    amountEarnedRecord: "",
+    amountEarnedRecord: [],
     email: "",
     college: "",
     university: "",
@@ -57,6 +58,7 @@ class Upload extends React.Component {
     original: {},
     credits: 0,
     creditsToRedeem: "",
+    isLoading: true,
   };
 
   handleCredits(event) {
@@ -101,8 +103,6 @@ class Upload extends React.Component {
       },
     })
       .then(({ data }) => {
-        console.log({ professorDetails: data.Item });
-
         const {
           fullName,
           email,
@@ -122,14 +122,17 @@ class Upload extends React.Component {
           myUploads,
           phoneNo,
           amountEarnedRecord,
+          isLoading: false,
         });
-        /* console.log(amountEarnedRecord); */
+        // console.log(this.state.amountEarnedRecord.length);
       })
       .catch((err) => console.error(err));
   }
 
   render() {
-    return (
+    return this.state.isLoading ? (
+      <Loader />
+    ) : (
       <div>
         <section id="earning-credits-section" className="py-4">
           <div className="container">
@@ -242,82 +245,73 @@ class Upload extends React.Component {
 
             {/* transaction details go here */}
             <div className="row mt-3">
-              {
-                // eslint-disable-next-line eqeqeq
-                this.state.amountEarnedRecord.length === 0 ? (
-                  <h2>No earnings to display</h2>
-                ) : (
-                  Object.keys(this.state.amountEarnedRecord).forEach((key) => {
-                    /* console.log(this.state.amountEarnedRecord[key]); */
-                    this.state.amountEarnedRecord[key].notesPurchased.map(
-                      (noteDetails) => {
-                        console.log(noteDetails.noteId);
-                        /* console.log(noteDetails.noteId); */
-                        return (
-                          <div className="col-md-6">
-                            <p>richard</p>
-                            <div className="card mb-4">
-                              <div className="card-body pb-3">
-                                <div className="row">
-                                  <div className="col-lg-3">
-                                    <img
-                                      src={require("../../assets/img/pdf_logo.svg")}
-                                      alt="pdf logo"
-                                      className="img-fluid"
-                                    />
-                                  </div>
-                                  <div className="col-lg-9">
-                                    <a href>
-                                      <h4 className="purple-color">
-                                        Note ID:
-                                        {noteDetails.noteId}
-                                      </h4>
-                                    </a>
-                                    {/*
-                              <div class="row">
-                                  <div class="col">
-                                  <p class="bold"><i class="fas fa-user-circle"></i> <b><span id="prof-name"><a href="#">By Prof.
-                                          ${state.prof_name}</a></span></b></p>
-                                  </div>
+              {this.state.amountEarnedRecord.length == 0 ? (
+                <h2>No earnings to display</h2>
+              ) : (
+                this.state.amountEarnedRecord.map((recordObj) => {
+                  const { studentEmail, timestamp, notesPurchased } = recordObj;
+                  const date = new Date(Date.parse(timestamp)).toDateString();
+                  return notesPurchased.map(({ amountEarned, noteId }) => (
+                    <div class="col-md-6">
+                      <div class="card mb-4">
+                        <div class="card-body pb-3">
+                          <div class="row">
+                            <div class="col-lg-3">
+                              <img
+                                src={require("./../../assets/img/pdf_logo.svg")}
+                                alt=""
+                                class="img-fluid"
+                              />
+                            </div>
+                            <div class="col-lg-9">
+                              <a href="">
+                                <h4 class="purple-color">Note ID: {noteId}</h4>
+                              </a>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div>
+                                <p class="text-muted">
+                                  Selling Price:{" "}
+                                  <b>
+                                    <span class="text-dark">
+                                      {(amountEarned * 10) / 6} credits
+                                    </span>
+                                  </b>
+                                </p>
                               </div>
-                          */}
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-md-12">
-                                    <div>
-                                      <p className="text-muted">
-                                        Selling Price:{" "}
-                                        <b>
-                                          <span className="text-dark">
-                                            dummy data
-                                          </span>
-                                        </b>
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <div className="col-md-12">
-                                    <div>
-                                      <p className="lead purple-color">
-                                        Total Credits:{" "}
-                                        <span className="red-color">
-                                          ${"{"}
-                                          earning.notesPurchased[0].amountEarned
-                                          {"}"}
-                                        </span>
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div>
+                                <p class="lead purple-color">
+                                  Total Credits:{" "}
+                                  <span class="red-color">{amountEarned}</span>
+                                </p>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div>
+                                <p class="lead purple-color">
+                                  Bought by:{" "}
+                                  <span class="red-color">{studentEmail}</span>
+                                </p>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div>
+                                <p class="lead purple-color">
+                                  Date: <span class="red-color">{date}</span>
+                                </p>
                               </div>
                             </div>
                           </div>
-                        );
-                      }
-                    );
-                  })
-                )
-              }
+                        </div>
+                      </div>
+                    </div>
+                  ));
+                })
+              )}
             </div>
             {/* Transaction div */}
           </div>
