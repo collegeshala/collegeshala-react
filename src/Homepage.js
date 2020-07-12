@@ -129,6 +129,13 @@ class Index extends React.Component {
                 type="text"
                 id="search-input"
                 placeholder="Search your subject here "
+                onKeyPress={(event) => {
+                  if (event.key && event.key == "Enter") {
+                    const { value } = event.target;
+                    window.localStorage.setItem("value", value);
+                    navigate("/all-product");
+                  }
+                }}
               />
             </p>
           </div>

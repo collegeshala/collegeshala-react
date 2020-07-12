@@ -7,6 +7,7 @@ import {
   forgotPassword,
   resetPassword,
   parseJwt,
+  signout,
 } from "./../../../js/auth";
 import "../../../assets/css/studentRegister.css";
 
@@ -132,6 +133,11 @@ class Login extends React.Component {
       navigate("/register");
     }
   }
+
+  componentDidMount() {
+    signout();
+  }
+
   handleLogin() {
     var userData = {
       username: this.state.email,
@@ -248,6 +254,11 @@ class Login extends React.Component {
                   placeholder="Enter your email address"
                   value={this.state.email}
                   onChange={(e) => this.setState({ email: e.target.value })}
+                  onKeyPress={(e) => {
+                    if (e.key == "Enter") {
+                      this.handleLogin();
+                    }
+                  }}
                 />
                 <input
                   type="password"
@@ -255,6 +266,11 @@ class Login extends React.Component {
                   placeholder="Enter your password"
                   value={this.state.password}
                   onChange={(e) => this.setState({ password: e.target.value })}
+                  onKeyPress={(e) => {
+                    if (e.key == "Enter") {
+                      this.handleLogin();
+                    }
+                  }}
                 />
                 <br />
                 <p id="forgot-password" onClick={() => this.next()}>

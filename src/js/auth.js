@@ -162,8 +162,12 @@ export const getToken = () => {
 };
 
 export const signout = () => {
-  const cognitoUser = UserPool.getCurrentUser();
-  cognitoUser.signOut();
+  try {
+    const cognitoUser = UserPool.getCurrentUser();
+    cognitoUser.signOut();
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const forgotPassword = (username, onSuccess) => {

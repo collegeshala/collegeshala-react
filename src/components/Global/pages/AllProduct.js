@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { navigate } from "@reach/router";
 import axios from "axios";
 
 import Navbar from "../Navbar";
@@ -17,7 +18,14 @@ const NoteCard = ({ note }) => (
       />
     </div>
     <div className="col-12 col-md-8">
-      <a id="to-pdf" href="/single-product.html?noteId=${note.noteId}">
+      <a
+        href=""
+        id="to-pdf"
+        onClick={(event) => {
+          event.preventDefault();
+          navigate("/single-product", { state: { note } });
+        }}
+      >
         <h5>
           <span id="custom-purple">{note.chaptername}</span> -{note.subjectname}
         </h5>

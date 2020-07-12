@@ -7,11 +7,12 @@ import Navbar from "../Navbar";
 import Footer from "../Footer";
 import Loader from "../Loader";
 
-const SingleProductPage = () => {
+const SingleProductPage = (props) => {
+  const { note } = props.location.state;
   return (
     <Fragment>
       <Navbar />
-      <SingleProduct />
+      <SingleProduct noteObj={note} />
       <Footer />
     </Fragment>
   );
@@ -26,37 +27,12 @@ class SingleProduct extends Component {
     requiredCredits: "",
     universityname: "",
     subjectname: "",
+    note: this.props.note,
   };
 
   async componentDidMount() {
-    const noteId = window.location.search.split("=")[1];
-    console.log(noteId);
-
-    axios({
-      method: "POST",
-      url: "https://api.collegeshala.com/getnotebyid",
-      data: JSON.stringify({ noteId }),
-    })
-      .then(({ data }) => {
-        console.log(data);
-        const {
-          chaptername,
-          professorname,
-          requiredCredits,
-          universityname,
-          subjectname,
-        } = data.Item;
-        this.setState({
-          chaptername,
-          professorname,
-          requiredCredits,
-          universityname,
-          subjectname,
-          noteId,
-          isLoading: false,
-        });
-      })
-      .catch((err) => console.error(err));
+    const { noteObj } = this.props;
+    this.setState({ ...noteObj, isLoading: false });
   }
 
   async addToCart() {

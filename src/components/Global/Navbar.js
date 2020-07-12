@@ -334,7 +334,7 @@ class Navbar extends Component {
 
   async componentDidMount() {
     const checkLogin = await isLoggedIn();
-    console.log(checkLogin);
+    // console.log(checkLogin);
     let isProf = false,
       isLoading = true;
 
