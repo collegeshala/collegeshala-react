@@ -37,6 +37,7 @@ import ReturnPolicy from "./components/Global/pages/ReturnPolicy";
 import Copyright from "./components/Global/pages/Copyright";
 import ProfessorUpload from "./components/Professor/ProfessorUpload";
 import ProfessorEarnings from "./components/Professor/ProfessorEarnings";
+import Blogs from "./components/Global/pages/Blogs"
 
 const App = () => {
   return (
@@ -64,6 +65,7 @@ const App = () => {
 
       {/* GLOBAL ROUTES */}
       <Homepage path="/" />
+      <Blogs path="/blogs" />
       <About path="/about" />
       <ComingSoon path="/coming-soon" />
       <Copyright path="/copyright" />

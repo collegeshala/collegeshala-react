@@ -1,9 +1,12 @@
 import React, {Component} from "react";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 class About extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <section className="text-center mb-3 py-3" id="About-Us">
           <div className="container">
             <div className="row">
@@ -359,6 +362,7 @@ class About extends Component {
             </div>
           </div>
         </section>
+        <Footer />
       </div>
     );
   }

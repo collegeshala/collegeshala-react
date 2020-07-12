@@ -40,14 +40,19 @@ const AnonymousNav = (props) => (
         <ul className="navbar-nav ml-auto">
           <li className="nav-item" id="large-screen-search-box">
             <a className="nav-link navbar-talkshala" href="./coming-soon.html">
+              Blogs
+            </a>
+          </li>
+          <li className="nav-item" id="large-screen-search-box">
+            <a className="nav-link navbar-talkshala" href="./coming-soon.html">
               TalkShala
             </a>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a className="nav-link" href="./cart.html">
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>
             </a>
-          </li>
+          </li> */}
           {/* <li className="nav-item" id="large-screen-search-box">
                 <a className="nav-link" href="#">
                   <i className="fa fa-user-circle" aria-hidden="true"></i>
@@ -107,6 +112,11 @@ const StudentNav = (props) => (
           </li>
         </ul>
         <ul className="navbar-nav ml-auto">
+          <li className="nav-item" id="large-screen-search-box">
+            <a className="nav-link navbar-talkshala" href="./coming-soon.html">
+              Blogs
+            </a>
+          </li>
           <li className="nav-item" id="large-screen-search-box">
             <a className="nav-link navbar-talkshala" href="./coming-soon.html">
               TalkShala
@@ -223,14 +233,19 @@ const TeacherNav = (props) => (
         <ul className="navbar-nav ml-auto">
           <li className="nav-item" id="large-screen-search-box">
             <a className="nav-link navbar-talkshala" href="./coming-soon.html">
+              Blogs
+            </a>
+          </li>
+          <li className="nav-item" id="large-screen-search-box">
+            <a className="nav-link navbar-talkshala" href="./coming-soon.html">
               TalkShala
             </a>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a className="nav-link" href="./cart.html">
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>
             </a>
-          </li>
+          </li> */}
           <li className="nav-item dropdown" id="large-screen-search-box">
             <a
               className="nav-link"
