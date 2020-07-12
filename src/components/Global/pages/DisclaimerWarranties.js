@@ -1,4 +1,6 @@
 import React from 'react'
+import Navbar from '../Navbar';
+import Footer from '../Footer';
 
 const DisclaimerWarranties = () => {
     const body = `Collegeshala does not provide any warranties, express or implied, or make any representations regarding the use, or the results of use, of CONTENT, in terms of its correctness, legality, decency, accuracy, reliability, appropriateness or otherwise. Review and use of CONTENT are subject to all applicable laws and regulations and is solely at the risk of the individual or organization using this data.\n
@@ -13,12 +15,14 @@ const DisclaimerWarranties = () => {
     All materials are available at CollegeShala are contributed by users, and the ownership and copyright to the materials remain with the actual owner of the content. CollegeShala does not claim ownership of any materials or Intellectual Property. Materials shared at CollegeShala.in are available for educational purposes only. No claim for the originality of content is made. The contents are shared by the users to help other community members.`
     return (
     <div>
+        <Navbar />
         <div class="container text-center py-3">
             <h2>DISCLAIMER OF WARRANTIES</h2>
             <div class="text-left">
                 <p style={{whiteSpace : "pre-line"}}>{body}</p>
             </div>
         </div>
+        <Footer />
     </div>
     );
 }

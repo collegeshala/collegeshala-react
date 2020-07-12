@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 const TermsOfUse = () => {
     return (
     <div>
+        <Navbar />
         <div class="container text-center py-3">
             <h2>TERMS OF USE</h2>
             <div class="text-left">
@@ -119,6 +122,7 @@ const TermsOfUse = () => {
                 </p> 
             </div>
         </div>
+        <Footer />
     </div>
     )
 }

@@ -3,7 +3,9 @@
 import React from "react";
 import { navigate } from "@reach/router";
 import { resendCode, confirm, register } from "./../../../js/auth";
-import '../../../assets/css/studentRegister.css';
+import "../../../assets/css/studentRegister.css";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 class StudentRegister extends React.Component {
   constructor(props) {
@@ -330,551 +332,590 @@ class StudentRegister extends React.Component {
       );
 
     return (
-      <div id="student-signup">
-        <style>{css}</style>
-        <div>
-          <nav
-            className="navbar navbar-expand-lg navbar-dark"
-            style={{ backgroundColor: "#6534CC" }}
-          >
-            <a id="back" className="navbar-brand" onClick={() => this.back()}>
-              <img
-                src={require("../../../assets/logo/LeftArrow.png")}
-                alt=""
-                srcSet=""
-                width="35"
-                height="30"
-              />
-            </a>
-
-            <a id="backtext" onClick={() => this.back()}>
-              <p className="back-label">Back</p>
-            </a>
-          </nav>
-        </div>
-        <div className="content">
+      <div>
+        <Navbar />
+        <div id="student-signup">
+          <style>{css}</style>
           <div>
-            <div className="progressbar-container">
-              <div className="progressbar">
-                <div
-                  id="progval"
-                  ref={this.progval}
-                  className="progress-value"
-                ></div>
-                <div className="progress-steps">
+            <nav
+              className="navbar navbar-expand-lg navbar-dark"
+              style={{ backgroundColor: "#6534CC" }}
+            >
+              <a id="back" className="navbar-brand" onClick={() => this.back()}>
+                <img
+                  src={require("../../../assets/logo/LeftArrow.png")}
+                  alt=""
+                  srcSet=""
+                  width="35"
+                  height="30"
+                />
+              </a>
+
+              <a id="backtext" onClick={() => this.back()}>
+                <p className="back-label">Back</p>
+              </a>
+            </nav>
+          </div>
+          <div className="content">
+            <div>
+              <div className="progressbar-container">
+                <div className="progressbar">
+                  <div
+                    id="progval"
+                    ref={this.progval}
+                    className="progress-value"
+                  ></div>
+                  <div className="progress-steps">
+                    <img
+                      id="step-1-img"
+                      src={require("../../../assets/logo/step1.png")}
+                      alt="step1"
+                    />
+                    <img
+                      id="step-2-img"
+                      src={this.state.step2img}
+                      alt="step2"
+                    />
+                    <img
+                      id="step-3-img"
+                      src={this.state.step3img}
+                      alt="step3"
+                    />
+                    <img
+                      id="step-4-img"
+                      src={this.state.step4img}
+                      alt="step4"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                id="step-1"
+                className="row details-container"
+                style={this.state.step1display}
+              >
+                <div className="col-6 image-column">
+                  <div className="info-about">
+                    Tell us <span style={{ color: "#FF4133" }}>about</span>{" "}
+                    you...
+                  </div>
                   <img
-                    id="step-1-img"
-                    src={require("../../../assets/logo/step1.png")}
-                    alt="step1"
+                    className="info-image"
+                    src={require("../../../assets/img/name-email-student-card.png")}
+                    alt="Register as student"
                   />
-                  <img id="step-2-img" src={this.state.step2img} alt="step2" />
-                  <img id="step-3-img" src={this.state.step3img} alt="step3" />
-                  <img id="step-4-img" src={this.state.step4img} alt="step4" />
                 </div>
-              </div>
-            </div>
-            <div
-              id="step-1"
-              className="row details-container"
-              style={this.state.step1display}
-            >
-              <div className="col-6 image-column">
-                <div className="info-about">
-                  Tell us <span style={{ color: "#FF4133" }}>about</span> you...
-                </div>
-                <img
-                  className="info-image"
-                  src={require("../../../assets/img/name-email-student-card.png")}
-                  alt="Register as student"
-                />
-              </div>
-              <div className="col-6 input-column">
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter your full name"
-                  value={this.state.name}
-                  onChange={(e) => this.setState({ name: e.target.value })}
-                />
-                <input
-                  type="email"
-                  className="input-text"
-                  placeholder="Enter your email address"
-                  value={this.state.email}
-                  onChange={(e) => this.setState({ email: e.target.value })}
-                />
-                <input
-                  type="password"
-                  className="input-text"
-                  placeholder="Enter your password"
-                  value={this.state.password}
-                  onChange={(e) => this.setState({ password: e.target.value })}
-                />
-              </div>
-            </div>
-            <div
-              id="step-2"
-              className="row details-container"
-              style={this.state.step2display}
-            >
-              <div className="col-6 image-column">
-                <div className="info-about">
-                  Tell us <span style={{ color: "#FF4133" }}>about</span> your
-                  college...
-                </div>
-                <img
-                  className="info-image"
-                  src={require("../../../assets/img/college-details-student-card 1.png")}
-                  alt="Register as student"
-                />
-              </div>
-              <div
-                className="col-6 input-column"
-                style={{ paddingTop: "1vh", paddingBottom: "0" }}
-              >
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter your college's name"
-                  value={this.state.college}
-                  onChange={(e) => this.setState({ college: e.target.value })}
-                />
-                <select
-                  onChange={(e) => this.changeCllg(e)}
-                  defaultValue={this.state.university}
-                  type="text"
-                  className="input-text"
-                  id="uname"
-                >
-                  <option
-                    selected={this.state.university === "select-university"}
-                    value="select-university"
-                  >
-                    -Select University-
-                  </option>
-                  <option
-                    selected={this.state.university === "Calcutta-University"}
-                    value="Calcutta-University"
-                  >
-                    Calcutta University
-                  </option>
-                  <option
-                    selected={this.state.university === "Amity-University"}
-                    value="Amity-University"
-                  >
-                    Amity University
-                  </option>
-                  <option
-                    selected={this.state.university === "Jadavpur-University"}
-                    value="Jadavpur-University"
-                  >
-                    Jadavpur University
-                  </option>
-                  <option
-                    selected={
-                      this.state.university === "Techno-India-University"
+                <div className="col-6 input-column">
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter your full name"
+                    value={this.state.name}
+                    onChange={(e) => this.setState({ name: e.target.value })}
+                  />
+                  <input
+                    type="email"
+                    className="input-text"
+                    placeholder="Enter your email address"
+                    value={this.state.email}
+                    onChange={(e) => this.setState({ email: e.target.value })}
+                  />
+                  <input
+                    type="password"
+                    className="input-text"
+                    placeholder="Enter your password"
+                    value={this.state.password}
+                    onChange={(e) =>
+                      this.setState({ password: e.target.value })
                     }
-                    value="Techno-India-University"
-                  >
-                    Techno India University
-                  </option>
-                  <option
-                    selected={this.state.university === "Barasat-University"}
-                    value="Barasat-University"
-                  >
-                    Barasat University
-                  </option>
-                  <option
-                    selected={this.state.university === "MAKAUT"}
-                    value="MAKAUT"
-                  >
-                    MAKAUT
-                  </option>
-                </select>
-                <select
-                  className="input-text select-degree"
-                  id="select-degree"
-                  defaultValue={this.state.degree}
-                  onChange={(e) => this.setState({ degree: e.target.value })}
-                >
-                  <option selected={this.state.degree === ""} value="">
-                    -Select Degree-
-                  </option>
-                </select>
-                <select
-                  className="input-text select-degree"
-                  id="Calcutta-University"
-                  defaultValue={this.state.degree}
-                  style={{ display: "none" }}
-                  onChange={(e) => this.setState({ degree: e.target.value })}
-                >
-                  <option selected={this.state.degree === ""} value="">
-                    -Select Degree-
-                  </option>
-                  <option selected={this.state.degree === "BCom"} value="BCom">
-                    B-Com
-                  </option>
-                  <option selected={this.state.degree === "BBA"} value="BBA">
-                    BBA
-                  </option>
-                  <option
-                    selected={this.state.degree === "BSc-Botany-Honours"}
-                    value="BSc-Botany-Honours"
-                  >
-                    B. Sc Botany (Honours)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BSc-Botany-Pass"}
-                    value="BSc-Botany-Pass"
-                  >
-                    B. Sc Botany (Pass)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BA-English-Honours"}
-                    value="BA-English-Honours"
-                  >
-                    BA English (Honours)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BA-English-Pass"}
-                    value="BA-English-Pass"
-                  >
-                    BA English (Pass)
-                  </option>
-                </select>
-                <select
-                  className="input-text select-degree"
-                  id="Amity-University"
-                  defaultValue={this.state.degree}
-                  style={{ display: "none" }}
-                  onChange={(e) => this.setState({ degree: e.target.value })}
-                >
-                  <option selected={this.state.degree === ""} value="">
-                    -Select Degree-
-                  </option>
-                  <option selected={this.state.degree === "BCom"} value="BCom">
-                    B-Com
-                  </option>
-                  <option selected={this.state.degree === "BBA"} value="BBA">
-                    BBA
-                  </option>
-                  <option
-                    selected={this.state.degree === "BSc-Botany-Honours"}
-                    value="BSc-Botany-Honours"
-                  >
-                    B. Sc Botany (Honours)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BSc-Botany-Pass"}
-                    value="BSc-Botany-Pass"
-                  >
-                    B. Sc Botany (Pass)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BA-English-Honours"}
-                    value="BA-English-Honours"
-                  >
-                    BA English (Honours)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BA-English-Pass"}
-                    value="BA-English-Pass"
-                  >
-                    BA English (Pass)
-                  </option>
-                </select>
-                <select
-                  className="input-text select-degree"
-                  id="Jadavpur-University"
-                  defaultValue={this.state.degree}
-                  style={{ display: "none" }}
-                  onChange={(e) => this.setState({ degree: e.target.value })}
-                >
-                  <option selected={this.state.degree === ""} value="">
-                    -Select Degree-
-                  </option>
-                  <option selected={this.state.degree === "BCom"} value="BCom">
-                    B-Com
-                  </option>
-                  <option selected={this.state.degree === "BBA"} value="BBA">
-                    BBA
-                  </option>
-                  <option
-                    selected={this.state.degree === "BSc-Botany-Honours"}
-                    value="BSc-Botany-Honours"
-                  >
-                    B. Sc Botany (Honours)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BSc-Botany-Pass"}
-                    value="BSc-Botany-Pass"
-                  >
-                    B. Sc Botany (Pass)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BA-English-Honours"}
-                    value="BA-English-Honours"
-                  >
-                    BA English (Honours)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BA-English-Pass"}
-                    value="BA-English-Pass"
-                  >
-                    BA English (Pass)
-                  </option>
-                </select>
-                <select
-                  className="input-text select-degree"
-                  id="Techno-India-University"
-                  defaultValue={this.state.degree}
-                  style={{ display: "none" }}
-                  onChange={(e) => this.setState({ degree: e.target.value })}
-                >
-                  <option selected={this.state.degree === ""} value="">
-                    -Select Degree-
-                  </option>
-                  <option selected={this.state.degree === "BCom"} value="BCom">
-                    B-Com
-                  </option>
-                  <option selected={this.state.degree === "BBA"} value="BBA">
-                    BBA
-                  </option>
-                  <option
-                    selected={this.state.degree === "BSc-Botany-Honours"}
-                    value="BSc-Botany-Honours"
-                  >
-                    B. Sc Botany (Honours)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BSc-Botany-Pass"}
-                    value="BSc-Botany-Pass"
-                  >
-                    B. Sc Botany (Pass)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BA-English-Honours"}
-                    value="BA-English-Honours"
-                  >
-                    BA English (Honours)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BA-English-Pass"}
-                    value="BA-English-Pass"
-                  >
-                    BA English (Pass)
-                  </option>
-                </select>
-                <select
-                  className="input-text select-degree"
-                  id="Barasat-University"
-                  defaultValue={this.state.degree}
-                  style={{ display: "none" }}
-                  onChange={(e) => this.setState({ degree: e.target.value })}
-                >
-                  <option selected={this.state.degree === ""} value="">
-                    -Select Degree-
-                  </option>
-                  <option selected={this.state.degree === "BCom"} value="BCom">
-                    B-Com
-                  </option>
-                  <option selected={this.state.degree === "BBA"} value="BBA">
-                    BBA
-                  </option>
-                  <option
-                    selected={this.state.degree === "BSc-Botany-Honours"}
-                    value="BSc-Botany-Honours"
-                  >
-                    B. Sc Botany (Honours)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BSc-Botany-Pass"}
-                    value="BSc-Botany-Pass"
-                  >
-                    B. Sc Botany (Pass)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BA-English-Honours"}
-                    value="BA-English-Honours"
-                  >
-                    BA English (Honours)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BA-English-Pass"}
-                    value="BA-English-Pass"
-                  >
-                    BA English (Pass)
-                  </option>
-                </select>
-                <select
-                  className="input-text select-degree"
-                  id="MAKAUT"
-                  defaultValue={this.state.degree}
-                  style={{ display: "none" }}
-                  onChange={(e) => this.setState({ degree: e.target.value })}
-                >
-                  <option selected={this.state.degree === ""} value="">
-                    -Select Degree-
-                  </option>
-                  <option selected={this.state.degree === "BCom"} value="BCom">
-                    B-Com
-                  </option>
-                  <option selected={this.state.degree === "BBA"} value="BBA">
-                    BBA
-                  </option>
-                  <option
-                    selected={this.state.degree === "BSc-Botany-Honours"}
-                    value="BSc-Botany-Honours"
-                  >
-                    B. Sc Botany (Honours)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BSc-Botany-Pass"}
-                    value="BSc-Botany-Pass"
-                  >
-                    B. Sc Botany (Pass)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BA-English-Honours"}
-                    value="BA-English-Honours"
-                  >
-                    BA English (Honours)
-                  </option>
-                  <option
-                    selected={this.state.degree === "BA-English-Pass"}
-                    value="BA-English-Pass"
-                  >
-                    BA English (Pass)
-                  </option>
-                </select>
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="In which semester are you?"
-                  onChange={(e) =>
-                    this.setState({ sem: Number(e.target.value) })
-                  }
-                />
-              </div>
-            </div>
-            <div
-              id="step-3"
-              className="row details-container"
-              style={this.state.step3display}
-            >
-              <div className="col-6 image-column">
-                <div className="info-about">
-                  One <span style={{ color: "#FF4133" }}>last</span> entry...
+                  />
                 </div>
-                <img
-                  className="info-image"
-                  src={require("../../../assets/img/step3.png")}
-                  alt="Register as student"
-                />
               </div>
               <div
-                className="col-6 input-column"
-                style={{ paddingTop: "1vh", paddingBottom: "0" }}
+                id="step-2"
+                className="row details-container"
+                style={this.state.step2display}
               >
-                <select
-                  className="input-text"
-                  id="knowabout"
-                  style={{ fontSize: "20px" }}
-                  onChange={(e) => this.setState({ knowabout: e.target.value })}
-                >
-                  <option value="">
-                    -How did you know about Collegeshala-
-                  </option>
-                  <option value="social-media">Social Media</option>
-                  <option value="friends">Friends</option>
-                  <option value="collegeshala-collaborators">
-                    Collegeshala collaborators
-                  </option>
-                  <option value="none">None</option>
-                </select>
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter Collaborator's Name"
-                  style={{
-                    display:
-                      this.state.knowabout === "collegeshala-collaborators"
-                        ? ""
-                        : "none",
-                  }}
-                  value={this.state.ccName}
-                  onChange={(e) => this.setState({ ccName: e.target.value })}
-                />
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter your Phone number"
-                  value={this.state.phoneNo}
-                  onChange={(e) => this.setState({ phoneNo: e.target.value })}
-                />
-                <br />
-                <input
-                  type="checkbox"
-                  name="termsconditions"
-                  defaultChecked={this.state.isChecked}
-                  onChange={() =>
-                    this.setState({ isChecked: !this.state.isChecked })
-                  }
-                />{" "}
-                I accept terms & conditions
-                <br />
+                <div className="col-6 image-column">
+                  <div className="info-about">
+                    Tell us <span style={{ color: "#FF4133" }}>about</span> your
+                    college...
+                  </div>
+                  <img
+                    className="info-image"
+                    src={require("../../../assets/img/college-details-student-card 1.png")}
+                    alt="Register as student"
+                  />
+                </div>
                 <div
-                  className="otpbtncontainer"
-                  style={{ textAlign: "center" }}
+                  className="col-6 input-column"
+                  style={{ paddingTop: "1vh", paddingBottom: "0" }}
                 >
-                  {OtpButton}
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter your college's name"
+                    value={this.state.college}
+                    onChange={(e) => this.setState({ college: e.target.value })}
+                  />
+                  <select
+                    onChange={(e) => this.changeCllg(e)}
+                    defaultValue={this.state.university}
+                    type="text"
+                    className="input-text"
+                    id="uname"
+                  >
+                    <option
+                      selected={this.state.university === "select-university"}
+                      value="select-university"
+                    >
+                      -Select University-
+                    </option>
+                    <option
+                      selected={this.state.university === "Calcutta-University"}
+                      value="Calcutta-University"
+                    >
+                      Calcutta University
+                    </option>
+                    <option
+                      selected={this.state.university === "Amity-University"}
+                      value="Amity-University"
+                    >
+                      Amity University
+                    </option>
+                    <option
+                      selected={this.state.university === "Jadavpur-University"}
+                      value="Jadavpur-University"
+                    >
+                      Jadavpur University
+                    </option>
+                    <option
+                      selected={
+                        this.state.university === "Techno-India-University"
+                      }
+                      value="Techno-India-University"
+                    >
+                      Techno India University
+                    </option>
+                    <option
+                      selected={this.state.university === "Barasat-University"}
+                      value="Barasat-University"
+                    >
+                      Barasat University
+                    </option>
+                    <option
+                      selected={this.state.university === "MAKAUT"}
+                      value="MAKAUT"
+                    >
+                      MAKAUT
+                    </option>
+                  </select>
+                  <select
+                    className="input-text select-degree"
+                    id="select-degree"
+                    defaultValue={this.state.degree}
+                    onChange={(e) => this.setState({ degree: e.target.value })}
+                  >
+                    <option selected={this.state.degree === ""} value="">
+                      -Select Degree-
+                    </option>
+                  </select>
+                  <select
+                    className="input-text select-degree"
+                    id="Calcutta-University"
+                    defaultValue={this.state.degree}
+                    style={{ display: "none" }}
+                    onChange={(e) => this.setState({ degree: e.target.value })}
+                  >
+                    <option selected={this.state.degree === ""} value="">
+                      -Select Degree-
+                    </option>
+                    <option
+                      selected={this.state.degree === "BCom"}
+                      value="BCom"
+                    >
+                      B-Com
+                    </option>
+                    <option selected={this.state.degree === "BBA"} value="BBA">
+                      BBA
+                    </option>
+                    <option
+                      selected={this.state.degree === "BSc-Botany-Honours"}
+                      value="BSc-Botany-Honours"
+                    >
+                      B. Sc Botany (Honours)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BSc-Botany-Pass"}
+                      value="BSc-Botany-Pass"
+                    >
+                      B. Sc Botany (Pass)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BA-English-Honours"}
+                      value="BA-English-Honours"
+                    >
+                      BA English (Honours)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BA-English-Pass"}
+                      value="BA-English-Pass"
+                    >
+                      BA English (Pass)
+                    </option>
+                  </select>
+                  <select
+                    className="input-text select-degree"
+                    id="Amity-University"
+                    defaultValue={this.state.degree}
+                    style={{ display: "none" }}
+                    onChange={(e) => this.setState({ degree: e.target.value })}
+                  >
+                    <option selected={this.state.degree === ""} value="">
+                      -Select Degree-
+                    </option>
+                    <option
+                      selected={this.state.degree === "BCom"}
+                      value="BCom"
+                    >
+                      B-Com
+                    </option>
+                    <option selected={this.state.degree === "BBA"} value="BBA">
+                      BBA
+                    </option>
+                    <option
+                      selected={this.state.degree === "BSc-Botany-Honours"}
+                      value="BSc-Botany-Honours"
+                    >
+                      B. Sc Botany (Honours)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BSc-Botany-Pass"}
+                      value="BSc-Botany-Pass"
+                    >
+                      B. Sc Botany (Pass)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BA-English-Honours"}
+                      value="BA-English-Honours"
+                    >
+                      BA English (Honours)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BA-English-Pass"}
+                      value="BA-English-Pass"
+                    >
+                      BA English (Pass)
+                    </option>
+                  </select>
+                  <select
+                    className="input-text select-degree"
+                    id="Jadavpur-University"
+                    defaultValue={this.state.degree}
+                    style={{ display: "none" }}
+                    onChange={(e) => this.setState({ degree: e.target.value })}
+                  >
+                    <option selected={this.state.degree === ""} value="">
+                      -Select Degree-
+                    </option>
+                    <option
+                      selected={this.state.degree === "BCom"}
+                      value="BCom"
+                    >
+                      B-Com
+                    </option>
+                    <option selected={this.state.degree === "BBA"} value="BBA">
+                      BBA
+                    </option>
+                    <option
+                      selected={this.state.degree === "BSc-Botany-Honours"}
+                      value="BSc-Botany-Honours"
+                    >
+                      B. Sc Botany (Honours)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BSc-Botany-Pass"}
+                      value="BSc-Botany-Pass"
+                    >
+                      B. Sc Botany (Pass)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BA-English-Honours"}
+                      value="BA-English-Honours"
+                    >
+                      BA English (Honours)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BA-English-Pass"}
+                      value="BA-English-Pass"
+                    >
+                      BA English (Pass)
+                    </option>
+                  </select>
+                  <select
+                    className="input-text select-degree"
+                    id="Techno-India-University"
+                    defaultValue={this.state.degree}
+                    style={{ display: "none" }}
+                    onChange={(e) => this.setState({ degree: e.target.value })}
+                  >
+                    <option selected={this.state.degree === ""} value="">
+                      -Select Degree-
+                    </option>
+                    <option
+                      selected={this.state.degree === "BCom"}
+                      value="BCom"
+                    >
+                      B-Com
+                    </option>
+                    <option selected={this.state.degree === "BBA"} value="BBA">
+                      BBA
+                    </option>
+                    <option
+                      selected={this.state.degree === "BSc-Botany-Honours"}
+                      value="BSc-Botany-Honours"
+                    >
+                      B. Sc Botany (Honours)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BSc-Botany-Pass"}
+                      value="BSc-Botany-Pass"
+                    >
+                      B. Sc Botany (Pass)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BA-English-Honours"}
+                      value="BA-English-Honours"
+                    >
+                      BA English (Honours)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BA-English-Pass"}
+                      value="BA-English-Pass"
+                    >
+                      BA English (Pass)
+                    </option>
+                  </select>
+                  <select
+                    className="input-text select-degree"
+                    id="Barasat-University"
+                    defaultValue={this.state.degree}
+                    style={{ display: "none" }}
+                    onChange={(e) => this.setState({ degree: e.target.value })}
+                  >
+                    <option selected={this.state.degree === ""} value="">
+                      -Select Degree-
+                    </option>
+                    <option
+                      selected={this.state.degree === "BCom"}
+                      value="BCom"
+                    >
+                      B-Com
+                    </option>
+                    <option selected={this.state.degree === "BBA"} value="BBA">
+                      BBA
+                    </option>
+                    <option
+                      selected={this.state.degree === "BSc-Botany-Honours"}
+                      value="BSc-Botany-Honours"
+                    >
+                      B. Sc Botany (Honours)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BSc-Botany-Pass"}
+                      value="BSc-Botany-Pass"
+                    >
+                      B. Sc Botany (Pass)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BA-English-Honours"}
+                      value="BA-English-Honours"
+                    >
+                      BA English (Honours)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BA-English-Pass"}
+                      value="BA-English-Pass"
+                    >
+                      BA English (Pass)
+                    </option>
+                  </select>
+                  <select
+                    className="input-text select-degree"
+                    id="MAKAUT"
+                    defaultValue={this.state.degree}
+                    style={{ display: "none" }}
+                    onChange={(e) => this.setState({ degree: e.target.value })}
+                  >
+                    <option selected={this.state.degree === ""} value="">
+                      -Select Degree-
+                    </option>
+                    <option
+                      selected={this.state.degree === "BCom"}
+                      value="BCom"
+                    >
+                      B-Com
+                    </option>
+                    <option selected={this.state.degree === "BBA"} value="BBA">
+                      BBA
+                    </option>
+                    <option
+                      selected={this.state.degree === "BSc-Botany-Honours"}
+                      value="BSc-Botany-Honours"
+                    >
+                      B. Sc Botany (Honours)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BSc-Botany-Pass"}
+                      value="BSc-Botany-Pass"
+                    >
+                      B. Sc Botany (Pass)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BA-English-Honours"}
+                      value="BA-English-Honours"
+                    >
+                      BA English (Honours)
+                    </option>
+                    <option
+                      selected={this.state.degree === "BA-English-Pass"}
+                      value="BA-English-Pass"
+                    >
+                      BA English (Pass)
+                    </option>
+                  </select>
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="In which semester are you?"
+                    onChange={(e) =>
+                      this.setState({ sem: Number(e.target.value) })
+                    }
+                  />
                 </div>
-                <input
-                  type="number"
-                  className="otpinput"
-                  placeholder="Enter Your OTP"
-                  name="otp"
-                  onChange={(e) => this.setState({ code: e.target.value })}
-                />
               </div>
-            </div>
-            <div
-              id="step-4"
-              className="row details-container"
-              style={this.state.step4display}
-            >
-              <div className="col-6 image-column">
+              <div
+                id="step-3"
+                className="row details-container"
+                style={this.state.step3display}
+              >
+                <div className="col-6 image-column">
+                  <div className="info-about">
+                    One <span style={{ color: "#FF4133" }}>last</span> entry...
+                  </div>
+                  <img
+                    className="info-image"
+                    src={require("../../../assets/img/step3.png")}
+                    alt="Register as student"
+                  />
+                </div>
+                <div
+                  className="col-6 input-column"
+                  style={{ paddingTop: "1vh", paddingBottom: "0" }}
+                >
+                  <select
+                    className="input-text"
+                    id="knowabout"
+                    style={{ fontSize: "20px" }}
+                    onChange={(e) =>
+                      this.setState({ knowabout: e.target.value })
+                    }
+                  >
+                    <option value="">
+                      -How did you know about Collegeshala-
+                    </option>
+                    <option value="social-media">Social Media</option>
+                    <option value="friends">Friends</option>
+                    <option value="collegeshala-collaborators">
+                      Collegeshala collaborators
+                    </option>
+                    <option value="none">None</option>
+                  </select>
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter Collaborator's Name"
+                    style={{
+                      display:
+                        this.state.knowabout === "collegeshala-collaborators"
+                          ? ""
+                          : "none",
+                    }}
+                    value={this.state.ccName}
+                    onChange={(e) => this.setState({ ccName: e.target.value })}
+                  />
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter your Phone number"
+                    value={this.state.phoneNo}
+                    onChange={(e) => this.setState({ phoneNo: e.target.value })}
+                  />
+                  <br />
+                  <input
+                    type="checkbox"
+                    name="termsconditions"
+                    defaultChecked={this.state.isChecked}
+                    onChange={() =>
+                      this.setState({ isChecked: !this.state.isChecked })
+                    }
+                  />{" "}
+                  I accept terms & conditions
+                  <br />
+                  <div
+                    className="otpbtncontainer"
+                    style={{ textAlign: "center" }}
+                  >
+                    {OtpButton}
+                  </div>
+                  <input
+                    type="number"
+                    className="otpinput"
+                    placeholder="Enter Your OTP"
+                    name="otp"
+                    onChange={(e) => this.setState({ code: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div
+                id="step-4"
+                className="row details-container"
+                style={this.state.step4display}
+              >
+                <div className="col-6 image-column">
+                  <img
+                    className="info-image"
+                    src={require("../../../assets/img/rocket-human-icon 1.png")}
+                    alt="Register as student"
+                  />
+                </div>
+                <div className="col-6 input-column">
+                  <div className="hurray">
+                    HURRAY<span style={{ color: "#6534CC" }}>!</span>
+                  </div>
+                  <p className="success-message">
+                    You are registered on our platform. Head over to you
+                    dashboard.
+                  </p>
+                </div>
+              </div>
+              <div
+                id="nextbtn"
+                className="next"
+                onMouseOver={(e) => this.handlemouseover(e)}
+                onClick={() => this.next()}
+              >
+                {this.state.nextbtntext}
                 <img
-                  className="info-image"
-                  src={require("../../../assets/img/rocket-human-icon 1.png")}
-                  alt="Register as student"
+                  id="nextimg"
+                  alt="next-logo"
+                  src={require("../../../assets/logo/next.png")}
                 />
               </div>
-              <div className="col-6 input-column">
-                <div className="hurray">
-                  HURRAY<span style={{ color: "#6534CC" }}>!</span>
-                </div>
-                <p className="success-message">
-                  You are registered on our platform. Head over to you
-                  dashboard.
-                </p>
-              </div>
-            </div>
-            <div
-              id="nextbtn"
-              className="next"
-              onMouseOver={(e) => this.handlemouseover(e)}
-              onClick={() => this.next()}
-            >
-              {this.state.nextbtntext}
-              <img
-                id="nextimg"
-                alt="next-logo"
-                src={require("../../../assets/logo/next.png")}
-              />
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

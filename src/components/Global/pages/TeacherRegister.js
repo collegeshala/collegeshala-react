@@ -1,7 +1,9 @@
 import React from "react";
 import { navigate } from "@reach/router";
 import { resendCode, confirm, register } from "./../../../js/auth";
-import '../../../assets/css/studentRegister.css';
+import "../../../assets/css/studentRegister.css";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 class TeacherRegister extends React.Component {
   constructor(props) {
@@ -287,210 +289,229 @@ class TeacherRegister extends React.Component {
       );
 
     return (
-      <div id="student-signup">
-        <div>
-          <nav
-            className="navbar navbar-expand-lg navbar-dark"
-            style={{ backgroundColor: "#6534CC" }}
-          >
-            <a id="back" className="navbar-brand" onClick={() => this.back()}>
-              <img
-                src={require("../../../assets/logo/LeftArrow.png")}
-                alt=""
-                srcset=""
-                width="35"
-                height="30"
-              />
-            </a>
-            <a id="backtext" onClick={() => this.back()}>
-              <p className="back-label">Back</p>
-            </a>
-          </nav>
-        </div>
-        <div className="content">
+      <div>
+        <Navbar />
+        <div id="student-signup">
           <div>
-            <div className="progressbar-container">
-              <div className="progressbar">
-                <div
-                  id="progval"
-                  ref={this.progval}
-                  className="progress-value"
-                ></div>
-                <div className="progress-steps">
+            <nav
+              className="navbar navbar-expand-lg navbar-dark"
+              style={{ backgroundColor: "#6534CC" }}
+            >
+              <a id="back" className="navbar-brand" onClick={() => this.back()}>
+                <img
+                  src={require("../../../assets/logo/LeftArrow.png")}
+                  alt=""
+                  srcset=""
+                  width="35"
+                  height="30"
+                />
+              </a>
+              <a id="backtext" onClick={() => this.back()}>
+                <p className="back-label">Back</p>
+              </a>
+            </nav>
+          </div>
+          <div className="content">
+            <div>
+              <div className="progressbar-container">
+                <div className="progressbar">
+                  <div
+                    id="progval"
+                    ref={this.progval}
+                    className="progress-value"
+                  ></div>
+                  <div className="progress-steps">
+                    <img
+                      id="step-1-img"
+                      src={require("../../../assets/logo/step1.png")}
+                      alt="step1"
+                    />
+                    <img
+                      id="step-2-img"
+                      src={this.state.step2img}
+                      alt="step2"
+                    />
+                    <img
+                      id="step-3-img"
+                      src={this.state.step3img}
+                      alt="step3"
+                    />
+                    <img
+                      id="step-4-img"
+                      src={this.state.step4img}
+                      alt="step4"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                id="step-1"
+                className="row details-container"
+                style={this.state.step1display}
+              >
+                <div className="col-6 image-column">
+                  <div className="info-about">
+                    Tell us <span style={{ color: "#FF4133" }}>about</span>{" "}
+                    you...
+                  </div>
                   <img
-                    id="step-1-img"
-                    src={require("../../../assets/logo/step1.png")}
-                    alt="step1"
+                    className="info-image"
+                    src={require("../../../assets/img/teacher-details-svg.png")}
+                    alt="Register as student"
                   />
-                  <img id="step-2-img" src={this.state.step2img} alt="step2" />
-                  <img id="step-3-img" src={this.state.step3img} alt="step3" />
-                  <img id="step-4-img" src={this.state.step4img} alt="step4" />
+                </div>
+                <div className="col-6 input-column">
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter your full name"
+                    value={this.state.name}
+                    onChange={(e) => this.setState({ name: e.target.value })}
+                  />
+                  <input
+                    type="email"
+                    className="input-text"
+                    placeholder="Enter your email address"
+                    value={this.state.email}
+                    onChange={(e) => this.setState({ email: e.target.value })}
+                  />
+                  <input
+                    type="password"
+                    className="input-text"
+                    placeholder="Enter your password"
+                    value={this.state.password}
+                    onChange={(e) =>
+                      this.setState({ password: e.target.value })
+                    }
+                  />
                 </div>
               </div>
-            </div>
-            <div
-              id="step-1"
-              className="row details-container"
-              style={this.state.step1display}
-            >
-              <div className="col-6 image-column">
-                <div className="info-about">
-                  Tell us <span style={{ color: "#FF4133" }}>about</span> you...
+              <div
+                id="step-2"
+                className="row details-container"
+                style={this.state.step2display}
+              >
+                <div className="col-6 image-column">
+                  <div className="info-about">
+                    Tell us <span style={{ color: "#FF4133" }}>about</span> your
+                    college...
+                  </div>
+                  <img
+                    className="info-image"
+                    src={require("../../../assets/img/teaching-details.png")}
+                    alt="Register as student"
+                  />
                 </div>
+                <div className="col-6 input-column">
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter your college's name"
+                    value={this.state.college}
+                    onChange={(e) => this.setState({ college: e.target.value })}
+                  />
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter your department"
+                    value={this.state.dept}
+                    onChange={(e) => this.setState({ dept: e.target.value })}
+                  />
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="You teach which subjects?"
+                    value={this.state.subject}
+                    onChange={(e) => this.setState({ subject: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div
+                id="step-3"
+                className="row details-container"
+                style={this.state.step3display}
+              >
+                <div className="col-6 image-column">
+                  <div className="info-about">
+                    One <span style={{ color: "#FF4133" }}>last</span> entry...
+                  </div>
+                  <img
+                    className="info-image"
+                    src={require("../../../assets/img/teachersverify.png")}
+                    alt="Register as student"
+                  />
+                </div>
+                <div className="col-6 input-column">
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter your Phone number"
+                    value={this.state.phoneNo}
+                    onChange={(e) => this.setState({ phoneNo: e.target.value })}
+                  />
+                  <br />
+                  <input
+                    type="checkbox"
+                    name="termsconditions"
+                    defaultChecked={this.state.isChecked}
+                    onChange={() =>
+                      this.setState({ isChecked: !this.state.isChecked })
+                    }
+                  />{" "}
+                  I accept terms & conditions
+                  <div
+                    className="otpbtncontainer"
+                    style={{ textAlign: "center" }}
+                  >
+                    {OtpButton}
+                  </div>
+                  <input
+                    type="text"
+                    className="otpinput"
+                    placeholder="Enter Your OTP"
+                    name="otp"
+                    onChange={(e) => this.setState({ code: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div
+                id="step-4"
+                className="row details-container"
+                style={this.state.step4display}
+              >
+                <div className="col-6 image-column">
+                  <img
+                    className="info-image"
+                    src={require("../../../assets/img/rocket-human-icon 1.png")}
+                    alt="Register as student"
+                  />
+                </div>
+                <div className="col-6 input-column">
+                  <div className="hurray">
+                    HURRAY<span style={{ color: "#6534CC" }}>!</span>
+                  </div>
+                  <p className="success-message">
+                    You are registered on our platform. Head over to you
+                    dashboard.
+                  </p>
+                </div>
+              </div>
+              <div
+                id="nextbtn"
+                className="next"
+                onMouseOver={(e) => this.handlemouseover(e)}
+                onClick={() => this.next()}
+              >
+                {this.state.nextbtntext}
                 <img
-                  className="info-image"
-                  src={require("../../../assets/img/teacher-details-svg.png")}
-                  alt="Register as student"
+                  id="nextimg"
+                  src={require("../../../assets/logo/next.png")}
                 />
               </div>
-              <div className="col-6 input-column">
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter your full name"
-                  value={this.state.name}
-                  onChange={(e) => this.setState({ name: e.target.value })}
-                />
-                <input
-                  type="email"
-                  className="input-text"
-                  placeholder="Enter your email address"
-                  value={this.state.email}
-                  onChange={(e) => this.setState({ email: e.target.value })}
-                />
-                <input
-                  type="password"
-                  className="input-text"
-                  placeholder="Enter your password"
-                  value={this.state.password}
-                  onChange={(e) => this.setState({ password: e.target.value })}
-                />
-              </div>
-            </div>
-            <div
-              id="step-2"
-              className="row details-container"
-              style={this.state.step2display}
-            >
-              <div className="col-6 image-column">
-                <div className="info-about">
-                  Tell us <span style={{ color: "#FF4133" }}>about</span> your
-                  college...
-                </div>
-                <img
-                  className="info-image"
-                  src={require("../../../assets/img/teaching-details.png")}
-                  alt="Register as student"
-                />
-              </div>
-              <div className="col-6 input-column">
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter your college's name"
-                  value={this.state.college}
-                  onChange={(e) => this.setState({ college: e.target.value })}
-                />
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter your department"
-                  value={this.state.dept}
-                  onChange={(e) => this.setState({ dept: e.target.value })}
-                />
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="You teach which subjects?"
-                  value={this.state.subject}
-                  onChange={(e) => this.setState({ subject: e.target.value })}
-                />
-              </div>
-            </div>
-            <div
-              id="step-3"
-              className="row details-container"
-              style={this.state.step3display}
-            >
-              <div className="col-6 image-column">
-                <div className="info-about">
-                  One <span style={{ color: "#FF4133" }}>last</span> entry...
-                </div>
-                <img
-                  className="info-image"
-                  src={require("../../../assets/img/teachersverify.png")}
-                  alt="Register as student"
-                />
-              </div>
-              <div className="col-6 input-column">
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter your Phone number"
-                  value={this.state.phoneNo}
-                  onChange={(e) => this.setState({ phoneNo: e.target.value })}
-                />
-                <br />
-                <input
-                  type="checkbox"
-                  name="termsconditions"
-                  defaultChecked={this.state.isChecked}
-                  onChange={() =>
-                    this.setState({ isChecked: !this.state.isChecked })
-                  }
-                />{" "}
-                I accept terms & conditions
-                <div
-                  className="otpbtncontainer"
-                  style={{ textAlign: "center" }}
-                >
-                  {OtpButton}
-                </div>
-                <input
-                  type="text"
-                  className="otpinput"
-                  placeholder="Enter Your OTP"
-                  name="otp"
-                  onChange={(e) => this.setState({ code: e.target.value })}
-                />
-              </div>
-            </div>
-            <div
-              id="step-4"
-              className="row details-container"
-              style={this.state.step4display}
-            >
-              <div className="col-6 image-column">
-                <img
-                  className="info-image"
-                  src={require("../../../assets/img/rocket-human-icon 1.png")}
-                  alt="Register as student"
-                />
-              </div>
-              <div className="col-6 input-column">
-                <div className="hurray">
-                  HURRAY<span style={{ color: "#6534CC" }}>!</span>
-                </div>
-                <p className="success-message">
-                  You are registered on our platform. Head over to you
-                  dashboard.
-                </p>
-              </div>
-            </div>
-            <div
-              id="nextbtn"
-              className="next"
-              onMouseOver={(e) => this.handlemouseover(e)}
-              onClick={() => this.next()}
-            >
-              {this.state.nextbtntext}
-              <img
-                id="nextimg"
-                src={require("../../../assets/logo/next.png")}
-              />
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
