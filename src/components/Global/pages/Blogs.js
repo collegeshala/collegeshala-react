@@ -5,7 +5,7 @@ import Footer from "../Footer";
 const Blog = (props) => (
   <div class="col-lg-4 col-md-6">
     <div class="card mb-5">
-      <img src={require("../../../assets/img/Blogs/blog_4.jfif")} alt="" class="card-img-top card-custom-image"/>
+      <img src={props.blog.image_path} alt="" class="card-img-top card-custom-image"/>
       <div class="card-body">
         <h5 class="card-title">{props.blog.title}</h5>
         <p class="card-text mb-1">{props.blog.author}</p>
@@ -26,25 +26,29 @@ class Blogs extends Component {
         title: "Ways to Make Studying a Lot More Fun",
         author: "CollegeShala",
         date: "July 6, 2020",
-        link: "https://medium.com/@collegeshala2020/ways-to-make-studying-fun-cbce702bed42"
+        link: "https://medium.com/@collegeshala2020/ways-to-make-studying-fun-cbce702bed42",
+        image_path: require("../../../assets/img/Blogs/blog_4.jfif")
       },
       {
         title: "Advantages of Sharing Study Materials Online",
         author: "CollegeShala",
         date: "July 6, 2020",
-        link: "https://medium.com/@collegeshala2020/advantages-of-sharing-study-materials-online-6524a51fd564"
+        link: "https://medium.com/@collegeshala2020/advantages-of-sharing-study-materials-online-6524a51fd564",
+        image_path: require("../../../assets/img/Blogs/blog_3.jfif")
       },
       {
         title: "How To Take Study Notes in an Effective Way",
         author: "CollegeShala",
         date: "July 6, 2020",
-        link: "https://medium.com/@collegeshala2020/how-to-take-study-notes-in-an-effective-way-e5d0baf9a8f0"
+        link: "https://medium.com/@collegeshala2020/how-to-take-study-notes-in-an-effective-way-e5d0baf9a8f0",
+        image_path: require("../../../assets/img/Blogs/blog_2.jfif")
       },
       {
         title: "Avoiding Distractions While Studying",
         author: "Aashi Kumari",
         date: "June 18, 2020",
-        link: "https://medium.com/@collegeshala2020/avoiding-distractions-while-studying-7646df1f810a?sk=0d1400ef58f2d24efba217cf2bfa74d1"
+        link: "https://medium.com/@collegeshala2020/avoiding-distractions-while-studying-7646df1f810a?sk=0d1400ef58f2d24efba217cf2bfa74d1",
+        image_path: require("../../../assets/img/Blogs/blog_collegeshala.jpeg")
       }
     ]
     }
