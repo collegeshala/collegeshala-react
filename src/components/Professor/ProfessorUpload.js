@@ -1,6 +1,6 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { Fragment } from "react";
 import { navigate } from "@reach/router";
 import axios from "axios";
 
@@ -8,6 +8,7 @@ import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import ProfessorNav from "../Global/ProfessorNav";
 import ProfessorBreadcrumb from "../Professor/ProfessorBreadcrumb";
+import Loader from "./../Global/Loader";
 
 import UploadModal from "./UploadModal";
 
@@ -34,6 +35,7 @@ class Upload extends React.Component {
     myUploads: "",
     phoneNo: "",
     original: {},
+    isLoading: true,
   };
 
   setData() {
@@ -106,6 +108,7 @@ class Upload extends React.Component {
           university,
           myUploads,
           phoneNo,
+          isLoading: false,
         });
         /* console.log(fullName); */
         /* console.log(myUploads.map((note) => note.subjectname)); */
@@ -115,7 +118,9 @@ class Upload extends React.Component {
   }
 
   render() {
-    return (
+    return this.state.isLoading ? (
+      <Loader />
+    ) : (
       <div>
         {/* Teacher Upload Button Open div */}
         <UploadModal updateFunc={this.componentDidMount.bind(this)} />
@@ -210,7 +215,6 @@ class Upload extends React.Component {
             }
           </div>
         </div>
-
         <div className="container student-dashboard-material mt-3">
           <div id="myuploadsrow" className="row"></div>
           <nav
