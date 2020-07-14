@@ -1,14 +1,30 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { Fragment } from "react";
 import { navigate, Link } from "@reach/router";
 import axios from "axios";
+import { isLoggedIn, parseJwt, getToken } from "./js/auth";
 
 import Footer from "./components/Global/Footer";
 
 class Index extends React.Component {
   state = {
     email: "",
+    isLoggedIn: false,
+    accountLink: "",
   };
+
+  async componentDidMount() {
+    const checkLogin = await isLoggedIn();
+    let accountLink = "";
+    if (checkLogin) {
+      const token = await getToken();
+      accountLink =
+        parseJwt(token)["custom:isProfessor"] == "true"
+          ? "/professor-account"
+          : "/student-account";
+    }
+    this.setState({ isLoggedIn: checkLogin, accountLink });
+  }
 
   handleEmail(email) {
     this.setState({ email });
@@ -83,33 +99,42 @@ class Index extends React.Component {
                     <span id="nav-font">TalkShala</span>
                   </a>
                 </li>
-
-                <li className="nav-item">
-                  <a
-                    className="nav-link index-nav-link"
-                    id="nav-sign-up"
-                    href=""
-                    data-target=".navbar-collapse.show"
-                    onClick={() => navigate("/register")}
-                  >
-                    <span id="nav-font">Sign Up</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link index-nav-link"
-                    // onclick="goToURL(); return false;"
-                    target="_blank"
-                    id="nav-user-icon"
-                    href=""
-                    data-toggle="collapse"
-                    data-target=".navbar-collapse.show"
-                  >
-                    <span id="nav-font">
-                      <i className="fa fa-user-circle" aria-hidden="true"></i>
-                    </span>
-                  </a>
-                </li>
+                {this.state.isLoggedIn ? (
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link index-nav-link"
+                      id="nav-user-icon"
+                      to={this.state.accountLink}
+                    >
+                      <span id="nav-font">
+                        <i className="fa fa-user-circle" aria-hidden="true"></i>
+                      </span>
+                    </Link>
+                  </li>
+                ) : (
+                  <Fragment>
+                    <li className="nav-item">
+                      <Link
+                        className="nav-link index-nav-link"
+                        id="nav-sign-up"
+                        to="/login"
+                        data-target=".navbar-collapse.show"
+                      >
+                        <span id="nav-font">Log In</span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        className="nav-link index-nav-link"
+                        id="nav-sign-up"
+                        to="/register"
+                        data-target=".navbar-collapse.show"
+                      >
+                        <span id="nav-font">Sign Up</span>
+                      </Link>
+                    </li>
+                  </Fragment>
+                )}
               </ul>
             </div>
           </nav>
