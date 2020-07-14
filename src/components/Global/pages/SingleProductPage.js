@@ -32,6 +32,7 @@ class SingleProduct extends Component {
 
   async componentDidMount() {
     const { noteObj } = this.props;
+    console.log(noteObj);
     this.setState({ ...noteObj, isLoading: false });
   }
 
@@ -140,7 +141,7 @@ class SingleProduct extends Component {
                 <img
                   src={require("./../../../assets/img/single-product-page/prof-vector.png")}
                   className="single-product-prof-vector"
-                  alt=""
+                  alt="professor vectors"
                 />
                 <div className="single-product-prof-details">
                   <a href="#" className="custom-links">

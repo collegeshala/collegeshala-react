@@ -104,6 +104,9 @@ class AllProduct extends Component {
   async componentDidMount() {
     const value = localStorage.getItem("value");
     this.fetchResults(value);
+    this.setState({
+      value,
+    });
   }
 
   render() {
@@ -125,7 +128,7 @@ class AllProduct extends Component {
                     <a href="#">Library</a>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
-                    All Product
+                    {this.state.value}
                   </li>
                 </ol>
               </nav>
