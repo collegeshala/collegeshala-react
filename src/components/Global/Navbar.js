@@ -341,7 +341,7 @@ class Navbar extends Component {
   onenter(event) {
     const code = event.keyCode ? event.keyCode : event.which;
     if (code == 13) {
-      if (window.location.to.endsWith("/all-product")) {
+      if (window.location.href.endsWith("/all-product")) {
         this.props.searchFunc(localStorage.getItem("value"));
       } else {
         navigate("/all-product");
