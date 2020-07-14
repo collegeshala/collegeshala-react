@@ -5,13 +5,14 @@ import main_logo from "./../../assets/img/logo.png";
 import { getToken } from "./../../js/auth";
 import { isLoggedIn } from "./../../js/auth";
 import { parseJwt } from "./../../js/auth";
+import { Link } from "@reach/router";
 
 const AnonymousNav = (props) => (
   <div>
     <nav className="navbar custom-nav navbar-expand-lg navbar-light bg-custom-blur">
-      <a className="navbar-brand" href="/">
+      <Link className="navbar-brand" to="/">
         <img src={main_logo} id="logo" alt="" />
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -39,24 +40,24 @@ const AnonymousNav = (props) => (
         </ul>
         <ul className="navbar-nav ml-auto">
           <li className="nav-item" id="large-screen-search-box">
-            <a className="nav-link navbar-talkshala" href="./coming-soon.html">
+            <Link className="nav-link navbar-talkshala" to="/blogs">
               Blogs
-            </a>
+            </Link>
           </li>
           <li className="nav-item" id="large-screen-search-box">
-            <a className="nav-link navbar-talkshala" href="./coming-soon.html">
+            <Link className="nav-link navbar-talkshala" to="/coming-soon">
               TalkShala
-            </a>
+            </Link>
           </li>
           {/* <li className="nav-item">
-            <a className="nav-link" href="./cart.html">
+            <Link className="nav-link" to="./cart.html">
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-            </a>
+            </Link>
           </li> */}
           {/* <li className="nav-item" id="large-screen-search-box">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="#">
                   <i className="fa fa-user-circle" aria-hidden="true"></i>
-                </a>
+                </Link>
               </li> */}
         </ul>
       </div>
@@ -83,9 +84,9 @@ const AnonymousNav = (props) => (
 const StudentNav = (props) => (
   <div>
     <nav className="navbar custom-nav navbar-expand-lg navbar-light bg-custom-blur">
-      <a className="navbar-brand" href="/">
+      <Link className="navbar-brand" to="/">
         <img src={main_logo} id="logo" alt="" />
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -113,24 +114,24 @@ const StudentNav = (props) => (
         </ul>
         <ul className="navbar-nav ml-auto">
           <li className="nav-item" id="large-screen-search-box">
-            <a className="nav-link navbar-talkshala" href="./coming-soon.html">
+            <Link className="nav-link navbar-talkshala" to="/blogs">
               Blogs
-            </a>
+            </Link>
           </li>
           <li className="nav-item" id="large-screen-search-box">
-            <a className="nav-link navbar-talkshala" href="./coming-soon.html">
+            <Link className="nav-link navbar-talkshala" to="/coming-soon">
               TalkShala
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="./cart.html">
+            <Link className="nav-link" to="/cart">
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-            </a>
+            </Link>
           </li>
           <li className="nav-item dropdown" id="large-screen-search-box">
-            <a
+            <Link
               className="nav-link"
-              href="#"
+              to="#"
               id="navbarDropdownMenuLink"
               role="button"
               data-toggle="dropdown"
@@ -138,44 +139,44 @@ const StudentNav = (props) => (
               aria-expanded="false"
             >
               <i className="fa fa-user-circle" aria-hidden="true"></i>
-            </a>
+            </Link>
             <div
               className="dropdown-menu dropdown-menu-right"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              <a className="dropdown-item" href="./my-account.html">
+              <Link className="dropdown-item" to="/student-account">
                 My Account
-              </a>
-              <a className="dropdown-item" href="./student-dashboard.html">
+              </Link>
+              <Link className="dropdown-item" to="/student-materials">
                 My Materials
-              </a>
-              <a className="dropdown-item" href="./my-transaction.html">
+              </Link>
+              <Link className="dropdown-item" to="/student-transactions">
                 My Transactions
-              </a>
-              <a className="dropdown-item" href="./coming-soon.html">
+              </Link>
+              <Link className="dropdown-item" to="/coming-soon">
                 Q/A Forum
-              </a>
-              <a className="dropdown-item" href="#">
+              </Link>
+              <Link className="dropdown-item" to="#">
                 Log Out
-              </a>
+              </Link>
             </div>
           </li>
           <li className="nav-item" id="small-screen-search-box">
-            <a className="dropdown-item" href="./my-account.html">
+            <Link className="dropdown-item" to="/student-account">
               My Account
-            </a>
-            <a className="dropdown-item" href="./student-dashboard.html">
+            </Link>
+            <Link className="dropdown-item" to="/student-materials">
               My Materials
-            </a>
-            <a className="dropdown-item" href="./my-transaction.html">
+            </Link>
+            <Link className="dropdown-item" to="/student-transactions">
               My Transactions
-            </a>
-            <a className="dropdown-item" href="./coming-soon.html">
+            </Link>
+            <Link className="dropdown-item" to="/coming-soon">
               Q/A Forum
-            </a>
-            <a className="dropdown-item" href="#">
+            </Link>
+            <Link className="dropdown-item" to="#">
               Log Out
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
@@ -202,9 +203,9 @@ const StudentNav = (props) => (
 const TeacherNav = (props) => (
   <div>
     <nav className="navbar custom-nav navbar-expand-lg navbar-light bg-custom-blur">
-      <a className="navbar-brand" href="/">
+      <Link className="navbar-brand" to="/">
         <img src={main_logo} id="logo" alt="" />
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -232,24 +233,24 @@ const TeacherNav = (props) => (
         </ul>
         <ul className="navbar-nav ml-auto">
           <li className="nav-item" id="large-screen-search-box">
-            <a className="nav-link navbar-talkshala" href="./coming-soon.html">
+            <Link className="nav-link navbar-talkshala" to="/blogs">
               Blogs
-            </a>
+            </Link>
           </li>
           <li className="nav-item" id="large-screen-search-box">
-            <a className="nav-link navbar-talkshala" href="./coming-soon.html">
+            <Link className="nav-link navbar-talkshala" to="/coming-soon">
               TalkShala
-            </a>
+            </Link>
           </li>
           {/* <li className="nav-item">
-            <a className="nav-link" href="./cart.html">
+            <Link className="nav-link" to="./cart.html">
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-            </a>
+            </Link>
           </li> */}
           <li className="nav-item dropdown" id="large-screen-search-box">
-            <a
+            <Link
               className="nav-link"
-              href="#"
+              to="#"
               id="navbarDropdownMenuLink"
               role="button"
               data-toggle="dropdown"
@@ -257,44 +258,44 @@ const TeacherNav = (props) => (
               aria-expanded="false"
             >
               <i className="fa fa-user-circle" aria-hidden="true"></i>
-            </a>
+            </Link>
             <div
               className="dropdown-menu dropdown-menu-right"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              <a className="dropdown-item" href="./my-account.html">
+              <Link className="dropdown-item" to="/professor-account">
                 My Account
-              </a>
-              <a className="dropdown-item" href="./student-dashboard.html">
+              </Link>
+              <Link className="dropdown-item" to="/professor-upload">
                 My Uploads
-              </a>
-              <a className="dropdown-item" href="./my-transaction.html">
+              </Link>
+              <Link className="dropdown-item" to="/professor-earnings">
                 My Earnings
-              </a>
-              <a className="dropdown-item" href="./coming-soon.html">
+              </Link>
+              <Link className="dropdown-item" to="/coming-soon">
                 Q/A Forum
-              </a>
-              <a className="dropdown-item" href="#">
+              </Link>
+              <Link className="dropdown-item" to="#">
                 Log Out
-              </a>
+              </Link>
             </div>
           </li>
           <li className="nav-item" id="small-screen-search-box">
-            <a className="dropdown-item" href="./my-account.html">
+            <Link className="dropdown-item" to="/professor-account">
               My Account
-            </a>
-            <a className="dropdown-item" href="./student-dashboard.html">
+            </Link>
+            <Link className="dropdown-item" to="/professor-upload">
               My Uploads
-            </a>
-            <a className="dropdown-item" href="./my-transaction.html">
+            </Link>
+            <Link className="dropdown-item" to="/professor-earnings">
               My Earnings
-            </a>
-            <a className="dropdown-item" href="./coming-soon.html">
+            </Link>
+            <Link className="dropdown-item" to="/coming-soon">
               Q/A Forum
-            </a>
-            <a className="dropdown-item" href="#">
+            </Link>
+            <Link className="dropdown-item" to="#">
               Log Out
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
@@ -338,7 +339,7 @@ class Navbar extends Component {
   onenter(event) {
     const code = event.keyCode ? event.keyCode : event.which;
     if (code == 13) {
-      if (window.location.href.endsWith("/all-product")) {
+      if (window.location.to.endsWith("/all-product")) {
         this.props.searchFunc(localStorage.getItem("value"));
       } else {
         navigate("/all-product");
