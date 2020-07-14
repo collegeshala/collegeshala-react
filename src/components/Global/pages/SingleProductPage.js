@@ -27,12 +27,13 @@ class SingleProduct extends Component {
     requiredCredits: "",
     universityname: "",
     subjectname: "",
+    noteurl: "",
     note: this.props.note,
   };
 
   async componentDidMount() {
     const { noteObj } = this.props;
-    console.log(noteObj);
+    // console.log(noteObj);
     this.setState({ ...noteObj, isLoading: false });
   }
 
@@ -105,7 +106,17 @@ class SingleProduct extends Component {
           <div className=" course-and-suggested-area">
             <div className="row">
               <div className="col-12 col-md-6 notes-image-area notes-image">
-                <button type="button" className="btn preview-btn">
+                <button
+                  type="button"
+                  className="btn preview-btn"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    console.log(this.state.noteurl);
+                    navigate("/pdf", {
+                      state: { noteUrl: this.state.noteurl },
+                    });
+                  }}
+                >
                   Preview
                 </button>
                 <input

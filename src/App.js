@@ -24,6 +24,7 @@ import ProfessorAccount from "./components/Professor/ProfessorAccount";
 // UTILITY IMPORTS
 import SingleProductPage from "./components/Global/pages/SingleProductPage";
 import AllProduct from "./components/Global/pages/AllProduct";
+import Pdf from "./components/Global/Pdf";
 
 // GLOBAL IMPORTS
 import Homepage from "./Homepage";
@@ -37,7 +38,7 @@ import ReturnPolicy from "./components/Global/pages/ReturnPolicy";
 import Copyright from "./components/Global/pages/Copyright";
 import ProfessorUpload from "./components/Professor/ProfessorUpload";
 import ProfessorEarnings from "./components/Professor/ProfessorEarnings";
-import Blogs from "./components/Global/pages/Blogs"
+import Blogs from "./components/Global/pages/Blogs";
 
 const App = () => {
   return (
@@ -62,6 +63,7 @@ const App = () => {
       {/* UTILITY ROUTES */}
       <SingleProductPage path="/single-product" />
       <AllProduct path="/all-product" />
+      <Pdf path="/pdf" />
 
       {/* GLOBAL ROUTES */}
       <Homepage path="/" />

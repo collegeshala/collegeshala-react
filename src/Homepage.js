@@ -83,8 +83,6 @@ class Index extends React.Component {
                   <a
                     className="nav-link scroll index-nav-link"
                     href="#services"
-                    data-toggle="collapse"
-                    data-target=".navbar-collapse.show"
                   >
                     <span id="nav-font">Services</span>
                   </a>
@@ -93,8 +91,6 @@ class Index extends React.Component {
                   <a
                     className="nav-link scroll index-nav-link"
                     href="#talkshala"
-                    data-toggle="collapse"
-                    data-target=".navbar-collapse.show"
                   >
                     <span id="nav-font">TalkShala</span>
                   </a>
@@ -178,10 +174,7 @@ class Index extends React.Component {
           </h1>
           <div className="card-deck m-5">
             <div className="card">
-              <a
-                // onClick="userindexredirect(); return false;"
-                href="#"
-              >
+              <Link to="/coming-soon">
                 <p className="text-center">
                   <img
                     className="card-img-top services-image"
@@ -189,13 +182,13 @@ class Index extends React.Component {
                     alt="materials"
                   />
                 </p>
-              </a>
+              </Link>
               <div className="card-body">
-                <a href="#">
+                <Link to="/coming-soon">
                   <h5 className="card-title text-center" id="custom-purple">
                     Study Materials
                   </h5>
-                </a>
+                </Link>
                 <p className="card-text text-center"></p>
               </div>
             </div>
