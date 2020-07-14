@@ -5,6 +5,7 @@ import main_logo from "./../../assets/img/logo.png";
 import { getToken } from "./../../js/auth";
 import { isLoggedIn } from "./../../js/auth";
 import { parseJwt } from "./../../js/auth";
+import { signout } from "./../../js/auth";
 import { Link } from "@reach/router";
 
 const AnonymousNav = (props) => (
@@ -156,7 +157,7 @@ const StudentNav = (props) => (
               <Link className="dropdown-item" to="/coming-soon">
                 Q/A Forum
               </Link>
-              <Link className="dropdown-item" to="#">
+              <Link className="dropdown-item" to="#" onClick={props.logout}>
                 Log Out
               </Link>
             </div>
@@ -174,7 +175,7 @@ const StudentNav = (props) => (
             <Link className="dropdown-item" to="/coming-soon">
               Q/A Forum
             </Link>
-            <Link className="dropdown-item" to="#">
+            <Link className="dropdown-item" to="#" onChange={props.logout}>
               Log Out
             </Link>
           </li>
@@ -275,7 +276,7 @@ const TeacherNav = (props) => (
               <Link className="dropdown-item" to="/coming-soon">
                 Q/A Forum
               </Link>
-              <Link className="dropdown-item" to="#">
+              <Link className="dropdown-item" to="#" onChange={props.logout}>
                 Log Out
               </Link>
             </div>
@@ -293,7 +294,7 @@ const TeacherNav = (props) => (
             <Link className="dropdown-item" to="/coming-soon">
               Q/A Forum
             </Link>
-            <Link className="dropdown-item" to="#">
+            <Link className="dropdown-item" to="#" onChange={props.logout}>
               Log Out
             </Link>
           </li>
@@ -330,6 +331,7 @@ class Navbar extends Component {
 
     this.search = this.search.bind(this);
     this.onenter = this.onenter.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   search(event) {
@@ -346,6 +348,11 @@ class Navbar extends Component {
       }
       // window.location.pathname = "/all-product";
     }
+  }
+
+  logout() {
+    signout();
+    navigate("/");
   }
 
   async componentDidMount() {
@@ -369,9 +376,9 @@ class Navbar extends Component {
     return this.state.isLoading ? (
       <AnonymousNav search={this.search} check={this.onenter} />
     ) : this.state.isProf ? (
-      <TeacherNav search={this.search} check={this.onenter} />
+      <TeacherNav search={this.search} check={this.onenter} logout={this.logout}/>
     ) : (
-      <StudentNav search={this.search} check={this.onenter} />
+      <StudentNav search={this.search} check={this.onenter} logout={this.logout}/>
     );
   }
 }
