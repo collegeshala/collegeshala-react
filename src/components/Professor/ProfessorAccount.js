@@ -108,11 +108,6 @@ class Account extends React.Component {
       <div className="container student-account">
         <div className="row">
           <div className="col-12 col-md-8">
-            <div className="container m-5">
-              <a href="" onClick={this.logout}>
-                Log Out
-              </a>
-            </div>
             <form action="#" method="post">
               <div className="form-row mb-1"></div>
               <div className="form-group">

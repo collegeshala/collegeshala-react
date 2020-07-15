@@ -2025,6 +2025,14 @@ b {
   margin-top: -5px;
 }
 
+.custom-buy-credits-button {
+  border: #ff4133 2px solid;
+  border-radius: 45px;
+  padding: 0.4rem 2.4rem;
+  color: #6534cc;
+  margin-top: -5px;
+}
+
 #earning-credits-section h2,
 p,
 b,

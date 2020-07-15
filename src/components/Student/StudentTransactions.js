@@ -138,14 +138,13 @@ class Transactions extends React.Component {
             </div>
             <div className="col-12 col-md-4">
               <a
-                href="#"
+                href=""
                 data-toggle="modal"
                 data-target="#buy-credits-btn"
                 className="btn custom-buy-credits-button"
               >
                 <span>
-                  Buy Credits
-                  <i className="fas fa-arrow-right"></i>
+                  Buy Credits <i className="fas fa-arrow-right"></i>
                 </span>
               </a>
             </div>

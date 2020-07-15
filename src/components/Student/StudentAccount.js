@@ -132,11 +132,6 @@ class Account extends React.Component {
       <div className="container student-account">
         <div className="row">
           <div className="col-12 col-md-8">
-            <div className="container m-5">
-              <a href="" onClick={this.logout}>
-                Log Out
-              </a>
-            </div>
             <form action="#" method="post">
               <div className="form-group">
                 <label htmlFor="fullname">Full Name</label>
@@ -163,7 +158,7 @@ class Account extends React.Component {
                   value={this.state.email}
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
-                  onChange={(e) => this.setState({ email: e.target.value })}
+                  onChange={() => alert("You cannot change your email!")}
                 />
               </div>
               <div className="form-group">
@@ -229,11 +224,7 @@ class Account extends React.Component {
                   value={this.state.phoneNo}
                   aria-describedby="emailHelp"
                   placeholder="Phone Number"
-                  onChange={(e) =>
-                    this.setState({
-                      phoneNo: e.target.value,
-                    })
-                  }
+                  onChange={() => alert("You cannot change your email!")}
                 />
               </div>
               <div className="container pt-3">
@@ -243,7 +234,7 @@ class Account extends React.Component {
                   onClick={(e) => this.update(e)}
                 >
                   Update
-                </button>
+                </button>{" "}
                 <button
                   type="submit"
                   onClick={(e) => this.discardChanges(e)}

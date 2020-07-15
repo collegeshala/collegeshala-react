@@ -157,9 +157,9 @@ const StudentNav = (props) => (
               <Link className="dropdown-item" to="/coming-soon">
                 Q/A Forum
               </Link>
-              <Link className="dropdown-item" to="#" onClick={props.logout}>
+              <a className="dropdown-item" href="" onClick={props.logout}>
                 Log Out
-              </Link>
+              </a>
             </div>
           </li>
           <li className="nav-item" id="small-screen-search-box">
@@ -175,9 +175,9 @@ const StudentNav = (props) => (
             <Link className="dropdown-item" to="/coming-soon">
               Q/A Forum
             </Link>
-            <Link className="dropdown-item" to="#" onChange={props.logout}>
+            <a className="dropdown-item" href="" onClick={props.logout}>
               Log Out
-            </Link>
+            </a>
           </li>
         </ul>
       </div>
@@ -276,9 +276,9 @@ const TeacherNav = (props) => (
               <Link className="dropdown-item" to="/coming-soon">
                 Q/A Forum
               </Link>
-              <Link className="dropdown-item" to="#" onChange={props.logout}>
+              <a className="dropdown-item" href="" onClick={props.logout}>
                 Log Out
-              </Link>
+              </a>
             </div>
           </li>
           <li className="nav-item" id="small-screen-search-box">
@@ -294,9 +294,9 @@ const TeacherNav = (props) => (
             <Link className="dropdown-item" to="/coming-soon">
               Q/A Forum
             </Link>
-            <Link className="dropdown-item" to="#" onChange={props.logout}>
+            <a className="dropdown-item" href="" onClick={props.logout}>
               Log Out
-            </Link>
+            </a>
           </li>
         </ul>
       </div>
@@ -376,9 +376,17 @@ class Navbar extends Component {
     return this.state.isLoading ? (
       <AnonymousNav search={this.search} check={this.onenter} />
     ) : this.state.isProf ? (
-      <TeacherNav search={this.search} check={this.onenter} logout={this.logout}/>
+      <TeacherNav
+        search={this.search}
+        check={this.onenter}
+        logout={this.logout}
+      />
     ) : (
-      <StudentNav search={this.search} check={this.onenter} logout={this.logout}/>
+      <StudentNav
+        search={this.search}
+        check={this.onenter}
+        logout={this.logout}
+      />
     );
   }
 }
