@@ -279,6 +279,12 @@ class Login extends React.Component {
                     }}
                   />
                   <br />
+                  <div id="register-link">
+                    Don't have an account?
+                    <a href="" onClick={() => navigate("/register")}>
+                      <span style={{ color: "#ff4133" }}> Register here</span>
+                    </a>
+                  </div>
                   <p id="forgot-password" onClick={() => this.next()}>
                     Forgot your Password?
                   </p>
