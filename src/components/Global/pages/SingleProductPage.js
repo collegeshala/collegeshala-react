@@ -111,9 +111,9 @@ class SingleProduct extends Component {
                   className="btn preview-btn"
                   onClick={(event) => {
                     event.preventDefault();
-                    console.log(this.state.noteurl);
+                    // console.log(this.state.noteurl);
                     navigate("/pdf", {
-                      state: { noteUrl: this.state.noteurl },
+                      state: { noteUrl: this.state.noteurl, previewOnly: true },
                     });
                   }}
                 >
