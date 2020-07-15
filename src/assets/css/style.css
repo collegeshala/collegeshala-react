@@ -2093,7 +2093,7 @@ span {
 }
 
 #Blog-section .card-title {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #Blog-section a {
@@ -2102,4 +2102,36 @@ span {
 
 #Blog-section a:hover {
   background-color: #46248f;
+}
+
+.pdf-buttons {
+  padding: 10px;
+  border-radius: 5px 5px 5px 5px;
+  background-color: #ccb5ff;
+  font-weight: bold;
+  margin: 10px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: large;
+}
+
+.pdf-buttons:hover {
+  background-color: #ac85ff;
+}
+
+.page-status {
+  font-weight: bold;
+  margin: auto;
+  font-family: "Courier New", Courier, monospace;
+  border-radius: 5px 5px 5px 5px;
+  font-size: large;
+  border: 2px solid #ffbec4;
+  width: 20%;
+}
+
+.pdf-viewer,
+.pdf-renderer {
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  align-self: center;
 }

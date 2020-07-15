@@ -7,7 +7,7 @@ class Loader extends React.Component {
       const el = document.getElementById("global-footer");
       el.classList.toggle("isLoading");
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }
 
@@ -16,7 +16,7 @@ class Loader extends React.Component {
       const el = document.getElementById("global-footer");
       el.classList.toggle("isLoading");
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }
 

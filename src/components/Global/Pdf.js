@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import Loader from "./Loader";
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 class MyApp extends Component {
@@ -43,20 +47,31 @@ class MyApp extends Component {
 
     return (
       <div>
-        <button onClick={this.onNext}>Next</button>{" "}
-        <button onClick={this.onPrevious}>Previous</button>
-        <p>
-          Page {pageNumber} of {numPages}
-        </p>
-        <Document
-          file={this.state.pdfLink}
-          onLoadSuccess={this.onDocumentLoadSuccess.bind(this)}
-          onLoadError={this.onDocumentLoadFailure}
-          onItemClick={() => this.setState({ pageNumber: 4 })}
-          loading={<div>Loading</div>}
+        <Navbar />
+        <div
+          className="pdf-viewer"
+          style={{ marginTop: "20px", textAlign: "center" }}
         >
-          <Page scale={2} pageNumber={pageNumber} />
-        </Document>
+          <button className="pdf-buttons" onClick={this.onNext}>
+            Next
+          </button>{" "}
+          <button className="pdf-buttons" onClick={this.onPrevious}>
+            Previous
+          </button>
+          <p className="page-status">
+            Page {pageNumber} of {numPages}
+          </p>
+          <Document
+            file={this.state.pdfLink}
+            onLoadSuccess={this.onDocumentLoadSuccess.bind(this)}
+            onLoadError={this.onDocumentLoadFailure}
+            loading={<Loader />}
+            // loading={<div>Loading</div>}
+          >
+            <Page className="pdf-renderer" scale={2} pageNumber={pageNumber} />
+          </Document>
+          <Footer />
+        </div>
       </div>
     );
   }
