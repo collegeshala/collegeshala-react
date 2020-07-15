@@ -33,7 +33,7 @@ class SingleProduct extends Component {
 
   async componentDidMount() {
     const { noteObj } = this.props;
-    // console.log(noteObj);
+     console.log(noteObj);
     this.setState({ ...noteObj, isLoading: false });
   }
 

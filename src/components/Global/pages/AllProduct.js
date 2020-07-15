@@ -19,6 +19,7 @@ const NoteCard = ({ note }) => (
     </div>
     <div className="col-12 col-md-8">
       <a
+        href="#"
         id="to-pdf"
         onClick={(event) => {
           event.preventDefault();
@@ -26,7 +27,7 @@ const NoteCard = ({ note }) => (
         }}
       >
         <h5>
-          <span id="custom-purple">{note.chaptername}</span> -{note.subjectname}
+          <span id="custom-purple">{note.chaptername}</span> - {note.subjectname}
         </h5>
       </a>
       <div className="float-left mt-1">

@@ -1,7 +1,7 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment } from "react";
-import { navigate } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import axios from "axios";
 
 import Navbar from "../Global/Navbar";
@@ -112,6 +112,7 @@ class Upload extends React.Component {
         });
         /* console.log(fullName); */
         /* console.log(myUploads.map((note) => note.subjectname)); */
+        console.log(myUploads);
         this.setData();
       })
       .catch((err) => console.error(err));
@@ -195,12 +196,21 @@ class Upload extends React.Component {
                           <h5 className="professor">
                             By {this.state.fullName}
                           </h5>
-                          <p className="card-text">
+                          {/* <p className="card-text">
                             Some quick example text to build on the card title
                             and make up the bulk of the card's content.
-                          </p>
+                          </p> */}
                           <button
-                            // onClick="viewNote()"
+                            onClick={(event) => {
+                              event.preventDefault();
+                              // console.log(this.state.noteurl);
+                              navigate("/pdf", {
+                                state: {
+                                  noteUrl: this.state.noteurl,
+                                  previewOnly: true,
+                                },
+                              });
+                            }}
                             className="btn btn-primary"
                             value={note.noteId}
                           >

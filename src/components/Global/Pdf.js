@@ -13,7 +13,7 @@ class MyApp extends Component {
     pageNumber: 1,
     pdfLink: this.props.location.state.noteUrl,
     previewOnly: this.props.location.state.previewOnly,
-    scale: 5,
+    scale: 0.5,
   };
 
   onDocumentLoadSuccess = ({ numPages }) => {
@@ -46,18 +46,18 @@ class MyApp extends Component {
   scaleMinus = (event) => {
     event.preventDefault();
     const { scale } = this.state;
-    if(scale > 0.5) {
-      this.setState({ scale: scale - 0.5 })
+    if (scale > 0.5) {
+      this.setState({ scale: scale - 0.5 });
     }
-  }
+  };
 
   scalePlus = (event) => {
     event.preventDefault();
     const { scale } = this.state;
-    if(scale < 5) {
-      this.setState({ scale: scale + 0.5 })
+    if (scale < 5) {
+      this.setState({ scale: scale + 0.5 });
     }
-  }
+  };
 
   render() {
     const { pageNumber, numPages, scale } = this.state;
@@ -80,28 +80,30 @@ class MyApp extends Component {
           </div>
           <div>
             <button className="pdf-buttons" onClick={this.scaleMinus}>
-              <i class="fas fa-search-minus"></i>
+              <i className="fas fa-search-minus"></i>
             </button>{" "}
             <button className="pdf-buttons" onClick={this.scalePlus}>
-              <i class="fas fa-search-plus"></i>
+              <i className="fas fa-search-plus"></i>
             </button>
           </div>
           <p className="page-status">
             Page {pageNumber} of {numPages}
           </p>
-          <Document
-            file={this.state.pdfLink}
-            onLoadSuccess={this.onDocumentLoadSuccess.bind(this)}
-            onLoadError={this.onDocumentLoadFailure}
-            loading={<Loader />}
-            // loading={<div>Loading</div>}
-          >
-            <Page
-              className="pdf-renderer"
-              pageNumber={pageNumber}
-              scale={scale}
-            />
-          </Document>
+          <div className="pdf-content">
+            <Document
+              file={this.state.pdfLink}
+              onLoadSuccess={this.onDocumentLoadSuccess.bind(this)}
+              onLoadError={this.onDocumentLoadFailure}
+              loading={<Loader />}
+              // loading={<div>Loading</div>}
+            >
+              <Page
+                className="pdf-renderer"
+                pageNumber={pageNumber}
+                scale={scale}
+              />
+            </Document>
+          </div>
           <Footer />
         </div>
       </div>

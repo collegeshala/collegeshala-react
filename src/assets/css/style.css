@@ -2135,3 +2135,9 @@ span {
   justify-content: center;
   align-self: center;
 }
+
+.pdf-viewer .pdf-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
