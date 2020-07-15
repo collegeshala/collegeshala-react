@@ -352,7 +352,7 @@ class Navbar extends Component {
 
   logout() {
     signout();
-    navigate("/");
+    navigate("/login");
   }
 
   async componentDidMount() {
