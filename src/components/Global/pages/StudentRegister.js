@@ -475,7 +475,7 @@ class StudentRegister extends React.Component {
                       selected={this.state.university === "Calcutta-University"}
                       value="Calcutta-University"
                     >
-                      Calcutta University
+                      University of Calcutta
                     </option>
                     <option
                       selected={this.state.university === "Amity-University"}
