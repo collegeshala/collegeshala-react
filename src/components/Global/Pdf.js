@@ -13,6 +13,7 @@ class MyApp extends Component {
     pageNumber: 1,
     pdfLink: this.props.location.state.noteUrl,
     previewOnly: this.props.location.state.previewOnly,
+    scale: 5,
   };
 
   onDocumentLoadSuccess = ({ numPages }) => {
@@ -42,8 +43,24 @@ class MyApp extends Component {
     }
   };
 
+  scaleMinus = (event) => {
+    event.preventDefault();
+    const { scale } = this.state;
+    if(scale > 0.5) {
+      this.setState({ scale: scale - 0.5 })
+    }
+  }
+
+  scalePlus = (event) => {
+    event.preventDefault();
+    const { scale } = this.state;
+    if(scale < 5) {
+      this.setState({ scale: scale + 0.5 })
+    }
+  }
+
   render() {
-    const { pageNumber, numPages } = this.state;
+    const { pageNumber, numPages, scale } = this.state;
 
     return (
       <div>
@@ -52,12 +69,23 @@ class MyApp extends Component {
           className="pdf-viewer"
           style={{ marginTop: "20px", textAlign: "center" }}
         >
-          <button className="pdf-buttons" onClick={this.onNext}>
-            Next
-          </button>{" "}
-          <button className="pdf-buttons" onClick={this.onPrevious}>
-            Previous
-          </button>
+          <div>
+            <h3 className="display-4">Page Controls</h3>
+            <button className="pdf-buttons" onClick={this.onNext}>
+              Next
+            </button>{" "}
+            <button className="pdf-buttons" onClick={this.onPrevious}>
+              Previous
+            </button>
+          </div>
+          <div>
+            <button className="pdf-buttons" onClick={this.scaleMinus}>
+              <i class="fas fa-search-minus"></i>
+            </button>{" "}
+            <button className="pdf-buttons" onClick={this.scalePlus}>
+              <i class="fas fa-search-plus"></i>
+            </button>
+          </div>
           <p className="page-status">
             Page {pageNumber} of {numPages}
           </p>
@@ -68,7 +96,11 @@ class MyApp extends Component {
             loading={<Loader />}
             // loading={<div>Loading</div>}
           >
-            <Page className="pdf-renderer" scale={2} pageNumber={pageNumber} />
+            <Page
+              className="pdf-renderer"
+              pageNumber={pageNumber}
+              scale={scale}
+            />
           </Document>
           <Footer />
         </div>
