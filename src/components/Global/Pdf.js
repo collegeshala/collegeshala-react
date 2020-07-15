@@ -70,7 +70,7 @@ class MyApp extends Component {
           style={{ marginTop: "20px", textAlign: "center" }}
         >
           <div>
-            <h3 className="display-4">Page Controls</h3>
+            {/* <h3 className="display-4">Page Controls</h3> */}
             <button className="pdf-buttons" onClick={this.onNext}>
               Next
             </button>{" "}

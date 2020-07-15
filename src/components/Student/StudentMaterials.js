@@ -2,7 +2,7 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment } from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import axios from "axios";
 
 import Navbar from "../Global/Navbar";
@@ -104,7 +104,15 @@ class Materials extends React.Component {
                               and make up the bulk of the card's content.
                             </p>
                             <button
-                              // onClick="viewNote()"
+                              onClick={(event) => {
+                                event.preventDefault();
+                                navigate("/pdf", {
+                                  state: {
+                                    noteUrl: note.noteurl,
+                                    previewOnly: false,
+                                  },
+                                });
+                              }}
                               className="btn btn-primary"
                               value={note.noteId}
                             >

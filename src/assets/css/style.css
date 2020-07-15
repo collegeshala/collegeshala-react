@@ -2120,7 +2120,7 @@ span {
 
 .page-status {
   font-weight: bold;
-  margin: auto;
+  margin: 10px auto 10px auto;
   font-family: "Courier New", Courier, monospace;
   border-radius: 5px 5px 5px 5px;
   font-size: large;

@@ -112,7 +112,7 @@ class Upload extends React.Component {
         });
         /* console.log(fullName); */
         /* console.log(myUploads.map((note) => note.subjectname)); */
-        console.log(myUploads);
+        // console.log(myUploads);
         this.setData();
       })
       .catch((err) => console.error(err));
@@ -203,11 +203,12 @@ class Upload extends React.Component {
                           <button
                             onClick={(event) => {
                               event.preventDefault();
-                              // console.log(this.state.noteurl);
+                              const noteurl = `https://collegeshala-notes.s3.ap-south-1.amazonaws.com/${note.noteId}.pdf`;
+                              // console.log(noteurl);
                               navigate("/pdf", {
                                 state: {
-                                  noteUrl: this.state.noteurl,
-                                  previewOnly: true,
+                                  noteUrl: noteurl,
+                                  previewOnly: false,
                                 },
                               });
                             }}
