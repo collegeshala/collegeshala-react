@@ -60,9 +60,12 @@ class Materials extends React.Component {
       },
     })
       .then(({ data }) => {
-        console.log({ data });
+        // console.log({ data });
         if (!data.error) {
           this.setState({ notes: data, isLoading: false });
+        } else {
+          // console.log(data.error);
+          this.setState({ isLoading: false });
         }
       })
       .catch((err) => console.error(err));
