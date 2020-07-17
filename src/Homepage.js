@@ -87,6 +87,14 @@ class Index extends React.Component {
                     <span id="nav-font">Services</span>
                   </a>
                 </li>
+                <li className="nav-item active">
+                  <Link
+                    className="nav-link scroll index-nav-link"
+                    to="/blogs"
+                  >
+                    <span id="nav-font">Blogs</span>
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <a
                     className="nav-link scroll index-nav-link"
