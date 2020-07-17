@@ -21,6 +21,9 @@ class Blogs extends Component {
     super(props);
     
     this.state = {
+      // Add the latest blog object at the top-most position of the blogs array.
+      // Continue to do this till a function is added which automatically positions the trendiest blog at the top.
+      // Follow this rule strictly till the above condition is satisfied, after which you can delete this comment. 
       blogs: [
         {
         title: "Ways to Make Studying a Lot More Fun",
