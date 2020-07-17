@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 class ComingSoon extends Component {
   render() {
     return (
-      <body width="device-width">
+      <div width="device-width">
         <div id="home">
+        <Navbar />
           <div className="container">
             <h1 className="text-center coming-soon-heading">
               <span id="custom-purple">Coming</span>
@@ -12,7 +15,8 @@ class ComingSoon extends Component {
             </h1>
           </div>
         </div>
-      </body>
+        <Footer />
+      </div>
     )
   }
 }

@@ -1,39 +1,22 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Link, navigate } from "@reach/router";
+import { navigate } from "@reach/router";
 import axios from "axios";
 
 import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
-import SecondaryNav from "../Global/SecondaryNav";
+import ProfessorNav from "../Global/ProfessorNav";
+import ProfessorBreadcrumb from "../Professor/ProfessorBreadcrumb";
 
 import { getToken, signout } from "./../../js/auth";
 
-const StudentAccount = () => {
+const ProfessorAccount = () => {
   return (
     <React.Fragment>
       <Navbar />
-      <div className="container pt-4">
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="spa.html">Home</a>
-            </li>
-            <li className="breadcrumb-item">
-              <Link to="/student-account">Student's Name</Link>
-            </li>
-            <li
-              className="breadcrumb-item active"
-              id="current-active"
-              aria-current="page"
-            >
-              My Account
-            </li>
-          </ol>
-        </nav>
-      </div>
-      <SecondaryNav />
+      <ProfessorBreadcrumb breadcrumbs={"Edit Account"} />
+      <ProfessorNav />
       <Account />
       <Footer />
     </React.Fragment>
@@ -45,10 +28,10 @@ class Account extends React.Component {
     fullName: "",
     email: "",
     college: "",
-    university: "",
-    sem: "0",
     phoneNo: "",
     original: {},
+    dept: "",
+    subjects: "",
   };
 
   setData() {
@@ -59,7 +42,8 @@ class Account extends React.Component {
 
   discardChanges(event) {
     event.preventDefault();
-    this.setData(this.state.original);
+    const { original } = this.state;
+    this.setState({ ...original, original });
   }
 
   async update(event) {
@@ -67,12 +51,12 @@ class Account extends React.Component {
     const data = this.state;
     delete data.original;
     delete data.email;
+    delete data.phoneNo;
     const token = await getToken();
-    // console.log({ idToken: token });
 
     axios({
       method: "POST",
-      url: "https://api.collegeshala.com/updatestudentaccount",
+      url: "https://api.collegeshala.com/updateprofessorsaccount",
       headers: {
         authorization: token,
       },
@@ -96,31 +80,23 @@ class Account extends React.Component {
 
   async componentDidMount() {
     const token = await getToken();
-    // console.log({ idToken: token });
+
     axios({
       method: "POST",
-      url: "https://api.collegeshala.com/studentdetails",
+      url: "https://api.collegeshala.com/professordetails",
       headers: {
         authorization: token,
       },
     })
       .then(({ data }) => {
-        console.log({ studentDetails: data.Item });
-        const {
-          fullName,
-          email,
-          college,
-          university,
-          sem,
-          phoneNo,
-        } = data.Item;
+        const { email, college, dept, phoneNo, fullName, subjects } = data.Item;
         this.setState({
-          fullName,
           email,
           college,
-          university,
-          sem: sem.toString(),
+          dept,
           phoneNo,
+          fullName,
+          subjects,
         });
         this.setData();
       })
@@ -133,15 +109,16 @@ class Account extends React.Component {
         <div className="row">
           <div className="col-12 col-md-8">
             <form action="#" method="post">
+              <div className="form-row mb-1"></div>
               <div className="form-group">
                 <label htmlFor="fullname">Full Name</label>
                 <input
                   type="text"
                   className="form-control"
                   id="fullname"
-                  value={this.state.fullName}
                   aria-describedby="emailHelp"
                   placeholder="Enter Full Name"
+                  value={this.state.fullName}
                   onChange={(e) =>
                     this.setState({
                       fullName: e.target.value,
@@ -155,9 +132,9 @@ class Account extends React.Component {
                   type="email"
                   className="form-control"
                   id="email"
-                  value={this.state.email}
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
+                  value={this.state.email}
                   onChange={() => alert("You cannot change your email!")}
                 />
               </div>
@@ -167,9 +144,9 @@ class Account extends React.Component {
                   type="text"
                   className="form-control"
                   id="college"
-                  value={this.state.college}
                   aria-describedby="emailHelp"
                   placeholder="College Name"
+                  value={this.state.college}
                   onChange={(e) =>
                     this.setState({
                       college: e.target.value,
@@ -178,71 +155,63 @@ class Account extends React.Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="university">University</label>
+                <label htmlFor="dept">Department</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="university"
-                  value={this.state.university}
+                  id="dept"
                   aria-describedby="emailHelp"
-                  placeholder="Degree Pursuing"
+                  placeholder="Department"
+                  value={this.state.dept}
                   onChange={(e) =>
                     this.setState({
-                      university: e.target.value,
+                      dept: e.target.value,
                     })
                   }
                 />
               </div>
-              {this.state.sem === "0" ? null : (
-                <div className="form-group">
-                  <label htmlFor="semester">Semester</label>
-                  <select
-                    id="semester"
-                    className="form-control"
-                    defaultValue={this.state.sem}
-                    onChange={(e) => {
-                      const sem = e.target.value;
-                      console.log(sem);
-                      this.setState({ sem });
-                    }}
-                  >
-                    <option value="1">First</option>
-                    <option value="2">Second</option>
-                    <option value="3">Third</option>
-                    <option value="4">Fourth</option>
-                    <option value="5">Fifth</option>
-                    <option value="6">Sixth</option>
-                  </select>
-                </div>
-              )}
+              <div className="form-group">
+                <label htmlFor="subjects">Subjects</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="subjects"
+                  aria-describedby="emailHelp"
+                  placeholder="Subjects"
+                  value={this.state.subjects}
+                  onChange={(e) =>
+                    this.setState({
+                      subjects: e.target.value,
+                    })
+                  }
+                />
+              </div>
               <div className="form-group">
                 <label htmlFor="phoneNo">Phone Number</label>
                 <input
                   type="text"
                   className="form-control"
                   id="phoneNo"
-                  value={this.state.phoneNo}
                   aria-describedby="emailHelp"
                   placeholder="Phone Number"
-                  onChange={() => alert("You cannot change your email!")}
+                  value={this.state.phoneNo}
+                  onChange={() => alert("You cannot change your phone number!")}
                 />
               </div>
-              <div className="container pt-3">
-                <button
-                  type="submit"
-                  className="btn btn-primary update-btn"
-                  onClick={(e) => this.update(e)}
-                >
-                  Update
-                </button>{" "}
-                <button
-                  type="submit"
-                  onClick={(e) => this.discardChanges(e)}
-                  className="btn btn-secondary"
-                >
-                  Discard Changes
-                </button>
-              </div>
+              <button
+                type="submit"
+                className="btn btn-primary update-btn"
+                onClick={this.update.bind(this)}
+              >
+                Update
+              </button>{" "}
+              <button
+                type="submit"
+                className="btn btn-secondary"
+                onClick={this.discardChanges.bind(this)}
+              >
+                Discard Changes
+              </button>
             </form>
           </div>
         </div>
@@ -251,4 +220,4 @@ class Account extends React.Component {
   }
 }
 
-export default StudentAccount;
+export default ProfessorAccount;

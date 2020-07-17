@@ -1,9 +1,13 @@
-import React from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, {Component} from "react";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
-class About extends React.Component {
+class About extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <section className="text-center mb-3 py-3" id="About-Us">
           <div className="container">
             <div className="row">
@@ -35,7 +39,7 @@ class About extends React.Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div className="card text-center mb-5">
                     <div className="card-body">
                       <img
@@ -47,7 +51,7 @@ class About extends React.Component {
                       <h5 className="text-muted mb-3">CEO</h5>
                       <a
                         href="https://www.linkedin.com/in/md-fazal-mustafa-ba5265129/"
-                        className="btn btn-outline-dark"
+                        className="btn btn-outline-dark mb-5"
                       >
                         Visit Profile{" "}
                         <i className="fab fa-linkedin text-muted"></i>
@@ -55,7 +59,7 @@ class About extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div className="card text-center mb-5">
                     <div className="card-body">
                       <img
@@ -67,6 +71,26 @@ class About extends React.Component {
                       <h5 className="text-muted mb-3">Managing Partner</h5>
                       <a
                         href="https://www.linkedin.com/in/upamanyu-chatterjee-a7220b172/"
+                        className="btn btn-outline-dark mb-5"
+                      >
+                        Visit Profile{" "}
+                        <i className="fab fa-linkedin text-muted"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="card text-center mb-5">
+                    <div className="card-body">
+                      <img
+                        src={require("../../../assets/img/Shouradeep.jpeg")}
+                        alt=""
+                        className="img-fluid rounded-circle mb-3"
+                      />
+                      <h3>Shouradeep Chakraborty</h3>
+                      <h5 className="text-muted mb-3">Founder, COO</h5>
+                      <a
+                        href="https://www.linkedin.com/in/shouradeep-chakraborty-7b345a191/"
                         className="btn btn-outline-dark"
                       >
                         Visit Profile{" "}
@@ -84,26 +108,6 @@ class About extends React.Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col-lg-3 col-md-6">
-                  <div className="card text-center mb-5">
-                    <div className="card-body">
-                      <img
-                        src={require("../../../assets/img/Sayantan.jfif")}
-                        alt=""
-                        className="img-fluid rounded-circle mb-4"
-                      />
-                      <h3 className="mb-4">Sayantan Biswas</h3>
-                      <h5 className="text-muted mb-3">Tech Lead</h5>
-                      <a
-                        href="https://www.linkedin.com/in/sayantan-biswas/"
-                        className="btn btn-outline-dark"
-                      >
-                        Visit Profile{" "}
-                        <i className="fab fa-linkedin text-muted"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
                 <div className="col-lg-3 col-md-6">
                   <div className="card text-center mb-5">
                     <div className="card-body">
@@ -170,11 +174,11 @@ class About extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-3 col-md-6 mx-auto">
+                <div className="col-lg-3 col-md-6">
                   <div className="card text-center mb-5">
                     <div className="card-body">
                       <img
-                        src={require("../../../assets/img/Rupdeep.jfif")}
+                        src={require("../../../assets/img/Rupdeep.jpg")}
                         alt=""
                         className="img-fluid rounded-circle mb-3"
                       />
@@ -183,7 +187,7 @@ class About extends React.Component {
                         Front-End Web Developer
                       </h5>
                       <a
-                        href="https://www.linkedin.com/in/rupdeep-saha-400793183/"
+                        href="https://www.linkedin.com/in/rupdeep-saha-400793183"
                         className="btn btn-outline-dark"
                       >
                         Visit Profile{" "}
@@ -201,7 +205,7 @@ class About extends React.Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-4">
+                <div className="col-md-3">
                   <div className="card text-center mb-5">
                     <div className="card-body">
                       <img
@@ -210,17 +214,20 @@ class About extends React.Component {
                         className="img-fluid rounded-circle mb-3"
                       />
                       <h3 className="mb-3">Anik Sarkar</h3>
+                      <h5 className="text-muted mb-3">
+                        Director of Outreach Services
+                      </h5>
                       <a
                         href="https://www.linkedin.com/in/anik-sarkar-13916b16b/"
                         className="btn btn-outline-dark"
                       >
-                        Visit Profile
+                        Visit Profile{" "}
                         <i className="fab fa-linkedin text-muted"></i>
                       </a>
                     </div>
                   </div>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-3">
                   <div className="card text-center mb-5">
                     <div className="card-body">
                       <img
@@ -229,6 +236,9 @@ class About extends React.Component {
                         className="img-fluid rounded-circle mb-3"
                       />
                       <h3 className="mb-3">Simran Keshari</h3>
+                      <h5 className="text-muted mb-3">
+                        Brand Identity Developer
+                      </h5>
                       <a
                         href="https://www.linkedin.com/in/simran-keshari-99807b170/"
                         className="btn btn-outline-dark"
@@ -239,7 +249,7 @@ class About extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-3">
                   <div className="card text-center mb-5">
                     <div className="card-body">
                       <img
@@ -248,8 +258,99 @@ class About extends React.Component {
                         className="img-fluid rounded-circle mb-3"
                       />
                       <h3 className="mb-3">Supratim Mitra</h3>
+                      <h5 className="text-muted mb-3">
+                        Marketing Lead
+                      </h5>
                       <a
                         href="https://www.linkedin.com/in/supratim-mitra-10418719a/"
+                        className="btn btn-outline-dark"
+                      >
+                        Visit Profile{" "}
+                        <i className="fab fa-linkedin text-muted"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="card text-center mb-5">
+                    <div className="card-body">
+                      <img
+                        src={require("../../../assets/img/Tansi.jpeg")}
+                        alt=""
+                        className="img-fluid rounded-circle mb-3"
+                      />
+                      <h3 className="mb-3">Tansi Agarwal</h3>
+                      <h5 className="text-muted mb-3">
+                        Marketing Lead
+                      </h5>
+                      <a
+                        href="https://www.linkedin.com/in/tansi-agarwal-596a5a1b0/"
+                        className="btn btn-outline-dark"
+                      >
+                        Visit Profile{" "}
+                        <i className="fab fa-linkedin text-muted"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="card text-center mb-5">
+                    <div className="card-body">
+                      <img
+                        src={require("../../../assets/img/Srejeeta.jpeg")}
+                        alt=""
+                        className="img-fluid rounded-circle mb-3"
+                      />
+                      <h3 className="mb-3">Srejeeta Ghosh</h3>
+                      <h5 className="text-muted mb-3">
+                        Marketing Lead
+                      </h5>
+                      <a
+                        href="https://www.linkedin.com/in/sreejeeta-ghosh-0a44191a8/"
+                        className="btn btn-outline-dark"
+                      >
+                        Visit Profile{" "}
+                        <i className="fab fa-linkedin text-muted"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="card text-center mb-5">
+                    <div className="card-body">
+                      <img
+                        src={require("../../../assets/img/Divya.jpeg")}
+                        alt=""
+                        className="img-fluid rounded-circle mb-3"
+                      />
+                      <h3 className="mb-3">Divya Agarwal</h3>
+                      <h5 className="text-muted mb-3">
+                        Community Outreach Coordinator
+                      </h5>
+                      <a
+                        href="#"
+                        className="btn btn-outline-dark"
+                      >
+                        Visit Profile{" "}
+                        <i className="fab fa-linkedin text-muted"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="card text-center mb-5">
+                    <div className="card-body">
+                      <img
+                        src={require("../../../assets/img/Awdditia.jpeg")}
+                        alt=""
+                        className="img-fluid rounded-circle mb-3"
+                      />
+                      <h3 className="mb-3">Awdditia Chaterjee</h3>
+                      <h5 className="text-muted mb-3">
+                        Marketing Lead
+                      </h5>
+                      <a
+                        href="https://www.linkedin.com/in/awdditia-chatterjee-53aa08176/"
                         className="btn btn-outline-dark"
                       >
                         Visit Profile{" "}
@@ -262,6 +363,7 @@ class About extends React.Component {
             </div>
           </div>
         </section>
+        <Footer />
       </div>
     );
   }

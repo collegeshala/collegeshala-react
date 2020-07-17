@@ -171,7 +171,7 @@
 }
 
 /*.newsletter {
-    background-image: url(./../img/college-students-sitting-bench-illustration-university-girls-boys-with-bags-laptop.jpg);
+    background-image: url(../img/college-students-sitting-bench-illustration-university-girls-boys-with-bags-laptop.jpg);
     height: 150vh;
     background-repeat: no-repeat;
     background-size: cover;
@@ -205,6 +205,7 @@
   border-color: red;
   border-radius: 25px 0 0 25px;
   outline: none;
+  padding-left: 20px;
 }
 
 .newsletter-text input[type="button"] {
@@ -215,10 +216,6 @@
   padding: 12px 10px;
   width: 110px;
   outline: none;
-}
-
-.newsletter-text input[type="text"] {
-  padding: 20px;
 }
 
 .site-footer {
@@ -481,6 +478,7 @@
     border-width: 1.5px;
     border-color: red;
     border-radius: 25px 0 0 25px;
+    padding-left: 16px;
   }
 
   .newsletter .newsletter-text h1 {
@@ -1188,6 +1186,7 @@
 #upload-area {
   justify-content: space-between;
   padding: 0px 20px;
+  font-size: 1.5rem;
 }
 
 .course-and-suggested-area {
@@ -1935,13 +1934,13 @@
   color: #6534cc;
 }
 
-/*#About-Us .about-font {
+#About-Us .about-font {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-}*/
+}
 
 .purple-color {
   color: #6534cc;
-  /*font-family: Arial, Helvetica, sans-serif;*/
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #About-Team img {
@@ -2027,18 +2026,33 @@ b {
   margin-top: -5px;
 }
 
-/*#earning-credits-section h2,p,b,span {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}*/
+.custom-buy-credits-button {
+  border: #ff4133 2px solid;
+  border-radius: 45px;
+  padding: 0.4rem 2.4rem;
+  color: #6534cc;
+  margin-top: -5px;
+}
+
+#earning-credits-section h2,
+p,
+b,
+span {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
 #earning-credits-section .lead {
   font-size: 1.2rem;
   font-weight: 500;
 }
 
-/*#earning-details-section h2,h4,p,b,span {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}*/
+#earning-details-section h2,
+h4,
+p,
+b,
+span {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
 #earning-details-section img {
   border-radius: 5px;
@@ -2075,4 +2089,73 @@ b {
 
 #custom-carousel .custom-img {
   height: 720px;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  background-size: 20px 20px;
+  background-position: center;
+}
+
+/*
+            ************
+        Blog Page Styles Starts
+            ************
+*/
+
+#Blog-section .card-custom-image {
+  height: 200px;
+}
+
+#Blog-section .card-title {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#Blog-section a {
+  background-color: #6534cc;
+}
+
+#Blog-section a:hover {
+  background-color: #46248f;
+}
+
+.pdf-buttons {
+  padding: 10px;
+  border-radius: 5px 5px 5px 5px;
+  background-color: #ccb5ff;
+  font-weight: bold;
+  margin: 10px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: large;
+}
+
+.pdf-buttons:hover {
+  background-color: #ac85ff;
+}
+
+.page-status {
+  font-weight: bold;
+  margin: 10px auto 10px auto;
+  font-family: "Courier New", Courier, monospace;
+  border-radius: 5px 5px 5px 5px;
+  font-size: large;
+  border: 2px solid #ffbec4;
+  width: 20%;
+}
+
+.pdf-viewer,
+.pdf-renderer {
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  align-self: center;
+}
+
+.pdf-viewer .pdf-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

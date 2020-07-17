@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 import { navigate } from "@reach/router";
 import {
@@ -7,7 +9,9 @@ import {
   forgotPassword,
   resetPassword,
   parseJwt,
+  signout,
 } from "./../../../js/auth";
+import "../../../assets/css/studentRegister.css";
 
 class Login extends React.Component {
   constructor(props) {
@@ -131,19 +135,24 @@ class Login extends React.Component {
       navigate("/register");
     }
   }
+
+  componentDidMount() {
+    signout();
+  }
+
   handleLogin() {
     var userData = {
       username: this.state.email,
       password: this.state.password,
     };
-    console.log({ userData });
+    // console.log({ userData });
     const onSuccess = (result) => {
       console.log(result);
       const accessToken = result.getAccessToken().getJwtToken();
       const idToken = result.getIdToken().getJwtToken();
       const refreshToken = result.getRefreshToken().getToken();
       const payload = result.getAccessToken().payload;
-      console.log(parseJwt(idToken));
+      // console.log(parseJwt(idToken));
       console.log({
         accessToken,
         idToken,
@@ -151,7 +160,9 @@ class Login extends React.Component {
         payload,
       });
       localStorage.setItem("username", userData.username);
+      localStorage.setItem("idToken", idToken);
       if (parseJwt(idToken)["custom:isProfessor"] === "true") {
+        navigate("/professor-account");
       } else {
         navigate("/student-materials");
       }
@@ -196,150 +207,174 @@ class Login extends React.Component {
   }
   render() {
     return (
-      <div id="student-signup">
-        <div>
-          <nav
-            className="navbar navbar-expand-lg navbar-dark"
-            style={{ backgroundColor: "#6534CC" }}
-          >
-            <a
-              href="#"
-              id="back"
-              className="navbar-brand"
-              onClick={() => this.back()}
-            >
-              <img
-                src={require("../../../assets/logo/LeftArrow.png")}
-                alt=""
-                srcSet=""
-                width="35"
-                height="30"
-              />
-            </a>
-            <a href="#" id="backtext" onClick={() => this.back()}>
-              <p className="back-label">Back</p>
-            </a>
-          </nav>
-        </div>
-        <div className="content">
+      <div>
+        <Navbar />
+        <div id="student-signup">
           <div>
-            <div className="welcome-text">
-              Welcome <span style={{ color: "#FF4133" }}>Back</span>!
-            </div>
-            <div
-              id="step-1"
-              className="row details-container"
-              style={this.state.step1display}
+            <nav
+              className="navbar navbar-expand-lg navbar-dark"
+              style={{ backgroundColor: "#6534CC" }}
             >
-              <div className="col-6 image-column">
+              <a
+                href="#"
+                id="back"
+                className="navbar-brand"
+                onClick={() => this.back()}
+              >
                 <img
-                  className="info-image"
-                  src={require("../../../assets/img/signin-card.png")}
-                  alt="Sign in"
+                  src={require("../../../assets/logo/LeftArrow.png")}
+                  alt=""
+                  srcSet=""
+                  width="35"
+                  height="30"
                 />
+              </a>
+              <a href="#" id="backtext" onClick={() => this.back()}>
+                <p className="back-label">Back</p>
+              </a>
+            </nav>
+          </div>
+          <div className="content">
+            <div>
+              <div className="welcome-text">
+                Welcome <span style={{ color: "#FF4133" }}>Back</span>!
               </div>
-              <div className="col-6 input-column">
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter your email address"
-                  value={this.state.email}
-                  onChange={(e) => this.setState({ email: e.target.value })}
-                />
-                <input
-                  type="password"
-                  className="input-text"
-                  placeholder="Enter your password"
-                  value={this.state.password}
-                  onChange={(e) => this.setState({ password: e.target.value })}
-                />
-                <br />
-                <p id="forgot-password" onClick={() => this.next()}>
-                  Forgot your Password?
-                </p>
+              <div
+                id="step-1"
+                className="row details-container"
+                style={this.state.step1display}
+              >
+                <div className="col-6 image-column">
+                  <img
+                    className="info-image"
+                    src={require("../../../assets/img/signin-card.png")}
+                    alt="Sign in"
+                  />
+                </div>
+                <div className="col-6 input-column">
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter your email address"
+                    value={this.state.email}
+                    onChange={(e) => this.setState({ email: e.target.value })}
+                    onKeyPress={(e) => {
+                      if (e.key == "Enter") {
+                        this.handleLogin();
+                      }
+                    }}
+                  />
+                  <input
+                    type="password"
+                    className="input-text"
+                    placeholder="Enter your password"
+                    value={this.state.password}
+                    onChange={(e) =>
+                      this.setState({ password: e.target.value })
+                    }
+                    onKeyPress={(e) => {
+                      if (e.key == "Enter") {
+                        this.handleLogin();
+                      }
+                    }}
+                  />
+                  <br />
+                  <div id="register-link">
+                    Don't have an account?
+                    <a href="" onClick={() => navigate("/register")}>
+                      <span style={{ color: "#ff4133" }}> Register here</span>
+                    </a>
+                  </div>
+                  <p id="forgot-password" onClick={() => this.next()}>
+                    Forgot your Password?
+                  </p>
+                </div>
               </div>
-            </div>
-            <div
-              id="step-2"
-              className="row details-container"
-              style={this.state.step2display}
-            >
-              <div className="col-6 image-column">
+              <div
+                id="step-2"
+                className="row details-container"
+                style={this.state.step2display}
+              >
+                <div className="col-6 image-column">
+                  <img
+                    className="info-image"
+                    src={require("../../../assets/img/signin-card.png")}
+                    alt="forgot-password"
+                  />
+                </div>
+                <div className="col-6 input-column">
+                  <p id="password-reset">
+                    Please enter your Email in the field below to reset your
+                    password.
+                  </p>
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter your email address"
+                    value={this.state.emailforgot}
+                    onChange={(e) =>
+                      this.setState({ emailforgot: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div
+                id="step-3"
+                className="row details-container"
+                style={this.state.step3display}
+              >
+                <div className="col-6 image-column">
+                  <img
+                    className="info-image"
+                    src={require("../../../assets/img/signin-card.png")}
+                    alt="forgot-password"
+                  />
+                </div>
+                <div className="col-6 input-column">
+                  <input
+                    type="text"
+                    className="input-text"
+                    placeholder="Enter Code Send to Phone"
+                    value={this.state.code}
+                    onChange={(e) => this.setState({ code: e.target.value })}
+                  />
+                  <input
+                    type="password"
+                    className="input-text"
+                    placeholder="Enter new password"
+                    value={this.state.password1}
+                    onChange={(e) =>
+                      this.setState({ password1: e.target.value })
+                    }
+                  />
+                  <input
+                    type="password"
+                    className="input-text"
+                    placeholder="Re-type password"
+                    value={this.state.passwordconf}
+                    onChange={(e) =>
+                      this.setState({ passwordconf: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div
+                id="nextbtn"
+                className="next"
+                onMouseOver={(e) => this.handlemouseover(e)}
+                onClick={this.state.nextFunction}
+              >
+                {this.state.nextbtntext}
                 <img
-                  className="info-image"
-                  src={require("../../../assets/img/signin-card.png")}
-                  alt="forgot-password"
+                  id="nextimg"
+                  alt="nextbutton"
+                  src={require("../../../assets/logo/next.png")}
                 />
               </div>
-              <div className="col-6 input-column">
-                <p id="password-reset">
-                  Please enter your Email in the field below to reset your
-                  password.
-                </p>
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter your email address"
-                  value={this.state.emailforgot}
-                  onChange={(e) =>
-                    this.setState({ emailforgot: e.target.value })
-                  }
-                />
-              </div>
-            </div>
-            <div
-              id="step-3"
-              className="row details-container"
-              style={this.state.step3display}
-            >
-              <div className="col-6 image-column">
-                <img
-                  className="info-image"
-                  src={require("../../../assets/img/signin-card.png")}
-                  alt="forgot-password"
-                />
-              </div>
-              <div className="col-6 input-column">
-                <input
-                  type="text"
-                  className="input-text"
-                  placeholder="Enter Code Send to Phone"
-                  value={this.state.code}
-                  onChange={(e) => this.setState({ code: e.target.value })}
-                />
-                <input
-                  type="password"
-                  className="input-text"
-                  placeholder="Enter new password"
-                  value={this.state.password1}
-                  onChange={(e) => this.setState({ password1: e.target.value })}
-                />
-                <input
-                  type="password"
-                  className="input-text"
-                  placeholder="Re-type password"
-                  value={this.state.passwordconf}
-                  onChange={(e) =>
-                    this.setState({ passwordconf: e.target.value })
-                  }
-                />
-              </div>
-            </div>
-            <div
-              id="nextbtn"
-              className="next"
-              onMouseOver={(e) => this.handlemouseover(e)}
-              onClick={this.state.nextFunction}
-            >
-              {this.state.nextbtntext}
-              <img
-                id="nextimg"
-                alt="nextbutton"
-                src={require("../../../assets/logo/next.png")}
-              />
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

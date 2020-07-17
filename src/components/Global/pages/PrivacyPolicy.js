@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 class PrivacyPolicy extends Component {
   render() {
     return (
       <body>
+        <Navbar />
         <div class="container text-center py-3">
       <h2>PRIVACY POLICY</h2>
       <div class="text-left">
@@ -63,6 +66,7 @@ class PrivacyPolicy extends Component {
           </p>
       </div>
     </div>
+    <Footer />
       </body>
     )
   }

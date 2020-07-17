@@ -1,16 +1,70 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { navigate } from "@reach/router";
+import React, { Fragment } from "react";
+import { navigate, Link } from "@reach/router";
+import axios from "axios";
+import { isLoggedIn, parseJwt, getToken } from "./js/auth";
+
+import Footer from "./components/Global/Footer";
 
 class Index extends React.Component {
+  state = {
+    email: "",
+    isLoggedIn: false,
+    accountLink: "",
+  };
+
+  async componentDidMount() {
+    const checkLogin = await isLoggedIn();
+    let accountLink = "";
+    if (checkLogin) {
+      const token = await getToken();
+      accountLink =
+        parseJwt(token)["custom:isProfessor"] == "true"
+          ? "/professor-account"
+          : "/student-account";
+    }
+    this.setState({ isLoggedIn: checkLogin, accountLink });
+  }
+
+  handleEmail(email) {
+    this.setState({ email });
+  }
+
+  subscribe() {
+    const { email } = this.state;
+    let re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/;
+    if (email.match(re)) {
+      // console.log(email);
+      axios({
+        method: "POST",
+        url: "https://api.collegeshala.com/subscribenewsletter",
+        data: JSON.stringify({ email }),
+      })
+        .then((res) => {
+          console.log(res.status);
+          alert("You have been subscribed successfully to our newsletter!");
+          this.handleEmail("");
+        })
+        .catch((err) => {
+          console.error(err);
+          alert(
+            "Oops! Seems like there was an error! Please try again later :-/"
+          );
+        });
+    } else {
+      alert("Please enter a valid email!");
+      this.handleEmail("");
+    }
+  }
+
   render() {
     return (
       <div>
         <div id="home">
           <nav className="navbar navbar-expand-lg navbar-light">
-            <a className="navbar-brand" href="/index.html">
+            <Link className="navbar-brand" to="/">
               <img src={require("./assets/img/logo.png")} id="logo" alt="" />
-            </a>
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -29,49 +83,62 @@ class Index extends React.Component {
                   <a
                     className="nav-link scroll index-nav-link"
                     href="#services"
-                    data-toggle="collapse"
-                    data-target=".navbar-collapse.show"
                   >
                     <span id="nav-font">Services</span>
                   </a>
+                </li>
+                <li className="nav-item active">
+                  <Link
+                    className="nav-link scroll index-nav-link"
+                    to="/blogs"
+                  >
+                    <span id="nav-font">Blogs</span>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a
                     className="nav-link scroll index-nav-link"
                     href="#talkshala"
-                    data-toggle="collapse"
-                    data-target=".navbar-collapse.show"
                   >
                     <span id="nav-font">TalkShala</span>
                   </a>
                 </li>
-
-                <li className="nav-item">
-                  <a
-                    className="nav-link index-nav-link"
-                    id="nav-sign-up"
-                    href="#"
-                    data-target=".navbar-collapse.show"
-                    onClick={() => navigate("/login")}
-                  >
-                    <span id="nav-font">Sign Up</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link index-nav-link"
-                    onclick="goToURL(); return false;"
-                    target="_blank"
-                    id="nav-user-icon"
-                    href="#"
-                    data-toggle="collapse"
-                    data-target=".navbar-collapse.show"
-                  >
-                    <span id="nav-font">
-                      <i className="fa fa-user-circle" aria-hidden="true"></i>
-                    </span>
-                  </a>
-                </li>
+                {this.state.isLoggedIn ? (
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link index-nav-link"
+                      id="nav-user-icon"
+                      to={this.state.accountLink}
+                    >
+                      <span id="nav-font">
+                        <i className="fa fa-user-circle" aria-hidden="true"></i>
+                      </span>
+                    </Link>
+                  </li>
+                ) : (
+                  <Fragment>
+                    <li className="nav-item">
+                      <Link
+                        className="nav-link index-nav-link"
+                        id="nav-sign-up"
+                        to="/login"
+                        data-target=".navbar-collapse.show"
+                      >
+                        <span id="nav-font">Log In</span>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        className="nav-link index-nav-link"
+                        id="nav-sign-up"
+                        to="/register"
+                        data-target=".navbar-collapse.show"
+                      >
+                        <span id="nav-font">Sign Up</span>
+                      </Link>
+                    </li>
+                  </Fragment>
+                )}
               </ul>
             </div>
           </nav>
@@ -80,7 +147,7 @@ class Index extends React.Component {
             <h1 className="above-search-bar-text">
               It's a <span id="custom-purple">Student</span>
               <span id="custom-red">'</span>
-              <span id="custom-purple">s</span>
+              <span id="custom-purple">s </span>
               Thing!
             </h1>
             <h2 className="text-center tagline-text">
@@ -91,6 +158,13 @@ class Index extends React.Component {
                 type="text"
                 id="search-input"
                 placeholder="Search your subject here "
+                onKeyPress={(event) => {
+                  if (event.key && event.key == "Enter") {
+                    const { value } = event.target;
+                    window.localStorage.setItem("value", value);
+                    navigate("/all-product");
+                  }
+                }}
               />
             </p>
           </div>
@@ -108,7 +182,7 @@ class Index extends React.Component {
           </h1>
           <div className="card-deck m-5">
             <div className="card">
-              <a onclick="userindexredirect(); return false;" href="#">
+              <Link to="/coming-soon">
                 <p className="text-center">
                   <img
                     className="card-img-top services-image"
@@ -116,21 +190,18 @@ class Index extends React.Component {
                     alt="materials"
                   />
                 </p>
-              </a>
+              </Link>
               <div className="card-body">
-                <a
-                  // onclick="userindexredirect(); return false;"
-                  href="#"
-                >
+                <Link to="/coming-soon">
                   <h5 className="card-title text-center" id="custom-purple">
                     Study Materials
                   </h5>
-                </a>
+                </Link>
                 <p className="card-text text-center"></p>
               </div>
             </div>
             <div className="card">
-              <a href="/coming-soon.html">
+              <a href="" onClick={() => navigate("/coming-soon")}>
                 <p className="text-center">
                   <img
                     className="card-img-top services-image"
@@ -141,7 +212,7 @@ class Index extends React.Component {
                 </p>
               </a>
               <div className="card-body">
-                <a href="/coming-soon.html">
+                <a href="" onClick={() => navigate("/coming-soon")}>
                   <h5 className="card-title text-center" id="custom-purple">
                     Question/Answers
                   </h5>
@@ -150,7 +221,7 @@ class Index extends React.Component {
               </div>
             </div>
             <div className="card">
-              <a href="/coming-soon.html">
+              <a href="" onClick={() => navigate("/coming-soon")}>
                 <p className="text-center">
                   <img
                     className="card-img-top services-image"
@@ -160,7 +231,7 @@ class Index extends React.Component {
                 </p>
               </a>
               <div className="card-body">
-                <a href="/coming-soon.html">
+                <a href="" onClick={() => navigate("/coming-soon")}>
                   <h5 className="card-title text-center" id="custom-purple">
                     Sell/Buy Books
                   </h5>
@@ -176,7 +247,7 @@ class Index extends React.Component {
               id="signup"
               href="#"
               role="button"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/register")}
             >
               Sign Up
             </a>
@@ -261,8 +332,9 @@ class Index extends React.Component {
                 <a
                   className="btn"
                   id="join-btn"
-                  href="/coming-soon.html"
+                  href=""
                   role="button"
+                  onClick={() => navigate("/coming-soon")}
                 >
                   Join the community
                 </a>
@@ -285,12 +357,22 @@ class Index extends React.Component {
                 type="email"
                 id="sub-email"
                 placeholder="Enter your email"
+                value={this.state.email}
+                onChange={(e) => this.handleEmail(e.target.value)}
               />
-              <input type="button" id="newsletter-btn" value="Subscribe" />
+              <input
+                type="button"
+                id="newsletter-btn"
+                onClick={this.subscribe.bind(this)}
+                value="Subscribe"
+              />
             </p>
           </div>
           <div className="newletter-below-img"></div>
         </div>
+
+        {/* FOOTER */}
+        <Footer />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
 
-const SecondaryNav = () => {
+const ProfessorNav = () => {
   const changeCurrent = (val) => {
     document.getElementById("current-active").textContent = val;
   };
@@ -13,21 +13,21 @@ const SecondaryNav = () => {
           onClick={(e) => changeCurrent("My Account")}
           className="col-sm text-center"
         >
-          <Link to="/student-account">My Account</Link>
+          <Link to="/professor-account">My Account</Link>
           {/* <a href="./my-account.html">My Account</a> */}
         </div>
         <div
-          onClick={(e) => changeCurrent("My Materials")}
+          onClick={(e) => changeCurrent("My Uploads")}
           className="col-sm text-center"
         >
-          <Link to="/student-materials">My Materials</Link>
+          <Link to="/professor-upload">My Uploads</Link>
           {/* <a href="./student-dashboard.html">My Materials</a> */}
         </div>
         <div
-          onClick={(e) => changeCurrent("My Transactions")}
+          onClick={(e) => changeCurrent("My Earnings")}
           className="col-sm text-center"
         >
-          <Link to="/student-transactions">My Transactions</Link>
+          <Link to="/professor-earnings">My Earnings</Link>
           {/* <a href="./my-transaction.html">My Transactions</a> */}
         </div>
         <div
@@ -42,4 +42,4 @@ const SecondaryNav = () => {
   );
 };
 
-export default SecondaryNav;
+export default ProfessorNav;

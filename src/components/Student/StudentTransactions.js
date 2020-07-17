@@ -4,15 +4,17 @@
 import React, { Fragment } from "react";
 import { Link } from "@reach/router";
 import axios from "axios";
-import { getToken } from "./../../js/auth";
+import { getToken, userDetails } from "./../../js/auth";
+import { checkout } from "./../../js/razorpay";
 
 import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import SecondaryNav from "../Global/SecondaryNav";
+import Loader from "./../Global/Loader";
 
 const StudentTransactions = () => {
   return (
-    <React.Fragment>
+    <Fragment>
       <Navbar />
       <div className="container pt-4">
         <nav aria-label="breadcrumb">
@@ -36,7 +38,7 @@ const StudentTransactions = () => {
       <SecondaryNav />
       <Transactions />
       <Footer />
-    </React.Fragment>
+    </Fragment>
   );
 };
 
@@ -45,7 +47,8 @@ class Transactions extends React.Component {
     transactions: [],
     length: 0,
     credits: 0,
-    creditsToPurchase: 0,
+    creditsToPurchase: "",
+    isLoading: true,
   };
 
   async componentDidMount() {
@@ -64,15 +67,59 @@ class Transactions extends React.Component {
           transactions: data.Item.creditsPurchaseRecord,
           credits: data.Item.credits,
           length: data.Item.creditsPurchaseRecord.length,
+          isLoading: false,
         });
+        userDetails(data.Item.email);
       })
       .catch((err) => console.error(err));
   }
 
   handleCredits(event) {
     const credits = event.target.value;
-    console.log(credits);
+    // console.log(credits);
     this.setState({ creditsToPurchase: credits });
+  }
+
+  async buyCredits() {
+    const token = await getToken();
+    const { creditsToPurchase } = this.state;
+    // console.log(creditsToPurchase);
+    try {
+      if (creditsToPurchase > 0 && (creditsToPurchase * 10) % 10 === 0) {
+        const amount = creditsToPurchase * 10;
+        const resp = await checkout(amount);
+        // const resp = await checkout(creditsToPurchase);
+        axios({
+          method: "POST",
+          url: "https://api.collegeshala.com/addcredits",
+          headers: {
+            authorization: token,
+          },
+          data: JSON.stringify({
+            credits: +creditsToPurchase,
+            amount: amount,
+            paymentid: resp.razorpay_payment_id,
+          }),
+        })
+          .then(({ data }) => {
+            // console.log(response.data);
+            const updatedCredits = data.Attributes.credits;
+            this.setState({ credits: updatedCredits });
+          })
+          .catch((err) => {
+            console.error(err);
+            alert(
+              "Oops! There was an error adding credits! Please contact us with reference Payment-ID: " +
+                resp.razorpay_payment_id
+            );
+          });
+      } else {
+        alert("Please enter a valid number!");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Oops! There was an error :-/");
+    }
   }
 
   render() {
@@ -80,7 +127,9 @@ class Transactions extends React.Component {
     const arr1 = transactions.slice(0, parseInt(length / 2));
     const arr2 = transactions.slice(parseInt(length / 2));
 
-    return (
+    return this.state.isLoading ? (
+      <Loader />
+    ) : (
       <Fragment>
         <section id="students-buy-credits" className="container mt-5">
           <div className="row">
@@ -89,14 +138,13 @@ class Transactions extends React.Component {
             </div>
             <div className="col-12 col-md-4">
               <a
-                href="#"
+                href=""
                 data-toggle="modal"
                 data-target="#buy-credits-btn"
                 className="btn custom-buy-credits-button"
               >
                 <span>
-                  Buy Credits
-                  <i className="fas fa-arrow-right"></i>
+                  Buy Credits <i className="fas fa-arrow-right"></i>
                 </span>
               </a>
             </div>
@@ -158,6 +206,7 @@ class Transactions extends React.Component {
                   id="buy-credits"
                   type="button"
                   className="btn btn-primary"
+                  onClick={this.buyCredits.bind(this)}
                 >
                   Buy Now
                 </button>

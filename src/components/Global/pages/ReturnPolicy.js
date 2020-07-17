@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 class ReturnPolicy extends Component {
   render() {
     return (
       <body>
+        <Navbar />
         <div>
           <div class="container text-center py-3">
             <h2>RETURN POLICY</h2>
@@ -26,6 +29,7 @@ class ReturnPolicy extends Component {
             </div>
           </div>
         </div>
+        <Footer />
       </body>
     )
   }

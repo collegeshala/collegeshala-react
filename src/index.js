@@ -1,13 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import "./assets/css/style.css"
-import "./assets/css/register.css"
-import "./assets/css/studentRegister.css"
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import AWS, { Config } from "aws-sdk";
+import AWS, { Config, CostExplorer } from "aws-sdk";
 import {
   CognitoUserPool,
   CognitoUserAttribute,
@@ -136,7 +136,7 @@ const sessionExpire = (token) => {
 export const getToken = () => {
   return new Promise((resolve, reject) => {
     const cognitoUser = UserPool.getCurrentUser();
-    console.log({ cognitoUser });
+    // console.log({ cognitoUser });
 
     if (cognitoUser) {
       cognitoUser.getSession((err, session) => {
@@ -162,8 +162,12 @@ export const getToken = () => {
 };
 
 export const signout = () => {
-  const cognitoUser = UserPool.getCurrentUser();
-  cognitoUser.signOut();
+  try {
+    const cognitoUser = UserPool.getCurrentUser();
+    cognitoUser.signOut();
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const forgotPassword = (username, onSuccess) => {
@@ -186,6 +190,17 @@ export const resetPassword = ({ username, code, password }, onSuccess) => {
       console.error(err);
       alert("Oops! There was an error.");
     },
+  });
+};
+
+export const userDetails = (username) => {
+  const cognitoUser = getUser(username);
+  cognitoUser.getUserData((err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log({ userDetails: data });
+    }
   });
 };
 
