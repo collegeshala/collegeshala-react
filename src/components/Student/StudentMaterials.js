@@ -91,7 +91,7 @@ class Materials extends React.Component {
                         className="col-121 col-md-4"
                         key={note.noteId + index}
                       >
-                        <div className="card" id="card">
+                        <div className="card mt-5" id="card">
                           <img
                             className="card-img-top img-fluid"
                             src="https://via.placeholder.com/260x180"
