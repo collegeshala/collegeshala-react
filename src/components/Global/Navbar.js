@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { navigate } from "@reach/router";
 import main_logo from "./../../assets/img/logo.png";

@@ -60,9 +60,12 @@ class Materials extends React.Component {
       },
     })
       .then(({ data }) => {
-        console.log({ data });
+        // console.log({ data });
         if (!data.error) {
           this.setState({ notes: data, isLoading: false });
+        } else {
+          // console.log(data.error);
+          this.setState({ isLoading: false });
         }
       })
       .catch((err) => console.error(err));
@@ -88,7 +91,7 @@ class Materials extends React.Component {
                         className="col-121 col-md-4"
                         key={note.noteId + index}
                       >
-                        <div className="card" id="card">
+                        <div className="card mt-5" id="card">
                           <img
                             className="card-img-top img-fluid"
                             src="https://via.placeholder.com/260x180"

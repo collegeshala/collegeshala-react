@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component, Fragment } from "react";
 import { navigate } from "@reach/router";
 import axios from "axios";

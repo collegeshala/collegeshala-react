@@ -205,6 +205,15 @@ option {
   border-radius: 50px;
   overflow: scroll;
 }
+#register-link {
+  width: 33vw;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+}
 #forgot-password {
   width: 30vw;
   text-align: center;
@@ -367,6 +376,10 @@ option {
   }
   .success-message {
     width: 100vw;
+  }
+  #register-link {
+    width: 100vw;
+    font-size: 22px;
   }
   #forgot-password {
     width: 100vw;

@@ -1186,6 +1186,7 @@
 #upload-area {
   justify-content: space-between;
   padding: 0px 20px;
+  font-size: 1.5rem;
 }
 
 .course-and-suggested-area {
@@ -2088,6 +2089,15 @@ span {
 
 #custom-carousel .custom-img {
   height: 720px;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  background-size: 20px 20px;
+  background-position: center;
 }
 
 /*

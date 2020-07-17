@@ -34,7 +34,7 @@ const SecondaryNav = () => {
           onClick={(e) => changeCurrent("Q/A Forum")}
           className="col-sm text-center"
         >
-          <Link to="/student-qa">Q/A Forum</Link>
+          <Link to="/coming-soon">Q/A Forum</Link>
           {/* <a href="./coming-soon.html">Q/A Forum</a> */}
         </div>
       </div>

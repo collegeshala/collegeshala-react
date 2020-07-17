@@ -93,6 +93,9 @@
   }
 }
 @media only screen and (max-width: 770px) {
+  #register {
+    height: auto;
+  }
   .studentimg {
     height: 40vh;
   }
