@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { navigate } from "@reach/router";
 import { resendCode, confirm, register } from "./../../../js/auth";
