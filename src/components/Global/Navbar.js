@@ -16,7 +16,7 @@ const AnonymousNav = (props) => (
         <img src={main_logo} id="logo" alt="" />
       </Link>
       <button
-        className="navbar-toggler"
+        className="navbar-toggler ml-auto"
         type="button"
         data-toggle="collapse"
         data-target="#navbarText"
@@ -65,7 +65,7 @@ const AnonymousNav = (props) => (
       </div>
     </nav>
 
-    <div className="container" id="small-screen-search-box">
+    <div className="container mb-3" id="small-screen-search-box">
       <div className="row">
         <div className="col">
           <div className="nav-seach-box">
@@ -90,7 +90,7 @@ const StudentNav = (props) => (
         <img src={main_logo} id="logo" alt="" />
       </Link>
       <button
-        className="navbar-toggler"
+        className="navbar-toggler ml-auto"
         type="button"
         data-toggle="collapse"
         data-target="#navbarText"
@@ -127,7 +127,7 @@ const StudentNav = (props) => (
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/cart">
-              <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+              <i className="fa fa-shopping-cart pl-4" aria-hidden="true"></i>
             </Link>
           </li>
           <li className="nav-item dropdown" id="large-screen-search-box">
@@ -184,7 +184,7 @@ const StudentNav = (props) => (
       </div>
     </nav>
 
-    <div className="container" id="small-screen-search-box">
+    <div className="container mb-3" id="small-screen-search-box">
       <div className="row">
         <div className="col">
           <div className="nav-seach-box">
@@ -209,7 +209,7 @@ const TeacherNav = (props) => (
         <img src={main_logo} id="logo" alt="" />
       </Link>
       <button
-        className="navbar-toggler"
+        className="navbar-toggler ml-auto"
         type="button"
         data-toggle="collapse"
         data-target="#navbarText"
@@ -303,7 +303,7 @@ const TeacherNav = (props) => (
       </div>
     </nav>
 
-    <div className="container" id="small-screen-search-box">
+    <div className="container mb-3" id="small-screen-search-box">
       <div className="row">
         <div className="col">
           <div className="nav-seach-box">

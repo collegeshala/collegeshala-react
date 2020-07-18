@@ -9,6 +9,7 @@ import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import SecondaryNav from "../Global/SecondaryNav";
 import Loader from "./../Global/Loader";
+import StudentBreadcrumb from "./StudentBreadcrumb";
 
 // import token from "./api_key";
 import { getToken } from "./../../js/auth";
@@ -17,25 +18,7 @@ const StudentMaterials = () => {
   return (
     <Fragment>
       <Navbar />
-      <div className="container pt-4">
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="spa.html">Home</a>
-            </li>
-            <li className="breadcrumb-item">
-              <Link to="/student-account">Student's Name</Link>
-            </li>
-            <li
-              className="breadcrumb-item active"
-              id="current-active"
-              aria-current="page"
-            >
-              My Materials
-            </li>
-          </ol>
-        </nav>
-      </div>
+      <StudentBreadcrumb breadcrumbs={"Purchased Notes"} />
       <SecondaryNav />
       <Materials />
       <Footer />
@@ -94,7 +77,7 @@ class Materials extends React.Component {
                         <div className="card mt-5" id="card">
                           <img
                             className="card-img-top img-fluid"
-                            src="https://via.placeholder.com/260x180"
+                            src="https://www.nicepng.com/png/detail/76-767861_image-free-library-note-clipart-pen-and-paper.png"
                             alt="my materials"
                           />
                           <div className="card-body">
