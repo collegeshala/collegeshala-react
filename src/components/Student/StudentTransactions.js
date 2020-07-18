@@ -11,30 +11,13 @@ import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import SecondaryNav from "../Global/SecondaryNav";
 import Loader from "./../Global/Loader";
+import StudentBreadcrumb from "./StudentBreadcrumb";
 
 const StudentTransactions = () => {
   return (
     <Fragment>
       <Navbar />
-      <div className="container pt-4">
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="spa.html">Home</a>
-            </li>
-            <li className="breadcrumb-item">
-              <Link to="/student-account">Student's Name</Link>
-            </li>
-            <li
-              className="breadcrumb-item active"
-              id="current-active"
-              aria-current="page"
-            >
-              My Transactions
-            </li>
-          </ol>
-        </nav>
-      </div>
+      <StudentBreadcrumb breadcrumbs={"Transactions"} />
       <SecondaryNav />
       <Transactions />
       <Footer />
@@ -221,7 +204,7 @@ class Transactions extends React.Component {
               <div id="col1" className="col">
                 {/* about half the cards go here */}
                 {arr1.map((transaction, index) => (
-                  <div className="card" key={transaction.paymentid}>
+                  <div className="card mb-2" key={transaction.paymentid}>
                     <div className="card-body pb-3">
                       <div className="row">
                         <div className="col-12 col-md-6">
@@ -250,7 +233,7 @@ class Transactions extends React.Component {
               <div id="col2" className="col">
                 {/* other cards go here */}
                 {arr2.map((transaction, index) => (
-                  <div className="card" key={transaction.paymentid}>
+                  <div className="card mb-2" key={transaction.paymentid}>
                     <div className="card-body pb-3">
                       <div className="row">
                         <div className="col-12 col-md-6">
