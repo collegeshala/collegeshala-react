@@ -29,6 +29,8 @@ class MyApp extends Component {
     if (previewOnly) {
       if (pageNumber < 2 && pageNumber < numPages) {
         this.setState({ pageNumber: pageNumber + 1 });
+      } else if (pageNumber == 2) {
+        alert("Please Purchase the Note to view all the pages");
       }
     } else if (pageNumber < numPages) {
       this.setState({ pageNumber: pageNumber + 1 });
@@ -71,11 +73,11 @@ class MyApp extends Component {
         >
           <div>
             {/* <h3 className="display-4">Page Controls</h3> */}
-            <button className="pdf-buttons" onClick={this.onNext}>
-              Next
-            </button>{" "}
             <button className="pdf-buttons" onClick={this.onPrevious}>
               Previous
+            </button>{" "}
+            <button className="pdf-buttons" onClick={this.onNext}>
+              Next
             </button>
           </div>
           <div>

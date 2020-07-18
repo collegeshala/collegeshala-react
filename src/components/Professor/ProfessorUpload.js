@@ -184,7 +184,7 @@ class Upload extends React.Component {
               ) : (
                 this.state.myUploads.map((note, index) => {
                   return (
-                    <div className="col-12 col-md-4" key={note.noteId}>
+                    <div className="col-12 col-md-4 mb-2" key={note.noteId}>
                       <div className="card" id="card">
                         <img
                           className="card-img-top img-fluid"

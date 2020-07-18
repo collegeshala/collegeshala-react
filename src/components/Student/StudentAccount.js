@@ -7,6 +7,7 @@ import axios from "axios";
 import Navbar from "../Global/Navbar";
 import Footer from "../Global/Footer";
 import SecondaryNav from "../Global/SecondaryNav";
+import StudentBreadcrumb from "./StudentBreadcrumb";
 
 import { getToken, signout } from "./../../js/auth";
 
@@ -14,25 +15,7 @@ const StudentAccount = () => {
   return (
     <React.Fragment>
       <Navbar />
-      <div className="container pt-4">
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="spa.html">Home</a>
-            </li>
-            <li className="breadcrumb-item">
-              <Link to="/student-account">Student's Name</Link>
-            </li>
-            <li
-              className="breadcrumb-item active"
-              id="current-active"
-              aria-current="page"
-            >
-              My Account
-            </li>
-          </ol>
-        </nav>
-      </div>
+      <StudentBreadcrumb breadcrumbs={"My Account"} />
       <SecondaryNav />
       <Account />
       <Footer />
