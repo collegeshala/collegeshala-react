@@ -10,6 +10,17 @@
             ************
 */
 
+
+@media only screen and (max-width: 991px) {
+  nav.navbar.navbar-expand-lg.navbar-light.homepage-nav {
+    justify-content: space-between !important;
+}
+}
+
+
+
+
+
 #logo {
   width: 320px;
   height: 60px;

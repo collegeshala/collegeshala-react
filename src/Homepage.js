@@ -61,7 +61,7 @@ class Index extends React.Component {
     return (
       <div>
         <div id="home">
-          <nav className="navbar navbar-expand-lg navbar-light">
+          <nav className="navbar navbar-expand-lg navbar-light homepage-nav">
             <Link className="navbar-brand" to="/">
               <img src={require("./assets/img/logo.png")} id="logo" alt="" />
             </Link>
