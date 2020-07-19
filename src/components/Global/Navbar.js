@@ -15,7 +15,7 @@ const AnonymousNav = (props) => (
       <Link className="navbar-brand" to="/">
         <img src={main_logo} id="logo" alt="" />
       </Link>
-      <button
+      {/* <button
         className="navbar-toggler ml-auto"
         type="button"
         data-toggle="collapse"
@@ -25,8 +25,8 @@ const AnonymousNav = (props) => (
         aria-label="Toggle navigation"
       >
         <span className="fa fa-user-circle"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarText">
+      </button> */}
+      <div id="navbarText">
         <ul className="navbar-nav mx-auto" id="large-screen-search-box">
           <li className="nav-item">
             <p className="nav-seach-box">
