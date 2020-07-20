@@ -335,6 +335,8 @@ option {
   }
   #student-signup {
     background-image: none;
+    height: auto;
+    margin-bottom: 10vh;
   }
   .progressbar {
     width: 70vw;
