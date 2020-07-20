@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import Navbar from "../Navbar";
 import Footer from "../Footer";
 
 import { navigate } from "@reach/router";
@@ -208,7 +207,6 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
         <div id="student-signup">
           <div>
             <nav
