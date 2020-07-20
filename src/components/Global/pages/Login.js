@@ -208,7 +208,6 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
         <div id="student-signup">
           <div>
             <nav
