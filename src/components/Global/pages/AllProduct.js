@@ -13,9 +13,9 @@ const NoteCard = ({ note }) => (
       <img
         width="85"
         height="85"
-        src={require("./../../../assets/img/pdf_logo.svg")}
+        src="https://collegeshala-assets.s3.ap-south-1.amazonaws.com/notes-thumbnail.png"
         className="all-prod-img rounded float-left"
-        alt="..."
+        alt="collegeshala all product image"
       />
     </div>
     <div className="col-12 col-md-8">
