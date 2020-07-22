@@ -250,14 +250,14 @@ option {
 .otpinput::placeholder {
   text-align: center;
 }
-::placeholder {
+/* ::placeholder {
   font-family: Lato;
   font-style: normal;
   font-weight: 500;
   font-size: 27px;
   line-height: 35px;
   color: #8c8c8c;
-}
+} */
 .next {
   text-align: right;
   padding-right: 5vw;
