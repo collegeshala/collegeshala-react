@@ -33,12 +33,12 @@ const NoteCard = ({ note }) => (
       </a>
       <div className="float-left mt-1 pr-3">
         <h5>
-          <i className="fas fa-user-circle"></i>By Prof. {note.professorname}
+          <i className="fas fa-user-circle"></i> By {note.professorname}
         </h5>
       </div>
       <div className="float-left mt-1">
         <h5>
-          <i className="fas fa-graduation-cap"></i>
+          <i className="fas fa-graduation-cap"></i> {" "}
           {note.universityname}
         </h5>
       </div>
