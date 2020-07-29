@@ -26,6 +26,27 @@ class Blogs extends Component {
       // Follow this rule strictly till the above condition is satisfied, after which you can delete this comment. 
       blogs: [
         {
+          title: "Afterlife",
+          author: "CollegeShala",
+          date: "July 27, 2020",
+          link: "https://medium.com/@collegeshala2020/afterlife-4d266158d8f2",
+          image_path: require("../../../assets/img/Blogs/blog_7.jpeg")
+      },
+      {
+          title: "Sachin",
+          author: "CollegeShala",
+          date: "July 27, 2020",
+          link: "https://medium.com/@collegeshala2020/sachin-2018e4737ce0",
+          image_path: require("../../../assets/img/Blogs/blog_6.jpeg")
+      },
+      {
+          title: "Rejuvenation of Existence",
+          author: "CollegeShala",
+          date: "July 27, 2020",
+          link: "https://medium.com/@collegeshala2020/rejuvenation-of-existence-f5ef27d34384",
+          image_path: require("../../../assets/img/Blogs/blog_5.jpeg")
+      },
+      {
         title: "Ways to Make Studying a Lot More Fun",
         author: "CollegeShala",
         date: "July 6, 2020",
