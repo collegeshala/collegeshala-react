@@ -26,6 +26,13 @@ class Blogs extends Component {
       // Follow this rule strictly till the above condition is satisfied, after which you can delete this comment. 
       blogs: [
         {
+          title: "Her Unfinished Love",
+          author: "CollegeShala",
+          date: "July 30, 2020",
+          link: "https://medium.com/@collegeshala2020/her-unfinished-love-61b799f4ddd2",
+          image_path: require("../../../assets/img/Blogs/blog_8.jpeg")
+      },
+      {
           title: "Afterlife",
           author: "CollegeShala",
           date: "July 27, 2020",
