@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+const $ = window.$;
 
 import upload from "./../../js/upload";
 import { getToken } from "./../../js/auth";
@@ -15,6 +16,7 @@ const UploadModal = ({ updateFunc }) => {
 
   const handleUpload = async (e) => {
     e.preventDefault();
+
     if (file) {
       const token = await getToken();
       const fileDetails = {
@@ -29,6 +31,16 @@ const UploadModal = ({ updateFunc }) => {
     } else {
       alert("Please enter a file first!");
     }
+  };
+
+  const clearForm = () => {
+    setFile("");
+    setSubject("");
+    setChapter("");
+    setSem("");
+    setUniversity("");
+    setProgress(0);
+    setUploading(false);
   };
 
   const changeStyle = ({ loaded, total }) => {
@@ -51,10 +63,13 @@ const UploadModal = ({ updateFunc }) => {
     })
       .then(() => {
         alert("Note uploaded successfully!");
+        $("#exampleModal").modal("toggle");
+        clearForm();
         updateFunc();
       })
       .catch((err) => {
         console.error(err);
+        clearForm();
         alert("There was an error in added the notes :-/");
       });
   };
