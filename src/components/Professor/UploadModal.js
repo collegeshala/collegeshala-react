@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-const $ = window.$;
 
 import upload from "./../../js/upload";
 import { getToken } from "./../../js/auth";
+
+const $ = window.$;
 
 const UploadModal = ({ updateFunc }) => {
   const [file, setFile] = useState("");
