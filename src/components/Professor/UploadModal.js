@@ -4,7 +4,7 @@ import axios from "axios";
 import upload from "./../../js/upload";
 import { getToken } from "./../../js/auth";
 
-const $ = window.$;
+// const $ = window.$;
 
 const UploadModal = ({ updateFunc }) => {
   const [file, setFile] = useState("");
@@ -34,7 +34,7 @@ const UploadModal = ({ updateFunc }) => {
     }
   };
 
-  const clearForm = () => {
+  const clearForm = (close = false) => {
     setFile("");
     setSubject("");
     setChapter("");
@@ -42,6 +42,9 @@ const UploadModal = ({ updateFunc }) => {
     setUniversity("");
     setProgress(0);
     setUploading(false);
+    // if (close) {
+    //   $("#exampleModal").modal("toggle");
+    // }
   };
 
   const changeStyle = ({ loaded, total }) => {
@@ -64,7 +67,6 @@ const UploadModal = ({ updateFunc }) => {
     })
       .then(() => {
         alert("Note uploaded successfully!");
-        $("#exampleModal").modal("toggle");
         clearForm();
         updateFunc();
       })
