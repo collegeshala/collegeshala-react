@@ -191,7 +191,7 @@
   font-family: Lato;
   font-style: normal;
   font-weight: 500;
-  font-size: 30px;
+  /* font-size: 30px; */
   line-height: 35px;
 }
 .input-text:focus {
