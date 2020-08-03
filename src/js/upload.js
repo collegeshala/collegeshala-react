@@ -2,7 +2,6 @@ import AWS from "aws-sdk";
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-dotenv.config();
 
 const upload = async (fileDetails, handler, updater, token) => {
   const keys = (

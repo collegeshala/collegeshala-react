@@ -49,6 +49,7 @@ class Account extends React.Component {
   async update(event) {
     event.preventDefault();
     const data = this.state;
+    const { email } = this.state;
     delete data.original;
     delete data.email;
     delete data.phoneNo;
@@ -66,8 +67,17 @@ class Account extends React.Component {
       }),
     })
       .then(({ data }) => {
-        console.log(data);
         alert("Details updated successfully!");
+        axios({
+          method: "POST",
+          url: "https://api.collegeshala.com/edit-notes",
+          headers: {
+            authorization: token,
+          },
+          data: JSON.stringify({ email }),
+        })
+          .then(() => console.log("Notes updated"))
+          .catch((err) => console.error(err.response));
         this.componentDidMount();
       })
       .catch((err) => console.error(err));
