@@ -11,6 +11,7 @@ import ProfessorBreadcrumb from "../Professor/ProfessorBreadcrumb";
 import Loader from "./../Global/Loader";
 
 import UploadModal from "./UploadModal";
+import EditNotesModal from "./EditNotesModal";
 
 import { getToken, signout } from "./../../js/auth";
 
@@ -125,6 +126,7 @@ class Upload extends React.Component {
       <div>
         {/* Teacher Upload Button Open div */}
         <UploadModal updateFunc={this.componentDidMount.bind(this)} />
+        <EditNotesModal />
         {/* display if notes uploaded successfully*/}
         <div
           role="alert"
@@ -200,6 +202,7 @@ class Upload extends React.Component {
                             Some quick example text to build on the card title
                             and make up the bulk of the card's content.
                           </p> */}
+                          <hr />
                           <button
                             onClick={(event) => {
                               event.preventDefault();
@@ -216,6 +219,14 @@ class Upload extends React.Component {
                             value={note.noteId}
                           >
                             Read
+                          </button>{" "}
+                          <button
+                            data-toggle="modal"
+                            data-target="#editNotesModal"
+                            className="btn btn-secondary"
+                            value={note.noteId}
+                          >
+                            Edit
                           </button>
                         </div>
                       </div>
