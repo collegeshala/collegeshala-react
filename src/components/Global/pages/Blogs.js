@@ -26,6 +26,20 @@ class Blogs extends Component {
       // Follow this rule strictly till the above condition is satisfied, after which you can delete this comment. 
       blogs: [
         {
+          title: "The Fake Trio",
+          author: "CollegeShala",
+          date: "August 2, 2020",
+          link: "https://medium.com/@collegeshala2020/the-fake-trio-ec6704e0c9ce",
+          image_path: require("../../../assets/img/Blogs/blog_10.jpg")
+      },
+      {
+          title: "With Love, Veronica",
+          author: "CollegeShala",
+          date: "August 2, 2020",
+          link: "https://medium.com/@collegeshala2020/with-love-veronica-73ecfd7b8740",
+          image_path: require("../../../assets/img/Blogs/blog_9.jpg")
+      },
+      {
           title: "Her Unfinished Love",
           author: "CollegeShala",
           date: "July 30, 2020",
