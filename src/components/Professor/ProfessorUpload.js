@@ -236,7 +236,8 @@ class Upload extends React.Component {
                             data-target="#editNotesModal"
                             className="btn btn-secondary"
                             value={note.noteId}
-                            onClick={() => {
+                            onClick={(event) => {
+                              // event.preventDefault();
                               this.setState({
                                 selectedNote: note.noteId,
                                 editing: !this.state.editing,
