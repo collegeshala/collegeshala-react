@@ -4,11 +4,11 @@ import axios from "axios";
 /* import upload from "./../../js/upload"; */
 import { getToken } from "./../../js/auth";
 
- EditNotesModal = (props) => {
+EditNotesModal = (props) => {
   console.log(props.selectedNote);
   const [details, setDetails] = useState([]);
   let [responseData, setResponseData] = React.useState("");
-   const  fetchData = React.useCallback( async () => {
+  const fetchData = React.useCallback(async () => {
     const token = await getToken();
     axios({
       method: "POST",
@@ -71,7 +71,7 @@ import { getToken } from "./../../js/auth";
                   aria-describedby="subjectnamehelp"
                   placeholder={responseData.subjectname}
                   value={responseData.subjectname}
-                  onChange={ (e) => e.target.value }
+                  onChange={(e) => e.target.value}
                 />
                 <small id="subjectnamehelp" className="form-text text-muted">
                   Change the Subject Name

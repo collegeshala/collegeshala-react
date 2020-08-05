@@ -129,7 +129,11 @@ class Upload extends React.Component {
         {/* Teacher Upload Button Open div */}
         <UploadModal updateFunc={this.componentDidMount.bind(this)} />
         {console.log(this.state.editing)}
-        {this.state.editing ? <EditNotesModal selectedNote={this.state.selectedNote} /> : ""}
+        {this.state.editing ? (
+          <EditNotesModal selectedNote={this.state.selectedNote} />
+        ) : (
+          ""
+        )}
 
         {/* display if notes uploaded successfully*/}
         <div
