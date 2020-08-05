@@ -37,6 +37,8 @@ class Upload extends React.Component {
     phoneNo: "",
     original: {},
     isLoading: true,
+    selectedNote: "",
+    editing: false,
   };
 
   setData() {
@@ -126,7 +128,9 @@ class Upload extends React.Component {
       <div>
         {/* Teacher Upload Button Open div */}
         <UploadModal updateFunc={this.componentDidMount.bind(this)} />
-        <EditNotesModal />
+        {console.log(this.state.editing)}
+        {this.state.editing ? <EditNotesModal selectedNote={this.state.selectedNote} /> : ""}
+
         {/* display if notes uploaded successfully*/}
         <div
           role="alert"
@@ -194,7 +198,10 @@ class Upload extends React.Component {
                           alt="my materials"
                         />
                         <div className="card-body">
-                          <h4 className="card-title">{note.chaptername}</h4>
+                          <h5 className="card-title">
+                            Chapter Name: {note.chaptername} <br />
+                            Subject Name: {note.subjectname} <br />
+                          </h5>
                           <h5 className="professor">
                             By {this.state.fullName}
                           </h5>
@@ -215,7 +222,7 @@ class Upload extends React.Component {
                                 },
                               });
                             }}
-                            className="btn btn-primary"
+                            className="btn btn-primary mr-3"
                             value={note.noteId}
                           >
                             Read
@@ -225,6 +232,12 @@ class Upload extends React.Component {
                             data-target="#editNotesModal"
                             className="btn btn-secondary"
                             value={note.noteId}
+                            onClick={() => {
+                              this.setState({
+                                selectedNote: note.noteId,
+                                editing: !this.state.editing,
+                              });
+                            }}
                           >
                             Edit
                           </button>
