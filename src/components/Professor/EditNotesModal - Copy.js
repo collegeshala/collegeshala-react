@@ -4,7 +4,7 @@ import axios from "axios";
 /* import upload from "./../../js/upload"; */
 import { getToken } from "./../../js/auth";
 
-EditNotesModal = (props) => {
+EditNotesModalCopy = (props) => {
   console.log(props.selectedNote);
   const [details, setDetails] = useState([]);
   let [responseData, setResponseData] = React.useState("");
@@ -136,4 +136,4 @@ EditNotesModal = (props) => {
   );
 };
 
-export default EditNotesModal;
+export default EditNotesModalCopy;
