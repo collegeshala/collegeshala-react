@@ -129,11 +129,15 @@ class Upload extends React.Component {
         {/* Teacher Upload Button Open div */}
         <UploadModal updateFunc={this.componentDidMount.bind(this)} />
         {console.log(this.state.editing)}
-        {this.state.editing ? (
+        {/* {this.state.editing ? (
           <EditNotesModal selectedNote={this.state.selectedNote} />
         ) : (
           ""
-        )}
+        )} */}
+        <EditNotesModal
+          onUpdate={this.componentDidMount.bind(this)}
+          selectedNote={this.state.selectedNote}
+        />
 
         {/* display if notes uploaded successfully*/}
         <div
@@ -236,13 +240,9 @@ class Upload extends React.Component {
                             data-target="#editNotesModal"
                             className="btn btn-secondary"
                             value={note.noteId}
-                            onClick={(event) => {
-                              // event.preventDefault();
-                              this.setState({
-                                selectedNote: note.noteId,
-                                editing: !this.state.editing,
-                              });
-                            }}
+                            onClick={() =>
+                              this.setState({ selectedNote: note.noteId })
+                            }
                           >
                             Edit
                           </button>

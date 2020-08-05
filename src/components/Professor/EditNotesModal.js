@@ -40,32 +40,81 @@ import { getToken } from "./../../js/auth";
 //   }
 // }
 
-const EditNotesModal = ({ selectedNote }) => {
+const EditNotesModal = ({ selectedNote, onUpdate }) => {
   /* console.log(selectedNote); */
   const [item, setItem] = useState([]);
+  const [subjectname, setSubjectname] = useState("");
+  const [chaptername, setChaptername] = useState("");
+  const [sem, setSem] = useState("");
+  const [universityname, setUniversityname] = useState("");
+  const [noteId, setNoteId] = useState("");
 
-  useEffect(() => {
-    const token = getToken();
+  const update = async (event) => {
+    event.preventDefault();
+    const token = await getToken();
+    const params = { sem, universityname, subjectname, chaptername };
+    // console.log(params);
     axios({
-      method: "POST",
-      url: "https://api.collegeshala.com/getnotebyid",
+      method: "PATCH",
+      url: "https://api.collegeshala.com/update-notes",
       headers: {
         authorization: token,
       },
-      data: JSON.stringify({
-        noteId: selectedNote,
-      }),
+      data: JSON.stringify({ noteId, params }),
     })
-      .then((response) => {
-        /* console.log({ item: response.data.Item }); */
-        setItem(response.data.Item);
+      .then(({ data }) => {
+        console.log("Updated!", data);
+        onUpdate();
+        // clear();
+        alert("Updated Successfully!");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.error(err.response);
+        alert("Oops! There was an error :-/");
       });
-  }, []);
+  };
 
-  console.log(item);
+  const clear = () => {
+    setChaptername("");
+    setSem("");
+    setSubjectname("");
+    setUniversityname("");
+  };
+
+  useEffect(() => {
+    const token = getToken();
+    if (selectedNote) {
+      axios({
+        method: "POST",
+        url: "https://api.collegeshala.com/getnotebyid",
+        headers: {
+          authorization: token,
+        },
+        data: JSON.stringify({
+          noteId: selectedNote,
+        }),
+      })
+        .then((response) => {
+          /* console.log({ item: response.data.Item }); */
+          setItem(response.data.Item);
+          setNoteId(response.data.Item.noteId);
+          const {
+            sem,
+            universityname,
+            subjectname,
+            chaptername,
+          } = response.data.Item;
+          setChaptername(chaptername);
+          setSem(sem);
+          setSubjectname(subjectname);
+          setUniversityname(universityname);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [selectedNote]);
+
   return (
     /*  Modal  */
     <div
@@ -101,8 +150,8 @@ const EditNotesModal = ({ selectedNote }) => {
                   id="subjectName"
                   aria-describedby="subjectnamehelp"
                   placeholder={item.subjectname}
-                  value={item.subjectname}
-                  onChange={(e) => e.target.value}
+                  value={subjectname}
+                  onChange={(e) => setSubjectname(e.target.value)}
                 />
                 <small id="subjectnamehelp" className="form-text text-muted">
                   Change the Subject Name
@@ -116,6 +165,8 @@ const EditNotesModal = ({ selectedNote }) => {
                   id="chapterName"
                   aria-describedby="chapternamehelp"
                   placeholder={item.chaptername}
+                  value={chaptername}
+                  onChange={(e) => setChaptername(e.target.value)}
                 />
                 <small id="chapternamehelp" className="form-text text-muted">
                   Change the Chapter Name
@@ -129,6 +180,8 @@ const EditNotesModal = ({ selectedNote }) => {
                   id="semesterName"
                   aria-describedby="semesternamehelp"
                   placeholder={item.sem}
+                  value={sem}
+                  onChange={(e) => setSem(e.target.value)}
                 />
                 <small id="subjectnamehelp" className="form-text text-muted">
                   Change the Semester Number
@@ -142,6 +195,8 @@ const EditNotesModal = ({ selectedNote }) => {
                   id="universityName"
                   aria-describedby="universitynamehelp"
                   placeholder={item.universityname}
+                  value={universityname}
+                  onChange={(e) => setUniversityname(e.target.value)}
                 />
                 <small id="subjectnamehelp" className="form-text text-muted">
                   Change the University Name
@@ -157,7 +212,7 @@ const EditNotesModal = ({ selectedNote }) => {
             >
               Close
             </button>
-            <button type="button" className="btn btn-primary">
+            <button type="button" className="btn btn-primary" onClick={update}>
               Save changes
             </button>
           </div>
