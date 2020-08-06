@@ -40,7 +40,7 @@ import { getToken } from "./../../js/auth";
 //   }
 // }
 
-const EditNotesModal = ({ selectedNote, onUpdate }) => {
+const EditNotesModal = ({ selectedNote, onUpdate, profEmail }) => {
   /* console.log(selectedNote); */
   const [item, setItem] = useState([]);
   const [subjectname, setSubjectname] = useState("");
@@ -64,9 +64,26 @@ const EditNotesModal = ({ selectedNote, onUpdate }) => {
     })
       .then(({ data }) => {
         console.log("Updated!", data);
-        onUpdate();
         // clear();
         alert("Updated Successfully!");
+        axios({
+          method: "PATCH",
+          url: "https://api.collegeshala.com/update-upload-record",
+          headers: {
+            authorization: token,
+          },
+          data: JSON.stringify({
+            email: profEmail,
+            noteObj: { subjectname, chaptername, noteId },
+          }),
+        })
+          .then(({ data }) => {
+            console.log(data);
+            onUpdate();
+            clear();
+            document.getElementById("close-update").click();
+          })
+          .catch((err) => console.error(err.response));
       })
       .catch((err) => {
         console.error(err.response);
@@ -133,6 +150,7 @@ const EditNotesModal = ({ selectedNote, onUpdate }) => {
             </h5>
             <button
               type="button"
+              id="close-update"
               className="close"
               data-dismiss="modal"
               aria-label="Close"

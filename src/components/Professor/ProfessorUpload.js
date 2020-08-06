@@ -137,6 +137,7 @@ class Upload extends React.Component {
         <EditNotesModal
           onUpdate={this.componentDidMount.bind(this)}
           selectedNote={this.state.selectedNote}
+          profEmail={this.state.email}
         />
 
         {/* display if notes uploaded successfully*/}
