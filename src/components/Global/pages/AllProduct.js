@@ -28,7 +28,8 @@ const NoteCard = ({ note }) => (
         }}
       >
         <h5>
-          <span id="custom-purple">{note.chaptername}</span> - {note.subjectname}
+          <span id="custom-purple">{note.chaptername}</span> -{" "}
+          {note.subjectname}
         </h5>
       </a>
       <div className="float-left mt-1 pr-3">
@@ -38,8 +39,7 @@ const NoteCard = ({ note }) => (
       </div>
       <div className="float-left mt-1">
         <h5>
-          <i className="fas fa-graduation-cap"></i> {" "}
-          {note.universityname}
+          <i className="fas fa-graduation-cap"></i> {note.universityname}
         </h5>
       </div>
     </div>

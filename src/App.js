@@ -63,7 +63,7 @@ const App = () => {
       {/* UTILITY ROUTES */}
       <SingleProductPage path="/single-product" />
       <AllProduct path="/all-product" />
-      <Pdf path="/pdf" />
+      <Pdf path="/pdf/:noteId" />
 
       {/* GLOBAL ROUTES */}
       <Homepage path="/" />

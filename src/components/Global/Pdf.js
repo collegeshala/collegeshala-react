@@ -11,8 +11,14 @@ class MyApp extends Component {
   state = {
     numPages: null,
     pageNumber: 1,
-    pdfLink: this.props.location.state.noteUrl,
-    previewOnly: this.props.location.state.previewOnly,
+    pdfLink:
+      "https://collegeshala-notes.s3.ap-south-1.amazonaws.com/" +
+      window.location.pathname.split("/")[2] +
+      ".pdf",
+    // pdfLink: this.props.location.state.noteUrl,
+    previewOnly: this.props.location.state
+      ? this.props.location.state.previewOnly
+      : true,
     scale: 0.5,
   };
 

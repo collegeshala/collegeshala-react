@@ -34,7 +34,7 @@ class SingleProduct extends Component {
 
   async componentDidMount() {
     const { noteObj } = this.props;
-    console.log(noteObj);
+    // console.log(noteObj);
     this.setState({ ...noteObj, isLoading: false });
   }
 
@@ -112,8 +112,8 @@ class SingleProduct extends Component {
                   className="btn preview-btn"
                   onClick={(event) => {
                     event.preventDefault();
-                    // console.log(this.state.noteurl);
-                    navigate("/pdf", {
+                    console.log(this.state.noteurl);
+                    navigate("/pdf/" + this.state.noteId, {
                       state: { noteUrl: this.state.noteurl, previewOnly: true },
                     });
                   }}
