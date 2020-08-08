@@ -208,8 +208,8 @@ class Upload extends React.Component {
                         />
                         <div className="card-body">
                           <h5 className="card-title">
-                            Chapter Name: {note.chaptername} <br />
-                            Subject Name: {note.subjectname} <br />
+                            {note.chaptername} <br />
+                            {note.subjectname} <br />
                           </h5>
                           <h5 className="professor">
                             By {this.state.fullName}
