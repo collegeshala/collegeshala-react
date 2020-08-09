@@ -24,7 +24,8 @@ const NoteCard = ({ note }) => (
         id="to-pdf"
         onClick={(event) => {
           event.preventDefault();
-          navigate("/single-product", { state: { note } });
+          navigate("/single-product/" + note.noteId);
+          // navigate("/single-product", { state: { note } });
         }}
       >
         <h5>

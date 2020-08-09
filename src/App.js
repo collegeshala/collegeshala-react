@@ -61,7 +61,7 @@ const App = () => {
       <Register path="/register" />
 
       {/* UTILITY ROUTES */}
-      <SingleProductPage path="/single-product" />
+      <SingleProductPage path="/single-product/:noteId" />
       <AllProduct path="/all-product" />
       <Pdf path="/pdf/:noteId" />
 

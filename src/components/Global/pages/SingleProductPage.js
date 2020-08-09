@@ -8,12 +8,11 @@ import Navbar from "../Navbar";
 import Footer from "../Footer";
 import Loader from "../Loader";
 
-const SingleProductPage = (props) => {
-  const { note } = props.location.state;
+const SingleProductPage = () => {
   return (
     <Fragment>
       <Navbar />
-      <SingleProduct noteObj={note} />
+      <SingleProduct />
       <Footer />
     </Fragment>
   );
@@ -29,13 +28,29 @@ class SingleProduct extends Component {
     universityname: "",
     subjectname: "",
     noteurl: "",
-    note: this.props.note,
+    note: "",
   };
 
   async componentDidMount() {
-    const { noteObj } = this.props;
-    // console.log(noteObj);
-    this.setState({ ...noteObj, isLoading: false });
+    const noteId = window.location.pathname.split("/")[2];
+    axios({
+      method: "POST",
+      url: "https://api.collegeshala.com/getnotebyid",
+      data: JSON.stringify({ noteId }),
+    })
+      .then(({ data }) => {
+        // console.log(data.Item);
+        this.setState({
+          ...data.Item,
+          isLoading: false,
+        });
+      })
+      .catch((err) => {
+        console.error(err.response);
+        this.setState({
+          isLoading: false,
+        });
+      });
   }
 
   async addToCart() {
