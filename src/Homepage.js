@@ -164,9 +164,19 @@ class Index extends React.Component {
                     }
                   }}
                 />
-                <button type="submit" className="searchButton">
+                {/* <button
+                  type="submit"
+                  onSubmit={(event) => {
+                    if (event.key) {
+                      const { value } = event.target;
+                      window.localStorage.setItem("value", value);
+                      navigate("/all-product");
+                    }
+                  }}
+                  className="searchButton"
+                >
                   <i className="fa fa-search"></i>
-                </button>
+                </button> */}
               </form>
             </div>
           </div>

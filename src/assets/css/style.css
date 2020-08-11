@@ -593,6 +593,7 @@
   /* border-radius: 0 5px 5px 0; */
   cursor: pointer;
   font-size: 16px;
+  outline: none;
 }
 
 .nav-seach-box .searchButton i {
@@ -751,7 +752,7 @@
   }
 
   #small-screen-search-box .nav-seach-box input {
-    width: 100%;
+    width: 92%;
   }
 }
 

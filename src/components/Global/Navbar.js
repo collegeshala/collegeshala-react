@@ -29,7 +29,7 @@ const AnonymousNav = (props) => (
       <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mx-auto" id="large-screen-search-box">
           <li className="nav-item">
-          <div className="nav-seach-box">
+            <div className="nav-seach-box">
               <form>
                 <input
                   type="text"
@@ -74,13 +74,18 @@ const AnonymousNav = (props) => (
       <div className="row">
         <div className="col">
           <div className="nav-seach-box">
-            <input
-              type="text"
-              id="search-notes"
-              placeholder="Search your subject here "
-              onChange={props.search}
-              onKeyPress={props.check}
-            />
+            <form>
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Search your subject here "
+                onChange={props.search}
+                onKeyPress={props.check}
+              />
+              <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -108,7 +113,7 @@ const StudentNav = (props) => (
       <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mx-auto" id="large-screen-search-box">
           <li className="nav-item">
-          <div className="nav-seach-box">
+            <div className="nav-seach-box">
               <form>
                 <input
                   type="text"
@@ -198,13 +203,18 @@ const StudentNav = (props) => (
       <div className="row">
         <div className="col">
           <div className="nav-seach-box">
-            <input
-              type="text"
-              id="search-notes"
-              placeholder="Search your subject here "
-              onChange={props.search}
-              onKeyPress={props.check}
-            />
+            <form>
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Search your subject here "
+                onChange={props.search}
+                onKeyPress={props.check}
+              />
+              <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -322,13 +332,18 @@ const TeacherNav = (props) => (
       <div className="row">
         <div className="col">
           <div className="nav-seach-box">
-            <input
-              type="text"
-              id="search-notes"
-              placeholder="Search your subject here "
-              onChange={props.search}
-              onKeyPress={props.check}
-            />
+            <form>
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Search your subject here "
+                onChange={props.search}
+                onKeyPress={props.check}
+              />
+              <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+              </button>
+            </form>
           </div>
         </div>
       </div>
