@@ -88,10 +88,7 @@ class Index extends React.Component {
                   </a>
                 </li>
                 <li className="nav-item active">
-                  <Link
-                    className="nav-link scroll index-nav-link"
-                    to="/blogs"
-                  >
+                  <Link className="nav-link scroll index-nav-link" to="/blogs">
                     <span id="nav-font">Blogs</span>
                   </Link>
                 </li>
@@ -153,20 +150,25 @@ class Index extends React.Component {
             <h2 className="text-center tagline-text">
               Get your college notes and more from the best educators
             </h2>
-            <p className="text-center seach-box">
-              <input
-                type="text"
-                id="search-input"
-                placeholder="Search your subject here "
-                onKeyPress={(event) => {
-                  if (event.key && event.key == "Enter") {
-                    const { value } = event.target;
-                    window.localStorage.setItem("value", value);
-                    navigate("/all-product");
-                  }
-                }}
-              />
-            </p>
+            <div className="text-center seach-box">
+              <form action="">
+                <input
+                  type="text"
+                  id="search-input"
+                  placeholder="Search your subject here "
+                  onKeyPress={(event) => {
+                    if (event.key && event.key == "Enter") {
+                      const { value } = event.target;
+                      window.localStorage.setItem("value", value);
+                      navigate("/all-product");
+                    }
+                  }}
+                />
+                <button type="submit" className="searchButton">
+                  <i className="fa fa-search"></i>
+                </button>
+              </form>
+            </div>
           </div>
         </div>
 

@@ -603,6 +603,30 @@
   outline: none;
 }
 
+.seach-box .searchButton {
+  z-index: 1;
+  position: relative;
+  right: 45px;
+  /* width: 40px; */
+  /* height: 15%; */
+  border: none;
+  background: transparent;
+  text-align: center;
+  color: #fff;
+  /* border-radius: 0 5px 5px 0; */
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.seach-box .searchButton i {
+  color: #ff4133;
+}
+
+.seach-box .searchButton:focus {
+  outline: none;
+}
+
+
 .breadcrumb {
   background-color: #fff;
 }

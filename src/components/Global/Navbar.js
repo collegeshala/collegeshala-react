@@ -29,15 +29,20 @@ const AnonymousNav = (props) => (
       <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mx-auto" id="large-screen-search-box">
           <li className="nav-item">
-            <p className="nav-seach-box">
-              <input
-                type="text"
-                id="search-input"
-                placeholder="Search your subject here "
-                onChange={props.search}
-                onKeyPress={props.check}
-              />
-            </p>
+          <div className="nav-seach-box">
+              <form>
+                <input
+                  type="text"
+                  id="search-input"
+                  placeholder="Search your subject here "
+                  onChange={props.search}
+                  onKeyPress={props.check}
+                />
+                <button type="submit" class="searchButton">
+                  <i class="fa fa-search"></i>
+                </button>
+              </form>
+            </div>
           </li>
         </ul>
         <ul className="navbar-nav ml-auto">
@@ -103,15 +108,20 @@ const StudentNav = (props) => (
       <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mx-auto" id="large-screen-search-box">
           <li className="nav-item">
-            <p className="nav-seach-box">
-              <input
-                type="text"
-                id="search-input"
-                placeholder="Search your subject here "
-                onChange={props.search}
-                onKeyPress={props.check}
-              />
-            </p>
+          <div className="nav-seach-box">
+              <form>
+                <input
+                  type="text"
+                  id="search-input"
+                  placeholder="Search your subject here "
+                  onChange={props.search}
+                  onKeyPress={props.check}
+                />
+                <button type="submit" class="searchButton">
+                  <i class="fa fa-search"></i>
+                </button>
+              </form>
+            </div>
           </li>
         </ul>
         <ul className="navbar-nav ml-auto">
@@ -224,16 +234,16 @@ const TeacherNav = (props) => (
           <li className="nav-item">
             <div className="nav-seach-box">
               <form>
-              <input
-                type="text"
-                id="search-input"
-                placeholder="Search your subject here "
-                onChange={props.search}
-                onKeyPress={props.check}
-              />
-              <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
-              </button>
+                <input
+                  type="text"
+                  id="search-input"
+                  placeholder="Search your subject here "
+                  onChange={props.search}
+                  onKeyPress={props.check}
+                />
+                <button type="submit" class="searchButton">
+                  <i class="fa fa-search"></i>
+                </button>
               </form>
             </div>
           </li>
