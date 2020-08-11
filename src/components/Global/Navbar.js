@@ -15,7 +15,7 @@ const AnonymousNav = (props) => (
       <Link className="navbar-brand" to="/">
         <img src={main_logo} id="logo" alt="" />
       </Link>
-       {/* <button
+      {/* <button
         className="navbar-toggler ml-auto"
         type="button"
         data-toggle="collapse"
@@ -222,7 +222,8 @@ const TeacherNav = (props) => (
       <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mx-auto" id="large-screen-search-box">
           <li className="nav-item">
-            <p className="nav-seach-box">
+            <div className="nav-seach-box">
+              <form>
               <input
                 type="text"
                 id="search-input"
@@ -230,7 +231,11 @@ const TeacherNav = (props) => (
                 onChange={props.search}
                 onKeyPress={props.check}
               />
-            </p>
+              <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+              </button>
+              </form>
+            </div>
           </li>
         </ul>
         <ul className="navbar-nav ml-auto">
