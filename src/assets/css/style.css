@@ -756,6 +756,12 @@
   }
 }
 
+@media (max-width: 400px) {
+  #small-screen-search-box .nav-seach-box input {
+    width: 89%;
+  }
+}
+
 @media (max-width: 904px) {
   .custom-card-image {
     width: 140px;
