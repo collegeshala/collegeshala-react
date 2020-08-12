@@ -63,15 +63,15 @@ class About extends Component {
                   <div className="card text-center mb-5">
                     <div className="card-body">
                       <img
-                        src={require("../../../assets/img/Upmanyu Chatterjee.jfif")}
+                        src={require("../../../assets/img/Shouradeep.jpeg")}
                         alt=""
                         className="img-fluid rounded-circle mb-3"
                       />
-                      <h3>Upmanyu Chaterjee</h3>
-                      <h5 className="text-muted mb-3">Managing Partner</h5>
+                      <h3>Shouradeep Chakraborty</h3>
+                      <h5 className="text-muted mb-3">Founder, COO</h5>
                       <a
-                        href="https://www.linkedin.com/in/upamanyu-chatterjee-a7220b172/"
-                        className="btn btn-outline-dark mb-5"
+                        href="https://www.linkedin.com/in/shouradeep-chakraborty-7b345a191/"
+                        className="btn btn-outline-dark"
                       >
                         Visit Profile{" "}
                         <i className="fab fa-linkedin text-muted"></i>
@@ -83,15 +83,15 @@ class About extends Component {
                   <div className="card text-center mb-5">
                     <div className="card-body">
                       <img
-                        src={require("../../../assets/img/Shouradeep.jpeg")}
+                        src={require("../../../assets/img/Upmanyu Chatterjee.jfif")}
                         alt=""
                         className="img-fluid rounded-circle mb-3"
                       />
-                      <h3>Shouradeep Chakraborty</h3>
-                      <h5 className="text-muted mb-3">Founder, COO</h5>
+                      <h3>Upmanyu Chaterjee</h3>
+                      <h5 className="text-muted mb-3">Managing Partner</h5>
                       <a
-                        href="https://www.linkedin.com/in/shouradeep-chakraborty-7b345a191/"
-                        className="btn btn-outline-dark"
+                        href="https://www.linkedin.com/in/upamanyu-chatterjee-a7220b172/"
+                        className="btn btn-outline-dark mb-5"
                       >
                         Visit Profile{" "}
                         <i className="fab fa-linkedin text-muted"></i>
