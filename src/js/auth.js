@@ -147,12 +147,13 @@ export const getToken = () => {
           console.error(Error("Session invalid!"));
           resolve(null);
         }
-        if (sessionExpire(session.getIdToken().getJwtToken())) {
-          console.error(Error("Session expired"));
-          reject(null);
-        } else {
-          resolve(session.getIdToken().getJwtToken());
-        }
+        resolve(session.getIdToken().getJwtToken());
+        // if (sessionExpire(session.getIdToken().getJwtToken())) {
+        //   console.error(Error("Session expired"));
+        //   reject(null);
+        // } else {
+        //   resolve(session.getIdToken().getJwtToken());
+        // }
       });
     } else {
       console.error(Error("Could not get user!"));
