@@ -136,7 +136,7 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    signout();
+    // signout();
   }
 
   handleLogin() {
