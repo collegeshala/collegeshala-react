@@ -135,10 +135,6 @@ class Login extends React.Component {
     }
   }
 
-  componentDidMount() {
-    // signout();
-  }
-
   handleLogin() {
     var userData = {
       username: this.state.email,

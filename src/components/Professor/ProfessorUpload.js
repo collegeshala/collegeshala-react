@@ -224,7 +224,7 @@ class Upload extends React.Component {
                               event.preventDefault();
                               const noteurl = `https://collegeshala-notes.s3.ap-south-1.amazonaws.com/${note.noteId}.pdf`;
                               // console.log(noteurl);
-                              navigate("/pdf", {
+                              navigate("/pdf/" + note.noteId, {
                                 state: {
                                   noteUrl: noteurl,
                                   previewOnly: false,

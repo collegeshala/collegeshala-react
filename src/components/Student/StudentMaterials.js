@@ -92,7 +92,7 @@ class Materials extends React.Component {
                             <button
                               onClick={(event) => {
                                 event.preventDefault();
-                                navigate("/pdf", {
+                                navigate("/pdf/" + note.noteId, {
                                   state: {
                                     noteUrl: note.noteurl,
                                     previewOnly: false,

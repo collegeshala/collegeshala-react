@@ -71,7 +71,7 @@ const UploadModal = ({ updateFunc }) => {
         updateFunc();
       })
       .catch((err) => {
-        console.error(err);
+        console.error(err.response);
         clearForm();
         alert("There was an error in added the notes :-/");
       });
