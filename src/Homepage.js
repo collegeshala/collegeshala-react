@@ -11,6 +11,7 @@ class Index extends React.Component {
     email: "",
     isLoggedIn: false,
     accountLink: "",
+    searchVal: "",
   };
 
   async componentDidMount() {
@@ -151,32 +152,34 @@ class Index extends React.Component {
               Get your college notes and more from the best educators
             </h2>
             <div className="text-center seach-box">
-              <form action="">
+              <form>
                 <input
                   type="text"
                   id="search-input"
                   placeholder="Search your subject here "
+                  value={this.state.searchVal}
+                  onChange={(event) =>
+                    this.setState({ searchVal: event.target.value })
+                  }
                   onKeyPress={(event) => {
                     if (event.key && event.key == "Enter") {
-                      const { value } = event.target;
-                      window.localStorage.setItem("value", value);
+                      const { searchVal } = this.state;
+                      window.localStorage.setItem("value", searchVal);
                       navigate("/all-product");
                     }
                   }}
                 />
-                {/* <button
-                  type="submit"
-                  onSubmit={(event) => {
-                    if (event.key) {
-                      const { value } = event.target;
-                      window.localStorage.setItem("value", value);
-                      navigate("/all-product");
-                    }
+                <button
+                  onClick={(event) => {
+                    event.preventDefault();
+                    const { searchVal } = this.state;
+                    window.localStorage.setItem("value", searchVal);
+                    navigate("/all-product");
                   }}
                   className="searchButton"
                 >
                   <i className="fa fa-search"></i>
-                </button> */}
+                </button>
               </form>
             </div>
           </div>

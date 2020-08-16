@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { navigate } from "@reach/router";
 import main_logo from "./../../assets/img/logo.png";
 
@@ -9,13 +9,16 @@ import { parseJwt } from "./../../js/auth";
 import { signout } from "./../../js/auth";
 import { Link } from "@reach/router";
 
-const AnonymousNav = (props) => (
-  <div>
-    <nav className="navbar custom-nav navbar-expand-lg navbar-light bg-custom-blur">
-      <Link className="navbar-brand" to="/">
-        <img src={main_logo} id="logo" alt="" />
-      </Link>
-      {/* <button
+const AnonymousNav = (props) => {
+  const [val, setVal] = useState("");
+
+  return (
+    <div>
+      <nav className="navbar custom-nav navbar-expand-lg navbar-light bg-custom-blur">
+        <Link className="navbar-brand" to="/">
+          <img src={main_logo} id="logo" alt="" />
+        </Link>
+        {/* <button
         className="navbar-toggler ml-auto"
         type="button"
         data-toggle="collapse"
@@ -26,141 +29,192 @@ const AnonymousNav = (props) => (
       >
         <span className="fa fa-user-circle"></span>
       </button> */}
-      <div className="collapse navbar-collapse" id="navbarText">
-        <ul className="navbar-nav mx-auto" id="large-screen-search-box">
-          <li className="nav-item">
-            <div className="nav-seach-box">
-              <form>
-                <input
-                  type="text"
-                  id="search-input"
-                  placeholder="Search your subject here "
-                  onChange={props.search}
-                  onKeyPress={props.check}
-                />
-                <button type="submit" class="searchButton">
-                  <i class="fa fa-search"></i>
-                </button>
-              </form>
-            </div>
-          </li>
-        </ul>
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item" id="large-screen-search-box">
-            <Link className="nav-link navbar-talkshala" to="/blogs">
-              Blogs
-            </Link>
-          </li>
-          <li className="nav-item" id="large-screen-search-box">
-            <Link className="nav-link navbar-talkshala" to="/coming-soon">
-              TalkShala
-            </Link>
-          </li>
-          {/* <li className="nav-item">
+        <div className="collapse navbar-collapse" id="navbarText">
+          <ul className="navbar-nav mx-auto" id="large-screen-search-box">
+            <li className="nav-item">
+              <div className="nav-seach-box">
+                <form>
+                  <input
+                    type="text"
+                    id="search-input"
+                    value={val}
+                    placeholder="Search your subject here "
+                    onChange={(event) => setVal(event.target.value)}
+                    onKeyPress={(event) => {
+                      window.localStorage.setItem("value", val);
+                      props.check(event);
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      window.localStorage.setItem("value", val);
+                      props.onclick();
+                    }}
+                    className="searchButton"
+                  >
+                    <i className="fa fa-search"></i>
+                  </button>
+                </form>
+              </div>
+            </li>
+          </ul>
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item" id="large-screen-search-box">
+              <Link className="nav-link navbar-talkshala" to="/blogs">
+                Blogs
+              </Link>
+            </li>
+            <li className="nav-item" id="large-screen-search-box">
+              <Link className="nav-link navbar-talkshala" to="/coming-soon">
+                TalkShala
+              </Link>
+            </li>
+            {/* <li className="nav-item">
             <Link className="nav-link" to="./cart.html">
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>
             </Link>
           </li> */}
-          {/* <li className="nav-item" id="large-screen-search-box">
+            {/* <li className="nav-item" id="large-screen-search-box">
                 <Link className="nav-link" to="#">
                   <i className="fa fa-user-circle" aria-hidden="true"></i>
                 </Link>
               </li> */}
-        </ul>
-      </div>
-    </nav>
-
-    <div className="container mb-3" id="small-screen-search-box">
-      <div className="row">
-        <div className="col">
-          <div className="nav-seach-box">
-            <form>
-              <input
-                type="text"
-                id="search-input"
-                placeholder="Search your subject here "
-                onChange={props.search}
-                onKeyPress={props.check}
-              />
-              <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
-              </button>
-            </form>
-          </div>
+          </ul>
         </div>
-      </div>
-    </div>
-  </div>
-);
+      </nav>
 
-const StudentNav = (props) => (
-  <div>
-    <nav className="navbar custom-nav navbar-expand-lg navbar-light bg-custom-blur">
-      <Link className="navbar-brand" to="/">
-        <img src={main_logo} id="logo" alt="" />
-      </Link>
-      <button
-        className="navbar-toggler ml-auto"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarText"
-        aria-controls="navbarText"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="fa fa-user-circle"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarText">
-        <ul className="navbar-nav mx-auto" id="large-screen-search-box">
-          <li className="nav-item">
+      <div className="container mb-3" id="small-screen-search-box">
+        <div className="row">
+          <div className="col">
             <div className="nav-seach-box">
               <form>
                 <input
                   type="text"
-                  id="search-input"
+                  value={val}
                   placeholder="Search your subject here "
-                  onChange={props.search}
-                  onKeyPress={props.check}
+                  onChange={(event) => setVal(event.target.value)}
+                  onKeyPress={(event) => {
+                    window.localStorage.setItem("value", val);
+                    props.check(event);
+                  }}
                 />
-                <button type="submit" class="searchButton">
-                  <i class="fa fa-search"></i>
+                <button
+                  onClick={() => {
+                    window.localStorage.setItem("value", val);
+                    props.onclick();
+                  }}
+                  className="searchButton"
+                >
+                  <i className="fa fa-search"></i>
                 </button>
               </form>
             </div>
-          </li>
-        </ul>
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item" id="large-screen-search-box">
-            <Link className="nav-link navbar-talkshala" to="/blogs">
-              Blogs
-            </Link>
-          </li>
-          <li className="nav-item" id="large-screen-search-box">
-            <Link className="nav-link navbar-talkshala" to="/coming-soon">
-              TalkShala
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/cart">
-              <i className="fa fa-shopping-cart pl-4" aria-hidden="true"></i>
-            </Link>
-          </li>
-          <li className="nav-item dropdown" id="large-screen-search-box">
-            <Link
-              className="nav-link"
-              to="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i className="fa fa-user-circle" aria-hidden="true"></i>
-            </Link>
-            <div
-              className="dropdown-menu dropdown-menu-right"
-              aria-labelledby="navbarDropdownMenuLink"
-            >
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const StudentNav = (props) => {
+  const [val, setVal] = useState("");
+
+  return (
+    <div>
+      <nav className="navbar custom-nav navbar-expand-lg navbar-light bg-custom-blur">
+        <Link className="navbar-brand" to="/">
+          <img src={main_logo} id="logo" alt="" />
+        </Link>
+        <button
+          className="navbar-toggler ml-auto"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarText"
+          aria-controls="navbarText"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="fa fa-user-circle"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarText">
+          <ul className="navbar-nav mx-auto" id="large-screen-search-box">
+            <li className="nav-item">
+              <div className="nav-seach-box">
+                <form>
+                  <input
+                    type="text"
+                    id="search-input"
+                    value={val}
+                    placeholder="Search your subject here "
+                    onChange={(event) => setVal(event.target.value)}
+                    onKeyPress={(event) => {
+                      window.localStorage.setItem("value", val);
+                      props.check(event);
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      window.localStorage.setItem("value", val);
+                      props.onclick();
+                    }}
+                    className="searchButton"
+                  >
+                    <i className="fa fa-search"></i>
+                  </button>
+                </form>
+              </div>
+            </li>
+          </ul>
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item" id="large-screen-search-box">
+              <Link className="nav-link navbar-talkshala" to="/blogs">
+                Blogs
+              </Link>
+            </li>
+            <li className="nav-item" id="large-screen-search-box">
+              <Link className="nav-link navbar-talkshala" to="/coming-soon">
+                TalkShala
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/cart">
+                <i className="fa fa-shopping-cart pl-4" aria-hidden="true"></i>
+              </Link>
+            </li>
+            <li className="nav-item dropdown" id="large-screen-search-box">
+              <Link
+                className="nav-link"
+                to="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i className="fa fa-user-circle" aria-hidden="true"></i>
+              </Link>
+              <div
+                className="dropdown-menu dropdown-menu-right"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <Link className="dropdown-item" to="/student-account">
+                  My Account
+                </Link>
+                <Link className="dropdown-item" to="/student-materials">
+                  My Materials
+                </Link>
+                <Link className="dropdown-item" to="/student-transactions">
+                  My Transactions
+                </Link>
+                <Link className="dropdown-item" to="/coming-soon">
+                  Q/A Forum
+                </Link>
+                <a className="dropdown-item" href="" onClick={props.logout}>
+                  Log Out
+                </a>
+              </div>
+            </li>
+            <li className="nav-item" id="small-screen-search-box">
               <Link className="dropdown-item" to="/student-account">
                 My Account
               </Link>
@@ -176,120 +230,144 @@ const StudentNav = (props) => (
               <a className="dropdown-item" href="" onClick={props.logout}>
                 Log Out
               </a>
-            </div>
-          </li>
-          <li className="nav-item" id="small-screen-search-box">
-            <Link className="dropdown-item" to="/student-account">
-              My Account
-            </Link>
-            <Link className="dropdown-item" to="/student-materials">
-              My Materials
-            </Link>
-            <Link className="dropdown-item" to="/student-transactions">
-              My Transactions
-            </Link>
-            <Link className="dropdown-item" to="/coming-soon">
-              Q/A Forum
-            </Link>
-            <a className="dropdown-item" href="" onClick={props.logout}>
-              Log Out
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <div className="container mb-3" id="small-screen-search-box">
-      <div className="row">
-        <div className="col">
-          <div className="nav-seach-box">
-            <form>
-              <input
-                type="text"
-                id="search-input"
-                placeholder="Search your subject here "
-                onChange={props.search}
-                onKeyPress={props.check}
-              />
-              <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
-              </button>
-            </form>
-          </div>
+            </li>
+          </ul>
         </div>
-      </div>
-    </div>
-  </div>
-);
+      </nav>
 
-const TeacherNav = (props) => (
-  <div>
-    <nav className="navbar custom-nav navbar-expand-lg navbar-light bg-custom-blur">
-      <Link className="navbar-brand" to="/">
-        <img src={main_logo} id="logo" alt="" />
-      </Link>
-      <button
-        className="navbar-toggler ml-auto"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarText"
-        aria-controls="navbarText"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="fa fa-user-circle"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarText">
-        <ul className="navbar-nav mx-auto" id="large-screen-search-box">
-          <li className="nav-item">
+      <div className="container mb-3" id="small-screen-search-box">
+        <div className="row">
+          <div className="col">
             <div className="nav-seach-box">
               <form>
                 <input
                   type="text"
                   id="search-input"
+                  value={val}
                   placeholder="Search your subject here "
-                  onChange={props.search}
-                  onKeyPress={props.check}
+                  onChange={(event) => setVal(event.target.value)}
+                  onKeyPress={(event) => {
+                    window.localStorage.setItem("value", val);
+                    props.check(event);
+                  }}
                 />
-                <button type="submit" class="searchButton">
-                  <i class="fa fa-search"></i>
+                <button
+                  onClick={() => {
+                    window.localStorage.setItem("value", val);
+                    props.onclick();
+                  }}
+                  className="searchButton"
+                >
+                  <i className="fa fa-search"></i>
                 </button>
               </form>
             </div>
-          </li>
-        </ul>
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item" id="large-screen-search-box">
-            <Link className="nav-link navbar-talkshala" to="/blogs">
-              Blogs
-            </Link>
-          </li>
-          <li className="nav-item" id="large-screen-search-box">
-            <Link className="nav-link navbar-talkshala" to="/coming-soon">
-              TalkShala
-            </Link>
-          </li>
-          {/* <li className="nav-item">
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const TeacherNav = (props) => {
+  const [val, setVal] = useState("");
+
+  return (
+    <div>
+      <nav className="navbar custom-nav navbar-expand-lg navbar-light bg-custom-blur">
+        <Link className="navbar-brand" to="/">
+          <img src={main_logo} id="logo" alt="" />
+        </Link>
+        <button
+          className="navbar-toggler ml-auto"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarText"
+          aria-controls="navbarText"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="fa fa-user-circle"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarText">
+          <ul className="navbar-nav mx-auto" id="large-screen-search-box">
+            <li className="nav-item">
+              <div className="nav-seach-box">
+                <form>
+                  <input
+                    type="text"
+                    id="search-input"
+                    value={val}
+                    placeholder="Search your subject here "
+                    onChange={(event) => setVal(event.target.value)}
+                    onKeyPress={(event) => {
+                      window.localStorage.setItem("value", val);
+                      props.check(event);
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      window.localStorage.setItem("value", val);
+                      props.onclick();
+                    }}
+                    className="searchButton"
+                  >
+                    <i className="fa fa-search"></i>
+                  </button>
+                </form>
+              </div>
+            </li>
+          </ul>
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item" id="large-screen-search-box">
+              <Link className="nav-link navbar-talkshala" to="/blogs">
+                Blogs
+              </Link>
+            </li>
+            <li className="nav-item" id="large-screen-search-box">
+              <Link className="nav-link navbar-talkshala" to="/coming-soon">
+                TalkShala
+              </Link>
+            </li>
+            {/* <li className="nav-item">
             <Link className="nav-link" to="./cart.html">
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>
             </Link>
           </li> */}
-          <li className="nav-item dropdown" id="large-screen-search-box">
-            <Link
-              className="nav-link"
-              to="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i className="fa fa-user-circle" aria-hidden="true"></i>
-            </Link>
-            <div
-              className="dropdown-menu dropdown-menu-right"
-              aria-labelledby="navbarDropdownMenuLink"
-            >
+            <li className="nav-item dropdown" id="large-screen-search-box">
+              <Link
+                className="nav-link"
+                to="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i className="fa fa-user-circle" aria-hidden="true"></i>
+              </Link>
+              <div
+                className="dropdown-menu dropdown-menu-right"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <Link className="dropdown-item" to="/professor-account">
+                  My Account
+                </Link>
+                <Link className="dropdown-item" to="/professor-upload">
+                  My Uploads
+                </Link>
+                <Link className="dropdown-item" to="/professor-earnings">
+                  My Earnings
+                </Link>
+                <Link className="dropdown-item" to="/coming-soon">
+                  Q/A Forum
+                </Link>
+                <a className="dropdown-item" href="" onClick={props.logout}>
+                  Log Out
+                </a>
+              </div>
+            </li>
+            <li className="nav-item" id="small-screen-search-box">
               <Link className="dropdown-item" to="/professor-account">
                 My Account
               </Link>
@@ -305,51 +383,44 @@ const TeacherNav = (props) => (
               <a className="dropdown-item" href="" onClick={props.logout}>
                 Log Out
               </a>
-            </div>
-          </li>
-          <li className="nav-item" id="small-screen-search-box">
-            <Link className="dropdown-item" to="/professor-account">
-              My Account
-            </Link>
-            <Link className="dropdown-item" to="/professor-upload">
-              My Uploads
-            </Link>
-            <Link className="dropdown-item" to="/professor-earnings">
-              My Earnings
-            </Link>
-            <Link className="dropdown-item" to="/coming-soon">
-              Q/A Forum
-            </Link>
-            <a className="dropdown-item" href="" onClick={props.logout}>
-              Log Out
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    <div className="container mb-3" id="small-screen-search-box">
-      <div className="row">
-        <div className="col">
-          <div className="nav-seach-box">
-            <form>
-              <input
-                type="text"
-                id="search-input"
-                placeholder="Search your subject here "
-                onChange={props.search}
-                onKeyPress={props.check}
-              />
-              <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
-              </button>
-            </form>
+      <div className="container mb-3" id="small-screen-search-box">
+        <div className="row">
+          <div className="col">
+            <div className="nav-seach-box">
+              <form>
+                <input
+                  type="text"
+                  id="search-input"
+                  value={val}
+                  placeholder="Search your subject here "
+                  onChange={(event) => setVal(event.target.value)}
+                  onKeyPress={(event) => {
+                    window.localStorage.setItem("value", val);
+                    props.check(event);
+                  }}
+                />
+                <button
+                  type="submit"
+                  onClick={(event) => {
+                    event.preventDefault();
+                  }}
+                  className="searchButton"
+                >
+                  <i className="fa fa-search"></i>
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 class Navbar extends Component {
   constructor(props) {
@@ -378,6 +449,14 @@ class Navbar extends Component {
         navigate("/all-product");
       }
       // window.location.pathname = "/all-product";
+    }
+  }
+
+  onclick() {
+    if (window.location.href.endsWith("/all-product")) {
+      this.props.searchFunc(localStorage.getItem("value"));
+    } else {
+      navigate("/all-product");
     }
   }
 
