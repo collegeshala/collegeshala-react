@@ -247,7 +247,7 @@ class Login extends React.Component {
                 </div>
                 <div className="col-6 input-column">
                   <input
-                    type="text"
+                    type="email"
                     className="input-text"
                     placeholder="Enter your email address"
                     value={this.state.email}
@@ -302,7 +302,7 @@ class Login extends React.Component {
                     password.
                   </p>
                   <input
-                    type="text"
+                    type="email"
                     className="input-text"
                     placeholder="Enter your email address"
                     value={this.state.emailforgot}
