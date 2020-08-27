@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import Footer from "../Footer";
+import Navbar from "../Navbar";
 
 import { navigate } from "@reach/router";
 import {
@@ -131,7 +132,7 @@ class Login extends React.Component {
         this.setState({ step: this.state.step - 2 }, () => this.backCallback());
       // adding callback as setstate is asynchronous and does not update
     } else {
-      navigate("/register");
+      navigate("/");
     }
   }
 
@@ -203,6 +204,7 @@ class Login extends React.Component {
   render() {
     return (
       <div>
+        <Navbar />
         <div id="student-signup">
           <div>
             <nav
