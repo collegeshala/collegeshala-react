@@ -197,7 +197,7 @@ class Index extends React.Component {
           </h1>
           <div className="card-deck m-5">
             <div className="card">
-              <Link to="/coming-soon">
+              <Link to="/login">
                 <p className="text-center">
                   <img
                     className="card-img-top services-image"
