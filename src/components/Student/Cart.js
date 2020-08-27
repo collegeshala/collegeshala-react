@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 // a0ff20dd-b95e-4b0c-a6c9-01338352ff59
 import React, { Fragment } from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import axios from "axios";
 
 import { getToken } from "./../../js/auth";
@@ -99,6 +99,7 @@ class CartPage extends React.Component {
       } else {
         alert("Notes purchased successfully!");
         this.setState({ payment_id: "", notes: [] });
+        navigate('/student-materials')
       }
     } catch (error) {
       console.error(error);
@@ -109,6 +110,7 @@ class CartPage extends React.Component {
             this.state.payment_id
         );
       }
+
     }
   }
 
