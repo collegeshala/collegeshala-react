@@ -212,7 +212,7 @@ class Login extends React.Component {
               style={{ backgroundColor: "#6534CC" }}
             >
               <a
-                href="#"
+                href="/"
                 id="back"
                 className="navbar-brand"
                 onClick={() => this.back()}
@@ -225,7 +225,7 @@ class Login extends React.Component {
                   height="30"
                 />
               </a>
-              <a href="#" id="backtext" onClick={() => this.back()}>
+              <a href="/" id="backtext" onClick={() => this.back()}>
                 <p className="back-label">Back</p>
               </a>
             </nav>
