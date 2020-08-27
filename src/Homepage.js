@@ -12,19 +12,26 @@ class Index extends React.Component {
     isLoggedIn: false,
     accountLink: "",
     searchVal: "",
+    study: "",
   };
 
   async componentDidMount() {
     const checkLogin = await isLoggedIn();
     let accountLink = "";
+    let study = "";
     if (checkLogin) {
       const token = await getToken();
+
+      study =
+        parseJwt(token)["custom:isProfessor"] == "true"
+          ? "/professor-upload"
+          : "/student-materials";
       accountLink =
         parseJwt(token)["custom:isProfessor"] == "true"
           ? "/professor-account"
           : "/student-account";
     }
-    this.setState({ isLoggedIn: checkLogin, accountLink });
+    this.setState({ isLoggedIn: checkLogin, accountLink, study });
   }
 
   handleEmail(email) {
@@ -197,21 +204,41 @@ class Index extends React.Component {
           </h1>
           <div className="card-deck m-5">
             <div className="card">
-              <Link to="/login">
-                <p className="text-center">
-                  <img
-                    className="card-img-top services-image"
-                    src={require("./assets/img/study-materials-png.png")}
-                    alt="materials"
-                  />
-                </p>
-              </Link>
-              <div className="card-body">
-                <Link to="/coming-soon">
-                  <h5 className="card-title text-center" id="custom-purple">
-                    Study Materials
-                  </h5>
+              {this.state.isLoggedIn ? (
+                <Link to={this.state.study}>
+                  <p className="text-center">
+                    <img
+                      className="card-img-top services-image"
+                      src={require("./assets/img/study-materials-png.png")}
+                      alt="materials"
+                    />
+                  </p>
                 </Link>
+              ) : (
+                <Link to="/login">
+                  <p className="text-center">
+                    <img
+                      className="card-img-top services-image"
+                      src={require("./assets/img/study-materials-png.png")}
+                      alt="materials"
+                    />
+                  </p>
+                </Link>
+              )}
+              <div className="card-body">
+                {this.state.isLoggedIn ? (
+                  <Link to={this.state.study}>
+                    <h5 className="card-title text-center" id="custom-purple">
+                      Study Materials
+                    </h5>
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <h5 className="card-title text-center" id="custom-purple">
+                      Study Materials
+                    </h5>
+                  </Link>
+                )}
                 <p className="card-text text-center"></p>
               </div>
             </div>
