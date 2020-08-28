@@ -207,7 +207,7 @@ class Account extends React.Component {
                   value={this.state.phoneNo}
                   aria-describedby="emailHelp"
                   placeholder="Phone Number"
-                  onChange={() => alert("You cannot change your email!")}
+                  onChange={() => alert("You cannot change your phone number!")}
                 />
               </div>
               <div className="container pt-3">
