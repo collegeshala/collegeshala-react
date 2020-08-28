@@ -90,7 +90,8 @@ export const login = ({ username, password }, onSuccess, onFailure) => {
     Username: username,
     Password: password,
   });
-  const cognitoUser = getUser(username);
+  const cognitoUser = new CognitoUser({ Username: username, Pool: UserPool });
+  window.user = cognitoUser;
   cognitoUser.authenticateUser(authenticationDetails, {
     onSuccess: onSuccess,
     onFailure: onFailure,
