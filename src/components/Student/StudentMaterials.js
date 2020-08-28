@@ -63,12 +63,17 @@ class Materials extends React.Component {
               {
                 // eslint-disable-next-line eqeqeq
                 this.state.notes.length === 0 ? (
-                  <h2 className="text-muted text-center">
-                    {/* <br />
-                    No notes to display */}
-                    "Welcome friend, search for your subject to get the notes. " <br />
-                    "Also if you don't find what you are looking for then reach out to us via chatbot. "
-                  </h2>
+                  <div className="container mt-5">
+                    <h5 className="text-muted text-center">
+                      "Welcome friend, search for your subject to get the notes.
+                      "
+                    </h5>
+                    
+                    <h5 className="text-muted text-center">
+                        "Also if you don't find what you are looking for then
+                        reach out to us via chatbot. "
+                    </h5>
+                  </div>
                 ) : (
                   this.state.notes.map((note, index) => {
                     return (
