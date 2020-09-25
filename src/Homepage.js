@@ -4,7 +4,6 @@ import { navigate, Link } from "@reach/router";
 import axios from "axios";
 import { isLoggedIn, parseJwt, getToken } from "./js/auth";
 
-import ChatBot from "./components/Global/pages/ChatBot";
 import Footer from "./components/Global/Footer";
 
 class Index extends React.Component {
