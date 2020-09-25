@@ -22,6 +22,7 @@ class MyApp extends Component {
     scale: 0.5,
   };
 
+  
   onDocumentLoadSuccess = ({ numPages }) => {
     this.setState({ numPages });
   };

@@ -15,12 +15,13 @@ const NoteCard = ({ note }) => (
         height="85"
         src="https://collegeshala-assets.s3.ap-south-1.amazonaws.com/notes-thumbnail.png"
         className="all-prod-img rounded float-left"
-        alt="collegeshala all product image"
+        alt="collegeshala all product image" 
       />
     </div>
     <div className="col-12 col-md-8">
       <a
         href="#"
+        
         id="to-pdf"
         onClick={(event) => {
           event.preventDefault();
