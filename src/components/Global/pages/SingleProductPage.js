@@ -122,19 +122,19 @@ class SingleProduct extends Component {
           <div className=" course-and-suggested-area">
             <div className="row">
               <div className="col-12 col-md-6 notes-image-area notes-image">
-                <a
-                  href={"/pdf/" + this.state.noteId}
-                  target="_blank"
+                <button
+                  type="button"
                   className="btn preview-btn"
                   onClick={(event) => {
+                    event.preventDefault();
                     console.log(this.state.noteurl);
-                    /* navigate("/pdf/" + this.state.noteId, {
+                    navigate("/pdf/" + this.state.noteId, {
                       state: { noteUrl: this.state.noteurl, previewOnly: true },
-                    }); */
+                    });
                   }}
                 >
                   Preview
-                </a>
+                </button>
                 <input
                   type="button"
                   value="Buy Now"

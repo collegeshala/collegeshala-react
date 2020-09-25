@@ -1324,8 +1324,8 @@
 
 .notes-image .preview-btn {
   position: absolute;
-  bottom: 55%;
-  left: 50%;
+  bottom: 45%;
+  left: 47%;
   transform: translate(-50%, -50%);
   background-color: white;
   outline: none;
@@ -1333,8 +1333,7 @@
   border: 1px solid #ff4133;
   border-radius: 30px;
   width: 180px;
-  height: 40px;
-
+  height: 60px;
 }
 
 .notes-image .btn-2 {
