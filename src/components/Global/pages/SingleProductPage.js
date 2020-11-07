@@ -3,6 +3,7 @@ import React, { Component, Fragment } from "react";
 import { Link, navigate } from "@reach/router";
 import axios from "axios";
 import { getToken, isLoggedIn } from "../../../js/auth";
+import notes from "./../../../assets/img/single-product-page/notes.png";
 
 import Navbar from "../Navbar";
 import Footer from "../Footer";

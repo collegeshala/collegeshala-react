@@ -10,6 +10,7 @@ import Footer from "../Global/Footer";
 import SecondaryNav from "../Global/SecondaryNav";
 import Loader from "./../Global/Loader";
 import StudentBreadcrumb from "./StudentBreadcrumb";
+import notesImg from "./../../assets/img/notes/notes-thumbnail.jpeg";
 
 // import token from "./api_key";
 import { getToken } from "./../../js/auth";
@@ -84,7 +85,7 @@ class Materials extends React.Component {
                         <div className="card mt-5" id="card">
                           <img
                             className="card-img-top img-fluid"
-                            src="https://collegeshala-assets.s3.ap-south-1.amazonaws.com/notes-thumbnail.png"
+                            src={notesImg}
                             alt="my materials"
                           />
                           <div className="card-body">

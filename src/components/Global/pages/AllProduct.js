@@ -2,6 +2,7 @@
 import React, { Component, Fragment } from "react";
 import { navigate } from "@reach/router";
 import axios from "axios";
+import notes from "./../../../assets/img/notes/notes-thumbnail.jpeg";
 
 import Navbar from "../Navbar";
 import Footer from "../Footer";
@@ -13,15 +14,14 @@ const NoteCard = ({ note }) => (
       <img
         width="85"
         height="85"
-        src="https://collegeshala-assets.s3.ap-south-1.amazonaws.com/notes-thumbnail.png"
+        src={notes}
         className="all-prod-img rounded float-left"
-        alt="collegeshala all product image" 
+        alt="collegeshala all product image"
       />
     </div>
     <div className="col-12 col-md-8">
       <a
         href="#"
-        
         id="to-pdf"
         onClick={(event) => {
           event.preventDefault();

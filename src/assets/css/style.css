@@ -1255,7 +1255,7 @@
 }
 
 .notes-image {
-  background-image: url("https://collegeshala-assets.s3.ap-south-1.amazonaws.com/single-product-page.png");
+  background-image: url("../img/single-product-page/notes.png");
   width: 50%;
   height: 100vh;
   background-size: cover;

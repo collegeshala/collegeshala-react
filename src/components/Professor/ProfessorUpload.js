@@ -9,6 +9,7 @@ import Footer from "../Global/Footer";
 import ProfessorNav from "../Global/ProfessorNav";
 import ProfessorBreadcrumb from "../Professor/ProfessorBreadcrumb";
 import Loader from "./../Global/Loader";
+import notes from "./../../assets/img/notes/notes-thumbnail.jpeg";
 
 import UploadModal from "./UploadModal";
 import EditNotesModal from "./EditNotesModal";
@@ -203,7 +204,7 @@ class Upload extends React.Component {
                       <div className="card" id="card">
                         <img
                           className="card-img-top img-fluid"
-                          src="https://collegeshala-assets.s3.ap-south-1.amazonaws.com/notes-thumbnail.png"
+                          src={notes}
                           alt="my materials"
                         />
                         <div className="card-body">
